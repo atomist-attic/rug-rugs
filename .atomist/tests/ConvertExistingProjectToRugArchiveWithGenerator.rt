@@ -1,0 +1,63 @@
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+scenario ConvertExistingProjectToRugArchiveWithGenerator should add default .atomist directory with a default generator for the archive
+
+let rug_archive_name = "myRugArchive"
+let rug_archive_group_id = "myRugGroup"
+let version = "0.0.1"
+let generator_name = "DefaultGenerator"
+
+given
+  Empty
+
+when
+  ConvertExistingProjectToRugArchiveWithGenerator
+
+then
+  fileExists ".atomist/manifest.yml"
+  and fileContains ".atomist/manifest.yml" "artifact: myRugArchive"
+  and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+  and fileContains ".atomist/manifest.yml" "0.0.1"
+  and fileExists ".atomist/editors/DefaultGenerator.rug"
+  and fileContains ".atomist/editors/DefaultGenerator.rug" "param project_name: @project_name"
+  and fileContains ".atomist/editors/DefaultGenerator.rug" "editor DefaultGenerator"
+  and fileExists ".atomist/tests/DefaultGenerator.rt"
+  and fileContains ".atomist/tests/DefaultGenerator.rt" "scenario DefaultGenerator"
+
+
+scenario ConvertExistingProjectToRugArchiveWithGenerator with long archive and generator names
+
+let rug_archive_name = "spring-cloud-config-server"
+let version = "0.0.1"
+let generator_name = "NewSpringCloudConfigServer"
+let rug_archive_group_id = "myRugGroup"
+
+given
+  Empty
+
+when
+  ConvertExistingProjectToRugArchiveWithGenerator
+
+then
+  fileExists ".atomist/manifest.yml"
+  and fileContains ".atomist/manifest.yml" "artifact: spring-cloud-config-server"
+  and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+  and fileContains ".atomist/manifest.yml" "0.0.1"
+  and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "param project_name: @project_name"
+  and fileExists ".atomist/editors/NewSpringCloudConfigServer.rug"
+  and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "editor NewSpringCloudConfigServer"
+  and fileExists ".atomist/tests/NewSpringCloudConfigServer.rt"
+  and fileContains ".atomist/tests/NewSpringCloudConfigServer.rt" "scenario NewSpringCloudConfigServer"

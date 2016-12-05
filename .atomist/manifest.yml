@@ -1,0 +1,10 @@
+group: atomist-rugs
+artifact: rug-editors
+version: "0.1.0"
+
+requires: "[0.4.0,1.0.0)"
+
+dependencies:
+  - "atomist-rugs:rug-archive:0.1.0"
+
+extensions:

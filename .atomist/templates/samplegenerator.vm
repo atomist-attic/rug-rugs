@@ -1,0 +1,10 @@
+@generator
+editor $generator_name
+
+@maxLength 21
+@description "Name of your new project."
+@displayName "Project Name"
+param project_name: @project_name
+
+with project
+  do fileExists ".provenance.txt"

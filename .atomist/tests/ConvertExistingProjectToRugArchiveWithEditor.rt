@@ -1,0 +1,54 @@
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+scenario ConvertExistingProjectToRugArchiveWithEditor should add the appropriate starting point directories to an existing project
+
+let rug_archive_name = "myRugArchive"
+let rug_archive_group_id = "myRugGroup"
+let version = "0.0.1"
+let editor_name = "MyEditor"
+
+given
+  Empty
+
+when
+  ConvertExistingProjectToRugArchiveWithEditor
+
+then
+  fileExists ".atomist/manifest.yml"
+  and fileContains ".atomist/manifest.yml" "artifact: myRugArchive"
+  and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+  and fileContains ".atomist/manifest.yml" "0.0.1"
+  and fileExists ".atomist/editors/MyEditor.rug"
+  and fileContains ".atomist/editors/MyEditor.rug" "editor MyEditor"
+  and fileExists ".atomist/tests/MyEditor.rt"
+  and fileContains ".atomist/tests/MyEditor.rt" "scenario MyEditor"
+  and fileExists ".atomist/templates/MyEditorTemplate.vm"
+
+scenario ConvertExistingProjectToRugArchive should ignore project if it already contains a .atomist directory
+
+let rug_archive_name = "myRugArchive"
+let rug_archive_group_id = "myRugGroup"
+let version = "0.0.1"
+let editor_name = "MyEditor"
+
+given
+  ArchiveRoot
+
+when
+  ConvertExistingProjectToRugArchiveWithEditor
+
+then
+  NoChange

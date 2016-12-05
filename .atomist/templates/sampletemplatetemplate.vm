@@ -1,0 +1,3 @@
+Shows resolving a parameter to an editor as a variable in the template:
+
+$my_value

@@ -44,7 +44,7 @@ param version: @semantic_version
 @description "Description of the new project"
 @displayName "description"
 @validInput "Free Text"
-param description: .*
+param description: ^.*$
 
 @maxLength 21
 @description "Name of a new initial editor that will be added to the project."

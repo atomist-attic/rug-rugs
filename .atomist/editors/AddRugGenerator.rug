@@ -20,7 +20,7 @@ editor AddRugGenerator
 
 @description "Name of the default generator."
 @displayName "Generator Name"
-param generator_name: .*
+param generator_name: ^.*$
 
 let sampleGeneratorTemplate = "samplegenerator.vm"
 let sampleGeneratorTestTemplate = "samplegeneratortest.vm"

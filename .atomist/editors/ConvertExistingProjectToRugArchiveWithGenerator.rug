@@ -43,7 +43,7 @@ param version: @semantic_version
 @description "Description of the new project"
 @displayName "description"
 @validInput "Free Text"
-param description: .*
+param description: ^.*$
 
 @description "Name of a default generator that will be added to the project."
 @displayName "Initial Rug Generator Name"

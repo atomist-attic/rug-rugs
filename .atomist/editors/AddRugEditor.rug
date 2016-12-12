@@ -20,7 +20,7 @@ editor AddRugEditor
 
 @description "Name of your new editor."
 @displayName "Editor Name"
-param editor_name: .*
+param editor_name: ^.*$
 
 let sampleEditorTemplate = "sampleeditor.vm"
 let sampleEditorTestTemplate = "sampleeditortest.vm"

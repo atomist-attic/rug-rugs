@@ -1,8 +1,11 @@
+@description "uses a template to create samplefile.txt"
+@tag "documentation"
 editor $editor_name
 
-@description "A single parameter to this editor."
 @displayName "My Value"
-param my_value: .*
+@description "a single parameter to this editor"
+@validInput "free text"
+param my_value: @any
 
 let sampleTemplateTemplate = "${editor_name}Template.vm"
 

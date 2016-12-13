@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 scenario ConvertExistingProjectToRugArchiveWithEditor should add the appropriate starting point directories to an existing project
 
 let rug_archive_name = "myRugArchive"
@@ -28,14 +29,14 @@ when
 
 then
   fileExists ".atomist/manifest.yml"
-  and fileContains ".atomist/manifest.yml" "artifact: myRugArchive"
-  and fileContains ".atomist/manifest.yml" "group: myRugGroup"
-  and fileContains ".atomist/manifest.yml" "0.0.1"
-  and fileExists ".atomist/editors/MyEditor.rug"
-  and fileContains ".atomist/editors/MyEditor.rug" "editor MyEditor"
-  and fileExists ".atomist/tests/MyEditor.rt"
-  and fileContains ".atomist/tests/MyEditor.rt" "scenario MyEditor"
-  and fileExists ".atomist/templates/MyEditorTemplate.vm"
+    and fileContains ".atomist/manifest.yml" "artifact: myRugArchive"
+    and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+    and fileContains ".atomist/manifest.yml" "0.0.1"
+    and fileExists ".atomist/editors/MyEditor.rug"
+    and fileContains ".atomist/editors/MyEditor.rug" "editor MyEditor"
+    and fileExists ".atomist/tests/MyEditor.rt"
+    and fileContains ".atomist/tests/MyEditor.rt" "scenario MyEditor"
+    and fileExists ".atomist/templates/MyEditorTemplate.vm"
 
 scenario ConvertExistingProjectToRugArchive should ignore project if it already contains a .atomist directory
 

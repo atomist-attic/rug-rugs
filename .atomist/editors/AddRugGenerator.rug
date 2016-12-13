@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+@description "adds a new Rug Generator to an existing Rug Archive project"
 @tag "rug"
 @tag "atomist"
-@description "adds a new Rug Generator in an existing project"
 editor AddRugGenerator
 
-@description "Name of the default generator."
+precondition IsRugArchive
+
 @displayName "Generator Name"
-param generator_name: ^.*$
+@description "name of the generator"
+@validInput "a valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long"
+@minLength 1
+@maxLength 100
+param generator_name: ^[A-Z][A-Za-z0-9]*$
 
 let sampleGeneratorTemplate = "samplegenerator.vm"
 let sampleGeneratorTestTemplate = "samplegeneratortest.vm"
@@ -28,7 +34,8 @@ let sampleGeneratorTestTemplate = "samplegeneratortest.vm"
 let generatorFilename = { ".atomist/editors/" + generator_name + ".rug" }
 let generatorTestFilename = { ".atomist/tests/" + generator_name + ".rt" }
 
-with project p begin
-  do merge sampleGeneratorTemplate to generatorFilename
-  do merge sampleGeneratorTestTemplate to generatorTestFilename
-end
+with project p
+  begin
+    do merge sampleGeneratorTemplate to generatorFilename
+    do merge sampleGeneratorTestTemplate to generatorTestFilename
+  end

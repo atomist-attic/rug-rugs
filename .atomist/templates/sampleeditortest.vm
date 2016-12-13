@@ -1,4 +1,4 @@
-scenario ${editor_name} should do something amazing for developers...
+scenario ${editor_name} should do something amazing for developers
 
 let my_value = "Hey there new Atomista"
 
@@ -17,4 +17,4 @@ when
 then
   /* Assert Something imoportant that your editor did */
   fileExists sample_output_file
-  and fileContains sample_output_file my_value
+    and fileContains sample_output_file my_value

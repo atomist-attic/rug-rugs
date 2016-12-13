@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+@description "adds a new Rug Editor to an existing Rug Archive project"
 @tag "rug"
 @tag "atomist"
-@description "adds a new Blank editor in an existing project"
 editor AddRugEditor
 
-@description "Name of your new editor."
+precondition IsRugArchive
+
 @displayName "Editor Name"
-param editor_name: ^.*$
+@description "name of your new editor"
+@validInput "a valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long"
+@minLength 1
+@maxLength 100
+param editor_name: ^[A-Z][A-Za-z0-9]*$
 
 let sampleEditorTemplate = "sampleeditor.vm"
 let sampleEditorTestTemplate = "sampleeditortest.vm"
@@ -30,8 +36,9 @@ let editorFilename = { ".atomist/editors/" + editor_name + ".rug" }
 let editorTestFilename = { ".atomist/tests/" + editor_name + ".rt" }
 let editorTemplateFilename = { ".atomist/templates/" + editor_name + "Template.vm" }
 
-with project p begin
-  do merge sampleEditorTemplate to editorFilename
-  do merge sampleEditorTestTemplate to editorTestFilename
-  do merge sampleTemplateTemplate to editorTemplateFilename
-end
+with project p
+  begin
+    do merge sampleEditorTemplate to editorFilename
+    do merge sampleEditorTestTemplate to editorTestFilename
+    do merge sampleTemplateTemplate to editorTemplateFilename
+  end

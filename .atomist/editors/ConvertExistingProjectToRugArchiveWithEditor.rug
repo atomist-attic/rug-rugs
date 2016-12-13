@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,43 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+@description "adds default Rug Archive starter files and directories for a Rug Editor to an existing project"
 @tag "rug"
 @tag "atomist"
-@description "adds default Rug Archive starter files and directories for a Rug Editor to an existing project"
 editor ConvertExistingProjectToRugArchiveWithEditor
 
 uses atomist-rugs.rug-archive.AddBasicRugArchiveManifestYml
 
 precondition IsNotRugArchive
 
-@maxLength 21
-@description "Name of your new Rug Archive."
 @displayName "Rug Archive Name"
+@description "name of your new Rug Archive, typically the same as the repo name"
+@validInput "a valid GitHub repo name containing only alphanumeric, ., -, and _ characters and 21 characters or less to avoid Slack truncating the name when creating a channel for the repo"
+@minLength 1
+@maxLength 21
 param rug_archive_name: @project_name
 
-@description "Group id: Used by Maven"
 @displayName "Group ID"
-@validInput "A valid Maven Group ID, often used to indicate your company, group or open source project"
+@displayName "Group ID"
+@description "Maven group identifier, often used to provide a namespace for your rugs, e.g., company-rugs, typically the GitHub owner"
+@validInput "a valid Maven group ID, which starts with a letter, -, or _ and contains only alphanumeric, -, and _ characters and may having leading period separated identifiers starting with letters or underscores and containing only alphanumeric and _ characters."
 param rug_archive_group_id: @group_id
 
-@default "0.0.1-SNAPSHOT"
-@displayName "Semantic Version"
+@displayName "Version"
+@description "initial version of the project, e.g., 1.2.3"
+@validInput "a valid semantic version, http://semver.org"
 @optional
-@description "A Semantic Version number of the form: MAJOR.MINOR.PATCH"
-@validInput "MAJOR.MINOR.PATCH"
+@default "0.1.0"
 param version: @semantic_version
 
-@default "My new project"
+@displayName "Project Description"
+@description "short descriptive text describing the new project"
+@minLength 1
+@validInput "free text"
 @optional
-@description "Description of the new project"
-@displayName "description"
-@validInput "Free Text"
-param description: ^.*$
+@default "My new project"
+param description: @any
 
-@maxLength 21
-@description "Name of a new initial editor that will be added to the project."
-@displayName "Initial Rug Editor Name"
-param editor_name: @project_name
+@displayName "Editor Name"
+@description "name of your new editor"
+@validInput "a valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long"
+@minLength 1
+@maxLength 100
+param editor_name: ^[A-Z][A-Za-z0-9]*$
 
 AddBasicRugArchiveManifestYml project_name = rug_archive_name, group_id = rug_archive_group_id
 AddRugEditor

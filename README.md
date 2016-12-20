@@ -35,7 +35,7 @@ Name | Required | Default | Description
 Run it as follows:
 
 ```
-$ cd parent/directory
+$ cd rug/archive/directory
 $ rug edit atomist-rugs:rug-editors:AddRugEditor \
     editor_name=MyNewEditor
 ```
@@ -70,7 +70,7 @@ Name | Required | Default | Description
 Run it as follows:
 
 ```
-$ cd parent/directory
+$ cd rug/archive/directory
 $ rug edit atomist-rugs:rug-editors:AddRugGenerator \
     generator_name=MyNewGenerator
 ```
@@ -109,7 +109,7 @@ Name | Required | Default | Description
 Run it as follows:
 
 ```
-$ cd parent/directory
+$ cd project/directory
 $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchiveWithEditor \
     editor_name=MyNewEditor \
     rug_archive_name=my-new-editor \
@@ -153,7 +153,7 @@ Name | Required | Default | Description
 Run it as follows:
 
 ```
-$ cd parent/directory
+$ cd project/directory
 $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchiveWithGenerator \
     generator_name=MyNewGenerator \
     rug_archive_name=my-new-generator \
@@ -166,6 +166,44 @@ This will add the files `.atomist/manifest.yml`,
 `.atomist/editors/MyNewGenerator.rug`, and
 `.atomist/tests/MyNewGenerator.rt` to the project.  Edit the latter
 two files to do and test what you want to do with the Generator.
+
+### UpdateRugVersion
+
+The UpdateRugVersion Editor updates the version of the rug dependency
+in the Rug Archive's `manifest.yml` or `package.json`.  Since the
+manifest and package version formats are different, their new values
+are specified as different parameters.
+
+#### Prerequisites
+
+Before running this Editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug Archive source code repository
+
+#### Parameters
+
+To run this Editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`manifest_version` | Yes | | A valid Rug version of the form M.N.P or a version range of the form [M.N.P,X.Y.Z) where a square bracket includes the adjacent version and a parenthesis excludes it.
+`package_version` | Yes | | A valid NPM dependency version, https://docs.npmjs.com/files/package.json#dependencies, representing valid Rug version(s).
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd rug/archive/directory
+$ rug edit atomist-rugs:rug-editors:UpdateRugVersion \
+    manifest_version='[0.8.0,1.0.0)' \
+    package_version='~0.8.0'
+```
+
+This will update the rug version in either the `.atomist/manifest.yml`
+or `.atomist/package.json`, whichever exists.  If there is no
+`.atomist` directory, nothing will be done.
 
 ## Support
 

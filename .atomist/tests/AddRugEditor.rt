@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-scenario AddRugEditor should add a new blank editor to an existing project
+
+scenario AddRugEditor should add a new blank editor to an existing Rug Archive project
+
+let editor_name = "MyNewEditor"
+let project_name = "MyProject"
+
+given
+  ".atomist/manifest.yml" = """group: test-rugs
+artifact: test-manifest
+version: "0.1.0"
+requires: "[0.6.0,1.0.0)"
+dependencies:
+extensions:
+"""
+
+when
+  AddRugEditor
+
+then
+  fileExists ".atomist/editors/MyNewEditor.rug"
+    and fileContains ".atomist/editors/MyNewEditor.rug" "editor MyNewEditor"
+    and fileExists ".atomist/tests/MyNewEditor.rt"
+    and fileContains ".atomist/tests/MyNewEditor.rt" "scenario MyNewEditor"
+    and fileExists ".atomist/templates/MyNewEditorTemplate.vm"
+
+
+scenario AddRugEditor should fail if not a Rug Archive project
 
 let editor_name = "MyNewEditor"
 let project_name = "MyProject"
@@ -25,8 +51,4 @@ when
   AddRugEditor
 
 then
-  fileExists ".atomist/editors/MyNewEditor.rug"
-  and fileContains ".atomist/editors/MyNewEditor.rug" "editor MyNewEditor"
-  and fileExists ".atomist/tests/MyNewEditor.rt"
-  and fileContains ".atomist/tests/MyNewEditor.rt" "scenario MyNewEditor"
-  and fileExists ".atomist/templates/MyNewEditorTemplate.vm"
+  NoChange

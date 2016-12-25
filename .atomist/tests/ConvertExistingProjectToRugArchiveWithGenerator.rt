@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 scenario ConvertExistingProjectToRugArchiveWithGenerator should add default .atomist directory with a default generator for the archive
 
 let rug_archive_name = "myRugArchive"
@@ -28,19 +29,19 @@ when
 
 then
   fileExists ".atomist/manifest.yml"
-  and fileContains ".atomist/manifest.yml" "artifact: myRugArchive"
-  and fileContains ".atomist/manifest.yml" "group: myRugGroup"
-  and fileContains ".atomist/manifest.yml" "0.0.1"
-  and fileExists ".atomist/editors/DefaultGenerator.rug"
-  and fileContains ".atomist/editors/DefaultGenerator.rug" "param project_name: @project_name"
-  and fileContains ".atomist/editors/DefaultGenerator.rug" "editor DefaultGenerator"
-  and fileExists ".atomist/tests/DefaultGenerator.rt"
-  and fileContains ".atomist/tests/DefaultGenerator.rt" "scenario DefaultGenerator"
+    and fileContains ".atomist/manifest.yml" "artifact: myRugArchive"
+    and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+    and fileContains ".atomist/manifest.yml" "0.0.1"
+    and fileExists ".atomist/editors/DefaultGenerator.rug"
+    and fileContains ".atomist/editors/DefaultGenerator.rug" "param project_name: @project_name"
+    and fileContains ".atomist/editors/DefaultGenerator.rug" "editor DefaultGenerator"
+    and fileExists ".atomist/tests/DefaultGenerator.rt"
+    and fileContains ".atomist/tests/DefaultGenerator.rt" "scenario DefaultGenerator"
 
 
-scenario ConvertExistingProjectToRugArchiveWithGenerator with long archive and generator names
+scenario ConvertExistingProjectToRugArchiveWithGenerator with long but valid archive and generator names
 
-let rug_archive_name = "spring-cloud-config-server"
+let rug_archive_name = "spring-cloud-cfg-srvr"
 let version = "0.0.1"
 let generator_name = "NewSpringCloudConfigServer"
 let rug_archive_group_id = "myRugGroup"
@@ -53,11 +54,41 @@ when
 
 then
   fileExists ".atomist/manifest.yml"
-  and fileContains ".atomist/manifest.yml" "artifact: spring-cloud-config-server"
-  and fileContains ".atomist/manifest.yml" "group: myRugGroup"
-  and fileContains ".atomist/manifest.yml" "0.0.1"
-  and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "param project_name: @project_name"
-  and fileExists ".atomist/editors/NewSpringCloudConfigServer.rug"
-  and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "editor NewSpringCloudConfigServer"
-  and fileExists ".atomist/tests/NewSpringCloudConfigServer.rt"
-  and fileContains ".atomist/tests/NewSpringCloudConfigServer.rt" "scenario NewSpringCloudConfigServer"
+    and fileContains ".atomist/manifest.yml" "artifact: spring-cloud-cfg-srvr"
+    and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+    and fileContains ".atomist/manifest.yml" "0.0.1"
+    and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "param project_name: @project_name"
+    and fileExists ".atomist/editors/NewSpringCloudConfigServer.rug"
+    and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "editor NewSpringCloudConfigServer"
+    and fileExists ".atomist/tests/NewSpringCloudConfigServer.rt"
+    and fileContains ".atomist/tests/NewSpringCloudConfigServer.rt" "scenario NewSpringCloudConfigServer"
+
+
+scenario ConvertExistingProjectToRugArchiveWithGenerator with too long archive and generator names should fail
+
+let rug_archive_name = "spring-cloud-config-server"
+let generator_name = "NewSpringCloudConfigServer"
+let rug_archive_group_id = "myRugGroup"
+
+given
+  Empty
+
+when
+  ConvertExistingProjectToRugArchiveWithGenerator
+
+then
+  InvalidParameters
+
+
+scenario ConvertExistingProjectToRugArchiveWithGenerator with missing parameters should fail
+
+let rug_archive_name = "spring-config"
+
+given
+  Empty
+
+when
+  ConvertExistingProjectToRugArchiveWithGenerator
+
+then
+  MissingParameters

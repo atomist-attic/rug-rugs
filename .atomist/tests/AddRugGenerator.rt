@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 the original author or authors.
+ * Copyright © 2016 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-scenario AddRugGenerator should add a new Rug Generator to an existing project
+
+scenario AddRugGenerator should add a new Rug Generator to an existing Rug Archive project
+
+let generator_name = "MyNewGenerator"
+let project_name = "MyProject"
+
+given
+  ".atomist/manifest.yml" = """group: test-rugs
+artifact: test-manifest
+version: "0.1.0"
+requires: "[0.6.0,1.0.0)"
+dependencies:
+extensions:
+"""
+
+when
+  AddRugGenerator
+
+then
+  fileExists ".atomist/editors/MyNewGenerator.rug"
+  and fileContains ".atomist/editors/MyNewGenerator.rug" "param project_name: @project_name"
+  and fileContains ".atomist/editors/MyNewGenerator.rug" "editor MyNewGenerator"
+  and fileExists ".atomist/tests/MyNewGenerator.rt"
+  and fileContains ".atomist/tests/MyNewGenerator.rt" "scenario MyNewGenerator"
+
+
+scenario AddRugGenerator should fail if not a Rug Archive project
 
 let generator_name = "MyNewGenerator"
 let project_name = "MyProject"
@@ -25,8 +51,4 @@ when
   AddRugGenerator
 
 then
-  fileExists ".atomist/editors/MyNewGenerator.rug"
-  and fileContains ".atomist/editors/MyNewGenerator.rug" "param project_name: @project_name"
-  and fileContains ".atomist/editors/MyNewGenerator.rug" "editor MyNewGenerator"
-  and fileExists ".atomist/tests/MyNewGenerator.rt"
-  and fileContains ".atomist/tests/MyNewGenerator.rt" "scenario MyNewGenerator"
+  NoChange

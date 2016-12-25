@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-@description "only works on projects that do not have a .atomist directory"
+@description "only works on projects that have a .atomist directory"
 @tag "rug"
 @tag "atomist"
-predicate IsNotRugArchive
+predicate IsRugArchive
   with project p
-    when { !p.directoryExists(".atomist") }
+    when directoryExists ".atomist"

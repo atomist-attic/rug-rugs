@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/atomist-rugs/rug-editors.svg?branch=master)](https://travis-ci.org/atomist-rugs/rug-editors)
 [![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
 
-This [Rug][rug] archive contains a Editors to create a a Rug Archive
-from an existing project and add Editors and Generators to Rug
+This [Rug][rug] archive contains Editors to create a a Rug Archive
+from an existing project and to add Editors and Generators to Rug
 Archives.  Most meta.
 
 [rug]: http://docs.atomist.com/

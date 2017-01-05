@@ -7,13 +7,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.3.0...HEAD
+
+## [0.3.0] - 2017-01-05
+
+[0.3.0]: https://github.com/atomist-rugs/rug-editors/compare/0.2.0...0.3.0
+
+Brand new Rug release
+
+### Changed
+
+-   Updates for rug 0.8.0
 
 ## [0.2.0] - 2016-12-19
 
-Update your Rug release
-
 [0.2.0]: https://github.com/atomist-rugs/rug-editors/compare/0.1.0...0.2.0
+
+Update your Rug release
 
 ### Added
 
@@ -21,9 +31,9 @@ Update your Rug release
 
 ## [0.1.0] - 2016-12-13
 
-Initial release
+[0.1.0]: https://github.com/atomist-rugs/rug-editors/tree/0.1.0
 
-[0.1.0]: https://github.com/atomist-rugs/rug-editors/compare/47e893f...0.1.0
+Initial release
 
 ### Added
 

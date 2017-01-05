@@ -38,11 +38,11 @@ param package_version: @any
 let manifest = ".atomist/manifest.yml"
 let pkgJSON = ".atomist/package.json"
 
-with project p
+with Project p
   begin
-    with file f when path = manifest
+    with File f when path = manifest
       do regexpReplace '(?m)^\s*requires:.*$' { 'requires: "' + manifest_version + '"' }
 
-    with file f when path = pkgJSON
+    with File f when path = pkgJSON
       do regexpReplace '"@atomist/rug"\s*:\s*"[^"]*"' { '"@atomist/rug": "' + package_version + '"' }
   end

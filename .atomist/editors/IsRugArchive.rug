@@ -18,5 +18,5 @@
 @tag "rug"
 @tag "atomist"
 predicate IsRugArchive
-  with project p
+  with Project p
     when directoryExists ".atomist"

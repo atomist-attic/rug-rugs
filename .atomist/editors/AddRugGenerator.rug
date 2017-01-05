@@ -34,7 +34,7 @@ let sampleGeneratorTestTemplate = "samplegeneratortest.vm"
 let generatorFilename = { ".atomist/editors/" + generator_name + ".rug" }
 let generatorTestFilename = { ".atomist/tests/" + generator_name + ".rt" }
 
-with project p
+with Project p
   begin
     do merge sampleGeneratorTemplate to generatorFilename
     do merge sampleGeneratorTestTemplate to generatorTestFilename

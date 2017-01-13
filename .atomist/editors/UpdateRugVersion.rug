@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@description "updates the version of the rug depenpendency"
+@description "updates the version of the rug dependency"
 @tag "rug"
 @tag "atomist"
 editor UpdateRugVersion

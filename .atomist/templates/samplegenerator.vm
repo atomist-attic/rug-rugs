@@ -10,5 +10,5 @@ editor $generator_name
 @maxLength 21
 param project_name: @project_name
 
-with project
+with Project
   do fileExists ".atomist.yml"

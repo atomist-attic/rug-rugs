@@ -3,5 +3,5 @@ artifact: rug-editors
 version: "0.4.0"
 requires: "[0.8.0,1.0.0)"
 dependencies:
-- "atomist-rugs:rug-archive:0.2.0"
+- "atomist-rugs:rug-archive:0.3.0"
 extensions:

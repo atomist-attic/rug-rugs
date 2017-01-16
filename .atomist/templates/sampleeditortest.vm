@@ -15,6 +15,6 @@ when
   $editor_name
 
 then
-  /* Assert Something imoportant that your editor did */
+  /* Assert Something important that your editor did */
   fileExists sample_output_file
     and fileContains sample_output_file my_value

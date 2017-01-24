@@ -27,6 +27,7 @@ precondition IsNotRugArchive
 @description "name of your new Rug Archive, typically the same as the repo name"
 @validInput "a valid GitHub repo name containing only alphanumeric, ., -, and _ characters"
 @minLength 1
+@maxLength 100
 param rug_archive_name: @project_name
 
 @displayName "Group ID"

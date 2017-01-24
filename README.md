@@ -100,7 +100,7 @@ Name | Required | Default | Description
 -----|----------|---------|------------
 `editor_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 `rug_archive_name` | Yes | | A valid GitHub repository name.  It must be 21 characters or less to avoid truncating name when the its Slack channel is created.
-`group_id` | Yes | | Maven group ID, e.g., "company-rugs".  Typically the GitHub owner of the repo being created is used.
+`rug_archive_group_id` | Yes | | Maven group ID, e.g., "company-rugs".  Typically the GitHub owner of the repo being created is used.
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.
 `description` | No | My new project | A brief description of the project.
 
@@ -113,7 +113,7 @@ $ cd project/directory
 $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchiveWithEditor \
     editor_name=MyNewEditor \
     rug_archive_name=my-new-editor \
-    group_id=my-rugs \
+    rug_archive_group_id=my-rugs \
     version=2.7.1 \
     description="This is going to be great."
 ```
@@ -144,7 +144,7 @@ Name | Required | Default | Description
 -----|----------|---------|------------
 `generator_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 `rug_archive_name` | Yes | | A valid GitHub repository name.  It must be 21 characters or less to avoid truncating name when the its Slack channel is created.
-`group_id` | Yes | | Maven group ID, e.g., "company-rugs".  Typically the GitHub owner of the repo being created is used.
+`rug_archive_group_id` | Yes | | Maven group ID, e.g., "company-rugs".  Typically the GitHub owner of the repo being created is used.
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.
 `description` | No | My new project | A brief description of the project.
 
@@ -157,7 +157,7 @@ $ cd project/directory
 $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchiveWithGenerator \
     generator_name=MyNewGenerator \
     rug_archive_name=my-new-generator \
-    group_id=my-rugs \
+    rug_archive_group_id=my-rugs \
     version=3.1.4 \
     description="This is going to create something great."
 ```

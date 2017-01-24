@@ -27,7 +27,7 @@ precondition IsNotRugArchive
 @description "name of your new Rug Archive, typically the same as the repo name"
 @validInput "a valid GitHub repo name containing only alphanumeric, ., -, and _ characters and 21 characters or less to avoid Slack truncating the name when creating a channel for the repo"
 @minLength 1
-@maxLength 21
+@maxLength 100
 param rug_archive_name: @project_name
 
 @displayName "Group ID"

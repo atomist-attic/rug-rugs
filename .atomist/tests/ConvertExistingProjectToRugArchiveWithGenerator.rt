@@ -64,20 +64,21 @@ then
     and fileContains ".atomist/tests/NewSpringCloudConfigServer.rt" "scenario NewSpringCloudConfigServer"
 
 
-scenario ConvertExistingProjectToRugArchiveWithGenerator with too long archive and generator names should fail
+scenario ConvertExistingProjectToRugArchiveWithGenerator should ignore project if it already contains a .atomist directory
 
-let rug_archive_name = "spring-cloud-config-server"
-let generator_name = "NewSpringCloudConfigServer"
+let rug_archive_name = "myRugArchive"
 let rug_archive_group_id = "myRugGroup"
+let version = "0.0.1"
+let generator_name = "MyGenerator"
 
 given
-  Empty
+  ArchiveRoot
 
 when
   ConvertExistingProjectToRugArchiveWithGenerator
 
 then
-  InvalidParameters
+  NoChange
 
 
 scenario ConvertExistingProjectToRugArchiveWithGenerator with missing parameters should fail

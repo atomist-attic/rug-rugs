@@ -38,7 +38,7 @@ then
     and fileContains ".atomist/tests/MyEditor.rt" "scenario MyEditor"
     and fileExists ".atomist/templates/MyEditorTemplate.vm"
 
-scenario ConvertExistingProjectToRugArchive should ignore project if it already contains a .atomist directory
+scenario ConvertExistingProjectToRugArchiveWithEditor should ignore project if it already contains a .atomist directory
 
 let rug_archive_name = "myRugArchive"
 let rug_archive_group_id = "myRugGroup"

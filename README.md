@@ -28,7 +28,7 @@ To run this Editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`editor_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long.
+`editor_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 
 #### Running
 
@@ -63,7 +63,7 @@ To run this Editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`generator_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long.
+`generator_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 
 #### Running
 
@@ -98,7 +98,7 @@ To run this Editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`editor_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long.
+`editor_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 `rug_archive_name` | Yes | | A valid GitHub repository name.  It must be 21 characters or less to avoid truncating name when the its Slack channel is created.
 `group_id` | Yes | | Maven group ID, e.g., "company-rugs".  Typically the GitHub owner of the repo being created is used.
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.
@@ -142,7 +142,7 @@ To run this Editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`generator_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long.
+`generator_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 `rug_archive_name` | Yes | | A valid GitHub repository name.  It must be 21 characters or less to avoid truncating name when the its Slack channel is created.
 `group_id` | Yes | | Maven group ID, e.g., "company-rugs".  Typically the GitHub owner of the repo being created is used.
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.

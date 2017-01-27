@@ -39,8 +39,10 @@ let original_rug_version = """0.10.0"""
 
 let package_json_filename = ".atomist/package.json"
 
-with Project
+with Project begin
   do addFile package_json_filename package_json_content
+  do addFile ".atomist/tsconfig.json" ""
+end
 
 with File when path = ".atomist/package.json"
   do replace original_rug_version rug_version

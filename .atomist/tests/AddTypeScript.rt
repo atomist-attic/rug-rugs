@@ -23,11 +23,10 @@ when
   AddTypeScript
 
 then
-  dump ".atomist/package.json"
-    and fileExists ".atomist/package.json"
+  fileExists ".atomist/package.json"
     and fileContains ".atomist/package.json" "@atomist/rug"
     and fileContains ".atomist/package.json" "0.10.0"
-
+    and fileExists ".atomist/tsconfig.json"
 
 scenario AddTypeScript should add support files for writing Rugs in TypeScript with a specific version of Rug
 
@@ -40,10 +39,10 @@ when
   AddTypeScript
 
 then
-  dump ".atomist/package.json"
-    and fileExists ".atomist/package.json"
+  fileExists ".atomist/package.json"
     and fileContains ".atomist/package.json" "@atomist/rug"
     and fileContains ".atomist/package.json" "0.9.0"
+    and fileExists ".atomist/tsconfig.json"
 
 
 scenario AddTypeScript should not make any changes if the target project is not a Rug archive

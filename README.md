@@ -205,6 +205,37 @@ This will update the rug version in either the `.atomist/manifest.yml`
 or `.atomist/package.json`, whichever exists.  If there is no
 `.atomist` directory, nothing will be done.
 
+### AddTypeScript
+
+The AddTypeScript editor adds support files so that you can write your Rugs in TypeScript.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug Archive source code repository
+
+#### Parameters
+
+To run this Editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`editor_name` | No | 0.10.0 | A valid Rug version following Maven version range semantics.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd rug/archive/directory
+$ rug edit atomist-rugs:rug-editors:AddTypeScript \
+    rug_version=0.10.0
+```
+
+This will add the files `.atomist/package.json` to the project.
+
 ## Support
 
 General support questions should be discussed in the `#support`

@@ -34,8 +34,7 @@ when
   AddRugExecutor
 
 then
-  dump ".atomist/executors/MyNewExecutor.ts"
-    and fileExists ".atomist/executors/MyNewExecutor.ts"
+  fileExists ".atomist/executors/MyNewExecutor.ts"
     and fileContains ".atomist/executors/MyNewExecutor.ts" "var myNewExecutor: Executor"
     and fileContains ".atomist/executors/MyNewExecutor.ts" { "description: \"" + description + "\"" }
     and fileContains ".atomist/executors/MyNewExecutor.ts" { "name: \"" + executor_name + "\"" }

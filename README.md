@@ -236,6 +236,44 @@ $ rug edit atomist-rugs:rug-editors:AddTypeScript \
 
 This will add the files `.atomist/package.json` and `.atomist/tsconfig.json` to the project.
 
+----
+
+### AddRugExecutor
+
+The AddRugExecutor editor adds a Rug TypeScript editor to an existing Rug Archive.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A source code repository that does have a `.atomist` directory
+
+#### Parameters
+
+To run this editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`executor_name` | Yes | | A valid Rug Executor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
+`description` | Yes | | A brief description of the new executor.
+`bot_intent` | Yes | | The phrase that will be used to run this executor from the Bot.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist-rugs:rug-editors:AddRugExecutor \
+    executor_name=MyNewExecutor \
+    description="This is going to create something great." \
+    bot_intent="do it"
+```
+
+This will add a
+`.atomist/executors/MyNewExecutor.ts` file to the project.
+
 ## Support
 
 General support questions should be discussed in the `#support`

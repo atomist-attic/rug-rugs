@@ -3,9 +3,9 @@
 [![Build Status](https://travis-ci.org/atomist-rugs/rug-editors.svg?branch=master)](https://travis-ci.org/atomist-rugs/rug-editors)
 [![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
 
-This [Rug][rug] archive contains Editors to create a a Rug Archive
-from an existing project and to add Editors and Generators to Rug
-Archives.  Most meta.
+This [Rug][rug] archive contains editors to create a a Rug archive
+from an existing project and to add editors and generators to Rug
+archives.  Most meta.
 
 [rug]: http://docs.atomist.com/
 
@@ -13,22 +13,22 @@ Archives.  Most meta.
 
 ### AddRugEditor
 
-The AddRugEditor Editor adds a simple Editor to a Rug Archive project.
+The AddRugEditor editor adds a simple editor to a Rug Archive project.
 
 #### Prerequisites
 
-Before running this Editor, you must have the following prerequisites
+Before running this editor, you must have the following prerequisites
 satisfied.
 
-*   A Rug Archive source code repository
+*   A Rug archive source code repository
 
 #### Parameters
 
-To run this Editor, you must supply the following parameters.
+To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`editor_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
+`editor_name` | Yes | | A valid Rug editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 
 #### Running
 
@@ -42,28 +42,28 @@ $ rug edit atomist-rugs:rug-editors:AddRugEditor \
 
 This will add the files `.atomist/editors/MyNewEditor.rug` and
 `.atomist/tests/MyNewEditor.rt` to the project.  Edit those files to
-do and test what you want to do with the Editor.
+do and test what you want to do with the editor.
 
 ### AddRugGenerator
 
-The AddRugGenerator Editor adds a simple Generator to a Rug Archive
+The AddRugGenerator editor adds a simple generator to a Rug archive
 project.  It probably does not make sense to run this more than once
 on a project.
 
 #### Prerequisites
 
-Before running this Editor, you must have the following prerequisites
+Before running this editor, you must have the following prerequisites
 satisfied.
 
-*   A Rug Archive source code repository
+*   A Rug archive source code repository
 
 #### Parameters
 
-To run this Editor, you must supply the following parameters.
+To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`generator_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
+`generator_name` | Yes | | A valid Rug editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 
 #### Running
 
@@ -77,28 +77,28 @@ $ rug edit atomist-rugs:rug-editors:AddRugGenerator \
 
 This will add the files `.atomist/editors/MyNewGenerator.rug` and
 `.atomist/tests/MyNewGenerator.rt` to the project.  Edit those files
-to do and test what you want to do with the Generator.
+to do and test what you want to do with the generator.
 
 ### ConvertExistingProjectToRugArchiveWithEditor
 
-The ConvertExistingProjectToRugArchiveWithEditor Editor creates a
-valid Rug Archive in the current project and adds a simple Editor.  It
+The ConvertExistingProjectToRugArchiveWithEditor editor creates a
+valid Rug archive in the current project and adds a simple editor.  It
 probably does not make sense to run this more than once on a project.
 
 #### Prerequisites
 
-Before running this Editor, you must have the following prerequisites
+Before running this editor, you must have the following prerequisites
 satisfied.
 
 *   A source code repository that does not have a `.atomist` directory
 
 #### Parameters
 
-To run this Editor, you must supply the following parameters.
+To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`editor_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
+`editor_name` | Yes | | A valid Rug editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 `rug_archive_name` | Yes | | A valid GitHub repository name.  It must be 21 characters or less to avoid truncating name when the its Slack channel is created.
 `rug_archive_group_id` | Yes | | Maven group ID, e.g., "company-rugs".  Typically the GitHub owner of the repo being created is used.
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.
@@ -121,28 +121,28 @@ $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchiveWithEditor
 This will add the files `.atomist/manifest.yml`,
 `.atomist/editors/MyNewEditor.rug`, and
 `.atomist/tests/MyNewEditor.rt` to the project.  Edit the latter two
-files to do and test what you want to do with the Editor.
+files to do and test what you want to do with the editor.
 
 ### ConvertExistingProjectToRugArchiveWithGenerator
 
-The ConvertExistingProjectToRugArchiveWithGenerator Editor creates a
-valid Rug Archive in the current project and adds a simple Generator.  It
+The ConvertExistingProjectToRugArchiveWithGenerator editor creates a
+valid Rug archive in the current project and adds a simple generator.  It
 probably does not make sense to run this more than once on a project.
 
 #### Prerequisites
 
-Before running this Editor, you must have the following prerequisites
+Before running this editor, you must have the following prerequisites
 satisfied.
 
 *   A source code repository that does not have a `.atomist` directory
 
 #### Parameters
 
-To run this Editor, you must supply the following parameters.
+To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`generator_name` | Yes | | A valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
+`generator_name` | Yes | | A valid Rug editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
 `rug_archive_name` | Yes | | A valid GitHub repository name.  It must be 21 characters or less to avoid truncating name when the its Slack channel is created.
 `rug_archive_group_id` | Yes | | Maven group ID, e.g., "company-rugs".  Typically the GitHub owner of the repo being created is used.
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.
@@ -165,25 +165,25 @@ $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchiveWithGenera
 This will add the files `.atomist/manifest.yml`,
 `.atomist/editors/MyNewGenerator.rug`, and
 `.atomist/tests/MyNewGenerator.rt` to the project.  Edit the latter
-two files to do and test what you want to do with the Generator.
+two files to do and test what you want to do with the generator.
 
 ### UpdateRugVersion
 
-The UpdateRugVersion Editor updates the version of the rug dependency
-in the Rug Archive's `manifest.yml` or `package.json`.  Since the
+The UpdateRugVersion editor updates the version of the rug dependency
+in the Rug archive's `manifest.yml` or `package.json`.  Since the
 manifest and package version formats are different, their new values
 are specified as different parameters.
 
 #### Prerequisites
 
-Before running this Editor, you must have the following prerequisites
+Before running this editor, you must have the following prerequisites
 satisfied.
 
-*   A Rug Archive source code repository
+*   A Rug archive source code repository
 
 #### Parameters
 
-To run this Editor, you must supply the following parameters.
+To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
@@ -214,7 +214,7 @@ The AddTypeScript editor adds support files so that you can write your Rugs in T
 Before running this editor, you must have the following prerequisites
 satisfied.
 
-*   A Rug Archive source code repository
+*   A Rug archive source code repository
 
 #### Parameters
 

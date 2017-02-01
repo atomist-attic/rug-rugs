@@ -236,8 +236,6 @@ $ rug edit atomist-rugs:rug-editors:AddTypeScript \
 
 This will add the files `.atomist/package.json` and `.atomist/tsconfig.json` to the project.
 
-----
-
 ### AddRugExecutor
 
 The AddRugExecutor editor adds a Rug TypeScript editor to an existing Rug Archive.

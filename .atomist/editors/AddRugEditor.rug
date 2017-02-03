@@ -33,14 +33,14 @@ let editorTestFilename = { ".atomist/tests/" + editor_name + ".rt" }
 
 with Project p
   begin
-    do copyEditorBackingFileOrFail "AddRugEditor/EditorName.rug" editorFilename
-    do copyEditorBackingFileOrFail "AddRugEditor/EditorName.rt" editorTestFilename
+    do copyEditorBackingFileOrFail ".atomist/editors/HelloWorld.rug" editorFilename
+    do copyEditorBackingFileOrFail ".atomist/tests/HelloWorld.rt" editorTestFilename
     end
 
 with Project p
   begin
     with File f when path = editorFilename
-      do replace "EditorName" editor_name
+      do replace "HelloWorld" editor_name
     with File f when path = editorTestFilename
-      do replace "EditorName" editor_name
+      do replace "HelloWorld" editor_name
   end

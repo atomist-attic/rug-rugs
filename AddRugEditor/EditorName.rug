@@ -1,0 +1,14 @@
+@description "what does this do?"
+@tag "documentation"
+editor EditorName
+
+@displayName "My Value"
+@description "a single parameter to this editor"
+@validInput "free text"
+param my_value: @any
+
+let happyFileContents = "I like it here"
+
+/* Example showing adding one file */
+with Project p
+  do addFile "happy.txt" happyFileContents

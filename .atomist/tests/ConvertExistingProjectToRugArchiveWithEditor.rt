@@ -36,7 +36,6 @@ then
     and fileContains ".atomist/editors/MyEditor.rug" "editor MyEditor"
     and fileExists ".atomist/tests/MyEditor.rt"
     and fileContains ".atomist/tests/MyEditor.rt" "scenario MyEditor"
-    and fileExists ".atomist/templates/MyEditorTemplate.vm"
 
 scenario ConvertExistingProjectToRugArchiveWithEditor should ignore project if it already contains a .atomist directory
 

@@ -1,4 +1,4 @@
-scenario ${editor_name} should do something amazing for developers
+scenario EditorName should do something amazing for developers
 
 let my_value = "I like it here"
 
@@ -12,7 +12,7 @@ given
 
 when
   /* Run your editor */
-  $editor_name
+  EditorName
 
 then
   /* Assert Something important that your editor did */

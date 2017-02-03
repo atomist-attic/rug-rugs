@@ -1,8 +1,8 @@
-scenario ${editor_name} should do something amazing for developers
+scenario HelloWorld should do something amazing for developers
 
-let my_value = "Hey there new Atomista"
+let my_value = "Hello"
 
-let sample_output_file = "samplefile.txt"
+let sample_output_file = "hello.txt"
 
 given
   /* Selects the current project and its source files
@@ -12,7 +12,7 @@ given
 
 when
   /* Run your editor */
-  $editor_name
+  HelloWorld
 
 then
   /* Assert Something important that your editor did */

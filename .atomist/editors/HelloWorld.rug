@@ -1,0 +1,14 @@
+@description "This rug is copied into your project by AddRugEditor"
+@tag "documentation"
+editor HelloWorld
+
+@displayName "My Value"
+@description "a single parameter to this editor"
+@validInput "free text"
+param my_value: @any
+
+let fileContents = "Hello, world!"
+
+/* Example showing adding one file */
+with Project p
+  do addFile "hello.txt" fileContents

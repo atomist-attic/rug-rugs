@@ -28,17 +28,19 @@ precondition IsRugArchive
 @maxLength 100
 param editor_name: ^[A-Z][A-Za-z0-9]*$
 
-let sampleEditorTemplate = "sampleeditor.vm"
-let sampleEditorTestTemplate = "sampleeditortest.vm"
-let sampleTemplateTemplate = "sampletemplatetemplate.vm"
-
 let editorFilename = { ".atomist/editors/" + editor_name + ".rug" }
 let editorTestFilename = { ".atomist/tests/" + editor_name + ".rt" }
-let editorTemplateFilename = { ".atomist/templates/" + editor_name + "Template.vm" }
 
 with Project p
   begin
-    do merge sampleEditorTemplate to editorFilename
-    do merge sampleEditorTestTemplate to editorTestFilename
-    do merge sampleTemplateTemplate to editorTemplateFilename
+    do copyEditorBackingFileOrFail ".atomist/editors/HelloWorld.rug" editorFilename
+    do copyEditorBackingFileOrFail ".atomist/tests/HelloWorld.rt" editorTestFilename
+    end
+
+with Project p
+  begin
+    with File f when path = editorFilename
+      do replace "HelloWorld" editor_name
+    with File f when path = editorTestFilename
+      do replace "HelloWorld" editor_name
   end

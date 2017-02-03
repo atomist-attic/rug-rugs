@@ -16,8 +16,6 @@
 
 scenario AddRugEditor should add a new blank editor to an existing Rug Archive project
 
-debug=true
-
 let editor_name = "MyNewEditor"
 let project_name = "MyProject"
 

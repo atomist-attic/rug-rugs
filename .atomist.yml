@@ -33,6 +33,7 @@ editor:
 
 ---
 kind: "operation"
+<<<<<<< Updated upstream
 client: "rug-cli 0.21.0-SNAPSHOT"
 executor:
   name: "UpdateRugVersion"
@@ -56,4 +57,18 @@ executor:
     repo: "n/a"
     branch: "n/a"
     sha: "n/a"
+=======
+client: "rug-cli 0.20.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddRugEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.4.0"
+  origin:
+    repo: "atomist-rugs/rug-editors"
+    branch: "master"
+    sha: "17eefad*"
+  parameters:
+    - "editor_name": "AddTypescriptEditor"
+>>>>>>> Stashed changes
 

@@ -23,7 +23,7 @@ precondition IsRugArchive
 
 @displayName "Editor Name"
 @description "name of your new editor"
-@validInput "a valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long"
+@validInput "a valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long"
 @minLength 1
 @maxLength 100
 param editor_name: ^[A-Z][A-Za-z0-9]*$

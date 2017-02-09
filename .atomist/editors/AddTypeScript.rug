@@ -14,35 +14,28 @@
  * limitations under the License.
  */
 
-@description "adds a new Rug Generator to an existing Rug Archive project"
+@description "adds a TypeScript supporting files to an existing Rug Archive project"
 @tag "rug"
 @tag "atomist"
+@tag "typscript"
 editor AddTypeScript
 
 precondition IsRugArchive
 
 @displayName "Rug Version"
 @description "specific version or version range for Rug"
-@validInput "a valid Maven version range, http://semver.org and http://maven.apache.org/components/enforcer/enforcer-rules/versionRanges.html"
+@validInput """a valid Node.js version range, e.g., '0.11.0' or '>= 0.11.0', see https://docs.npmjs.com/misc/semver"""
 @optional
-@default "0.10.0"
+@default "0.11.0"
 param rug_version: @version_range
 
-let package_json_content = """{
-  "dependencies": {
-    "@atomist/rug": "0.10.0"
-  }
-}
-"""
-
-let original_rug_version = """0.10.0"""
-
-let package_json_filename = ".atomist/package.json"
+let package_json_path = ".atomist/package.json"
+let tsconfig_json_path = ".atomist/tsconfig.json"
 
 with Project begin
-  do addFile package_json_filename package_json_content
-  do addFile ".atomist/tsconfig.json" ""
+  do copyEditorBackingFileOrFail package_json_path
+  do copyEditorBackingFileOrFail tsconfig_json_path
 end
 
-with File when path = ".atomist/package.json"
-  do replace original_rug_version rug_version
+with File when path = package_json_path
+  do regexpReplace '"@atomist/rug":.*' { '"@atomist/rug": "' + rug_version + '"' }

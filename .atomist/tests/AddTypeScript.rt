@@ -17,32 +17,37 @@
 scenario AddTypeScript should add support files for writing Rugs in TypeScript
 
 given
-  ArchiveRoot
+  .atomist/manifest.yml = """requires: "0.11.0"
+"""
 
 when
   AddTypeScript
 
 then
   fileExists ".atomist/package.json"
-    and fileContains ".atomist/package.json" "@atomist/rug"
-    and fileContains ".atomist/package.json" "0.10.0"
+    and fileContains ".atomist/package.json" '"@atomist/rug"'
+    and fileContains ".atomist/package.json" '"0.11.0"'
     and fileExists ".atomist/tsconfig.json"
+    and fileContains ".atomist/tsconfig.json" "suppressImplicitAnyIndexErrors"
+
 
 scenario AddTypeScript should add support files for writing Rugs in TypeScript with a specific version of Rug
 
 let rug_version = "0.9.0"
 
 given
-  ArchiveRoot
+  .atomist/manifest.yml = """requires: "0.11.0"
+"""
 
 when
   AddTypeScript
 
 then
   fileExists ".atomist/package.json"
-    and fileContains ".atomist/package.json" "@atomist/rug"
-    and fileContains ".atomist/package.json" "0.9.0"
+    and fileContains ".atomist/package.json" '"@atomist/rug"'
+    and fileContains ".atomist/package.json" '"0.9.0"'
     and fileExists ".atomist/tsconfig.json"
+    and fileContains ".atomist/tsconfig.json" "suppressImplicitAnyIndexErrors"
 
 
 scenario AddTypeScript should not make any changes if the target project is not a Rug archive

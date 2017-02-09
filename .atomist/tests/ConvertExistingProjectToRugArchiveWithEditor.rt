@@ -29,8 +29,8 @@ when
 
 then
   fileExists ".atomist/manifest.yml"
-    and fileContains ".atomist/manifest.yml" "artifact: myRugArchive"
-    and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+    and fileContains ".atomist/manifest.yml" 'artifact: "myRugArchive"'
+    and fileContains ".atomist/manifest.yml" 'group: "myRugGroup"'
     and fileContains ".atomist/manifest.yml" "0.0.1"
     and fileExists ".atomist/editors/MyEditor.rug"
     and fileContains ".atomist/editors/MyEditor.rug" "editor MyEditor"

@@ -29,8 +29,8 @@ when
 
 then
   fileExists ".atomist/manifest.yml"
-    and fileContains ".atomist/manifest.yml" "artifact: myRugArchive"
-    and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+    and fileContains ".atomist/manifest.yml" 'artifact: "myRugArchive"'
+    and fileContains ".atomist/manifest.yml" 'group: "myRugGroup"'
     and fileContains ".atomist/manifest.yml" "0.0.1"
     and fileExists ".atomist/editors/DefaultGenerator.rug"
     and fileContains ".atomist/editors/DefaultGenerator.rug" "param project_name: @project_name"
@@ -54,8 +54,8 @@ when
 
 then
   fileExists ".atomist/manifest.yml"
-    and fileContains ".atomist/manifest.yml" "artifact: spring-cloud-cfg-srvr"
-    and fileContains ".atomist/manifest.yml" "group: myRugGroup"
+    and fileContains ".atomist/manifest.yml" 'artifact: "spring-cloud-cfg-srvr"'
+    and fileContains ".atomist/manifest.yml" 'group: "myRugGroup"'
     and fileContains ".atomist/manifest.yml" "0.0.1"
     and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "param project_name: @project_name"
     and fileExists ".atomist/editors/NewSpringCloudConfigServer.rug"

@@ -35,7 +35,6 @@ then
   fileExists ".atomist/editors/MyNewEditor.rug"
     and fileContains ".atomist/editors/MyNewEditor.rug" "editor MyNewEditor"
     and fileExists ".atomist/tests/MyNewEditor.rt"
-    and dump ".atomist/tests/MyNewEditor.rt"
     and fileContains ".atomist/tests/MyNewEditor.rt" "scenario MyNewEditor"
 
 

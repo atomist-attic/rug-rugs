@@ -42,20 +42,22 @@ param bot_intent: @any
 
 let executor_filename = { ".atomist/executors/" + executor_name + ".ts" }
 let default_executor_name = "DefaultExecutor"
-let default_executor_filename = { "defaults/" + default_executor_name + ".ts" }
+let default_executor_filename = { ".atomist/executors/" + default_executor_name + ".ts" }
 let default_executor_function_name = "defaultExecutor"
 let executor_function_name = { executor_name.charAt(0).toLowerCase() + executor_name.slice(1) }
-let full_bot_intent = { "tags: [\"atomist/intent=" + bot_intent + "\"]" }
 let default_bot_intent = { "tags: [\"atomist/intent=do something\"]" }
+let full_bot_intent = { "tags: [\"atomist/intent=" + bot_intent + "\"]" }
 let default_description = { "description: \"Default Executor\"" }
 let full_description = { "description: \"" + description + "\"" }
 
-with Project begin
+with Project
+  begin
     do copyEditorBackingFileOrFail default_executor_filename executor_filename
-    with File when name = { executor_name + ".ts" } begin
-      do replace default_executor_name executor_name
-      do replace default_executor_function_name executor_function_name
-      do replace default_bot_intent full_bot_intent
-      do replace default_description full_description
-    end
-end
+    with File when name = { executor_name + ".ts" }
+      begin
+        do replace default_executor_name executor_name
+        do replace default_executor_function_name executor_function_name
+        do replace default_bot_intent full_bot_intent
+        do replace default_description full_description
+      end
+  end

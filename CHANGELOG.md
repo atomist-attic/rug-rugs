@@ -19,6 +19,11 @@ TypeScripty release
 
 -   AddTypeScriptEditor
 
+### Changed
+
+-   Move base executor for AddRugExecutor under .atomist so we can at
+    least be sure it compiles
+
 ## [0.6.0]
 
 [0.6.0]: https://github.com/atomist-rugs/rug-editors/compare/0.5.0...0.6.0

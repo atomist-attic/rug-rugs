@@ -21,6 +21,7 @@
 editor AddTypeScript
 
 precondition IsRugArchive
+precondition IsNotSetUpForTypeScript
 
 @displayName "Rug Version"
 @description "specific version or version range for Rug"
@@ -34,6 +35,7 @@ let tsconfig_json_path = ".atomist/tsconfig.json"
 
 with Project begin
   do copyEditorBackingFileOrFail package_json_path
+  do println "Please run `npm install` to download the Atomist rug typescript module"
   do copyEditorBackingFileOrFail tsconfig_json_path
 end
 

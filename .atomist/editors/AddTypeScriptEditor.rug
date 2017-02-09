@@ -1,0 +1,26 @@
+@description "uses a template to create samplefile.txt"
+@tag "rug"
+editor AddTypeScriptEditor
+
+precondition IsRugArchive
+
+@displayName "Editor Name"
+@description "name of your new editor"
+@validInput "a valid Rug Editor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long"
+@minLength 1
+@maxLength 100
+param editor_name: ^[A-Z][A-Za-z0-9]*$
+
+let new_editor_name = { ".atomist/editors/" + editor_name + ".ts" }
+let new_test_name = { ".atomist/tests/" + editor_name + ".rt" }
+
+AddTypeScript
+
+with Project p begin
+  do copyEditorBackingFileOrFail ".atomist/editors/HelloTypeScript.ts" new_editor_name
+  do copyEditorBackingFileOrFail ".atomist/tests/HelloTypeScript.rt" new_test_name
+  with File f when path = new_editor_name
+    do replace "HelloTypeScript" editor_name
+  with File f when path = new_test_name
+    do replace "HelloTypeScript" editor_name
+end

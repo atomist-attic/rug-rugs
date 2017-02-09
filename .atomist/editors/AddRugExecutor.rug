@@ -40,9 +40,9 @@ param description: @any
 @validInput "free text"
 param bot_intent: @any
 
-let executor_filename = { ".atomist/executors/" + executor_name + ".ts" }
+let executor_path = { ".atomist/executors/" + executor_name + ".ts" }
 let default_executor_name = "DefaultExecutor"
-let default_executor_filename = { ".atomist/executors/" + default_executor_name + ".ts" }
+let default_executor_path = { ".atomist/executors/" + default_executor_name + ".ts" }
 let default_executor_function_name = "defaultExecutor"
 let executor_function_name = { executor_name.charAt(0).toLowerCase() + executor_name.slice(1) }
 let default_bot_intent = { "tags: [\"atomist/intent=do something\"]" }
@@ -52,8 +52,8 @@ let full_description = { "description: \"" + description + "\"" }
 
 with Project
   begin
-    do copyEditorBackingFileOrFail default_executor_filename executor_filename
-    with File when name = { executor_name + ".ts" }
+    do copyEditorBackingFileOrFail default_executor_path executor_path
+    with File when path = executor_path
       begin
         do replace default_executor_name executor_name
         do replace default_executor_function_name executor_function_name

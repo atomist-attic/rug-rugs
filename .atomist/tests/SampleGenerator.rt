@@ -1,0 +1,12 @@
+scenario SampleGenerator should create a new project based on this archive
+
+let project_name = "my-project-name"
+
+given
+  Empty
+
+when
+  SampleGenerator
+
+then
+  fileExists ".atomist.yml"

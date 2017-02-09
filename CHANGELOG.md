@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.7.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.8.0...HEAD
+
+## [0.8.0]
+
+[0.8.0]: https://github.com/atomist-rugs/rug-editors/compare/0.7.0...0.8.0
+
+Templates are bad, mkay release
+
+### Changed
+
+-   Use real generator as basis for AddRugGenerator
 
 ## [0.7.0]
 

@@ -33,10 +33,11 @@ when
 
 then
   fileExists ".atomist/editors/MyNewGenerator.rug"
-  and fileContains ".atomist/editors/MyNewGenerator.rug" "param project_name: @project_name"
-  and fileContains ".atomist/editors/MyNewGenerator.rug" "editor MyNewGenerator"
+  and fileContains ".atomist/editors/MyNewGenerator.rug" "generator MyNewGenerator"
+  and { !result.fileContains(".atomist/editors/MyNewGenerator.rug", "SampleGenerator") }
   and fileExists ".atomist/tests/MyNewGenerator.rt"
   and fileContains ".atomist/tests/MyNewGenerator.rt" "scenario MyNewGenerator"
+  and { !result.fileContains(".atomist/tests/MyNewGenerator.rt", "SampleGenerator") }
 
 
 scenario AddRugGenerator should fail if not a Rug Archive project

@@ -23,19 +23,25 @@ precondition IsRugArchive
 
 @displayName "Generator Name"
 @description "name of the generator"
-@validInput "a valid Rug Editor name starting with a capital letter and containing only alphanumberic characters from one to 100 characters long"
+@validInput "a valid Rug Generator name starting with a capital letter and containing only alphanumeric characters, 1-100 characters"
 @minLength 1
 @maxLength 100
 param generator_name: ^[A-Z][A-Za-z0-9]*$
 
-let sampleGeneratorTemplate = "samplegenerator.vm"
-let sampleGeneratorTestTemplate = "samplegeneratortest.vm"
+let default_generator_name = "SampleGenerator"
 
-let generatorFilename = { ".atomist/editors/" + generator_name + ".rug" }
-let generatorTestFilename = { ".atomist/tests/" + generator_name + ".rt" }
+let sample_generator_path = { ".atomist/editors/" + default_generator_name + ".rug" }
+let sample_generator_test_path = { ".atomist/tests/" + default_generator_name + ".rt" }
 
-with Project p
+let generator_path = { ".atomist/editors/" + generator_name + ".rug" }
+let generator_test_path = { ".atomist/tests/" + generator_name + ".rt" }
+
+with Project
   begin
-    do merge sampleGeneratorTemplate to generatorFilename
-    do merge sampleGeneratorTestTemplate to generatorTestFilename
+    do copyEditorBackingFileOrFail sample_generator_path generator_path
+    do copyEditorBackingFileOrFail sample_generator_test_path generator_test_path
+    with File when path = generator_path
+        do replace default_generator_name generator_name
+    with File when path = generator_test_path
+        do replace default_generator_name generator_name
   end

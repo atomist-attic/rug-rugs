@@ -34,7 +34,7 @@ then
     and fileContains ".atomist/manifest.yml" "0.0.1"
     and fileExists ".atomist/editors/DefaultGenerator.rug"
     and fileContains ".atomist/editors/DefaultGenerator.rug" "param project_name: @project_name"
-    and fileContains ".atomist/editors/DefaultGenerator.rug" "editor DefaultGenerator"
+    and fileContains ".atomist/editors/DefaultGenerator.rug" "generator DefaultGenerator"
     and fileExists ".atomist/tests/DefaultGenerator.rt"
     and fileContains ".atomist/tests/DefaultGenerator.rt" "scenario DefaultGenerator"
 
@@ -59,7 +59,7 @@ then
     and fileContains ".atomist/manifest.yml" "0.0.1"
     and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "param project_name: @project_name"
     and fileExists ".atomist/editors/NewSpringCloudConfigServer.rug"
-    and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "editor NewSpringCloudConfigServer"
+    and fileContains ".atomist/editors/NewSpringCloudConfigServer.rug" "generator NewSpringCloudConfigServer"
     and fileExists ".atomist/tests/NewSpringCloudConfigServer.rt"
     and fileContains ".atomist/tests/NewSpringCloudConfigServer.rt" "scenario NewSpringCloudConfigServer"
 

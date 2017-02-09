@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.5.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.6.0...HEAD
+
+## [0.6.0]
+
+[0.6.0]: https://github.com/atomist-rugs/rug-editors/compare/0.5.0...0.6.0
+
+Repair release
+
+### Fixed
+
+-   Fix some issues with AddTypeScript editor
 
 ## [0.5.0]
 
@@ -18,7 +28,6 @@ Added an editor that introduces a Rug executor to an existing Rug Archive.
 ### Changed
 
 -   Added AddRugExecutor and accompanying test.
-
 
 ## [0.4.0]
 

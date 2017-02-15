@@ -44,6 +44,42 @@ This will add the files `.atomist/editors/MyNewEditor.rug` and
 `.atomist/tests/MyNewEditor.rt` to the project.  Edit those files to
 do and test what you want to do with the editor.
 
+### AddRugExecutor
+
+The AddRugExecutor editor adds a Rug TypeScript editor to an existing Rug Archive.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A source code repository that does have a `.atomist` directory
+
+#### Parameters
+
+To run this editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`executor_name` | Yes | | A valid Rug Executor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
+`description` | Yes | | A brief description of the new executor.
+`bot_intent` | Yes | | The phrase that will be used to run this executor from the Bot.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist-rugs:rug-editors:AddRugExecutor \
+    executor_name=MyNewExecutor \
+    description="This is going to create something great." \
+    bot_intent="do it"
+```
+
+This will add a
+`.atomist/executors/MyNewExecutor.ts` file to the project.
+
 ### AddRugGenerator
 
 The AddRugGenerator editor adds a simple generator to a Rug archive
@@ -78,6 +114,74 @@ $ rug edit atomist-rugs:rug-editors:AddRugGenerator \
 This will add the files `.atomist/editors/MyNewGenerator.rug` and
 `.atomist/tests/MyNewGenerator.rt` to the project.  Edit those files
 to do and test what you want to do with the generator.
+
+### AddTypeScript
+
+The AddTypeScript editor adds support files so that you can write your
+Rugs in TypeScript.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug archive source code repository
+
+#### Parameters
+
+To run this Editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`rug_version` | No | 0.12.0 | A valid Rug version following NPM version semantics, https://docs.npmjs.com/misc/semver.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd rug/archive/directory
+$ rug edit atomist-rugs:rug-editors:AddTypeScript \
+    rug_version=0.12.0
+```
+
+This will add the files `.atomist/package.json` and
+`.atomist/tsconfig.json` to the project.
+
+### AddTypeScriptEditor
+
+The AddTypeScript editor adds a sample TypeScript editor and
+corresponding test to your Rug project.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug archive source code repository
+
+#### Parameters
+
+To run this Editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`editor_name` | Yes | | A valid Rug Editor name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`rug_version` | No | 0.12.0 | A valid Rug version following NPM version semantics, https://docs.npmjs.com/misc/semver
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd rug/archive/directory
+$ rug edit atomist-rugs:rug-editors:AddTypeScriptEditor \
+    editor_name=MyNewEditor \
+    rug_version=0.12.0
+```
+
+This will add the files `.atomist/editors/MyNewEditor.ts` and
+`.atomist/tests/MyNewEditor.rt` to the project.
 
 ### ConvertExistingProjectToRugArchiveWithEditor
 
@@ -204,73 +308,6 @@ $ rug edit atomist-rugs:rug-editors:UpdateRugVersion \
 This will update the rug version in either the `.atomist/manifest.yml`
 or `.atomist/package.json`, whichever exists.  If there is no
 `.atomist` directory, nothing will be done.
-
-### AddTypeScript
-
-The AddTypeScript editor adds support files so that you can write your Rugs in TypeScript.
-
-#### Prerequisites
-
-Before running this editor, you must have the following prerequisites
-satisfied.
-
-*   A Rug archive source code repository
-
-#### Parameters
-
-To run this Editor, you must supply the following parameters.
-
-Name | Required | Default | Description
------|----------|---------|------------
-`rug_version` | No | 0.10.0 | A valid Rug version following Maven version range semantics.
-
-#### Running
-
-Run it as follows:
-
-```
-$ cd rug/archive/directory
-$ rug edit atomist-rugs:rug-editors:AddTypeScript \
-    rug_version=0.10.0
-```
-
-This will add the files `.atomist/package.json` and `.atomist/tsconfig.json` to the project.
-
-### AddRugExecutor
-
-The AddRugExecutor editor adds a Rug TypeScript editor to an existing Rug Archive.
-
-#### Prerequisites
-
-Before running this editor, you must have the following prerequisites
-satisfied.
-
-*   A source code repository that does have a `.atomist` directory
-
-#### Parameters
-
-To run this editor, you must supply the following parameters.
-
-Name | Required | Default | Description
------|----------|---------|------------
-`executor_name` | Yes | | A valid Rug Executor name starting with a capital letter and containing only alphanumeric characters from one to 100 characters long.
-`description` | Yes | | A brief description of the new executor.
-`bot_intent` | Yes | | The phrase that will be used to run this executor from the Bot.
-
-#### Running
-
-Run it as follows:
-
-```
-$ cd project/directory
-$ rug edit atomist-rugs:rug-editors:AddRugExecutor \
-    executor_name=MyNewExecutor \
-    description="This is going to create something great." \
-    bot_intent="do it"
-```
-
-This will add a
-`.atomist/executors/MyNewExecutor.ts` file to the project.
 
 ## Support
 

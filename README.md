@@ -222,7 +222,7 @@ To run this Editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`editor_name` | No | 0.10.0 | A valid Rug version following Maven version range semantics.
+`rug_version` | No | 0.10.0 | A valid Rug version following Maven version range semantics.
 
 #### Running
 

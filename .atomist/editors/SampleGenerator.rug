@@ -10,4 +10,4 @@ generator SampleGenerator
 param project_name: @project_name
 
 with Project
-  do fileExists ".atomist.yml"
+  do deleteFile ".atomist.yml"

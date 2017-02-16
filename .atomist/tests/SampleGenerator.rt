@@ -9,4 +9,4 @@ when
   SampleGenerator
 
 then
-  fileExists ".atomist.yml"
+  fileExists "README.md"

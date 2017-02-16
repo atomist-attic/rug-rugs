@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Atomist, Inc.
+ * Copyright © 2017 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-scenario AddRugGenerator should add a new Rug Generator to an existing Rug Archive project
+scenario AddRugGenerator should add a new DSL generator to an existing Rug Archive project
 
 let generator_name = "MyNewGenerator"
-let project_name = "MyProject"
 
 given
   ".atomist/manifest.yml" = """group: test-rugs
 artifact: test-manifest
 version: "0.1.0"
-requires: "[0.6.0,1.0.0)"
+requires: "[0.12.0,1.0.0)"
 dependencies:
 extensions:
 """
@@ -40,10 +39,9 @@ then
   and { !result.fileContains(".atomist/tests/MyNewGenerator.rt", "SampleGenerator") }
 
 
-scenario AddRugGenerator should fail if not a Rug Archive project
+scenario AddRugGenerator should fail if not a Rug archive project
 
 let generator_name = "MyNewGenerator"
-let project_name = "MyProject"
 
 given
   Empty

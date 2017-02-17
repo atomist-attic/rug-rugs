@@ -10,9 +10,9 @@ class TypeScriptGenerator implements PopulateProject {
     // this is only necessary to avoid https://github.com/atomist/rug-resolver/issues/17
     @Parameter({
         displayName: "Project Name",
-        description: "Name of project to be created",
+        description: "name of project to be created",
         pattern: Pattern.project_name,
-        validInput: "A valid GitHub project name consisting of alphanumeric, ., -, and _ characters",
+        validInput: "a valid GitHub project name consisting of alphanumeric, ., -, and _ characters",
         minLength: 1,
         maxLength: 100
     })

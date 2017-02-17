@@ -9,9 +9,9 @@ class HelloTypeScript implements EditProject {
 
     @Parameter({
         displayName: "Some Input",
-        description: "Example of how to specify a parameter using decorators",
+        description: "example of how to specify a parameter using decorators",
         pattern: Pattern.any,
-        validInput: "A description of the valid input",
+        validInput: "a description of the valid input",
         minLength: 1,
         maxLength: 100
     })

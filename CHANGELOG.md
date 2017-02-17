@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.9.0...HEAD
 
-## [0.9.0]
+## [0.9.0] - 2017-02-17
 
 [0.9.0]: https://github.com/atomist-rugs/rug-editors/compare/0.8.0...0.9.0
 
@@ -26,7 +26,7 @@ TypeScript is good
 
 -   AddTypeScriptEditor now takes a `description` parameter
 
-## [0.8.0]
+## [0.8.0] - 2017-02-09
 
 [0.8.0]: https://github.com/atomist-rugs/rug-editors/compare/0.7.0...0.8.0
 
@@ -36,7 +36,7 @@ Templates are bad, mkay release
 
 -   Use real generator as basis for AddRugGenerator
 
-## [0.7.0]
+## [0.7.0] - 2017-02-09
 
 [0.7.0]: https://github.com/atomist-rugs/rug-editors/compare/0.6.0...0.7.0
 
@@ -51,7 +51,7 @@ TypeScripty release
 -   Move base executor for AddRugExecutor under .atomist so we can at
     least be sure it compiles
 
-## [0.6.0]
+## [0.6.0] - 2017-02-06
 
 [0.6.0]: https://github.com/atomist-rugs/rug-editors/compare/0.5.0...0.6.0
 
@@ -61,7 +61,7 @@ Repair release
 
 -   Fix some issues with AddTypeScript editor
 
-## [0.5.0]
+## [0.5.0] - 2017-01-31
 
 [0.5.0]: https://github.com/atomist-rugs/rug-editors/compare/0.4.0...0.5.0
 
@@ -71,7 +71,7 @@ Added an editor that introduces a Rug executor to an existing Rug Archive.
 
 -   Added AddRugExecutor and accompanying test.
 
-## [0.4.0]
+## [0.4.0] - 2017-01-24
 
 [0.4.0]: https://github.com/atomist-rugs/rug-editors/compare/0.3.0...0.4.0
 

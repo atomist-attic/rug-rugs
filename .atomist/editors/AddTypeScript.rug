@@ -31,11 +31,13 @@ param rug_version: @version_range
 
 let package_json_path = ".atomist/package.json"
 let tsconfig_json_path = ".atomist/tsconfig.json"
+let gitignore_path = ".atomist/.gitignore"
 
 with Project begin
   do copyEditorBackingFileOrFail package_json_path
   do println "Please run `npm install` to download the Atomist rug TypeScript module"
   do copyEditorBackingFileOrFail tsconfig_json_path
+  do copyEditorBackingFileOrFail gitignore_path
 end
 
 with File when path = package_json_path

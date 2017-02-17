@@ -29,6 +29,8 @@ then
     and fileContains ".atomist/package.json" '"0.12.0"'
     and fileExists ".atomist/tsconfig.json"
     and fileContains ".atomist/tsconfig.json" "suppressImplicitAnyIndexErrors"
+    and fileExists ".atomist/.gitignore"
+    and fileContains ".atomist/.gitignore" "node_modules"
 
 
 scenario AddTypeScript should add support files for writing Rugs in TypeScript with a specific version of Rug
@@ -48,6 +50,8 @@ then
     and fileContains ".atomist/package.json" '"0.9.0"'
     and fileExists ".atomist/tsconfig.json"
     and fileContains ".atomist/tsconfig.json" "suppressImplicitAnyIndexErrors"
+    and fileExists ".atomist/.gitignore"
+    and fileContains ".atomist/.gitignore" "node_modules"
 
 
 scenario AddTypeScript should not make any changes if the target project is not a Rug archive

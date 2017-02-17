@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.9.0...HEAD
 
+### Changed
+
+-   AddTypeScript now adds an appropriate .gitignore
+
 ## [0.9.0] - 2017-02-17
 
 [0.9.0]: https://github.com/atomist-rugs/rug-editors/compare/0.8.0...0.9.0

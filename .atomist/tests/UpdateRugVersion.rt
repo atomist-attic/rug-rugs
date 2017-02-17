@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Atomist, Inc.
+ * Copyright © 2017 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,6 +63,13 @@ scenario UpdateRugVersion should update the version in a package.json
 let v = "7.4.3"
 
 given
+  ".atomist/manifest.yml" = """group: test-rugs
+artifact: test-manifest
+version: "0.1.0"
+requires: "[0.12.0,1.0.0)"
+dependencies:
+extensions:
+"""
   ".atomist/package.json" = """{
   "name": "@atomist-rugs/rug-tests",
   "version": "0.1.0",
@@ -108,6 +115,13 @@ scenario UpdateRugVersion should update the version in a squashed package.json
 let v = "7.4.3"
 
 given
+  ".atomist/manifest.yml" = """group: test-rugs
+artifact: test-manifest
+version: "0.1.0"
+requires: "[0.12.0,1.0.0)"
+dependencies:
+extensions:
+"""
   ".atomist/package.json" = """{"name":"@atomist-rugs/rug-tests","version":"0.1.0","description":"Editors for Rug Tests","keywords":["Atomist","Rug"],"author":"Atomist, Inc","license":"Apache-2.0","repository":{"type":"git","url":"https://github.com/atomist-rugs/rug-tests.git"},"bugs":{"url":"https://github.com/atomist-rugs/rug-tests/issues"},"homepage":"https://github.com/atomist-rugs/rug-tests","dependencies":{"@atomist/rug":"0.6.0","@college/dtc": "^3.5.7"},"scripts":{"rug-install":"rug install -urqX","rug-test":"rug test -urqX","rug-publish":"rug publish -urqX"}}"""
 
 when

@@ -150,7 +150,7 @@ This will add the files `.atomist/package.json` and
 
 ### AddTypeScriptEditor
 
-The AddTypeScript editor adds a sample TypeScript editor and
+The AddTypeScriptEditor editor adds a sample TypeScript editor and
 corresponding test to your Rug project.
 
 #### Prerequisites
@@ -166,8 +166,8 @@ To run this Editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`editor_name` | Yes | | A valid Rug Editor name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
-`rug_version` | No | 0.12.0 | A valid Rug version following NPM version semantics, https://docs.npmjs.com/misc/semver
+`editor_name` | Yes | | A valid Rug editor name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`description` | Yes | | A description of the generator being added
 
 #### Running
 
@@ -177,11 +177,46 @@ Run it as follows:
 $ cd rug/archive/directory
 $ rug edit atomist-rugs:rug-editors:AddTypeScriptEditor \
     editor_name=MyNewEditor \
-    rug_version=0.12.0
+    description="This is my newest editor... in TypeScript!"
 ```
 
 This will add the files `.atomist/editors/MyNewEditor.ts` and
 `.atomist/tests/MyNewEditor.rt` to the project.
+
+### AddTypeScriptGenerator
+
+The AddTypeScriptGenerator editor adds a sample TypeScript generator
+and corresponding test to your Rug project.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug archive source code repository
+
+#### Parameters
+
+To run this Editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`generator_name` | Yes | | A valid Rug generator name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`description` | Yes | | A description of the generator being added
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd rug/archive/directory
+$ rug edit atomist-rugs:rug-editors:AddTypeScriptGenerator \
+    generator_name=MyNewGenerator \
+    description="This is my newest generator... in TypeScript!"
+```
+
+This will add the files `.atomist/editors/MyNewGenerator.ts` and
+`.atomist/tests/MyNewGenerator.rt` to the project.
 
 ### ConvertExistingProjectToRugArchiveWithEditor
 

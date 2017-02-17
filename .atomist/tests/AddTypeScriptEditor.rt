@@ -20,12 +20,16 @@ given
   ArchiveRoot
 
 when
-  AddTypeScriptEditor editor_name="MyNewEditor"
+  AddTypeScriptEditor editor_name="MyNewEditor", description="The newest of the new"
 
 then
   fileExists ".atomist/editors/MyNewEditor.ts"
+    and fileContains ".atomist/editors/MyNewEditor.ts" '@Editor("MyNewEditor"'
     and fileContains ".atomist/editors/MyNewEditor.ts" "class MyNewEditor"
+    and fileContains ".atomist/editors/MyNewEditor.ts" "new MyNewEditor()"
     and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "HelloTypeScript") }
+    and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "@DESCRIPTION@") }
+    and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "helloTypeScript") }
     and fileExists ".atomist/tests/MyNewEditor.rt"
     and fileContains ".atomist/tests/MyNewEditor.rt" "scenario MyNewEditor"
     and { !result.fileContains(".atomist/tests/MyNewEditor.rt", "HelloTypeScript") }
@@ -34,10 +38,28 @@ then
 scenario AddTypeScriptEditor should not make any changes if the target project is not a Rug archive
 
 given
-  Empty
+  ".atomist/package.json" = '{"dependencies":{"@atomist/rug":"0.12.0"}}'
 
 when
-  AddTypeScriptEditor editor_name="SillyPerson"
+  AddTypeScriptEditor editor_name="SillyPerson", description="Dance!"
+
+then
+  NoChange
+
+
+scenario AddTypeScriptEditor should not make any changes if the target project is ready for TypeScript
+
+given
+  ".atomist/manifest.yml" = """group: test-rugs
+artifact: test-manifest
+version: "0.1.0"
+requires: "[0.12.0,1.0.0)"
+dependencies:
+extensions:
+"""
+
+when
+  AddTypeScriptEditor editor_name="SillyPerson", description="Dance!"
 
 then
   NoChange
@@ -46,10 +68,17 @@ then
 scenario AddTypeScriptEditor should fail if no editor name provided
 
 given
-  Empty
+  ".atomist/manifest.yml" = """group: test-rugs
+artifact: test-manifest
+version: "0.1.0"
+requires: "[0.12.0,1.0.0)"
+dependencies:
+extensions:
+"""
+  ".atomist/package.json" = '{"dependencies":{"@atomist/rug":"0.12.0"}}'
 
 when
-  AddTypeScriptEditor
+  AddTypeScriptEditor description="Dance!"
 
 then
   MissingParameters

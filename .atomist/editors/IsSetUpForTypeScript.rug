@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-@description "a rug archive does not have package.json"
+@description "a rug archive has a package.json"
 @tag "rug"
 @tag "typescript"
-predicate IsNotSetUpForTypeScript
+predicate IsSetUpForTypeScript
   with Project p
-    when not fileExists ".atomist/package.json"
+    when fileExists ".atomist/package.json"

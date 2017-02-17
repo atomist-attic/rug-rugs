@@ -7,7 +7,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.8.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.9.0...HEAD
+
+## [0.9.0]
+
+[0.9.0]: https://github.com/atomist-rugs/rug-editors/compare/0.8.0...0.9.0
+
+TypeScript is good
+
+### Added
+
+-   AddTypeScriptGenerator editor
+
+### Changed
+
+-   AddTypeScriptEditor will no longer create a package.json, run
+    AddTypeScript first
+
+-   AddTypeScriptEditor now takes a `description` parameter
 
 ## [0.8.0]
 

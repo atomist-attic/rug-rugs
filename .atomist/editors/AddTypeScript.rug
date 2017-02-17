@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-@description "adds a TypeScript supporting files to an existing Rug Archive project"
+@description "adds TypeScript supporting files to a Rug archive project"
 @tag "rug"
-@tag "atomist"
-@tag "typscript"
+@tag "typescript"
 editor AddTypeScript
 
 precondition IsRugArchive
@@ -35,7 +34,7 @@ let tsconfig_json_path = ".atomist/tsconfig.json"
 
 with Project begin
   do copyEditorBackingFileOrFail package_json_path
-  do println "Please run `npm install` to download the Atomist rug typescript module"
+  do println "Please run `npm install` to download the Atomist rug TypeScript module"
   do copyEditorBackingFileOrFail tsconfig_json_path
 end
 

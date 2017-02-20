@@ -1,0 +1,27 @@
+scenario AddAtomistCopyrightToRug should add a copyright message to a Rug
+
+let path_and_filename = ".atomist/editors/SampleGenerator.rug"
+
+given
+  ArchiveRoot
+
+when
+  AddAtomistCopyrightToRug
+
+then
+  fileExists path_and_filename
+    and fileContains path_and_filename "Copyright © 2016 Atomist, Inc."
+
+
+scenario AddAtomistCopyrightToRug should not add a copyright message if this is not a Rug archive
+
+let path_and_filename = ".atomist/editors/SampleGenerator.rug"
+
+given
+  Empty
+
+when
+  AddAtomistCopyrightToRug
+
+then
+  NoChange

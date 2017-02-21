@@ -31,6 +31,7 @@ param handler_name: ^[A-Z][A-Za-z0-9]*$
 @displayName "Handler Description"
 @description "short descriptive text describing the new executor"
 @minLength 1
+@maxLength 100
 @validInput "free text"
 param description: @any
 

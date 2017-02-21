@@ -88,3 +88,18 @@ editor:
     - "editor_name": "AddTypeScriptGenerator"
     - "rug_version": "0.12.0"
 
+---
+kind: "operation"
+client: "rug-cli 0.23.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddRugEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.10.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors.git"
+    branch: "addHandlerEditor"
+    sha: "b8650ae"
+  parameters:
+    - "editor_name": "AddAtomistCopyright"
+

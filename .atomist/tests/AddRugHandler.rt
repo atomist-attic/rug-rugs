@@ -1,0 +1,88 @@
+/*
+ * Copyright © 2017 Atomist, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+scenario AddRugHandler should add a new blank handler using default tree expression Rug Archive project
+
+let handler_name = "MyNewHandler"
+let project_name = "MyProject"
+let description = "This handler rocks"
+
+given
+  .atomist/manifest.yml = """group: test-rugs
+ artifact: test-manifest
+ version: "0.1.0"
+ requires: "[0.12.0,1.0.0)"
+ dependencies:
+ extensions:
+ """
+
+  .atomist/package.json = """{
+    "dependencies": {
+      "@atomist/rug": "0.12.0"
+    }
+  }"""
+
+when
+  AddRugHandler
+
+then
+  fileExists ".atomist/handlers/MyNewHandler.ts"
+   and fileContains ".atomist/handlers/MyNewHandler.ts" "/Tag()"
+
+
+scenario AddRugHandler should add a new blank handler to an existing Rug Archive project
+
+let handler_name = "MyNewHandler"
+let project_name = "MyProject"
+let description = "This handler rocks"
+let path_expression = "/Push()[/on::Repo()/channel::ChatChannel()][/contains::Commit()/author::GitHubId()[/hasGithubIdentity::Person()/hasChatIdentity::ChatId()]?]"
+
+given
+  .atomist/manifest.yml = """group: test-rugs
+artifact: test-manifest
+version: "0.1.0"
+requires: "[0.12.0,1.0.0)"
+dependencies:
+extensions:
+"""
+
+  .atomist/package.json = """{
+  "dependencies": {
+    "@atomist/rug": "0.12.0"
+  }
+}"""
+
+when
+  AddRugHandler
+
+then
+  fileExists ".atomist/handlers/MyNewHandler.ts"
+    and fileContains ".atomist/handlers/MyNewHandler.ts" "/Push()[/on::Repo()/channel::ChatChannel()][/contains::Commit()/author::GitHubId()[/hasGithubIdentity::Person()/hasChatIdentity::ChatId()]?]"
+
+scenario AddRugHandler should fail if not a Rug Archive project
+
+let handler_name = "MyNewExecutor"
+let project_name = "MyProject"
+let description = "This executor rocks"
+
+given
+  Empty
+
+when
+  AddRugHandler
+
+then
+  NoChange

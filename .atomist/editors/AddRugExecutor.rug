@@ -20,6 +20,7 @@
 editor AddRugExecutor
 
 precondition IsRugArchive
+precondition IsSetUpForTypeScript
 
 @displayName "Executor Name"
 @description "name of your new executor"

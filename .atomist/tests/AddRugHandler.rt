@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Atomist, Inc.
+ * Copyright © 2017 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +21,19 @@ let project_name = "MyProject"
 let description = "This handler rocks"
 
 given
-  ".atomist/manifest.yml" = """group: test-rugs
+  .atomist/manifest.yml = """group: test-rugs
  artifact: test-manifest
  version: "0.1.0"
  requires: "[0.12.0,1.0.0)"
  dependencies:
  extensions:
  """
+
+  .atomist/package.json = """{
+    "dependencies": {
+      "@atomist/rug": "0.12.0"
+    }
+  }"""
 
 when
   AddRugHandler
@@ -45,13 +51,19 @@ let description = "This handler rocks"
 let path_expression = "/Push()[/on::Repo()/channel::ChatChannel()][/contains::Commit()/author::GitHubId()[/hasGithubIdentity::Person()/hasChatIdentity::ChatId()]?]"
 
 given
-  ".atomist/manifest.yml" = """group: test-rugs
+  .atomist/manifest.yml = """group: test-rugs
 artifact: test-manifest
 version: "0.1.0"
 requires: "[0.12.0,1.0.0)"
 dependencies:
 extensions:
 """
+
+  .atomist/package.json = """{
+  "dependencies": {
+    "@atomist/rug": "0.12.0"
+  }
+}"""
 
 when
   AddRugHandler

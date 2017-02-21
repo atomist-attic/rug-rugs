@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Atomist, Inc.
+ * Copyright © 2017 Atomist, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@
 editor AddRugHandler
 
 precondition IsRugArchive
+precondition IsSetUpForTypeScript
 
 @displayName "Handler Name"
 @description "name of your new executor"
@@ -38,6 +39,7 @@ param description: @any
 @displayName "Path Expression"
 @description "the path expression to the information-change in Atomist that will trigger this handler"
 @minLength 1
+@maxLength 150
 @validInput "free text"
 @default "/Tag()"
 param path_expression: @any

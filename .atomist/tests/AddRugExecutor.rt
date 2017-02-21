@@ -22,13 +22,19 @@ let description = "This executor rocks"
 let bot_intent = "Do it"
 
 given
-  ".atomist/manifest.yml" = """group: test-rugs
+  .atomist/manifest.yml = """group: test-rugs
 artifact: test-manifest
 version: "0.1.0"
 requires: "[0.6.0,1.0.0)"
 dependencies:
 extensions:
 """
+
+.atomist/package.json = """{
+  "dependencies": {
+    "@atomist/rug": "0.12.0"
+  }
+}"""
 
 when
   AddRugExecutor

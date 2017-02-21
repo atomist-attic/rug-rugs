@@ -20,7 +20,6 @@
 editor AddAtomistCopyrightToRug
 
 precondition IsRugArchive
-precondition IsSetUpForTypeScript
 
 @displayName "Filename"
 @description "the filename of the file to prepend the copyright notice to"

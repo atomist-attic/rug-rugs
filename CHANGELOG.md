@@ -7,11 +7,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.9.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.10.0...HEAD
+
+## [0.10.0] - 2017-02-24
+
+[0.10.0]: https://github.com/atomist-rugs/rug-editors/compare/0.9.0...0.10.0
+
+### Added
+
+-   AddTypeScript adds .atomist/node_modules
 
 ### Changed
 
 -   AddTypeScript now adds an appropriate .gitignore
+
+-   AddTypeScript is now in TypeScript
+
+-   TypeScript Rugs export constants rather than variables
 
 ## [0.9.0] - 2017-02-17
 

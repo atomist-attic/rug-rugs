@@ -103,3 +103,19 @@ editor:
   parameters:
     - "editor_name": "AddAtomistCopyright"
 
+---
+kind: "operation"
+client: "rug-cli 0.24.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddTypeScriptEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.9.0"
+  origin:
+    repo: "https://github.com/atomist-rugs/rug-editors.git"
+    branch: "82acbef9ce2c04e0cb6316b9fde702a89469a85b"
+    sha: "82acbef"
+  parameters:
+    - "editor_name": "AddTypeScript"
+    - "description": "adds TypeScript supporting files to a Rug archive project"
+

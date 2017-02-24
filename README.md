@@ -129,11 +129,7 @@ satisfied.
 
 #### Parameters
 
-To run this Editor, you must supply the following parameters.
-
-Name | Required | Default | Description
------|----------|---------|------------
-`rug_version` | No | 0.12.0 | A valid Rug version following NPM version semantics, https://docs.npmjs.com/misc/semver.
+This editor has no parameters.
 
 #### Running
 
@@ -141,12 +137,12 @@ Run it as follows:
 
 ```
 $ cd rug/archive/directory
-$ rug edit atomist-rugs:rug-editors:AddTypeScript \
-    rug_version=0.12.0
+$ rug edit atomist-rugs:rug-editors:AddTypeScript
 ```
 
-This will add the files `.atomist/package.json` and
-`.atomist/tsconfig.json` to the project.
+This will add `package.json`, `tsconfig.json`, and `.gitignore` files
+and the `node_modules` directory to the `.atomist` directory in the
+project.
 
 ### AddTypeScriptEditor
 

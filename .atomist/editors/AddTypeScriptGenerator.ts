@@ -79,4 +79,4 @@ class AddTypeScriptGenerator implements EditProject {
     }
 }
 
-export let addTypeScriptGenerator = new AddTypeScriptGenerator()
+export const addTypeScriptGenerator = new AddTypeScriptGenerator()

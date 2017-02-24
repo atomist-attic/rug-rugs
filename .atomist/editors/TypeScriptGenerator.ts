@@ -23,4 +23,4 @@ class TypeScriptGenerator implements PopulateProject {
     }
 }
 
-export let typeScriptGenerator = new TypeScriptGenerator();
+export const typeScriptGenerator = new TypeScriptGenerator();

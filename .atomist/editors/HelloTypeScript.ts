@@ -22,4 +22,4 @@ class HelloTypeScript implements EditProject {
     }
 }
 
-export let helloTypeScript = new HelloTypeScript()
+export const helloTypeScript = new HelloTypeScript()

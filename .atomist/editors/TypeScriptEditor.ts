@@ -1,11 +1,11 @@
 import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Core'
+import { Project } from '@atomist/rug/model/Project'
 import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
-@Editor("HelloTypeScript", "@DESCRIPTION@")
+@Editor("TypeScriptEditor", "@DESCRIPTION@")
 @Tags("documentation")
-class HelloTypeScript implements EditProject {
+class TypeScriptEditor implements EditProject {
 
     @Parameter({
         displayName: "Some Input",
@@ -22,4 +22,4 @@ class HelloTypeScript implements EditProject {
     }
 }
 
-export const helloTypeScript = new HelloTypeScript()
+export const typeScriptEditor = new TypeScriptEditor();

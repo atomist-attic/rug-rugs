@@ -27,12 +27,12 @@ then
     and fileContains ".atomist/editors/MyNewEditor.ts" '@Editor("MyNewEditor"'
     and fileContains ".atomist/editors/MyNewEditor.ts" "class MyNewEditor"
     and fileContains ".atomist/editors/MyNewEditor.ts" "new MyNewEditor()"
-    and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "HelloTypeScript") }
+    and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "TypeScriptEditor") }
     and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "@DESCRIPTION@") }
     and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "helloTypeScript") }
     and fileExists ".atomist/tests/MyNewEditor.rt"
     and fileContains ".atomist/tests/MyNewEditor.rt" "scenario MyNewEditor"
-    and { !result.fileContains(".atomist/tests/MyNewEditor.rt", "HelloTypeScript") }
+    and { !result.fileContains(".atomist/tests/MyNewEditor.rt", "TypeScriptEditor") }
 
 
 scenario AddTypeScriptEditor should not make any changes if the target project is not a Rug archive

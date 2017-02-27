@@ -33,7 +33,6 @@ editor:
 
 ---
 kind: "operation"
-<<<<<<< Updated upstream
 client: "rug-cli 0.21.0-SNAPSHOT"
 executor:
   name: "UpdateRugVersion"
@@ -57,7 +56,9 @@ executor:
     repo: "n/a"
     branch: "n/a"
     sha: "n/a"
-=======
+
+---
+kind: "operation"
 client: "rug-cli 0.20.0"
 editor:
   name: "atomist-rugs.rug-editors.AddRugEditor"
@@ -70,7 +71,6 @@ editor:
     sha: "17eefad*"
   parameters:
     - "editor_name": "AddTypescriptEditor"
->>>>>>> Stashed changes
 
 ---
 kind: "operation"
@@ -118,4 +118,99 @@ editor:
   parameters:
     - "editor_name": "AddTypeScript"
     - "description": "adds TypeScript supporting files to a Rug archive project"
+
+---
+kind: "operation"
+client: "rug-cli 0.24.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddTypeScriptEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.11.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors.git"
+    branch: "master"
+    sha: "116c022*"
+  parameters:
+    - "editor_name": "ConvertExistingProjectToRugArchive"
+    - "description": "add Rug archive files to an existing project"
+
+---
+kind: "operation"
+client: "rug-cli 0.24.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddTypeScriptEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.11.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors.git"
+    branch: "master"
+    sha: "116c022*"
+  parameters:
+    - "editor_name": "AddManifestYml"
+    - "description": "add Rug archive manifest"
+---
+kind: "operation"
+client: "rug-cli 0.24.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddTypeScriptEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.11.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors.git"
+    branch: "master"
+    sha: "116c022*"
+  parameters:
+    - "editor_name": "AddTypeScriptExecutor"
+    - "description": "add TypeScript Rug executor to project"
+
+---
+kind: "operation"
+client: "rug-cli 0.24.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddTypeScriptEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.11.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors.git"
+    branch: "master"
+    sha: "116c022*"
+  parameters:
+    - "editor_name": "AddTypeScriptHandler"
+    - "description": "add TypeScript Rug handler to project"
+
+---
+kind: "operation"
+client: "rug-cli 0.24.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddTypeScriptEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.11.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors.git"
+    branch: "master"
+    sha: "116c022*"
+  parameters:
+    - "editor_name": "AddTypeScriptEditor"
+    - "description": "add TypeScript Rug editor to project"
+
+---
+kind: "operation"
+client: "rug-cli 0.24.0"
+editor:
+  name: "atomist-rugs.rug-editors.AddTypeScriptEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.11.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors.git"
+    branch: "master"
+    sha: "116c022*"
+  parameters:
+    - "editor_name": "UpdateRugVersion"
+    - "description": "update Rug archive Rug dependency version"
 

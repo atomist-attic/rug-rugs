@@ -5,9 +5,9 @@ import { Result, Status, Parameter } from "@atomist/rug/operations/RugOperation"
 interface Parameters {
 }
 
-var defaultExecutor: Executor = {
-    description: "Default Executor",
-    name: "DefaultExecutor",
+let typeScriptExecutor: Executor = {
+    description: "Sample TypeScript Executor",
+    name: "TypeScriptExecutor",
     tags: ["atomist/intent=do something"],
     parameters: [],
     execute(services: Services, p: Parameters): Result {

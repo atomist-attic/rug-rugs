@@ -7,7 +7,39 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.10.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.11.0...HEAD
+
+## [0.11.0] - 2017-02-27
+
+[0.11.0]: https://github.com/atomist-rugs/rug-editors/compare/0.10.0...0.11.0
+
+Non-DSL release
+
+### Added
+
+-   AddManifestYml editor moved from rug-archive and migrated to
+    TypeScript
+
+-   Predicate-like TypeScript functions
+
+### Changed
+
+-   All remaining Rugs are implemented in TypeScript
+
+-   Standardized naming of source Rugs
+
+### Removed
+
+-   Editors that add DSL Rugs
+
+-   ConvertExistingProjectToRugArchiveWith* editors replaced with
+    ConvertExistingProjectToRugArchive, you can add the editor or
+    generator with another editor
+
+-   AddAtomistCopyrightToRug will be made more generic and moved to
+    common-editors
+
+-   DSL predicates
 
 ## [0.10.0] - 2017-02-24
 

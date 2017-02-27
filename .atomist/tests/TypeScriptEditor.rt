@@ -1,0 +1,10 @@
+scenario TypeScriptEditor is added to your project by AddTypeScriptEditor
+
+given
+  ArchiveRoot
+
+when
+  TypeScriptEditor input_parameter="the input_parameter value"
+
+then
+  fileContains "hello.txt" "Hello, World!"

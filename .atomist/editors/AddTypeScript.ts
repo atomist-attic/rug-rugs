@@ -20,7 +20,7 @@ import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { Editor, Tags } from '@atomist/rug/operations/Decorators'
 
 @Editor("AddTypeScript", "adds TypeScript supporting files to a Rug archive project")
-@Tags("rug", "typescript")
+@Tags("rug", "atomist", "typescript")
 class AddTypeScript implements EditProject {
 
     edit(project: Project) {

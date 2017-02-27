@@ -68,13 +68,13 @@ class AddTypeScriptGenerator implements EditProject {
         let eng: PathExpressionEngine = project.context().pathExpressionEngine();
 
         let generatorPathExpression = new PathExpression<Project, File>("/*[@name='.atomist']/editors/*[@name='" + this.generator_name + ".ts']");
-        let generatorFile: File = eng.scalar(project, generatorPathExpression) as any;
+        let generatorFile: File = eng.scalar(project, generatorPathExpression);
         generatorFile.replace("TypeScriptGenerator", this.generator_name);
         generatorFile.replace("@DESCRIPTION@", this.description);
         generatorFile.replace("typeScriptGenerator", lcFirstGeneratorName);
 
         let testPathExpression = new PathExpression<Project, File>("/*[@name='.atomist']/tests/*[@name='" + this.generator_name + ".rt']");
-        let testFile: File = eng.scalar(project, testPathExpression) as any;
+        let testFile: File = eng.scalar(project, testPathExpression);
         testFile.replace("TypeScriptGenerator", this.generator_name);
     }
 }

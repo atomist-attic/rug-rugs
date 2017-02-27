@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-scenario AddRugHandler should add a new blank handler using default tree expression Rug Archive project
+scenario AddTypeScriptHandler should add a new blank handler using default tree expression to Rug project
 
 let handler_name = "MyNewHandler"
 let project_name = "MyProject"
@@ -22,28 +22,29 @@ let description = "This handler rocks"
 
 given
   .atomist/manifest.yml = """group: test-rugs
- artifact: test-manifest
- version: "0.1.0"
- requires: "[0.12.0,1.0.0)"
- dependencies:
- extensions:
- """
+artifact: test-manifest
+version: "0.1.0"
+requires: "[0.12.0,1.0.0)"
+dependencies:
+extensions:
+"""
 
   .atomist/package.json = """{
-    "dependencies": {
-      "@atomist/rug": "0.12.0"
-    }
-  }"""
+  "dependencies": {
+    "@atomist/rug": "0.12.0"
+  }
+}
+"""
 
 when
-  AddRugHandler
+  AddTypeScriptHandler
 
 then
   fileExists ".atomist/handlers/MyNewHandler.ts"
    and fileContains ".atomist/handlers/MyNewHandler.ts" "/Tag()"
 
 
-scenario AddRugHandler should add a new blank handler to an existing Rug Archive project
+scenario AddTypeScriptHandler should add a new blank handler to an existing Rug project
 
 let handler_name = "MyNewHandler"
 let project_name = "MyProject"
@@ -63,16 +64,17 @@ extensions:
   "dependencies": {
     "@atomist/rug": "0.12.0"
   }
-}"""
+}
+"""
 
 when
-  AddRugHandler
+  AddTypeScriptHandler
 
 then
   fileExists ".atomist/handlers/MyNewHandler.ts"
     and fileContains ".atomist/handlers/MyNewHandler.ts" "/Push()[/on::Repo()/channel::ChatChannel()][/contains::Commit()/author::GitHubId()[/hasGithubIdentity::Person()/hasChatIdentity::ChatId()]?]"
 
-scenario AddRugHandler should fail if not a Rug Archive project
+scenario AddTypeScriptHandler should fail if not a Rug project
 
 let handler_name = "MyNewExecutor"
 let project_name = "MyProject"
@@ -82,7 +84,7 @@ given
   Empty
 
 when
-  AddRugHandler
+  AddTypeScriptHandler
 
 then
   NoChange

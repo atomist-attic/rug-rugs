@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-@description "a rug archive does not have package.json"
-@tag "rug"
-@tag "typescript"
-predicate IsNotSetUpForTypeScript
-  with Project p
-    when not fileExists ".atomist/package.json"
+import { Project } from '@atomist/rug/model/Project'
+
+export function IsRugArchive(p: Project): boolean {
+    return p.fileExists(".atomist/manifest.yml");
+}
+
+export function IsSetUpForTypeScript(p: Project): boolean {
+    return p.fileExists(".atomist/package.json");
+}

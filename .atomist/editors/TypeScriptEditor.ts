@@ -3,7 +3,7 @@ import { Project } from '@atomist/rug/model/Project'
 import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
-@Editor("TypeScriptEditor", "@DESCRIPTION@")
+@Editor("TypeScriptEditor", "sample TypeScript editor used by AddTypeScriptEditor")
 @Tags("documentation")
 class TypeScriptEditor implements EditProject {
 

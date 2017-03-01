@@ -17,6 +17,33 @@
 scenario AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
 
 given
+  ArchiveRoot
+
+when
+  AddTypeScriptGenerator generator_name = "MyNewGenerator", description = "Description of MyNewGenerator"
+
+then
+  fileExists ".atomist/editors/MyNewGenerator.ts"
+    and fileContains ".atomist/editors/MyNewGenerator.ts" '@Generator("MyNewGenerator"'
+    and fileContains ".atomist/editors/MyNewGenerator.ts" "class MyNewGenerator"
+    and fileContains ".atomist/editors/MyNewGenerator.ts" "new MyNewGenerator()"
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "TypeScriptGenerator") }
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "@DESCRIPTION@") }
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "typeScriptGenerator") }
+    and fileExists ".atomist/tests/MyNewGenerator.rt"
+    and fileContains ".atomist/tests/MyNewGenerator.rt" "scenario MyNewGenerator"
+    and { !result.fileContains(".atomist/tests/MyNewGenerator.rt", "TypeScriptGenerator") }
+    and fileExists "README.md"
+    and fileContains "README.md" "### MyNewGenerator"
+    and fileContains "README.md" "Description of MyNewGenerator"
+    and fileContains "README.md" "This Rug has no prerequisites."
+    and fileContains "README.md" "`project_name` | Yes | | Name of project to be created"
+    and fileContains "README.md" ":MyNewGenerator \\"
+    and fileContains "README.md" "Explain what your generator does here."
+
+scenario AddTypeScriptGenerator should add a new TypeScript generator even if no README
+
+given
   ".atomist/manifest.yml" = """group: test-rugs
 artifact: test-manifest
 version: "0.1.0"
@@ -40,6 +67,7 @@ then
     and fileExists ".atomist/tests/MyNewGenerator.rt"
     and fileContains ".atomist/tests/MyNewGenerator.rt" "scenario MyNewGenerator"
     and { !result.fileContains(".atomist/tests/MyNewGenerator.rt", "TypeScriptGenerator") }
+    and { !result.fileExists("README.md") }
 
 
 scenario AddTypeScriptGenerator should make no changes if no manifest.yml

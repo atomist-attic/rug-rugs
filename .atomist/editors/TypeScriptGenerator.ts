@@ -3,7 +3,7 @@ import { Project } from '@atomist/rug/model/Core'
 import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
-@Generator("TypeScriptGenerator", "@DESCRIPTION@")
+@Generator("TypeScriptGenerator", "sample TypeScript generator used by AddTypeScriptGenerator")
 @Tags("documentation")
 class TypeScriptGenerator implements PopulateProject {
 

@@ -288,7 +288,7 @@ Name | Required | Default | Description
 Run it as follows:
 
 ```
-$ cd rug/archive/directory
+$ cd rug/project/directory
 $ rug edit atomist-rugs:rug-editors:UpdateRugVersion \
     manifest_version='[0.8.0,1.0.0)' \
     package_version='~0.8.0'

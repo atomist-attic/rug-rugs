@@ -18,10 +18,12 @@ import { EditProject } from '@atomist/rug/operations/ProjectEditor'
 import { Project, File } from '@atomist/rug/model/Core'
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { PathExpression, PathExpressionEngine, TreeNode, Match } from '@atomist/rug/tree/PathExpression'
+import { PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
+
+import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
 
 @Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug archive project")
-@Tags("rug", "typescript")
+@Tags("rug", "atomist", "typescript")
 class AddTypeScriptGenerator implements EditProject {
 
     @Parameter({
@@ -67,15 +69,33 @@ class AddTypeScriptGenerator implements EditProject {
 
         let eng: PathExpressionEngine = project.context().pathExpressionEngine();
 
-        let generatorPathExpression = new PathExpression<Project, File>("/*[@name='.atomist']/editors/*[@name='" + this.generator_name + ".ts']");
-        let generatorFile: File = eng.scalar(project, generatorPathExpression);
-        generatorFile.replace("TypeScriptGenerator", this.generator_name);
-        generatorFile.replace("@DESCRIPTION@", this.description);
-        generatorFile.replace("typeScriptGenerator", lcFirstGeneratorName);
+        let generatorPathExpression = "/*[@name='.atomist']/editors/*[@name='" + this.generator_name + ".ts']";
+        eng.with<File>(project, generatorPathExpression, g => {
+            g.replace("TypeScriptGenerator", this.generator_name);
+            g.replace("sample TypeScript generator used by AddTypeScriptGenerator", this.description);
+            g.replace("typeScriptGenerator", lcFirstGeneratorName);
+        });
 
-        let testPathExpression = new PathExpression<Project, File>("/*[@name='.atomist']/tests/*[@name='" + this.generator_name + ".rt']");
-        let testFile: File = eng.scalar(project, testPathExpression);
-        testFile.replace("TypeScriptGenerator", this.generator_name);
+        let testPathExpression = "/*[@name='.atomist']/tests/*[@name='" + this.generator_name + ".rt']";
+        eng.with<File>(project, testPathExpression, t => {
+            t.replace("TypeScriptGenerator", this.generator_name);
+        });
+
+        const example = `\$ cd parent/directory
+\$ rug generate atomist-rugs:rug-editors:${this.generator_name} \\\\
+    my-new-project`;
+        const example_text = "Explain what your generator does here.";
+        const prerequisites = "Put your editor prerequisites here.";
+        let parameters: string[] = ["`project_name` | Yes | | Name of project to be created"];
+        const instructions = readMeInstructions(
+            this.generator_name,
+            this.description,
+            example,
+            example_text,
+            "",
+            parameters
+        );
+        addInstructionsToReadMe(project, instructions);
     }
 }
 

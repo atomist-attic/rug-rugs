@@ -1,0 +1,73 @@
+/*
+ * Copyright © 2017 Atomist, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+scenario ConvertExistingProjectToGenerator should add Rug archive files and default generator
+
+let archive_name = "my-rug-archive"
+let group_id = "my-rug-group"
+let version = "0.0.1"
+let manifest = ".atomist/manifest.yml"
+let generator_name = "MyNewGenerator"
+let description = "Description of MyNewGenerator"
+
+given
+  Empty
+
+when
+  ConvertExistingProjectToGenerator
+
+then
+  fileExists manifest
+    and fileContains manifest { 'artifact: "' + archive_name + '"' }
+    and fileContains manifest { 'group: "' + group_id + '"' }
+    and fileContains manifest version
+    and fileExists ".atomist/package.json"
+    and fileContains ".atomist/package.json" '"@atomist/rug"'
+    and fileContains ".atomist/package.json" '"0.12.0"'
+    and fileExists ".atomist/tsconfig.json"
+    and fileContains ".atomist/tsconfig.json" "suppressImplicitAnyIndexErrors"
+    and fileExists ".atomist/.gitignore"
+    and fileContains ".atomist/.gitignore" "node_modules"
+    and directoryExists ".atomist/node_modules/@atomist/rug"
+    and fileExists ".atomist/node_modules/@atomist/rug/model/Core.ts"
+    and fileExists ".atomist/editors/MyNewGenerator.ts"
+    and fileContains ".atomist/editors/MyNewGenerator.ts" '@Generator("MyNewGenerator"'
+    and fileContains ".atomist/editors/MyNewGenerator.ts" "class MyNewGenerator"
+    and fileContains ".atomist/editors/MyNewGenerator.ts" "new MyNewGenerator()"
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "TypeScriptGenerator") }
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "@DESCRIPTION@") }
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "typeScriptGenerator") }
+    and fileExists ".atomist/tests/MyNewGenerator.rt"
+    and fileContains ".atomist/tests/MyNewGenerator.rt" "scenario MyNewGenerator"
+    and { !result.fileContains(".atomist/tests/MyNewGenerator.rt", "TypeScriptGenerator") }
+
+
+scenario ConvertExistingProjectToGenerator should make no change if project already contains a manifest
+
+let archive_name = "my-rug-archive"
+let group_id = "my-rug-group"
+let version = "0.0.1"
+let generator_name = "MyNewGenerator"
+let description = "Description of MyNewGenerator"
+
+given
+  ArchiveRoot
+
+when
+  ConvertExistingProjectToGenerator
+
+then
+  NoChange

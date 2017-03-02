@@ -15,9 +15,11 @@
  */
 
 import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Core'
+import { Project, File } from '@atomist/rug/model/Core'
 import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
+import { PathExpression, PathExpressionEngine, TreeNode, Match } from '@atomist/rug/tree/PathExpression'
+import { addAssertionsForAllFilesInProject } from './ProjectToGeneratorOperations'
 
 @Editor("ConvertExistingProjectToGenerator", "convert existing project to a Rug archive with a basic Generator")
 @Tags("rug", "atomist")
@@ -81,6 +83,8 @@ class ConvertExistingProjectToGenerator implements EditProject {
         project.editWith("ConvertExistingProjectToRugArchive", this);
         project.editWith("AddTypeScript", {})
         project.editWith("AddTypeScriptGenerator", this)
+
+        addAssertionsForAllFilesInProject(project, this.generator_name)
     }
 }
 

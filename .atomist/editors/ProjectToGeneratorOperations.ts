@@ -19,20 +19,18 @@ import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpr
 
 export function addAssertionsForAllFilesInProject(project: Project, generatorName: string): void {
     let originalTestAssertionsString = "then\n  fileExists \"README.md\""
-    let testAssertionsString = "then"
 
-    let counter = 0;
-    for (let file of project.files()) {
-        if (file.path().search("node_modules") < 0) {
-            let andStatement = "  and ";
-            let andPrefix = "";
-            if (counter > 0) {
-                andPrefix = andStatement;
-            }
-            testAssertionsString = testAssertionsString + "\n  " + andPrefix + "fileExists " + file.path();
-            counter = counter + 1;
-        }
-    }
+    let testAssertionsString = project.files().reduce(function(acc, file) {
+      if (file.path().search("node_modules") < 0) {
+          if(acc === "then"){
+            acc +=  "\n  "
+          }else{
+            acc +=  "\n    and "
+          }
+          acc += "fileExists " + file.path();
+      }
+      return acc;
+    },"then")
 
     let eng: PathExpressionEngine = project.context().pathExpressionEngine();
     let testPathExpression = new PathExpression<Project, File>("/*[@name='.atomist']/tests/*[@name='" + generatorName + ".rt']");

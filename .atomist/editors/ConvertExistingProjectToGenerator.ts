@@ -54,9 +54,33 @@ class ConvertExistingProjectToGenerator implements EditProject {
     })
     version: string = "0.1.0";
 
+    @Parameter({
+        displayName: "Generator Name",
+        description: "name of generator to add to Rug archive project",
+        pattern: "^[A-Z][A-Za-z0-9]*$",
+        validInput: "a valid generator name starting with a capital letter and consisting of alphanumeric characters from one to 100 characters long",
+        minLength: 1,
+        maxLength: 100
+    })
+    generator_name: string;
+
+    @Parameter({
+        displayName: "Generator Description",
+        description: "description of generator to add to Rug archive project",
+        pattern: Pattern.any,
+        validInput: "a string between one and 100 characters",
+        minLength: 1,
+        maxLength: 100
+    })
+    description: string
+
     edit(project: Project) {
+        if (project.fileExists(".atomist/manifest.yml")) {
+            return;
+        } 
         project.editWith("ConvertExistingProjectToRugArchive", this);
         project.editWith("AddTypeScript", {})
+        project.editWith("AddTypeScriptGenerator", this)
     }
 }
 

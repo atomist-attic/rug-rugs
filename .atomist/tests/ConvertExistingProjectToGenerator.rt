@@ -55,6 +55,54 @@ then
     and { !result.fileContains(".atomist/tests/MyNewGenerator.rt", "TypeScriptGenerator") }
 
 
+scenario ConvertExistingProjectToGenerator should add appropriate generator tests assertions
+
+let archive_name = "my-rug-archive"
+let group_id = "my-rug-group"
+let version = "0.0.1"
+let manifest = ".atomist/manifest.yml"
+let generator_name = "MyNewGenerator"
+let description = "Description of MyNewGenerator"
+
+given
+  "README.md" = "Beulah"
+  "CHANGELOG.md" = "Handsome Western States"
+  "LICENSE" = "When Your Heartstrings Break"
+  "configure" = "The Coast Is Never Clear"
+
+when
+  ConvertExistingProjectToGenerator
+
+then
+  fileExists manifest
+    and fileContains manifest { 'artifact: "' + archive_name + '"' }
+    and fileContains manifest { 'group: "' + group_id + '"' }
+    and fileContains manifest version
+    and fileExists ".atomist/package.json"
+    and fileContains ".atomist/package.json" '"@atomist/rug"'
+    and fileContains ".atomist/package.json" '"0.12.0"'
+    and fileExists ".atomist/tsconfig.json"
+    and fileContains ".atomist/tsconfig.json" "suppressImplicitAnyIndexErrors"
+    and fileExists ".atomist/.gitignore"
+    and fileContains ".atomist/.gitignore" "node_modules"
+    and directoryExists ".atomist/node_modules/@atomist/rug"
+    and fileExists ".atomist/node_modules/@atomist/rug/model/Core.ts"
+    and fileExists ".atomist/editors/MyNewGenerator.ts"
+    and fileContains ".atomist/editors/MyNewGenerator.ts" '@Generator("MyNewGenerator"'
+    and fileContains ".atomist/editors/MyNewGenerator.ts" "class MyNewGenerator"
+    and fileContains ".atomist/editors/MyNewGenerator.ts" "new MyNewGenerator()"
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "TypeScriptGenerator") }
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "@DESCRIPTION@") }
+    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "typeScriptGenerator") }
+    and fileExists ".atomist/tests/MyNewGenerator.rt"
+    and fileContains ".atomist/tests/MyNewGenerator.rt" "scenario MyNewGenerator"
+    and { !result.fileContains(".atomist/tests/MyNewGenerator.rt", "TypeScriptGenerator") }
+    and fileContains ".atomist/tests/MyNewGenerator.rt" 'fileExists "README.md"'
+    and fileContains ".atomist/tests/MyNewGenerator.rt" 'fileExists "CHANGELOG.md"'
+    and fileContains ".atomist/tests/MyNewGenerator.rt" 'fileExists "LICENSE"'
+    and fileContains ".atomist/tests/MyNewGenerator.rt" 'fileExists "configure"'
+
+
 scenario ConvertExistingProjectToGenerator should make no change if project already contains a manifest
 
 let archive_name = "my-rug-archive"

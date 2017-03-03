@@ -20,17 +20,17 @@ import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpr
 export function addAssertionsForAllFilesInProject(project: Project, generatorName: string): void {
     let originalTestAssertionsString = "then\n  fileExists \"README.md\""
 
-    let testAssertionsString = project.files().reduce(function(acc, file) {
-      if (notACommonPeripheralArtifact(file)) {
-          if(acc === "then") {
-            acc +=  "\n  ";
-          } else {
-            acc +=  "\n    and ";
-          }
-          acc += `fileExists \"{file.path()}\"`;
-      }
-      return acc;
-    },"then")
+    let testAssertionsString = project.files().reduce(function (acc, file) {
+        if (notACommonPeripheralArtifact(file)) {
+            if (acc === "then") {
+                acc += "\n  ";
+            } else {
+                acc += "\n    and ";
+            }
+            acc += `fileExists "${file.path()}"`;
+        }
+        return acc;
+    }, "then")
 
     let eng: PathExpressionEngine = project.context().pathExpressionEngine();
     let testPathExpression = new PathExpression<Project, File>("/*[@name='.atomist']/tests/*[@name='" + generatorName + ".rt']");
@@ -40,7 +40,7 @@ export function addAssertionsForAllFilesInProject(project: Project, generatorNam
 
 function notACommonPeripheralArtifact(file: File): boolean {
     return (file.path().search("node_modules") < 0) &&
-           (file.path().search(".idea") < 0) && 
-           (file.path().search("target") < 0) &&
-           (file.path().search(".atomist") < 0)
+        (file.path().search(".idea") < 0) &&
+        (file.path().search("target") < 0) &&
+        (file.path().search(".atomist") < 0)
 }

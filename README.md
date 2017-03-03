@@ -219,6 +219,52 @@ $ rug edit atomist-rugs:rug-editors:AddTypeScriptHandler \
 This will add the file `.atomist/handlers/MyNewHandler.ts` to the
 project.
 
+### ConvertExistingProjectToGenerator
+
+The ConvertExistingProjectToGenerator editor creates a valid Rug
+generator from the current project.  It does not make sense to run
+this more than once on a project.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A source code repository for a "model" project that does not have
+    a `.atomist/manifest.yml`
+
+#### Parameters
+
+To run this editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`archive_name` | Yes | | Name of the new Rug archive, typically the same as the repo name
+`group_id` | Yes | | Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo
+`version` | No | 0.1.0 | [Semantic version][semver] of the project.
+`generator_name` | Yes | | A valid Rug generator name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`description` | Yes | | A description of the generator being added
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToGenerator \
+    archive_name=my-new-archive \
+    group_id=my-rugs \
+    version=2.71.828 \
+    generator_name=MyNewGenerator \
+    description="This is my newest generator."
+```
+
+This will create a `.atomist` directory to the root of the project.
+The `.atomist` directory will have valid `manifest.yml` and
+`package.json` files, the generator script in
+`editors/MyNewGenerator.ts`, and its test in
+`tests/MyNewGenerator.rt`.
+
 ### ConvertExistingProjectToRugArchive
 
 The ConvertExistingProjectToRugArchive editor creates a valid Rug

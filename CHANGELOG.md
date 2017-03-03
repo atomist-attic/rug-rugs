@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.12.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.13.0...HEAD
+
+## [0.13.0] - 2017-03-03
+
+[0.13.0]: https://github.com/atomist-rugs/rug-editors/compare/0.12.0...0.13.0
+
+One-step generator release
+
+### Added
+
+-   `ConvertExistingProjectToGenerator` editor
 
 ## [0.12.0] - 2017-03-01
 

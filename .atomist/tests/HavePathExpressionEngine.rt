@@ -3,32 +3,7 @@ scenario HavePathExpressionEngine puts a path expression in the typescript
 let target=".atomist/editors/TypeScriptEditor.ts"
 
 given
-  .atomist/editors/TypeScriptEditor.ts = """import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Project'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
-
-@Editor("TypeScriptEditor", "@DESCRIPTION@")
-@Tags("documentation")
-class TypeScriptEditor implements EditProject {
-
-    @Parameter({
-        displayName: "Some Input",
-        description: "example of how to specify a parameter using decorators",
-        pattern: Pattern.any,
-        validInput: "a description of the valid input",
-        minLength: 1,
-        maxLength: 100
-    })
-    input_parameter: string;
-
-    edit(project: Project) {
-        project.addFile("hello.txt", "Hello, World!\n" + this.input_parameter + "\n");
-    }
-}
-
-export const typeScriptEditor = new TypeScriptEditor();
-"""
+  ArchiveRoot
 
 when
   HavePathExpressionEngine rug_name="TypeScriptEditor"

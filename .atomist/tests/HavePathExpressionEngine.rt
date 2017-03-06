@@ -1,0 +1,13 @@
+scenario HavePathExpressionEngine puts a path expression in the typescript
+
+let target=".atomist/editors/TypeScriptEditor.ts"
+
+given
+  ArchiveRoot
+
+when
+  HavePathExpressionEngine rug_name="TypeScriptEditor"
+
+then
+  fileContains target "let eng: PathExpressionEngine = project.context().pathExpressionEngine();"
+  and fileContains target "import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression"

@@ -34,7 +34,5 @@ when
   HavePathExpressionEngine rug_name="TypeScriptEditor"
 
 then
-dumpAll and
   fileContains target "let eng: PathExpressionEngine = project.context().pathExpressionEngine();"
-  and fileContains target "import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression'"
-  and dump target
+  and fileContains target "import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression"

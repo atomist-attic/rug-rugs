@@ -6,7 +6,7 @@ import { File } from '@atomist/rug/model/File'
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
 @Editor("HavePathExpressionEngine", "get access to a path expression engine in a Rug editor")
-@Tags("documentation")
+@Tags("rug")
 class HavePathExpressionEngine implements EditProject {
 
     @Parameter({

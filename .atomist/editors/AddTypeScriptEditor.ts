@@ -49,9 +49,13 @@ class AddTypeScriptEditor implements EditProject {
     description: string;
 
     edit(project: Project) {
-        if (!IsRugArchive(project) || !IsSetUpForTypeScript(project)) {
+
+        if (!IsRugArchive(project)) {
+            console.log("Can't run when not a rug archive");
             return;
         }
+
+        project.editWith("AddTypeScript", {});
 
         const editorPath = ".atomist/editors/" + this.editor_name + ".ts";
         const testPath = ".atomist/tests/" + this.editor_name + ".rt";

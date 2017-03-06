@@ -25,6 +25,11 @@ class AddTypeScript implements EditProject {
 
     edit(project: Project) {
         if (!project.fileExists(".atomist/manifest.yml")) {
+            console.log("Can't run as this doesn't appear to be a rug archive")
+            return;
+        }
+
+        if (project.fileExists(".atomist/package.json")) {
             return;
         }
 

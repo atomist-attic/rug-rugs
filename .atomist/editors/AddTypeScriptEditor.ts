@@ -51,7 +51,7 @@ class AddTypeScriptEditor implements EditProject {
     edit(project: Project) {
 
         if (!IsRugArchive(project)) {
-            console.log("Can't run when not a rug archive");
+            console.log("This project does not appear to be a Rug archive project, see https://github.com/atomist-rugs/rug-archive#addbasicrugarchivemanifestyml");
             return;
         }
 

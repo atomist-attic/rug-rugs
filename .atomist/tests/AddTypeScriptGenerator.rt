@@ -82,7 +82,7 @@ then
   NoChange
 
 
-scenario AddTypeScriptGenerator should make no changes if no package.json
+scenario AddTypeScriptGenerator should add package.json if not preset
 
 given
   ".atomist/manifest.yml" = """group: test-rugs
@@ -97,7 +97,8 @@ when
   AddTypeScriptGenerator generator_name = "MyNewGenerator", description = "Description of MyNewGenerator"
 
 then
-  NoChange
+  fileExists ".atomist/editors/MyNewGenerator.ts"
+  and fileExists ".atomist/package.json"
 
 
 scenario AddTypeScriptGenerator should fail if no generator name provided

@@ -21,6 +21,7 @@ import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
 
 import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
+import { IsRugArchive } from './RugEditorsPredicates';
 
 @Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug archive project")
 @Tags("rug", "atomist", "typescript")
@@ -47,14 +48,12 @@ class AddTypeScriptGenerator implements EditProject {
     description: string
 
     edit(project: Project) {
-        if (!project.fileExists(".atomist/manifest.yml")) {
+        if (!IsRugArchive(project)) {
             console.log("This project does not appear to be a Rug archive project, see https://github.com/atomist-rugs/rug-archive#addbasicrugarchivemanifestyml")
             return;
         }
-        if (!project.fileExists(".atomist/package.json")) {
-            console.log("This project does not appear to configured for TypeScript, see https://github.com/atomist-rugs/rug-editors#addtypescript")
-            return;
-        }
+
+        project.editWith("AddTypeScript", {});
 
         let srcGeneratorPath = ".atomist/editors/TypeScriptGenerator.ts";
         let srcTestPath = ".atomist/tests/TypeScriptGenerator.rt";

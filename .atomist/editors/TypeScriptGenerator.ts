@@ -1,5 +1,5 @@
 import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator'
-import { Project } from '@atomist/rug/model/Core'
+import { Project } from '@atomist/rug/model/Project'
 import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
@@ -7,19 +7,8 @@ import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 @Tags("documentation")
 class TypeScriptGenerator implements PopulateProject {
 
-    // this is only necessary to avoid https://github.com/atomist/rug-resolver/issues/17
-    @Parameter({
-        displayName: "Project Name",
-        description: "name of project to be created",
-        pattern: Pattern.project_name,
-        validInput: "a valid GitHub project name consisting of alphanumeric, ., -, and _ characters",
-        minLength: 1,
-        maxLength: 100
-    })
-    project_name: string;
-
     populate(project: Project) {
-        project.deleteFile(".atomist.yml");
+        console.log(`Creating ${project.name()}`);
     }
 }
 

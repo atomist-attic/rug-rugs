@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 -   AddTypeScript and ConvertExistingProjectToGenerator no longer add
     the node_modules directory
 
+-   Generators no longer require the project_name parameter be
+    declared so its was removed from the generator added by
+    AddTypeScriptGenerator
+
 ### Removed
 
 -   UpdateRugVersion has been moved to rug-upgrade

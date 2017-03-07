@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.13.0...HEAD
 
+### Changed
+
+-   Have editors that add TypeScript Rugs add the TypeScript support
+    files if they are not present
+
+### Removed
+
+-   UpdateRugVersion has been moved to rug-upgrade
+
 ## [0.13.0] - 2017-03-03
 
 [0.13.0]: https://github.com/atomist-rugs/rug-editors/compare/0.12.0...0.13.0

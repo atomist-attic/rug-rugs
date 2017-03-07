@@ -303,47 +303,6 @@ $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchive \
 
 This will add the file `.atomist/manifest.yml` to the project.
 
-### UpdateRugVersion
-
-The UpdateRugVersion editor updates the version of the rug dependency
-in the Rug archive's `manifest.yml`.  If the project has a
-`package.json`, it updates the dependency in that file too.  Since the
-manifest and package version formats are different, their new values
-are specified as different parameters.
-
-#### Prerequisites
-
-Before running this editor, you must have the following prerequisites
-satisfied.
-
-*   A Rug archive source code repository
-
-#### Parameters
-
-To run this editor, you must supply the following parameters.
-
-Name | Required | Default | Description
------|----------|---------|------------
-`manifest_version` | Yes | | A valid Rug version of the form M.N.P or a version range of the form [M.N.P,X.Y.Z) where a square bracket includes the adjacent version and a parenthesis excludes it
-`package_version` | Yes | | A [valid NPM dependency version][npm-version] representing valid Rug version(s)
-
-[npm-version]: https://docs.npmjs.com/files/package.json#dependencies
-
-#### Running
-
-Run it as follows:
-
-```
-$ cd rug/project/directory
-$ rug edit atomist-rugs:rug-editors:UpdateRugVersion \
-    manifest_version='[0.8.0,1.0.0)' \
-    package_version='~0.8.0'
-```
-
-This will update the rug version in the `.atomist/manifest.yml` and,
-if present, the `.atomist/package.json`.  If there is no `.atomist`
-directory, nothing will be done.
-
 ## Support
 
 General support questions should be discussed in the `#support`

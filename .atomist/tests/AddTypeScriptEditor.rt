@@ -24,7 +24,6 @@ when
 
 then
   fileExists ".atomist/editors/MyNewEditor.ts"
-    and dump ".atomist/editors/MyNewEditor.ts"
     and fileContains ".atomist/editors/MyNewEditor.ts" '@Editor("MyNewEditor"'
     and fileContains ".atomist/editors/MyNewEditor.ts" { '"'+ description + '"' }
     and fileContains ".atomist/editors/MyNewEditor.ts" "class MyNewEditor"

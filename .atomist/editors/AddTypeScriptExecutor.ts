@@ -58,9 +58,12 @@ class AddTypeScriptExecutor implements EditProject {
     bot_intent: string;
 
     edit(project: Project) {
-        if (!IsRugArchive(project) || !IsSetUpForTypeScript(project)) {
+        if (!IsRugArchive(project)) {
+            console.log("This project does not appear to be a Rug archive project");
             return;
         }
+
+        project.editWith("AddTypeScript", {});
 
         let executorPath = ".atomist/executors/" + this.executor_name + ".ts";
         let defaultExecutorName = "TypeScriptExecutor";

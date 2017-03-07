@@ -21,6 +21,7 @@ import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
 
 import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
+import { IsRugArchive } from './RugEditorsPredicates';
 
 @Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug archive project")
 @Tags("rug", "atomist", "typescript")
@@ -47,14 +48,12 @@ class AddTypeScriptGenerator implements EditProject {
     description: string
 
     edit(project: Project) {
-        if (!project.fileExists(".atomist/manifest.yml")) {
-            console.log("This project does not appear to be a Rug archive project, see https://github.com/atomist-rugs/rug-archive#addbasicrugarchivemanifestyml")
+        if (!IsRugArchive(project)) {
+            console.log("This project does not appear to be a Rug archive project");
             return;
         }
-        if (!project.fileExists(".atomist/package.json")) {
-            console.log("This project does not appear to configured for TypeScript, see https://github.com/atomist-rugs/rug-editors#addtypescript")
-            return;
-        }
+
+        project.editWith("AddTypeScript", {});
 
         let srcGeneratorPath = ".atomist/editors/TypeScriptGenerator.ts";
         let srcTestPath = ".atomist/tests/TypeScriptGenerator.rt";
@@ -71,8 +70,8 @@ class AddTypeScriptGenerator implements EditProject {
 
         let generatorPathExpression = "/*[@name='.atomist']/editors/*[@name='" + this.generator_name + ".ts']";
         eng.with<File>(project, generatorPathExpression, g => {
-            g.replace("TypeScriptGenerator", this.generator_name);
             g.replace("sample TypeScript generator used by AddTypeScriptGenerator", this.description);
+            g.replace("TypeScriptGenerator", this.generator_name);
             g.replace("typeScriptGenerator", lcFirstGeneratorName);
         });
 

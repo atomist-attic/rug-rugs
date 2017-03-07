@@ -24,11 +24,13 @@ when
 
 then
   fileExists ".atomist/editors/MyNewEditor.ts"
+    and dump ".atomist/editors/MyNewEditor.ts"
     and fileContains ".atomist/editors/MyNewEditor.ts" '@Editor("MyNewEditor"'
+    and fileContains ".atomist/editors/MyNewEditor.ts" { '"'+ description + '"' }
     and fileContains ".atomist/editors/MyNewEditor.ts" "class MyNewEditor"
     and fileContains ".atomist/editors/MyNewEditor.ts" "new MyNewEditor()"
     and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "TypeScriptEditor") }
-    and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "@DESCRIPTION@") }
+    and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "sample TypeScript editor used by") }
     and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "helloTypeScript") }
     and fileExists ".atomist/tests/MyNewEditor.rt"
     and fileContains ".atomist/tests/MyNewEditor.rt" "scenario MyNewEditor"
@@ -60,10 +62,11 @@ when
 then
   fileExists ".atomist/editors/MyNewEditor.ts"
     and fileContains ".atomist/editors/MyNewEditor.ts" '@Editor("MyNewEditor"'
+    and fileContains ".atomist/editors/MyNewEditor.ts" { '"'+ description + '"' }
     and fileContains ".atomist/editors/MyNewEditor.ts" "class MyNewEditor"
     and fileContains ".atomist/editors/MyNewEditor.ts" "new MyNewEditor()"
     and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "TypeScriptEditor") }
-    and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "@DESCRIPTION@") }
+    and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "sample TypeScript editor used by") }
     and { !result.fileContains(".atomist/editors/MyNewEditor.ts", "helloTypeScript") }
     and fileExists ".atomist/tests/MyNewEditor.rt"
     and fileContains ".atomist/tests/MyNewEditor.rt" "scenario MyNewEditor"
@@ -83,7 +86,7 @@ then
   NoChange
 
 
-scenario AddTypeScriptEditor should not make any changes if the target project is ready for TypeScript
+scenario AddTypeScriptEditor should make ready for typescript if not ready
 
 given
   ".atomist/manifest.yml" = """group: test-rugs
@@ -98,7 +101,9 @@ when
   AddTypeScriptEditor editor_name="SillyPerson", description="Dance!"
 
 then
-  NoChange
+  fileExists ".atomist/editors/SillyPerson.ts"
+    and fileContains ".atomist/editors/SillyPerson.ts" '@Editor("SillyPerson"'
+    and fileExists ".atomist/package.json"
 
 
 scenario AddTypeScriptEditor should fail if no editor name provided

@@ -21,7 +21,7 @@ import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
 import { File } from '@atomist/rug/model/File'
 
-import { IsRugArchive, IsSetUpForTypeScript } from './RugEditorsPredicates'
+import { IsRugArchive } from './RugEditorsPredicates'
 
 @Editor("AddTypeScriptHandler", "add TypeScript Rug handler to project")
 @Tags("rug", "atomist")
@@ -58,9 +58,12 @@ class AddTypeScriptHandler implements EditProject {
     path_expression: string = "/Tag()";
 
     edit(project: Project) {
-        if (!IsRugArchive(project) || !IsSetUpForTypeScript(project)) {
+        if (!IsRugArchive(project)) {
+            console.log("This project does not appear to be a Rug archive project");
             return;
         }
+
+        project.editWith("AddTypeScript", {});
 
         let handlerPath = ".atomist/handlers/" + this.handler_name + ".ts";
         let defaultHandlerName = "TypeScriptHandler";

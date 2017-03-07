@@ -73,6 +73,7 @@ when
 then
   fileExists ".atomist/handlers/MyNewHandler.ts"
     and fileContains ".atomist/handlers/MyNewHandler.ts" "/Push()[/on::Repo()/channel::ChatChannel()][/contains::Commit()/author::GitHubId()[/hasGithubIdentity::Person()/hasChatIdentity::ChatId()]?]"
+    and { !result.fileContains(".atomist/handlers/MyNewHandler.ts", "/Tag()") }
 
 scenario AddTypeScriptHandler should fail if not a Rug project
 

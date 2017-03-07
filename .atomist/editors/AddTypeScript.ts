@@ -35,14 +35,10 @@ class AddTypeScript implements EditProject {
             return;
         }
 
-        let packageJsonPath = ".atomist/package.json";
-        let tsconfigJsonPath = ".atomist/tsconfig.json";
-        let gitignorePath = ".atomist/.gitignore";
-        let nodeModulesPath = ".atomist/node_modules";
-        project.copyEditorBackingFileOrFail(packageJsonPath);
-        project.copyEditorBackingFileOrFail(tsconfigJsonPath);
-        project.copyEditorBackingFileOrFail(gitignorePath);
-        project.copyEditorBackingFilesPreservingPath(nodeModulesPath);
+        project.copyEditorBackingFileOrFail(".atomist/package.json");
+        project.copyEditorBackingFileOrFail(".atomist/tsconfig.json");
+        project.copyEditorBackingFileOrFail(".atomist/.gitignore");
+        console.log("TypeScript files added, run `cd .atomist && npm install`");
     }
 }
 

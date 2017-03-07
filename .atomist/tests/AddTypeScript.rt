@@ -31,8 +31,8 @@ then
     and fileContains ".atomist/tsconfig.json" "suppressImplicitAnyIndexErrors"
     and fileExists ".atomist/.gitignore"
     and fileContains ".atomist/.gitignore" "node_modules"
-    and directoryExists ".atomist/node_modules/@atomist/rug"
-    and fileExists ".atomist/node_modules/@atomist/rug/model/Core.ts"
+    and { !result.directoryExists(".atomist/node_modules/@atomist/rug") }
+    and { !result.fileExists(".atomist/node_modules/@atomist/rug/model/Core.ts") }
 
 
 scenario AddTypeScript should not make any changes if the target project is not a Rug archive

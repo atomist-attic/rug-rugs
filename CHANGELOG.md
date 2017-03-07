@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 -   Have editors that add TypeScript Rugs add the TypeScript support
     files if they are not present
 
+-   AddTypeScript and ConvertExistingProjectToGenerator no longer add
+    the node_modules directory
+
 ### Removed
 
 -   UpdateRugVersion has been moved to rug-upgrade

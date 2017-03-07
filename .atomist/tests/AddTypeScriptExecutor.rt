@@ -67,7 +67,7 @@ then
   NoChange
 
 
-scenario AddTypeScriptExecutor should fail if Rug project not ready for TypeScript
+scenario AddTypeScriptExecutor should add package.json if Rug project not ready for TypeScript
 
 let executor_name = "MyNewExecutor"
 let description = "This executor rocks"
@@ -86,7 +86,8 @@ when
   AddTypeScriptExecutor
 
 then
-  NoChange
+  fileExists ".atomist/executors/MyNewExecutor.ts"
+    and fileExists ".atomist/package.json"
 
 
 scenario AddTypeScriptExecutor should fail is parameters are missing

@@ -51,7 +51,7 @@ class AddTypeScriptEditor implements EditProject {
     edit(project: Project) {
 
         if (!IsRugArchive(project)) {
-            console.log("This project does not appear to be a Rug archive project, see https://github.com/atomist-rugs/rug-archive#addbasicrugarchivemanifestyml");
+            console.log("This project does not appear to be a Rug archive project");
             return;
         }
 
@@ -70,8 +70,8 @@ class AddTypeScriptEditor implements EditProject {
 
         const editorPE = "/*[@name='.atomist']/editors/*[@name='" + this.editor_name + ".ts']";
         eng.with<File>(project, editorPE, e => {
-            e.replace(defaultEditorName, this.editor_name);
             e.replace("sample TypeScript editor used by AddTypeScriptEditor", this.description);
+            e.replace(defaultEditorName, this.editor_name);
             const defaultEditorConstName = "typeScriptEditor";
             const editorConstName = this.editor_name.charAt(0).toLowerCase() + this.editor_name.slice(1);
             e.replace(defaultEditorConstName, editorConstName);

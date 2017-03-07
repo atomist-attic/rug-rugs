@@ -49,7 +49,7 @@ class AddTypeScriptGenerator implements EditProject {
 
     edit(project: Project) {
         if (!IsRugArchive(project)) {
-            console.log("This project does not appear to be a Rug archive project, see https://github.com/atomist-rugs/rug-archive#addbasicrugarchivemanifestyml")
+            console.log("This project does not appear to be a Rug archive project");
             return;
         }
 

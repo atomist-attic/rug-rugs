@@ -58,13 +58,12 @@ class AddTypeScriptHandler implements EditProject {
     path_expression: string = "/Tag()";
 
     edit(project: Project) {
-         if (!IsRugArchive(project)) {
-            console.log("This project does not appear to be a Rug archive project, see https://github.com/atomist-rugs/rug-archive#addbasicrugarchivemanifestyml");
+        if (!IsRugArchive(project)) {
+            console.log("This project does not appear to be a Rug archive project");
             return;
         }
 
         project.editWith("AddTypeScript", {});
-
 
         let handlerPath = ".atomist/handlers/" + this.handler_name + ".ts";
         let defaultHandlerName = "TypeScriptHandler";

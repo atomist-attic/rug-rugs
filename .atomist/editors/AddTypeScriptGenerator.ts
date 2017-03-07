@@ -70,8 +70,8 @@ class AddTypeScriptGenerator implements EditProject {
 
         let generatorPathExpression = "/*[@name='.atomist']/editors/*[@name='" + this.generator_name + ".ts']";
         eng.with<File>(project, generatorPathExpression, g => {
-            g.replace("TypeScriptGenerator", this.generator_name);
             g.replace("sample TypeScript generator used by AddTypeScriptGenerator", this.description);
+            g.replace("TypeScriptGenerator", this.generator_name);
             g.replace("typeScriptGenerator", lcFirstGeneratorName);
         });
 

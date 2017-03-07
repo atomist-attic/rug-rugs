@@ -58,11 +58,12 @@ when
 
 then
   fileExists ".atomist/editors/MyNewGenerator.ts"
+    and dump  ".atomist/editors/MyNewGenerator.ts"
     and fileContains ".atomist/editors/MyNewGenerator.ts" '@Generator("MyNewGenerator"'
+    and fileContains ".atomist/editors/MyNewGenerator.ts" "Description of MyNewGenerator"
     and fileContains ".atomist/editors/MyNewGenerator.ts" "class MyNewGenerator"
     and fileContains ".atomist/editors/MyNewGenerator.ts" "new MyNewGenerator()"
     and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "TypeScriptGenerator") }
-    and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "@DESCRIPTION@") }
     and { !result.fileContains(".atomist/editors/MyNewGenerator.ts", "typeScriptGenerator") }
     and fileExists ".atomist/tests/MyNewGenerator.rt"
     and fileContains ".atomist/tests/MyNewGenerator.rt" "scenario MyNewGenerator"

@@ -74,8 +74,14 @@ $ rug edit atomist-rugs:rug-editors:AddTypeScript
 ```
 
 This will add `package.json`, `tsconfig.json`, and `.gitignore` files
-and the `node_modules` directory to the `.atomist` directory in the
-project.
+to the `.atomist` directory in the project.  You will need to install
+the [node][] dependencies using NPM.
+
+```
+$ ( cd .atomist && npm install )
+```
+
+[node]: https://nodejs.org/
 
 ### AddTypeScriptEditor
 
@@ -260,10 +266,14 @@ $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToGenerator \
 ```
 
 This will create a `.atomist` directory to the root of the project.
-The `.atomist` directory will have valid `manifest.yml` and
-`package.json` files, the generator script in
-`editors/MyNewGenerator.ts`, and its test in
-`tests/MyNewGenerator.rt`.
+The `.atomist` directory will have valid `manifest.yml` and TypeScript
+files, the generator script in `editors/MyNewGenerator.ts`, and its
+test in `tests/MyNewGenerator.rt`.  You will need to install
+the [node][] dependencies using NPM.
+
+```
+$ ( cd .atomist && npm install )
+```
 
 ### ConvertExistingProjectToRugArchive
 

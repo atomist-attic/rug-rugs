@@ -5,7 +5,7 @@ import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
 @Editor("TypeScriptEditor", "sample TypeScript editor used by AddTypeScriptEditor")
 @Tags("documentation")
-class TypeScriptEditor implements EditProject {
+export class TypeScriptEditor implements EditProject {
 
     @Parameter({
         displayName: "Some Input",

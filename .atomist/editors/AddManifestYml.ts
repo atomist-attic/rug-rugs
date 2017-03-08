@@ -25,7 +25,7 @@ import { IsRugArchive } from './RugEditorsPredicates'
 
 @Editor("AddManifestYml", "add Rug archive manifest")
 @Tags("rug", "atomist")
-class AddManifestYml implements EditProject {
+export class AddManifestYml implements EditProject {
 
     @Parameter({
         displayName: "Rug Archive Name",

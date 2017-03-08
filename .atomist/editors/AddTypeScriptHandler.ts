@@ -25,7 +25,7 @@ import { IsRugArchive } from './RugEditorsPredicates'
 
 @Editor("AddTypeScriptHandler", "add TypeScript Rug handler to project")
 @Tags("rug", "atomist")
-class AddTypeScriptHandler implements EditProject {
+export class AddTypeScriptHandler implements EditProject {
 
     @Parameter({
         displayName: "Handler Name",

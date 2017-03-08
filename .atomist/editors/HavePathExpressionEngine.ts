@@ -23,7 +23,7 @@ import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
 @Editor("HavePathExpressionEngine", "get access to a path expression engine in a Rug editor")
 @Tags("rug")
-class HavePathExpressionEngine implements EditProject {
+export class HavePathExpressionEngine implements EditProject {
 
     @Parameter({
         displayName: "Rug to modify",

@@ -23,7 +23,7 @@ import { addAssertionsForAllFilesInProject } from './ProjectToGeneratorOperation
 
 @Editor("ConvertExistingProjectToGenerator", "convert existing project to a Rug archive with a basic Generator")
 @Tags("rug", "atomist")
-class ConvertExistingProjectToGenerator implements EditProject {
+export class ConvertExistingProjectToGenerator implements EditProject {
 
     @Parameter({
         displayName: "Rug Archive Name",
@@ -79,7 +79,7 @@ class ConvertExistingProjectToGenerator implements EditProject {
     edit(project: Project) {
         if (project.fileExists(".atomist/manifest.yml")) {
             return;
-        } 
+        }
         project.editWith("ConvertExistingProjectToRugArchive", this);
         project.editWith("AddTypeScript", {})
         project.editWith("AddTypeScriptGenerator", this)

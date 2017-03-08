@@ -5,7 +5,7 @@ import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
 @Generator("TypeScriptGenerator", "sample TypeScript generator used by AddTypeScriptGenerator")
 @Tags("documentation")
-class TypeScriptGenerator implements PopulateProject {
+export class TypeScriptGenerator implements PopulateProject {
 
     populate(project: Project) {
         console.log(`Creating ${project.name()}`);

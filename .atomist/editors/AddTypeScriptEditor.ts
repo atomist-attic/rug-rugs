@@ -26,7 +26,7 @@ import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
 
 @Editor("AddTypeScriptEditor", "add TypeScript Rug editor to project")
 @Tags("rug", "atomist", "typescript")
-class AddTypeScriptEditor implements EditProject {
+export class AddTypeScriptEditor implements EditProject {
 
     @Parameter({
         displayName: "Editor Name",

@@ -25,7 +25,7 @@ import { IsRugArchive } from './RugEditorsPredicates';
 
 @Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug archive project")
 @Tags("rug", "atomist", "typescript")
-class AddTypeScriptGenerator implements EditProject {
+export class AddTypeScriptGenerator implements EditProject {
 
     @Parameter({
         displayName: "Generator Name",

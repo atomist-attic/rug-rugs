@@ -25,7 +25,7 @@ import { IsRugArchive, IsSetUpForTypeScript } from './RugEditorsPredicates'
 
 @Editor("AddTypeScriptExecutor", "add TypeScript Rug executor to project")
 @Tags("rug", "atomist")
-class AddTypeScriptExecutor implements EditProject {
+export class AddTypeScriptExecutor implements EditProject {
 
     @Parameter({
         displayName: "Executor Name",

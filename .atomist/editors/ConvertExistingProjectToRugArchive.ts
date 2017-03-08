@@ -21,7 +21,7 @@ import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
 @Editor("ConvertExistingProjectToRugArchive", "convert existing project to a Rug archive")
 @Tags("rug", "atomist")
-class ConvertExistingProjectToRugArchive implements EditProject {
+export class ConvertExistingProjectToRugArchive implements EditProject {
 
     @Parameter({
         displayName: "Rug Archive Name",

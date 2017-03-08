@@ -23,7 +23,7 @@ import { IsRugArchive, IsSetUpForTypeScript } from './RugEditorsPredicates';
 
 @Editor("AddTypeScript", "adds TypeScript supporting files to a Rug archive project")
 @Tags("rug", "atomist", "typescript")
-class AddTypeScript implements EditProject {
+export class AddTypeScript implements EditProject {
 
     edit(project: Project) {
         if (!IsRugArchive(project)) {

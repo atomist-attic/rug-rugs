@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import { Project, File } from '@atomist/rug/model/Core'
-import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
+import { Project } from '@atomist/rug/model/Project'
+import { File } from '@atomist/rug/model/File'
+import { PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
 
 export function addAssertionsForAllFilesInProject(project: Project, generatorName: string): void {
     let originalTestAssertionsString = "then\n  fileExists \"README.md\""
@@ -33,9 +34,8 @@ export function addAssertionsForAllFilesInProject(project: Project, generatorNam
     }, "then")
 
     let eng: PathExpressionEngine = project.context().pathExpressionEngine();
-    let testPathExpression = new PathExpression<Project, File>("/*[@name='.atomist']/tests/*[@name='" + generatorName + ".rt']");
-    let testFile: File = eng.scalar(project, testPathExpression);
-    testFile.replace(originalTestAssertionsString, testAssertionsString)
+    eng.with<File>(project, "/*[@name='.atomist']/tests/*[@name='" + generatorName + ".rt']",
+        t => t.replace(originalTestAssertionsString, testAssertionsString));
 }
 
 function notACommonPeripheralArtifact(file: File): boolean {

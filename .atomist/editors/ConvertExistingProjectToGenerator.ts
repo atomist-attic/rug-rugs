@@ -15,7 +15,8 @@
  */
 
 import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project, File } from '@atomist/rug/model/Core'
+import { Project } from '@atomist/rug/model/Project'
+import { File } from '@atomist/rug/model/File'
 import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 import { PathExpression, PathExpressionEngine, TreeNode, Match } from '@atomist/rug/tree/PathExpression'

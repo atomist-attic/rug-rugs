@@ -74,7 +74,7 @@ export function readMeInstructions(
         instructions += "#### Parameters\n\n This Rug has no parameters.\n\n"
     }
     instructions += "#### Running\n\nRun this Rug as follows:\n\n```\n"
-        + example + "\n```\n\n" + example_text + "\n\n";
+        + example + "\n```\n\n" + example_text + "\n";
 
     return instructions.replace(/\$/g, "\\$");
 }

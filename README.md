@@ -3,11 +3,11 @@
 [![Build Status](https://travis-ci.org/atomist-rugs/rug-editors.svg?branch=master)](https://travis-ci.org/atomist-rugs/rug-editors)
 [![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
 
-This [Rug][rug] archive contains editors to create a a Rug archive
-from an existing project and to add editors and generators to Rug
-archives.  Most meta.
-
 [rug]: http://docs.atomist.com/
+
+This [Rug][rug] project contains generators for creating a Rug archive
+project, editors to create a Rug archive project from an existing
+project, and editors to add Rugs to Rug projects.  Most meta.
 
 ## Rugs
 
@@ -312,6 +312,83 @@ $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchive \
 ```
 
 This will add the file `.atomist/manifest.yml` to the project.
+
+### NewRugProject
+
+The NewRugProject generator creates a new empty Rug archive project.
+The generated project will have a `.atomist` directory and an
+appropriate `.atomist/manifest.yml` file, but no Rugs.
+
+#### Prerequisites
+
+There are no prerequisites to running this generator.
+
+#### Parameters
+
+To run this generator, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`project_name` | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
+`group_id` | Yes | |  Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo being created is used
+`description` | Yes | | A brief description of the project
+`version` | No | 0.1.0 | [Semantic version][semver] of the project
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd parent/directory
+$ rug generate atomist-rugs:rug-project:NewRugProject \
+    ruggery \
+    group_id=persian-rugs \
+    description="Rug archive to hold my Rugs" \
+    version=0.1.0
+```
+
+Note the first parameter, the `project_name`, is different in that you
+do not need to supply the name of the parameter, just the value.  This
+is because the `project_name` parameter is required for all
+generators.  This will create a directory named `ruggery` and populate
+it with a working Rug archive project.  You can use the editors in
+this project to add Rugs to the generated project.
+
+### NewStarterRugProject
+
+The NewStarterRugProject generator creates a new Rug archive project
+using a standard layout, sensible defaults, TypeScript dependencies,
+and a simple TypeScript editor.  It is a great way to get started
+writing Rugs!
+
+#### Prerequisites
+
+There are no prerequisites to running this generator.
+
+#### Parameters
+
+To run this generator, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`project_name` | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd parent/directory
+$ rug generate atomist-rugs:rug-project:NewStarterRugProject ruggery
+```
+
+Note the `project_name` parameter is different in that you do not need
+to supply the name of the parameter, just the value.  This is because
+the `project_name` parameter is required for all generators.  This
+will create a directory named `ruggery` and populate it with a working
+Rug archive project with a standard layout and TypeScript dependencies
+and a simple editor.  You can use the editors in this project to add
+more Rugs to the generated project.
 
 ## Support
 

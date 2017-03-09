@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.14.0...HEAD
 
+### Changed
+
+-   Export all Rug classes
+
+### Added
+
+-   NewRugProject and NewStarterRugProject generators
+
 ## [0.14.0] - 2017-03-07
 
 [0.14.0]: https://github.com/atomist-rugs/rug-editors/compare/0.13.0...0.14.0

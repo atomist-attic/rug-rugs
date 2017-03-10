@@ -207,9 +207,9 @@ To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`handler_name` | Yes | | A valid Rug handler name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`handlerName` | Yes | | A valid Rug handler name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
 `description` | Yes | | A description of the handler being added
-`path_expression` | No | `/Tag()` | Path expression to the event in Atomist that will trigger this handler
+`pathExpression` | No | `/Tag()` | Path expression to the event in Atomist that will trigger this handler
 
 #### Running
 
@@ -218,8 +218,9 @@ Run it as follows:
 ```
 $ cd rug/project/directory
 $ rug edit atomist-rugs:rug-editors:AddTypeScriptHandler \
-    handler_name=MyNewHandler \
-    description="This is my newest handler."
+    handlerName=MyNewHandler \
+    description="This is my newest handler." \
+    pathExpression="/Issue()"
 ```
 
 This will add the file `.atomist/handlers/MyNewHandler.ts` to the

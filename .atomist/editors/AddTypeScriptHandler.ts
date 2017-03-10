@@ -24,7 +24,7 @@ import { File } from '@atomist/rug/model/File'
 import { IsRugArchive } from './RugEditorsPredicates'
 
 @Editor("AddTypeScriptHandler", "add TypeScript Rug handler to project")
-@Tags("rug", "atomist")
+@Tags("rug", "atomist", "typescript")
 export class AddTypeScriptHandler implements EditProject {
 
     @Parameter({
@@ -35,7 +35,7 @@ export class AddTypeScriptHandler implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    handler_name: string;
+    handlerName: string;
 
     @Parameter({
         displayName: "Handler Description",
@@ -55,7 +55,7 @@ export class AddTypeScriptHandler implements EditProject {
         minLength: 1,
         maxLength: 200
     })
-    path_expression: string = "/Tag()";
+    pathExpression: string = "/Tag()";
 
     edit(project: Project) {
         if (!IsRugArchive(project)) {
@@ -65,17 +65,17 @@ export class AddTypeScriptHandler implements EditProject {
 
         project.editWith("AddTypeScript", {});
 
-        let handlerPath = ".atomist/handlers/" + this.handler_name + ".ts";
+        let handlerPath = ".atomist/handlers/" + this.handlerName + ".ts";
         let defaultHandlerName = "TypeScriptHandler";
-        let defaultHandlerPath = ".atomist/handlers/" + defaultHandlerName + ".ts";
+        let defaultHandlerPath = ".atomist/handlers/" + defaultHandlerName + ".ts_";
         let defaultPathExpression = "/Tag()";
         project.copyEditorBackingFileOrFail(defaultHandlerPath, handlerPath);
 
         let eng: PathExpressionEngine = project.context().pathExpressionEngine();
 
-        let handlerPE = new PathExpression<Project, File>("/*[@name='.atomist']/handlers/*[@name='" + this.handler_name + ".ts']");
+        let handlerPE = new PathExpression<Project, File>("/*[@name='.atomist']/handlers/*[@name='" + this.handlerName + ".ts']");
         let handler: File = eng.scalar(project, handlerPE);
-        handler.replace(defaultPathExpression, this.path_expression);
+        handler.replace(defaultPathExpression, this.pathExpression);
     }
 }
 

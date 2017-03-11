@@ -16,35 +16,28 @@
 
 import { EditProject } from '@atomist/rug/operations/ProjectEditor'
 import { Project } from '@atomist/rug/model/Project'
-import { File } from '@atomist/rug/model/File'
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
+import { File } from '@atomist/rug/model/File'
 
 import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
 import { IsRugArchive } from './RugEditorsPredicates';
+import { RugParameters } from './RugParameters';
 
-@Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug archive project")
+@Editor("AddTypeScriptGenerator", "add a TypeScript generator to a Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptGenerator implements EditProject {
 
     @Parameter({
+        ...RugParameters.Name,
         displayName: "Generator Name",
-        description: "name of generator to add to Rug archive project",
-        pattern: "^[A-Z][A-Za-z0-9]*$",
-        validInput: "a valid generator name starting with a capital letter and consisting of alphanumeric characters from one to 100 characters long",
-        minLength: 1,
-        maxLength: 100
+        description: "name of generator to add to Rug archive project"
     })
-    generator_name: string;
+    generatorName: string;
 
     @Parameter({
+        ...RugParameters.Description,
         displayName: "Generator Description",
-        description: "description of generator to add to Rug archive project",
-        pattern: Pattern.any,
-        validInput: "a string between one and 100 characters",
-        minLength: 1,
-        maxLength: 100
+        description: "description of generator to add to Rug archive project"
     })
     description: string
 
@@ -56,42 +49,45 @@ export class AddTypeScriptGenerator implements EditProject {
 
         project.editWith("AddTypeScript", {});
 
-        let srcGeneratorPath = ".atomist/editors/TypeScriptGenerator.ts";
-        let srcTestPath = ".atomist/tests/TypeScriptGenerator.rt";
-
-        let generatorPath = srcGeneratorPath.replace("TypeScriptGenerator", this.generator_name);
-        let testPath = srcTestPath.replace("TypeScriptGenerator", this.generator_name);
+        const srcGeneratorName = "TypeScriptGenerator";
+        const srcGeneratorPath = `.atomist/editors/${srcGeneratorName}.ts`;
+        const srcTestPath = ".atomist/tests/project/TypeScriptGeneratorTest.ts";
+        const srcFeaturePath = ".atomist/tests/project/TypeScriptGeneratorTest.feature";
+        const generatorPath = srcGeneratorPath.replace(srcGeneratorName, this.generatorName);
+        const testPath = srcTestPath.replace(srcGeneratorName, this.generatorName);
+        const featurePath = srcFeaturePath.replace(srcGeneratorName, this.generatorName);
 
         project.copyEditorBackingFileOrFailToDestination(srcGeneratorPath, generatorPath);
         project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
+        project.copyEditorBackingFileOrFailToDestination(srcFeaturePath, featurePath);
 
-        let lcFirstGeneratorName = this.generator_name[0].toLowerCase() + this.generator_name.slice(1);
+        const srcDescription = "sample TypeScript generator used by AddTypeScriptGenerator";
+        const srcGeneratorConstName = "typeScriptGenerator";
+        const generatorConstName = this.generatorName[0].toLowerCase() + this.generatorName.slice(1);
 
-        let eng: PathExpressionEngine = project.context().pathExpressionEngine();
+        let generatorFile: File = project.findFile(generatorPath);
+        generatorFile.replace(srcDescription, this.description);
+        generatorFile.replace(srcGeneratorName, this.generatorName);
+        generatorFile.replace(srcGeneratorConstName, generatorConstName);
 
-        let generatorPathExpression = "/*[@name='.atomist']/editors/*[@name='" + this.generator_name + ".ts']";
-        eng.with<File>(project, generatorPathExpression, g => {
-            g.replace("sample TypeScript generator used by AddTypeScriptGenerator", this.description);
-            g.replace("TypeScriptGenerator", this.generator_name);
-            g.replace("typeScriptGenerator", lcFirstGeneratorName);
-        });
+        let testFile: File = project.findFile(testPath);
+        testFile.replace(srcGeneratorName, this.generatorName);
 
-        let testPathExpression = "/*[@name='.atomist']/tests/*[@name='" + this.generator_name + ".rt']";
-        eng.with<File>(project, testPathExpression, t => {
-            t.replace("TypeScriptGenerator", this.generator_name);
-        });
+        let featureFile: File = project.findFile(featurePath);
+        featureFile.replace(srcDescription, this.description);
+        featureFile.replace(srcGeneratorName, this.generatorName);
 
         const example = `\$ cd parent/directory
-\$ rug generate atomist-rugs:rug-editors:${this.generator_name} \\\\
+\$ rug generate atomist-rugs:rug-editors:${this.generatorName} \\\\
     my-new-project`;
-        const example_text = "Explain what your generator does here.";
+        const exampleText = "Explain what your generator does here.";
         const prerequisites = "Put your editor prerequisites here.";
-        let parameters: string[] = ["`project_name` | Yes | | Name of project to be created"];
+        let parameters: string[] = ["`projectName` | Yes | | Name of project to be created"];
         const instructions = readMeInstructions(
-            this.generator_name,
+            this.generatorName,
             this.description,
             example,
-            example_text,
+            exampleText,
             "",
             parameters
         );

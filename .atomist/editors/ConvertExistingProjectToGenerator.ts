@@ -34,7 +34,7 @@ export class ConvertExistingProjectToGenerator implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    archive_name: string;
+    archiveName: string;
 
     @Parameter({
         displayName: "Rug Archive Group ID",
@@ -44,7 +44,7 @@ export class ConvertExistingProjectToGenerator implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    group_id: string;
+    groupId: string;
 
     @Parameter({
         displayName: "Rug Archive Version",
@@ -65,7 +65,7 @@ export class ConvertExistingProjectToGenerator implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    generator_name: string;
+    generatorName: string;
 
     @Parameter({
         displayName: "Generator Description",
@@ -85,7 +85,7 @@ export class ConvertExistingProjectToGenerator implements EditProject {
         project.editWith("AddTypeScript", {})
         project.editWith("AddTypeScriptGenerator", this)
 
-        addAssertionsForAllFilesInProject(project, this.generator_name)
+        //addAssertionsForAllFilesInProject(project, this.generatorName)
     }
 }
 

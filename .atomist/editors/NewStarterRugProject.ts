@@ -36,15 +36,15 @@ export class NewStarterRugProject implements PopulateProject {
 
         const version: string = "0.1.0";
         const manifestParams = {
-            archive_name: project.name(),
-            group_id: owner,
+            archiveName: project.name(),
+            groupId: owner,
             version: version
         }
         project.editWith("AddManifestYml", manifestParams);
         project.editWith("AddTypeScript", {});
         project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
         const editorParams = {
-            editor_name: "MyFirstEditor",
+            editorName: "MyFirstEditor",
             description: "A sample Rug TypeScript editor to start playing with."
         }
         project.editWith("AddTypeScriptEditor", editorParams);

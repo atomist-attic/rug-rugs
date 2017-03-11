@@ -65,8 +65,8 @@ To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`archive_name` | Yes | | Name of the new Rug archive, typically the same as the repo name
-`group_id` | Yes | | Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo
+`archiveName` | Yes | | Name of the new Rug archive, typically the same as the repo name
+`groupId` | Yes | | Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.
 
 #### Running
@@ -76,8 +76,8 @@ Run it as follows:
 ```
 $ cd project/directory
 $ rug edit atomist-rugs:rug-editors:AddManifestYml \
-    archive_name=my-new-archive \
-    group_id=my-rugs \
+    archiveName=my-new-archive \
+    groupId=my-rugs \
     version=2.71.828
 ```
 
@@ -136,7 +136,7 @@ To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`editor_name` | Yes | | A valid Rug editor name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`editorName` | Yes | | A valid Rug editor name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
 `description` | Yes | | A description of the generator being added
 
 #### Running
@@ -146,7 +146,7 @@ Run it as follows:
 ```
 $ cd rug/project/directory
 $ rug edit atomist-rugs:rug-editors:AddTypeScriptEditor \
-    editor_name=MyNewEditor \
+    editorName=MyNewEditor \
     description="This is my newest editor... in TypeScript!"
 ```
 
@@ -171,7 +171,7 @@ To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`generator_name` | Yes | | A valid Rug generator name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`generatorName` | Yes | | A valid Rug generator name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
 `description` | Yes | | A description of the generator being added
 
 #### Running
@@ -181,7 +181,7 @@ Run it as follows:
 ```
 $ cd rug/project/directory
 $ rug edit atomist-rugs:rug-editors:AddTypeScriptGenerator \
-    generator_name=MyNewGenerator \
+    generatorName=MyNewGenerator \
     description="This is my newest generator."
 ```
 
@@ -245,10 +245,10 @@ To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`archive_name` | Yes | | Name of the new Rug archive, typically the same as the repo name
-`group_id` | Yes | | Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo
+`archiveName` | Yes | | Name of the new Rug archive, typically the same as the repo name
+`groupId` | Yes | | Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.
-`generator_name` | Yes | | A valid Rug generator name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`generatorName` | Yes | | A valid Rug generator name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
 `description` | Yes | | A description of the generator being added
 
 #### Running
@@ -258,10 +258,10 @@ Run it as follows:
 ```
 $ cd project/directory
 $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToGenerator \
-    archive_name=my-new-archive \
-    group_id=my-rugs \
+    archiveName=my-new-archive \
+    groupId=my-rugs \
     version=2.71.828 \
-    generator_name=MyNewGenerator \
+    generatorName=MyNewGenerator \
     description="This is my newest generator."
 ```
 
@@ -295,8 +295,8 @@ To run this editor, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`archive_name` | Yes | | Name of the new Rug archive, typically the same as the repo name
-`group_id` | Yes | | Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo
+`archiveName` | Yes | | Name of the new Rug archive, typically the same as the repo name
+`groupId` | Yes | | Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo
 `version` | No | 0.1.0 | [Semantic version][semver] of the project.
 
 #### Running
@@ -306,8 +306,8 @@ Run it as follows:
 ```
 $ cd project/directory
 $ rug edit atomist-rugs:rug-editors:ConvertExistingProjectToRugArchive \
-    archive_name=my-new-archive \
-    group_id=my-rugs \
+    archiveName=my-new-archive \
+    groupId=my-rugs \
     version=2.71.828
 ```
 
@@ -329,8 +329,8 @@ To run this generator, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`project_name` | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
-`group_id` | Yes | |  Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo being created is used
+`projectName` | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
+`groupId` | Yes | |  Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo being created is used
 `description` | Yes | | A brief description of the project
 `version` | No | 0.1.0 | [Semantic version][semver] of the project
 
@@ -342,14 +342,14 @@ Run it as follows:
 $ cd parent/directory
 $ rug generate atomist-rugs:rug-editors:NewRugProject \
     ruggery \
-    group_id=persian-rugs \
+    groupId=persian-rugs \
     description="Rug archive to hold my Rugs" \
     version=0.1.0
 ```
 
-Note the first parameter, the `project_name`, is different in that you
+Note the first parameter, the `projectName`, is different in that you
 do not need to supply the name of the parameter, just the value.  This
-is because the `project_name` parameter is required for all
+is because the `projectName` parameter is required for all
 generators.  This will create a directory named `ruggery` and populate
 it with a working Rug archive project.  You can use the editors in
 this project to add Rugs to the generated project.
@@ -371,7 +371,7 @@ To run this generator, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`project_name` | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
+`projectName` | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
 
 #### Running
 
@@ -382,9 +382,9 @@ $ cd parent/directory
 $ rug generate atomist-rugs:rug-editors:NewStarterRugProject ruggery
 ```
 
-Note the `project_name` parameter is different in that you do not need
+Note the `projectName` parameter is different in that you do not need
 to supply the name of the parameter, just the value.  This is because
-the `project_name` parameter is required for all generators.  This
+the `projectName` parameter is required for all generators.  This
 will create a directory named `ruggery` and populate it with a working
 Rug archive project with a standard layout and TypeScript dependencies
 and a simple editor.  You can use the editors in this project to add

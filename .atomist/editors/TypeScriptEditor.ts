@@ -15,10 +15,10 @@ export class TypeScriptEditor implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    input_parameter: string;
+    inputParameter: string;
 
     edit(project: Project) {
-        project.addFile("hello.txt", "Hello, World!\n" + this.input_parameter + "\n");
+        project.addFile("hello.txt", "Hello, World!\n" + this.inputParameter + "\n");
     }
 }
 

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 -   Upgrade to rug 0.14.0
+-   Updated all tests to TypeScript
 
 ## [0.16.0] - 2017-03-15
 

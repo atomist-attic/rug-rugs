@@ -7,15 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.14.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.15.0...HEAD
+
+## [0.15.0] - 2017-03-13
+
+[0.15.0]: https://github.com/atomist-rugs/rug-editors/compare/0.14.0...0.15.0
+
+Look ma, no tests release
 
 ### Changed
 
 -   Export all Rug classes
+-   Use TypeScript naming conventions
+-   Update to rug 0.13.0, tests have not been migrated
 
 ### Added
 
 -   NewRugProject and NewStarterRugProject generators
+
+### Fixed
+
+-   Hid rug 0.12.0-style handler from TypeScript compiler.
 
 ## [0.14.0] - 2017-03-07
 
@@ -27,10 +39,8 @@ Less is more release
 
 -   Have editors that add TypeScript Rugs add the TypeScript support
     files if they are not present
-
 -   AddTypeScript and ConvertExistingProjectToGenerator no longer add
     the node_modules directory
-
 -   Generators no longer require the project_name parameter be
     declared so its was removed from the generator added by
     AddTypeScriptGenerator
@@ -70,26 +80,21 @@ Non-DSL release
 
 -   AddManifestYml editor moved from rug-archive and migrated to
     TypeScript
-
 -   Predicate-like TypeScript functions
 
 ### Changed
 
 -   All remaining Rugs are implemented in TypeScript
-
 -   Standardized naming of source Rugs
 
 ### Removed
 
 -   Editors that add DSL Rugs
-
 -   ConvertExistingProjectToRugArchiveWith* editors replaced with
     ConvertExistingProjectToRugArchive, you can add the editor or
     generator with another editor
-
 -   AddAtomistCopyrightToRug will be made more generic and moved to
     common-editors
-
 -   DSL predicates
 
 ## [0.10.0] - 2017-02-24
@@ -103,9 +108,7 @@ Non-DSL release
 ### Changed
 
 -   AddTypeScript now adds an appropriate .gitignore
-
 -   AddTypeScript is now in TypeScript
-
 -   TypeScript Rugs export constants rather than variables
 
 ## [0.9.0] - 2017-02-17
@@ -122,7 +125,6 @@ TypeScript is good
 
 -   AddTypeScriptEditor will no longer create a package.json, run
     AddTypeScript first
-
 -   AddTypeScriptEditor now takes a `description` parameter
 
 ## [0.8.0] - 2017-02-09
@@ -179,7 +181,6 @@ Lengthy release
 ### Changed
 
 -   Updated rug
-
 -   Increased maximum project name length to 100
 
 ## [0.3.0] - 2017-01-05

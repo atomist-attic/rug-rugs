@@ -341,7 +341,7 @@ Run it as follows:
 
 ```
 $ cd parent/directory
-$ rug generate atomist-rugs:rug-project:NewRugProject \
+$ rug generate atomist-rugs:rug-editors:NewRugProject \
     ruggery \
     group_id=persian-rugs \
     description="Rug archive to hold my Rugs" \
@@ -380,7 +380,7 @@ Run it as follows:
 
 ```
 $ cd parent/directory
-$ rug generate atomist-rugs:rug-project:NewStarterRugProject ruggery
+$ rug generate atomist-rugs:rug-editors:NewStarterRugProject ruggery
 ```
 
 Note the `project_name` parameter is different in that you do not need

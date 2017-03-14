@@ -19,6 +19,8 @@ import { Project } from '@atomist/rug/model/Project'
 import { Pattern } from '@atomist/rug/operations/RugOperation'
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 
+import { RugParameters } from './RugParameters'
+
 @Editor("ConvertExistingProjectToRugArchive", "convert existing project to a Rug archive")
 @Tags("rug", "atomist")
 export class ConvertExistingProjectToRugArchive implements EditProject {
@@ -31,17 +33,10 @@ export class ConvertExistingProjectToRugArchive implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    archive_name: string;
+    archiveName: string;
 
-    @Parameter({
-        displayName: "Rug Archive Group ID",
-        description: "Maven group identifier, often used to provide a namespace for your rugs, e.g., company-rugs, typically the GitHub owner",
-        pattern: Pattern.group_id,
-        validInput: "a valid Maven group ID, which starts with a letter, -, or _ and contains only alphanumeric, -, and _ characters and may having leading period separated identifiers starting with letters or underscores and containing only alphanumeric and _ characters",
-        minLength: 1,
-        maxLength: 100
-    })
-    group_id: string;
+    @Parameter(RugParameters.GroupId)
+    groupId: string;
 
     @Parameter({
         displayName: "Rug Archive Version",

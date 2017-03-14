@@ -22,6 +22,7 @@ import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
 import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
 
 import { IsRugArchive } from './RugEditorsPredicates'
+import { RugParameters } from './RugParameters';
 
 @Editor("AddManifestYml", "add Rug archive manifest")
 @Tags("rug", "atomist")
@@ -35,17 +36,10 @@ export class AddManifestYml implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    archive_name: string;
+    archiveName: string;
 
-    @Parameter({
-        displayName: "Rug Archive Group ID",
-        description: "Maven group identifier, often used to provide a namespace for your rugs, e.g., company-rugs, typically the GitHub owner",
-        pattern: Pattern.group_id,
-        validInput: "a valid Maven group ID, which starts with a letter, -, or _ and contains only alphanumeric, -, and _ characters and may having leading period separated identifiers starting with letters or underscores and containing only alphanumeric and _ characters",
-        minLength: 1,
-        maxLength: 100
-    })
-    group_id: string;
+    @Parameter(RugParameters.GroupId)
+    groupId: string;
 
     @Parameter({
         displayName: "Rug Archive Version",
@@ -70,8 +64,8 @@ export class AddManifestYml implements EditProject {
 
         let manifestPE = new PathExpression<Project, File>("/*[@name='.atomist']/*[@name='manifest.yml']");
         let manifest: File = eng.scalar(project, manifestPE);
-        manifest.regexpReplace("(?m)^group:.*", 'group: "' + this.group_id + '"');
-        manifest.regexpReplace("(?m)^artifact:.*", 'artifact: "' + this.archive_name + '"');
+        manifest.regexpReplace("(?m)^group:.*", 'group: "' + this.groupId + '"');
+        manifest.regexpReplace("(?m)^artifact:.*", 'artifact: "' + this.archiveName + '"');
         manifest.regexpReplace("(?m)^version:.*", 'version: "' + this.version + '"');
         manifest.regexpReplace("(?m)^dependencies:\s*\n(\s*-.*\n)*", "dependencies:\n");
         manifest.regexpReplace("(?m)^extensions:\s*\n(\s*-.*\n)*", "extensions:\n");

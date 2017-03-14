@@ -1,0 +1,10 @@
+scenario AddLocalEditor is added to your project by AddAddLocalEditor
+
+given
+  ArchiveRoot
+
+when
+  AddLocalEditor input_parameter="the input_parameter value"
+
+then
+  fileContains "hello.txt" "Hello, World!"

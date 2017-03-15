@@ -390,6 +390,7 @@ will create a directory named `ruggery` and populate it with a working
 Rug archive project with a standard layout and TypeScript dependencies
 and a simple editor.  You can use the editors in this project to add
 more Rugs to the generated project.
+
 ### AddLocalEditor
 
 make an editor for modifying the local project, initiating a rug archive if needed

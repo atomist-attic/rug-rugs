@@ -7,7 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.15.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.16.0...HEAD
+
+## [0.16.0] - 2017-03-15
+
+[0.16.0]: https://github.com/atomist-rugs/rug-editors/compare/0.15.0...0.16.0
+
+Beware the ides of March release
+
+### Added
+
+-   AddLocalEditor editor
+
+### Removed
+
+-   AddTypeScriptExecutor editor
 
 ## [0.15.0] - 2017-03-13
 

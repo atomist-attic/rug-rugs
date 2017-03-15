@@ -11,6 +11,41 @@ project, and editors to add Rugs to Rug projects.  Most meta.
 
 ## Rugs
 
+### AddLocalEditor
+
+The AddLocalEditor editor adds an editor for modifying the local
+project, initiating a Rug archive if needed.
+
+#### Prerequisites
+
+A source code project.
+
+#### Parameters
+
+This Rug takes following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`editorName` | Yes | | Name of the editor to add, it should start with a capital letter and contain only alphanumeric characters
+`description` | No | "an editor for modifying this project" | A short description of what the editor will do
+
+#### Running
+
+Run this Rug as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist-rugs:rug-editors:AddLocalEditor \
+    editorName=MyLocalEditor \
+    description='does something useful'
+```
+
+This will add a Rug editor as `.atomist/editors/MyLocalEditor.ts`.  If
+the project is currently set up for Atomist, it will also create the
+`.atomist` directory with appropriate initial contents like the
+`manifest.yml` and `package.json` files and the Rug TypeScript typings
+in the `node_modules` directory.
+
 ### AddManifestYml
 
 The AddManifestYml editor adds the Rug archive `manifest.yml` file to
@@ -390,34 +425,6 @@ will create a directory named `ruggery` and populate it with a working
 Rug archive project with a standard layout and TypeScript dependencies
 and a simple editor.  You can use the editors in this project to add
 more Rugs to the generated project.
-
-### AddLocalEditor
-
-make an editor for modifying the local project, initiating a rug archive if needed
-
-#### Prerequisites
-
-Put your editor prerequisites here.
-
-#### Parameters
-
-This Rug takes following parameters.
-
-Name | Required | Default | Description
------|----------|---------|------------
-`input_parameter` | Yes | | Example input parameter
-
-#### Running
-
-Run this Rug as follows:
-
-```
-$ cd project/directory
-$ rug edit atomist-rugs:rug-editors:AddLocalEditor \
-    input_parameter='some value'
-```
-
-Explain what your editor does here.
 
 ## Support
 

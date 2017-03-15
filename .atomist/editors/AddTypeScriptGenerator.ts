@@ -62,8 +62,8 @@ export class AddTypeScriptGenerator implements EditProject {
         let generatorPath = srcGeneratorPath.replace("TypeScriptGenerator", this.generator_name);
         let testPath = srcTestPath.replace("TypeScriptGenerator", this.generator_name);
 
-        project.copyEditorBackingFileOrFail(srcGeneratorPath, generatorPath);
-        project.copyEditorBackingFileOrFail(srcTestPath, testPath);
+        project.copyEditorBackingFileOrFailToDestination(srcGeneratorPath, generatorPath);
+        project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
 
         let lcFirstGeneratorName = this.generator_name[0].toLowerCase() + this.generator_name.slice(1);
 

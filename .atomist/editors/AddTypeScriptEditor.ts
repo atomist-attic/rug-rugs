@@ -57,8 +57,8 @@ export class AddTypeScriptEditor implements EditProject {
         const defaultEditorPath = ".atomist/editors/" + defaultEditorName + ".ts";
         const defaultTestPath = ".atomist/tests/" + defaultEditorName + ".rt";
 
-        project.copyEditorBackingFileOrFail(defaultEditorPath, editorPath);
-        project.copyEditorBackingFileOrFail(defaultTestPath, testPath);
+        project.copyEditorBackingFileOrFailToDestination(defaultEditorPath, editorPath);
+        project.copyEditorBackingFileOrFailToDestination(defaultTestPath, testPath);
 
         const eng: PathExpressionEngine = project.context().pathExpressionEngine();
 

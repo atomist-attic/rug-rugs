@@ -69,7 +69,7 @@ export class AddTypeScriptHandler implements EditProject {
         let defaultHandlerName = "TypeScriptHandler";
         let defaultHandlerPath = ".atomist/handlers/" + defaultHandlerName + ".ts_";
         let defaultPathExpression = "/Tag()";
-        project.copyEditorBackingFileOrFail(defaultHandlerPath, handlerPath);
+        project.copyEditorBackingFileOrFailToDestination(defaultHandlerPath, handlerPath);
 
         let eng: PathExpressionEngine = project.context().pathExpressionEngine();
 

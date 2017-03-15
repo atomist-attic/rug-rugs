@@ -391,6 +391,34 @@ Rug archive project with a standard layout and TypeScript dependencies
 and a simple editor.  You can use the editors in this project to add
 more Rugs to the generated project.
 
+### AddLocalEditor
+
+make an editor for modifying the local project, initiating a rug archive if needed
+
+#### Prerequisites
+
+Put your editor prerequisites here.
+
+#### Parameters
+
+This Rug takes following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`input_parameter` | Yes | | Example input parameter
+
+#### Running
+
+Run this Rug as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist-rugs:rug-editors:AddLocalEditor \
+    input_parameter='some value'
+```
+
+Explain what your editor does here.
+
 ## Support
 
 General support questions should be discussed in the `#support`

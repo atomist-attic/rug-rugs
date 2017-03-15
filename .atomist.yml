@@ -230,3 +230,19 @@ editor:
     - "editor_name": "HavePathExpressionEngine"
     - "description": "get access to a path expression engine in a Rug editor"
 
+---
+kind: "operation"
+client: "rug-cli 0.25.0"
+editor:
+  name: "AddTypeScriptEditor"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.16.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors"
+    branch: "master"
+    sha: "2f43ffb"
+  parameters:
+    - "editor_name": "AddLocalEditor"
+    - "description": "make an editor for modifying the local project, initiating a rug archive if needed"
+

@@ -59,7 +59,7 @@ export function readMeInstructions(
     prerequisites?: string,
     parameters?: string[]
 ): string {
-    let instructions: string = "### " + name + "\n\n";
+    let instructions: string = "\n### " + name + "\n\n";
     instructions += description + "\n\n";
     if (prerequisites != null && prerequisites != "") {
         instructions += "#### Prerequisites\n\n" + prerequisites + "\n\n";

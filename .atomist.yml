@@ -246,3 +246,29 @@ editor:
     - "editor_name": "AddLocalEditor"
     - "description": "make an editor for modifying the local project, initiating a rug archive if needed"
 
+---
+kind: "operation"
+client: "rug-cli 0.25.0"
+editor:
+  name: "TestsToTypeScript"
+  group: "atomist-rugs"
+  artifact: "rug-upgrade"
+  version: "0.3.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-upgrade.git"
+    branch: "master"
+    sha: "8b4f0e5*"
+
+---
+kind: "operation"
+client: "rug-cli 0.25.0"
+editor:
+  name: "TestsToTypeScript"
+  group: "atomist-rugs"
+  artifact: "rug-upgrade"
+  version: "0.4.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-upgrade.git"
+    branch: "master"
+    sha: "9800ee6*"
+

@@ -45,7 +45,7 @@ export function addInstructionsToReadMe(project: Project, instructions: string):
  * @param name           Name of the Rug.
  * @param description    Text description to introduction the function of the Rug.
  * @param example        Verbatim block showing how to invoke Rug using the CLI.
- * @param example_text   Text to follow example explaining what it does.
+ * @param exampleText   Text to follow example explaining what it does.
  * @param prerequisites  Text explaining prerequisites for running the Rug, if any.
  * @param parameters     Array of parameter table row text.
  *
@@ -55,7 +55,7 @@ export function readMeInstructions(
     name: string,
     description: string,
     example: string,
-    example_text: string,
+    exampleText: string,
     prerequisites?: string,
     parameters?: string[]
 ): string {
@@ -74,7 +74,7 @@ export function readMeInstructions(
         instructions += "#### Parameters\n\n This Rug has no parameters.\n\n"
     }
     instructions += "#### Running\n\nRun this Rug as follows:\n\n```\n"
-        + example + "\n```\n\n" + example_text + "\n";
+        + example + "\n```\n\n" + exampleText + "\n";
 
     return instructions.replace(/\$/g, "\\$");
 }

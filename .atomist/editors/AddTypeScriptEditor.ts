@@ -17,14 +17,13 @@
 import { EditProject } from '@atomist/rug/operations/ProjectEditor';
 import { Project } from '@atomist/rug/model/Project';
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
-import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression';
 import { File } from '@atomist/rug/model/File';
 
 import { IsRugArchive, IsSetUpForTypeScript } from './RugEditorsPredicates';
 import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
 import { RugParameters } from './RugParameters';
 
-@Editor("AddTypeScriptEditor", "add TypeScript Rug editor to project")
+@Editor("AddTypeScriptEditor", "add TypeScript Rug editor to Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptEditor implements EditProject {
 
@@ -51,42 +50,45 @@ export class AddTypeScriptEditor implements EditProject {
 
         project.editWith("AddTypeScript", {});
 
-        const editorPath = ".atomist/editors/" + this.editorName + ".ts";
-        const testPath = ".atomist/tests/" + this.editorName + ".rt";
-        const defaultEditorName = "TypeScriptEditor";
-        const defaultEditorPath = ".atomist/editors/" + defaultEditorName + ".ts";
-        const defaultTestPath = ".atomist/tests/" + defaultEditorName + ".rt";
+        const srcEditorName = "TypeScriptEditor";
+        const srcEditorPath = `.atomist/editors/${srcEditorName}.ts`;
+        const srcTestPath = `.atomist/tests/project/${srcEditorName}Test.ts`;
+        const srcFeaturePath = `.atomist/tests/project/${srcEditorName}Test.feature`;
+        const editorPath = srcEditorPath.replace(srcEditorName, this.editorName);
+        const testPath = srcTestPath.replace(srcEditorName, this.editorName);
+        const featurePath = srcFeaturePath.replace(srcEditorName, this.editorName);
 
-        project.copyEditorBackingFileOrFailToDestination(defaultEditorPath, editorPath);
-        project.copyEditorBackingFileOrFailToDestination(defaultTestPath, testPath);
+        project.copyEditorBackingFileOrFailToDestination(srcEditorPath, editorPath);
+        project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
+        project.copyEditorBackingFileOrFailToDestination(srcFeaturePath, featurePath);
 
-        const eng: PathExpressionEngine = project.context().pathExpressionEngine();
+        const srcDescription = "sample TypeScript editor used by AddTypeScriptEditor";
+        const srcEditorConstName = "typeScriptEditor";
+        const editorConstName = this.editorName.charAt(0).toLowerCase() + this.editorName.slice(1);
 
-        const editorPE = "/*[@name='.atomist']/editors/*[@name='" + this.editorName + ".ts']";
-        eng.with<File>(project, editorPE, e => {
-            e.replace("sample TypeScript editor used by AddTypeScriptEditor", this.description);
-            e.replace(defaultEditorName, this.editorName);
-            const defaultEditorConstName = "typeScriptEditor";
-            const editorConstName = this.editorName.charAt(0).toLowerCase() + this.editorName.slice(1);
-            e.replace(defaultEditorConstName, editorConstName);
-        });
+        let editorFile: File = project.findFile(editorPath);
+        editorFile.replace(srcDescription, this.description);
+        editorFile.replace(srcEditorName, this.editorName);
+        editorFile.replace(srcEditorConstName, editorConstName);
 
-        const testPE = "/*[@name='.atomist']/tests/*[@name='" + this.editorName + ".rt']";
-        eng.with<File>(project, testPE, t => {
-            t.replace(defaultEditorName, this.editorName);
-        });
+        let testFile: File = project.findFile(testPath);
+        testFile.replace(srcEditorName, this.editorName);
+
+        let featureFile: File = project.findFile(featurePath);
+        featureFile.replace(srcDescription, this.description);
+        featureFile.replace(srcEditorName, this.editorName);
 
         const example = `\$ cd project/directory
 \$ rug edit atomist-rugs:rug-editors:${this.editorName} \\\\
-    input_parameter='some value'`;
-        const example_text = "Explain what your editor does here.";
+    inputParameter='some value'`;
+        const exampleText = "Explain what your editor does here.";
         const prerequisites = "Put your editor prerequisites here.";
-        let parameters: string[] = ["`input_parameter` | Yes | | Example input parameter"];
+        let parameters: string[] = ["`inputParameter` | Yes | | Example input parameter"];
         const instructions = readMeInstructions(
             this.editorName,
             this.description,
             example,
-            example_text,
+            exampleText,
             prerequisites,
             parameters
         );

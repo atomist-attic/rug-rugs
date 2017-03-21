@@ -33,12 +33,12 @@ export class HavePathExpressionEngine implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    rug_name: string;
+    rugName: string;
 
     edit(project: Project) {
         let eng: PathExpressionEngine = project.context().pathExpressionEngine();
 
-        eng.with<File>(project, `/*[@name=".atomist"]/editors/*[@name='${this.rug_name}.ts']`, rug => {
+        eng.with<File>(project, `/*[@name=".atomist"]/editors/*[@name='${this.rugName}.ts']`, rug => {
             console.log(`Found file ${rug.path()}`)
             if (!rug.contains("project.context().pathExpressionEngine()")) {
                 // microgrammars would look better. Need rug 0.13

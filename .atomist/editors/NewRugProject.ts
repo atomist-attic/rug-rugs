@@ -69,8 +69,8 @@ export class NewRugProject implements PopulateProject {
         cleanReadMe(project, this.description, this.owner);
 
         let params = {
-            archive_name: project.name(),
-            group_id: this.owner,
+            archiveName: project.name(),
+            groupId: this.owner,
             version: this.version
         }
         project.editWith("AddManifestYml", params);

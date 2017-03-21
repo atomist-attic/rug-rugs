@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.16.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.17.0...HEAD
+
+## [0.17.0] - 2017-03-21
+
+[0.17.0]: https://github.com/atomist-rugs/rug-editors/compare/0.16.0...0.17.0
+
+Spring has sprung release
 
 ### Changed
 
--   Upgrade to rug 0.14.0
+-   Upgrade to rug 0.16.0
 -   Updated all tests to TypeScript
 
 ## [0.16.0] - 2017-03-15

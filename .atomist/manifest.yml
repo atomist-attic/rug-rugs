@@ -4,3 +4,10 @@ version: "0.18.0"
 requires: "[0.16.0,1.0.0)"
 dependencies:
 extensions:
+
+title: Rug Editors
+author: ddgenome
+summary: Create and modify Rugs
+description: >
+  These generators and editors initialize Rug archives,
+  add Rugs to existing Rug archives, and modify Rugs.

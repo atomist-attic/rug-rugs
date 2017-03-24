@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.17.0...HEAD
 
+### Changed
+
+- Delete CODE_OF_CONDUCT.md after calling `NewStarterRugProject` generator
+
 ## [0.17.0] - 2017-03-21
 
 [0.17.0]: https://github.com/atomist-rugs/rug-editors/compare/0.16.0...0.17.0

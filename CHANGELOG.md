@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.17.0...HEAD
 
+### Changed
+
+-   Moved generators to `.atomist/generators` directory
+
 ## [0.17.0] - 2017-03-21
 
 [0.17.0]: https://github.com/atomist-rugs/rug-editors/compare/0.16.0...0.17.0

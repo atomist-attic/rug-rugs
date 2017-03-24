@@ -317,7 +317,9 @@ This will add the file `.atomist/manifest.yml` to the project.
 
 The NewRugProject generator creates a new empty Rug archive project.
 The generated project will have a `.atomist` directory and an
-appropriate `.atomist/manifest.yml` file, but no Rugs.
+appropriate `.atomist/manifest.yml` file, but no Rugs.  If you want a
+simple way to create a more complete Rug project with a sample editor
+and tests, see [NewStarterRugProject](#newstarterrugproject).
 
 #### Prerequisites
 
@@ -329,7 +331,7 @@ To run this generator, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`projectName` | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
+Project Name | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
 `groupId` | Yes | |  Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo being created is used
 `description` | Yes | | A brief description of the project
 `version` | No | 0.1.0 | [Semantic version][semver] of the project
@@ -371,7 +373,7 @@ To run this generator, you must supply the following parameters.
 
 Name | Required | Default | Description
 -----|----------|---------|------------
-`projectName` | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
+Project Name | Yes | |  A valid GitHub repository name, which contains alphanumeric, `_`, and `-` characters
 
 #### Running
 
@@ -382,13 +384,14 @@ $ cd parent/directory
 $ rug generate atomist-rugs:rug-editors:NewStarterRugProject ruggery
 ```
 
-Note the `projectName` parameter is different in that you do not need
+Note the project name parameter is different in that you do not need
 to supply the name of the parameter, just the value.  This is because
-the `projectName` parameter is required for all generators.  This
-will create a directory named `ruggery` and populate it with a working
-Rug archive project with a standard layout and TypeScript dependencies
-and a simple editor.  You can use the editors in this project to add
-more Rugs to the generated project.
+the project name parameter is required for all generators.  This will
+create a directory named `ruggery` and populate it with a working Rug
+archive project with a standard layout and TypeScript dependencies and
+a simple editor.  It will also contain supporting files, e.g., a
+license and code of conduct.  You can use the editors in this project
+to add more Rugs to the generated project.
 
 ## Support
 

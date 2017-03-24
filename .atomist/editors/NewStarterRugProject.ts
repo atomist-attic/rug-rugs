@@ -31,6 +31,10 @@ export class NewStarterRugProject implements PopulateProject {
         const description: string = "Atomist Rug archive project.";
         const owner: string = "atomist-rugs";
 
+        let toRemove: string[] = [
+            "CODE_OF_CONDUCT.md"
+        ];
+        removeUnnecessaryFiles(project, toRemove);
         cleanReadMe(project, description, owner);
         cleanChangeLog(project, owner);
 

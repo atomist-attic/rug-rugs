@@ -7,11 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.17.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.18.0...HEAD
+
+## [0.18.0] - 2017-03-21
+
+[0.18.0]: https://github.com/atomist-rugs/rug-editors/compare/0.17.0...0.18.0
+
+Stratford-upon-Avon release
 
 ### Changed
 
 -   Moved generators to `.atomist/generators` directory
+-   The sample TypeScriptEditor and TypeScriptGenerator are now
+    excluded from search results
 
 ## [0.17.0] - 2017-03-21
 

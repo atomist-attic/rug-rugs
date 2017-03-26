@@ -4,3 +4,8 @@ version: "0.18.0"
 requires: "[0.17.3,1.0.0)"
 dependencies:
 extensions:
+excludes:
+  editors:
+    - TypeScriptEditor
+  generators:
+    - TypeScriptGenerator

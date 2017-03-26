@@ -50,7 +50,7 @@ export class AddTypeScriptGenerator implements EditProject {
         project.editWith("AddTypeScript", {});
 
         const srcGeneratorName = "TypeScriptGenerator";
-        const srcGeneratorPath = `.atomist/editors/${srcGeneratorName}.ts`;
+        const srcGeneratorPath = `.atomist/generators/${srcGeneratorName}.ts`;
         const srcTestPath = ".atomist/tests/project/TypeScriptGeneratorTest.ts";
         const srcFeaturePath = ".atomist/tests/project/TypeScriptGeneratorTest.feature";
         const generatorPath = srcGeneratorPath.replace(srcGeneratorName, this.generatorName);

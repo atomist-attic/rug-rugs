@@ -26,42 +26,42 @@ When("AddTypeScriptGenerator generatorName is MyNewGenerator, description is Des
 
 Then("fileExists atomist editors MyNewGenerator ts for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return p.fileExists(".atomist/editors/MyNewGenerator.ts");
+    return p.fileExists(".atomist/generators/MyNewGenerator.ts");
 });
 
 Then("fileContains atomist editors MyNewGenerator ts Generator MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return p.fileContains(".atomist/editors/MyNewGenerator.ts", '@Generator("MyNewGenerator"');
+    return p.fileContains(".atomist/generators/MyNewGenerator.ts", '@Generator("MyNewGenerator"');
 });
 
 Then("fileContains atomist editors MyNewGenerator ts description for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
     let description = "Description of MyNewGenerator";
-    return p.fileContains(".atomist/editors/MyNewGenerator.ts", '"' + description + '"');
+    return p.fileContains(".atomist/generators/MyNewGenerator.ts", '"' + description + '"');
 });
 
 Then("fileContains atomist editors MyNewGenerator ts class MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return p.fileContains(".atomist/editors/MyNewGenerator.ts", "class MyNewGenerator");
+    return p.fileContains(".atomist/generators/MyNewGenerator.ts", "class MyNewGenerator");
 });
 
 Then("fileContains atomist editors MyNewGenerator ts new MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return p.fileContains(".atomist/editors/MyNewGenerator.ts", "new MyNewGenerator()");
+    return p.fileContains(".atomist/generators/MyNewGenerator.ts", "new MyNewGenerator()");
 });
 
 Then("not result fileContains atomist editors MyNewGenerator ts TypeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return !p.fileContains(".atomist/editors/MyNewGenerator.ts", "TypeScriptGenerator");
+    return !p.fileContains(".atomist/generators/MyNewGenerator.ts", "TypeScriptGenerator");
 });
 
 Then("not result fileContains atomist editors MyNewGenerator ts sample TypeScript generator used by for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return !p.fileContains(".atomist/editors/MyNewGenerator.ts", "sample TypeScript generator used by");
+    return !p.fileContains(".atomist/generators/MyNewGenerator.ts", "sample TypeScript generator used by");
 });
 
 Then("not result fileContains atomist editors MyNewGenerator ts typeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return !p.fileContains(".atomist/editors/MyNewGenerator.ts", "typeScriptGenerator");
+    return !p.fileContains(".atomist/generators/MyNewGenerator.ts", "typeScriptGenerator");
 });
 
 Then("fileExists atomist tests project MyNewGeneratorTest ts for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
@@ -135,42 +135,42 @@ When("AddTypeScriptGenerator generatorName is MyNewGenerator, description is Des
 
 Then("fileExists atomist editors MyNewGenerator ts for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return p.fileExists(".atomist/editors/MyNewGenerator.ts");
+    return p.fileExists(".atomist/generators/MyNewGenerator.ts");
 });
 
 Then("fileContains atomist editors MyNewGenerator ts Generator MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return p.fileContains(".atomist/editors/MyNewGenerator.ts", '@Generator("MyNewGenerator"');
+    return p.fileContains(".atomist/generators/MyNewGenerator.ts", '@Generator("MyNewGenerator"');
 });
 
 Then("fileContains atomist editors MyNewGenerator ts description for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
     let description = "Description of MyNewGenerator";
-    return p.fileContains(".atomist/editors/MyNewGenerator.ts", '"' + description + '"');
+    return p.fileContains(".atomist/generators/MyNewGenerator.ts", '"' + description + '"');
 });
 
 Then("fileContains atomist editors MyNewGenerator ts class MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return p.fileContains(".atomist/editors/MyNewGenerator.ts", "class MyNewGenerator");
+    return p.fileContains(".atomist/generators/MyNewGenerator.ts", "class MyNewGenerator");
 });
 
 Then("fileContains atomist editors MyNewGenerator ts new MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return p.fileContains(".atomist/editors/MyNewGenerator.ts", "new MyNewGenerator()");
+    return p.fileContains(".atomist/generators/MyNewGenerator.ts", "new MyNewGenerator()");
 });
 
 Then("not result fileContains atomist editors MyNewGenerator ts TypeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return !p.fileContains(".atomist/editors/MyNewGenerator.ts", "TypeScriptGenerator");
+    return !p.fileContains(".atomist/generators/MyNewGenerator.ts", "TypeScriptGenerator");
 });
 
 Then("not result fileContains atomist editors MyNewGenerator ts sample TypeScript generator used by for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return !p.fileContains(".atomist/editors/MyNewGenerator.ts", "sample TypeScript generator used by");
+    return !p.fileContains(".atomist/generators/MyNewGenerator.ts", "sample TypeScript generator used by");
 });
 
 Then("not result fileContains atomist editors MyNewGenerator ts typeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return !p.fileContains(".atomist/editors/MyNewGenerator.ts", "typeScriptGenerator");
+    return !p.fileContains(".atomist/generators/MyNewGenerator.ts", "typeScriptGenerator");
 });
 
 Then("fileExists atomist tests project MyNewGeneratorTest ts for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
@@ -221,7 +221,7 @@ When("AddTypeScriptGenerator generatorName is MyNewGenerator, description is Des
 
 Then("fileExists atomist editors MyNewGenerator ts for AddTypeScriptGenerator should add package json if not preset", (p, world) => {
 
-    return p.fileExists(".atomist/editors/MyNewGenerator.ts");
+    return p.fileExists(".atomist/generators/MyNewGenerator.ts");
 });
 
 Then("fileExists atomist package json for AddTypeScriptGenerator should add package json if not preset", (p, world) => {

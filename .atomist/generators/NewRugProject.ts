@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator'
-import { Project } from '@atomist/rug/model/Project'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators'
-import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
-import { File } from '@atomist/rug/model/File'
+import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator';
+import { Project } from '@atomist/rug/model/Project';
+import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression';
+import { File } from '@atomist/rug/model/File';
 
-import { removeUnnecessaryFiles, cleanReadMe } from './RugGeneratorFunctions'
+import { removeUnnecessaryFiles, cleanReadMe } from './RugGeneratorFunctions';
 
-@Generator("NewRugProject", "Generate new Rug archive project")
+@Generator("NewRugProject", "creates a new Rug archive project")
 @Tags("rug", "atomist")
 export class NewRugProject implements PopulateProject {
 
@@ -72,7 +72,7 @@ export class NewRugProject implements PopulateProject {
             archiveName: project.name(),
             groupId: this.owner,
             version: this.version
-        }
+        };
         project.editWith("AddManifestYml", params);
     }
 }

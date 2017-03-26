@@ -1,6 +1,3 @@
-import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
-
 /*
  * Copyright © 2017 Atomist, Inc.
  *
@@ -16,20 +13,28 @@ import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/proje
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Given("a file named .atomist/manifest.yml for AddTypeScriptHandler should add a new blank handler using default tree expression to Rug project", p => { p.addFile(".atomist/manifest.yml", `group: test-rugs
+
+import { Project } from "@atomist/rug/model/Project";
+import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+
+Given("a file named .atomist/manifest.yml for AddTypeScriptHandler should add a new blank handler using default tree expression to Rug project", p => {
+    p.addFile(".atomist/manifest.yml", `group: test-rugs
 artifact: test-manifest
 version: "0.1.0"
 requires: "[0.12.0,1.0.0)"
 dependencies:
 extensions:
-`) });
+`)
+});
 
-Given("a file named .atomist/package.json for AddTypeScriptHandler should add a new blank handler using default tree expression to Rug project", p => { p.addFile(".atomist/package.json", `{
+Given("a file named .atomist/package.json for AddTypeScriptHandler should add a new blank handler using default tree expression to Rug project", p => {
+    p.addFile(".atomist/package.json", `{
   "dependencies": {
     "@atomist/rug": "0.12.0"
   }
 }
-`) });
+`)
+});
 
 When("AddTypeScriptHandler for AddTypeScriptHandler should add a new blank handler using default tree expression to Rug project", (p, world) => {
     let psworld = world as ProjectScenarioWorld;
@@ -54,20 +59,24 @@ Then("fileContains atomist handlers MyNewHandler ts Tag for AddTypeScriptHandler
     return p.fileContains(".atomist/handlers/MyNewHandler.ts", "/Tag()");
 });
 
-Given("a file named .atomist/manifest.yml for AddTypeScriptHandler should add a new blank handler to an existing Rug project", p => { p.addFile(".atomist/manifest.yml", `group: test-rugs
+Given("a file named .atomist/manifest.yml for AddTypeScriptHandler should add a new blank handler to an existing Rug project", p => {
+    p.addFile(".atomist/manifest.yml", `group: test-rugs
 artifact: test-manifest
 version: "0.1.0"
 requires: "[0.12.0,1.0.0)"
 dependencies:
 extensions:
-`) });
+`)
+});
 
-Given("a file named .atomist/package.json for AddTypeScriptHandler should add a new blank handler to an existing Rug project", p => { p.addFile(".atomist/package.json", `{
+Given("a file named .atomist/package.json for AddTypeScriptHandler should add a new blank handler to an existing Rug project", p => {
+    p.addFile(".atomist/package.json", `{
   "dependencies": {
     "@atomist/rug": "0.12.0"
   }
 }
-`) });
+`)
+});
 
 When("AddTypeScriptHandler for AddTypeScriptHandler should add a new blank handler to an existing Rug project", (p, world) => {
     let psworld = world as ProjectScenarioWorld;
@@ -111,4 +120,3 @@ When("AddTypeScriptHandler for AddTypeScriptHandler should fail if not a Rug pro
     let description = "This executor rocks";
     psworld.editWith(editor, { handlerName: "MyNewExecutor", projectName: "MyProject", description: "This executor rocks" });
 });
-

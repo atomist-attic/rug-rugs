@@ -12,4 +12,3 @@ Then("fileContains hello txt Hello Worldnot for TypeScriptEditor is added to you
 
     return p.fileContains("hello.txt", "Hello, World!");
 });
-

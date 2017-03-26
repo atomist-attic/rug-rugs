@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Project'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
-import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
-import { File } from '@atomist/rug/model/File'
+import { EditProject } from '@atomist/rug/operations/ProjectEditor';
+import { Project } from '@atomist/rug/model/Project';
+import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression';
+import { File } from '@atomist/rug/model/File';
 
-import { IsRugArchive } from './RugEditorsPredicates'
+import { IsRugArchive } from './RugEditorsPredicates';
 
-@Editor("AddTypeScriptHandler", "add TypeScript Rug handler to project")
+@Editor("AddTypeScriptHandler", "adds a TypeScript Rug handler to a Rug archive project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptHandler implements EditProject {
 
@@ -79,4 +79,4 @@ export class AddTypeScriptHandler implements EditProject {
     }
 }
 
-export const addTypeScriptHandler = new AddTypeScriptHandler()
+export const addTypeScriptHandler = new AddTypeScriptHandler();

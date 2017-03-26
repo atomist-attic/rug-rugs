@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Project'
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
-import { File } from '@atomist/rug/model/File'
+import { EditProject } from '@atomist/rug/operations/ProjectEditor';
+import { Project } from '@atomist/rug/model/Project';
+import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { File } from '@atomist/rug/model/File';
 
 import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
 import { IsRugArchive } from './RugEditorsPredicates';
 import { RugParameters } from './RugParameters';
 
-@Editor("AddTypeScriptGenerator", "add a TypeScript generator to a Rug project")
+@Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptGenerator implements EditProject {
 
@@ -39,7 +39,7 @@ export class AddTypeScriptGenerator implements EditProject {
         displayName: "Generator Description",
         description: "description of generator to add to Rug archive project"
     })
-    description: string
+    description: string;
 
     edit(project: Project) {
         if (!IsRugArchive(project)) {
@@ -51,7 +51,7 @@ export class AddTypeScriptGenerator implements EditProject {
 
         const srcGeneratorName = "TypeScriptGenerator";
         const srcGeneratorPath = `.atomist/generators/${srcGeneratorName}.ts`;
-        const srcTestPath = ".atomist/tests/project/TypeScriptGeneratorTest.ts";
+        const srcTestPath = ".atomist/tests/project/TypeScriptGeneratorSteps.ts";
         const srcFeaturePath = ".atomist/tests/project/TypeScriptGeneratorTest.feature";
         const generatorPath = srcGeneratorPath.replace(srcGeneratorName, this.generatorName);
         const testPath = srcTestPath.replace(srcGeneratorName, this.generatorName);
@@ -95,4 +95,4 @@ export class AddTypeScriptGenerator implements EditProject {
     }
 }
 
-export const addTypeScriptGenerator = new AddTypeScriptGenerator()
+export const addTypeScriptGenerator = new AddTypeScriptGenerator();

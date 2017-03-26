@@ -186,9 +186,9 @@ Then("fileExists atomist tests project MyFirstEditorTest feature for NewStarterR
 });
 
 Then("fileExists atomist tests project MyFirstEditorTest ts for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileExists(".atomist/tests/project/MyFirstEditorTest.ts");
+    return p.fileExists(".atomist/tests/project/MyFirstEditorSteps.ts");
 });
 
 Then("fileContains atomist tests project MyFirstEditorTest ts MyFirstEditor for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains(".atomist/tests/project/MyFirstEditorTest.ts", "MyFirstEditor");
+    return p.fileContains(".atomist/tests/project/MyFirstEditorSteps.ts", "MyFirstEditor");
 });

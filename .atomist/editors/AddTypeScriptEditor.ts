@@ -23,7 +23,7 @@ import { IsRugArchive, IsSetUpForTypeScript } from './RugEditorsPredicates';
 import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
 import { RugParameters } from './RugParameters';
 
-@Editor("AddTypeScriptEditor", "add TypeScript Rug editor to Rug project")
+@Editor("AddTypeScriptEditor", "adds a TypeScript Rug editor to a Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptEditor implements EditProject {
 
@@ -52,7 +52,7 @@ export class AddTypeScriptEditor implements EditProject {
 
         const srcEditorName = "TypeScriptEditor";
         const srcEditorPath = `.atomist/editors/${srcEditorName}.ts`;
-        const srcTestPath = `.atomist/tests/project/${srcEditorName}Test.ts`;
+        const srcTestPath = `.atomist/tests/project/${srcEditorName}Steps.ts`;
         const srcFeaturePath = `.atomist/tests/project/${srcEditorName}Test.feature`;
         const editorPath = srcEditorPath.replace(srcEditorName, this.editorName);
         const testPath = srcTestPath.replace(srcEditorName, this.editorName);
@@ -96,4 +96,4 @@ export class AddTypeScriptEditor implements EditProject {
     }
 }
 
-export const addTypeScriptEditor = new AddTypeScriptEditor()
+export const addTypeScriptEditor = new AddTypeScriptEditor();

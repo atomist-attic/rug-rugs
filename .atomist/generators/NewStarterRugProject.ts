@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator'
-import { Project } from '@atomist/rug/model/Project'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators'
+import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator';
+import { Project } from '@atomist/rug/model/Project';
+import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators';
 
-import { removeUnnecessaryFiles, cleanReadMe, cleanChangeLog } from './RugGeneratorFunctions'
+import { removeUnnecessaryFiles, cleanReadMe, cleanChangeLog } from './RugGeneratorFunctions';
 
-@Generator("NewStarterRugProject", "create new Rug archive project using standard setup and sensible defaults")
+@Generator("NewStarterRugProject", "creates a new Rug archive project using standard setup and sensible defaults")
 @Tags("atomist", "rug", "starter")
 export class NewStarterRugProject implements PopulateProject {
 
@@ -39,14 +39,14 @@ export class NewStarterRugProject implements PopulateProject {
             archiveName: project.name(),
             groupId: owner,
             version: version
-        }
+        };
         project.editWith("AddManifestYml", manifestParams);
         project.editWith("AddTypeScript", {});
         project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
         const editorParams = {
             editorName: "MyFirstEditor",
             description: "A sample Rug TypeScript editor to start playing with."
-        }
+        };
         project.editWith("AddTypeScriptEditor", editorParams);
     }
 }

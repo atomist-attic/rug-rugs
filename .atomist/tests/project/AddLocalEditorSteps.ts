@@ -17,7 +17,7 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
 
-import { addLocalEditor } from "../../editors/AddLocalEditor"
+import { addLocalEditor } from "../../editors/AddLocalEditor";
 
 let testEditorName = "TestEditorName";
 let testEditorDescription = "this is just a test";
@@ -82,7 +82,7 @@ Then("the new editor feature file should exist", p => {
 });
 
 Then("the new editor test file should exist", p => {
-    return p.fileExists(`.atomist/tests/project/${testEditorName}Test.ts`);
+    return p.fileExists(`.atomist/tests/project/${testEditorName}Steps.ts`);
 });
 
 Then("the Atomist directory should exist", p => {

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Project'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Editor, Tags } from '@atomist/rug/operations/Decorators'
+import { EditProject } from '@atomist/rug/operations/ProjectEditor';
+import { Project } from '@atomist/rug/model/Project';
+import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Editor, Tags } from '@atomist/rug/operations/Decorators';
 
 import { IsRugArchive, IsSetUpForTypeScript } from './RugEditorsPredicates';
 
@@ -42,4 +42,4 @@ export class AddTypeScript implements EditProject {
     }
 }
 
-export const addTypeScript = new AddTypeScript()
+export const addTypeScript = new AddTypeScript();

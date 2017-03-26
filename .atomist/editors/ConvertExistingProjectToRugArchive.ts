@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Project'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
+import { EditProject } from '@atomist/rug/operations/ProjectEditor';
+import { Project } from '@atomist/rug/model/Project';
+import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
 
-import { RugParameters } from './RugParameters'
+import { RugParameters } from './RugParameters';
 
-@Editor("ConvertExistingProjectToRugArchive", "convert existing project to a Rug archive")
+@Editor("ConvertExistingProjectToRugArchive", "converts an existing project to a Rug archive project")
 @Tags("rug", "atomist")
 export class ConvertExistingProjectToRugArchive implements EditProject {
 
@@ -54,4 +54,4 @@ export class ConvertExistingProjectToRugArchive implements EditProject {
     }
 }
 
-export const convertExistingProjectToRugArchive = new ConvertExistingProjectToRugArchive()
+export const convertExistingProjectToRugArchive = new ConvertExistingProjectToRugArchive();

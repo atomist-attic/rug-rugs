@@ -1,6 +1,3 @@
-import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
-
 /*
  * Copyright © 2017 Atomist, Inc.
  *
@@ -16,6 +13,10 @@ import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/proje
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import { Project } from "@atomist/rug/model/Project";
+import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+
 When("ConvertExistingProjectToRugArchive for ConvertExistingProjectToRugArchive should add Rug archive files", (p, world) => {
     let psworld = world as ProjectScenarioWorld;
     let editor = psworld.editor("ConvertExistingProjectToRugArchive");
@@ -64,4 +65,3 @@ When("ConvertExistingProjectToRugArchive archiveName is my-rug-archive, groupId 
 
     psworld.editWith(editor, { archiveName: "my-rug-archive", groupId: "my-rug-group", version: "0.0.1" });
 });
-

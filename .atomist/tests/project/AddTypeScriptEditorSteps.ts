@@ -66,7 +66,7 @@ Then("not result fileContains atomist editors MyNewEditor ts helloTypeScript for
 
 Then("fileExists atomist tests project MyNewEditorTest ts for AddTypeScriptEditor should add a TypeScript editor to a Rug archive", (p, world) => {
 
-    return p.fileExists(".atomist/tests/project/MyNewEditorTest.ts");
+    return p.fileExists(".atomist/tests/project/MyNewEditorSteps.ts");
 });
 
 Then("fileContains atomist tests project MyNewEditorTest ts scenario MyNewEditor for AddTypeScriptEditor should add a TypeScript editor to a Rug archive", (p, world) => {
@@ -76,7 +76,7 @@ Then("fileContains atomist tests project MyNewEditorTest ts scenario MyNewEditor
 
 Then("not result fileContains atomist tests project MyNewEditorTest ts TypeScriptEditor for AddTypeScriptEditor should add a TypeScript editor to a Rug archive", (p, world) => {
 
-    return !p.fileContains(".atomist/tests/project/MyNewEditorTest.ts", "TypeScriptEditor");
+    return !p.fileContains(".atomist/tests/project/MyNewEditorSteps.ts", "TypeScriptEditor");
 });
 
 Then("fileExists README md for AddTypeScriptEditor should add a TypeScript editor to a Rug archive", (p, world) => {
@@ -175,7 +175,7 @@ Then("not result fileContains atomist editors MyNewEditor ts helloTypeScript for
 
 Then("fileExists atomist tests project MyNewEditorTest ts for AddTypeScriptEditor should add a TypeScript editor even if no README", (p, world) => {
 
-    return p.fileExists(".atomist/tests/project/MyNewEditorTest.ts");
+    return p.fileExists(".atomist/tests/project/MyNewEditorSteps.ts");
 });
 
 Then("fileContains atomist tests project MyNewEditorTest ts scenario MyNewEditor for AddTypeScriptEditor should add a TypeScript editor even if no README", (p, world) => {
@@ -185,7 +185,7 @@ Then("fileContains atomist tests project MyNewEditorTest ts scenario MyNewEditor
 
 Then("not result fileContains atomist tests project MyNewEditorTest ts TypeScriptEditor for AddTypeScriptEditor should add a TypeScript editor even if no README", (p, world) => {
 
-    return !p.fileContains(".atomist/tests/project/MyNewEditorTest.ts", "TypeScriptEditor");
+    return !p.fileContains(".atomist/tests/project/MyNewEditorSteps.ts", "TypeScriptEditor");
 });
 
 Then("not result fileExists README md for AddTypeScriptEditor should add a TypeScript editor even if no README", (p, world) => {

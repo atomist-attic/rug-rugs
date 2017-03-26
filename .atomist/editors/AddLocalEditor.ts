@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Project'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
+import { EditProject } from '@atomist/rug/operations/ProjectEditor';
+import { Project } from '@atomist/rug/model/Project';
+import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
 
-import { RugParameters } from './RugParameters'
+import { RugParameters } from './RugParameters';
 
-@Editor("AddLocalEditor", "add an editor for modifying the local project, initiating a Rug archive if needed")
+@Editor("AddLocalEditor", "adds an editor for modifying the local project, initiating a Rug archive if needed")
 @Tags("rug", "atomist", "typescript")
 export class AddLocalEditor implements EditProject {
 

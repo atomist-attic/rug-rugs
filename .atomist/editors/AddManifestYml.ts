@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Project'
-import { File } from '@atomist/rug/model/File'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
-import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
+import { EditProject } from '@atomist/rug/operations/ProjectEditor';
+import { Project } from '@atomist/rug/model/Project';
+import { File } from '@atomist/rug/model/File';
+import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression';
 
-import { IsRugArchive } from './RugEditorsPredicates'
+import { IsRugArchive } from './RugEditorsPredicates';
 import { RugParameters } from './RugParameters';
 
-@Editor("AddManifestYml", "add Rug archive manifest")
+@Editor("AddManifestYml", "adds a Rug archive manifest")
 @Tags("rug", "atomist")
 export class AddManifestYml implements EditProject {
 
@@ -77,4 +77,4 @@ export class AddManifestYml implements EditProject {
     }
 }
 
-export const addManifestYml = new AddManifestYml()
+export const addManifestYml = new AddManifestYml();

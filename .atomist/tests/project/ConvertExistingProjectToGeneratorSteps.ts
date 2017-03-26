@@ -226,7 +226,7 @@ Then("fileExists atomist tests project MyNewGeneratorTest ts for ConvertExisting
     let manifest = ".atomist/manifest.yml";
     let generatorName = "MyNewGenerator";
     let description = "Description of MyNewGenerator";
-    return p.fileExists(".atomist/tests/project/MyNewGeneratorTest.ts");
+    return p.fileExists(".atomist/tests/project/MyNewGeneratorSteps.ts");
 });
 
 Then("fileContains atomist tests project MyNewGeneratorTest feature scenario MyNewGenerator for ConvertExistingProjectToGenerator should add Rug archive files and default generator", (p, world) => {
@@ -246,7 +246,7 @@ Then("not result fileContains atomist tests project MyNewGeneratorTest ts TypeSc
     let manifest = ".atomist/manifest.yml";
     let generatorName = "MyNewGenerator";
     let description = "Description of MyNewGenerator";
-    return !p.fileContains(".atomist/tests/project/MyNewGeneratorTest.ts", "TypeScriptGenerator");
+    return !p.fileContains(".atomist/tests/project/MyNewGeneratorSteps.ts", "TypeScriptGenerator");
 });
 
 Given("a file named README.md for ConvertExistingProjectToGenerator should add appropriate generator tests assertions", p => { p.addFile("README.md", `README.md" = "Beulah`) });
@@ -466,7 +466,7 @@ Then("fileExists atomist tests project MyNewGeneratorTest ts for ConvertExisting
     let manifest = ".atomist/manifest.yml";
     let generatorName = "MyNewGenerator";
     let description = "Description of MyNewGenerator";
-    return p.fileExists(".atomist/tests/project/MyNewGeneratorTest.ts");
+    return p.fileExists(".atomist/tests/project/MyNewGeneratorSteps.ts");
 });
 
 Then("fileContains atomist tests project MyNewGeneratorTest feature scenario MyNewGenerator for ConvertExistingProjectToGenerator should add appropriate generator tests assertions", (p, world) => {
@@ -486,7 +486,7 @@ Then("not result fileContains atomist tests project MyNewGeneratorTest ts TypeSc
     let manifest = ".atomist/manifest.yml";
     let generatorName = "MyNewGenerator";
     let description = "Description of MyNewGenerator";
-    return !p.fileContains(".atomist/tests/project/MyNewGeneratorTest.ts", "TypeScriptGenerator");
+    return !p.fileContains(".atomist/tests/project/MyNewGeneratorSteps.ts", "TypeScriptGenerator");
 });
 
 Then("fileContains atomist tests project MyNewGeneratorTest ts fileExists README md for ConvertExistingProjectToGenerator should add appropriate generator tests assertions", (p, world) => {
@@ -496,7 +496,7 @@ Then("fileContains atomist tests project MyNewGeneratorTest ts fileExists README
     let manifest = ".atomist/manifest.yml";
     let generatorName = "MyNewGenerator";
     let description = "Description of MyNewGenerator";
-    return p.fileContains(".atomist/tests/project/MyNewGeneratorTest.ts", 'fileExists("README.md")');
+    return p.fileContains(".atomist/tests/project/MyNewGeneratorSteps.ts", 'fileExists("README.md")');
 });
 
 When("ConvertExistingProjectToGenerator for ConvertExistingProjectToGenerator should make no change if project already contains a manifest", (p, world) => {

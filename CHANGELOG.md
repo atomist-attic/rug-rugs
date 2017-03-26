@@ -7,9 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.19.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.20.0...HEAD
 
-## [0.19.0] - 2017-03-21
+## [0.20.0] - 2017-03-26
+
+[0.20.0]: https://github.com/atomist-rugs/rug-editors/compare/0.19.0...0.20.0
+
+Format release
+
+### Changed
+
+-   Corrected Rug descriptions
+-   Added semicolons to TypeScript code
+-   Changed test step file names to Steps.ts
+
+## [0.19.0] - 2017-03-26
 
 [0.19.0]: https://github.com/atomist-rugs/rug-editors/compare/0.18.0...0.19.0
 

@@ -66,7 +66,7 @@ Then("not result fileContains atomist editors MyNewGenerator ts typeScriptGenera
 
 Then("fileExists atomist tests project MyNewGeneratorTest ts for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return p.fileExists(".atomist/tests/project/MyNewGeneratorTest.ts");
+    return p.fileExists(".atomist/tests/project/MyNewGeneratorSteps.ts");
 });
 
 Then("fileContains atomist tests project MyNewGeneratorTest ts scenario MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
@@ -76,7 +76,7 @@ Then("fileContains atomist tests project MyNewGeneratorTest ts scenario MyNewGen
 
 Then("not result fileContains atomist tests project MyNewGeneratorTest ts TypeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return !p.fileContains(".atomist/tests/project/MyNewGeneratorTest.ts", "TypeScriptGenerator");
+    return !p.fileContains(".atomist/tests/project/MyNewGeneratorSteps.ts", "TypeScriptGenerator");
 });
 
 Then("fileExists README md for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
@@ -175,7 +175,7 @@ Then("not result fileContains atomist editors MyNewGenerator ts typeScriptGenera
 
 Then("fileExists atomist tests project MyNewGeneratorTest ts for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return p.fileExists(".atomist/tests/project/MyNewGeneratorTest.ts");
+    return p.fileExists(".atomist/tests/project/MyNewGeneratorSteps.ts");
 });
 
 Then("fileContains atomist tests project MyNewGeneratorTest ts scenario MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
@@ -185,7 +185,7 @@ Then("fileContains atomist tests project MyNewGeneratorTest ts scenario MyNewGen
 
 Then("not result fileContains atomist tests project MyNewGeneratorTest ts TypeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {
 
-    return !p.fileContains(".atomist/tests/project/MyNewGeneratorTest.ts", "TypeScriptGenerator");
+    return !p.fileContains(".atomist/tests/project/MyNewGeneratorSteps.ts", "TypeScriptGenerator");
 });
 
 Then("not result fileExists README md for AddTypeScriptGenerator should add a new TypeScript generator even if no README", (p, world) => {

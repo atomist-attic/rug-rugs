@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor'
-import { Project } from '@atomist/rug/model/Project'
-import { File } from '@atomist/rug/model/File'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators'
-import { PathExpression, PathExpressionEngine, TreeNode, Match } from '@atomist/rug/tree/PathExpression'
-import { addAssertionsForAllFilesInProject } from './ProjectToGeneratorOperations'
+import { EditProject } from '@atomist/rug/operations/ProjectEditor';
+import { Project } from '@atomist/rug/model/Project';
+import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
 
-@Editor("ConvertExistingProjectToGenerator", "convert existing project to a Rug archive with a basic Generator")
+@Editor("ConvertExistingProjectToGenerator", "converts and existing project to a Rug archive project with a basic Generator")
 @Tags("rug", "atomist")
 export class ConvertExistingProjectToGenerator implements EditProject {
 
@@ -75,18 +72,16 @@ export class ConvertExistingProjectToGenerator implements EditProject {
         minLength: 1,
         maxLength: 100
     })
-    description: string
+    description: string;
 
     edit(project: Project) {
         if (project.fileExists(".atomist/manifest.yml")) {
             return;
         }
         project.editWith("ConvertExistingProjectToRugArchive", this);
-        project.editWith("AddTypeScript", {})
-        project.editWith("AddTypeScriptGenerator", this)
-
-        //addAssertionsForAllFilesInProject(project, this.generatorName)
+        project.editWith("AddTypeScript", {});
+        project.editWith("AddTypeScriptGenerator", this);
     }
 }
 
-export const convertExistingProjectToGenerator = new ConvertExistingProjectToGenerator()
+export const convertExistingProjectToGenerator = new ConvertExistingProjectToGenerator();

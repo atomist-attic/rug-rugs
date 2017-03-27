@@ -19,7 +19,6 @@ import { Project } from '@atomist/rug/model/Project';
 import { File } from '@atomist/rug/model/File';
 import { Pattern } from '@atomist/rug/operations/RugOperation';
 import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
-import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression';
 
 import { IsRugArchive } from './RugEditorsPredicates';
 import { RugParameters } from './RugParameters';
@@ -60,20 +59,19 @@ export class AddManifestYml implements EditProject {
         const manifestPath = ".atomist/manifest.yml";
         project.copyEditorBackingFileOrFail(manifestPath);
 
-        let eng: PathExpressionEngine = project.context().pathExpressionEngine();
-
-        let manifestPE = new PathExpression<Project, File>("/*[@name='.atomist']/*[@name='manifest.yml']");
-        let manifest: File = eng.scalar(project, manifestPE);
-        manifest.regexpReplace("(?m)^group:.*", 'group: "' + this.groupId + '"');
-        manifest.regexpReplace("(?m)^artifact:.*", 'artifact: "' + this.archiveName + '"');
-        manifest.regexpReplace("(?m)^version:.*", 'version: "' + this.version + '"');
-        manifest.regexpReplace("(?m)^dependencies:\s*\n(\s*-.*\n)*", "dependencies:\n");
-        manifest.regexpReplace("(?m)^extensions:\s*\n(\s*-.*\n)*", "extensions:\n");
-        manifest.regexpReplace("(?m)^repo:.*\n", "");
-        manifest.regexpReplace("(?m)^branch:.*\n", "");
-        manifest.regexpReplace("(?m)^sha:.*\n", "");
-        manifest.regexpReplace("(?m)^---\n", "");
-        manifest.regexpReplace("(?m)^\n", "");
+        let manifest: File = project.findFile(".atomist/manifest.yml");
+        let lines: string[] = manifest.content().split("\n");
+        let newLines: string[] = [
+            `group: "${this.groupId}"`,
+            `artifact: "${this.archiveName}"`,
+            `version: "${this.version}"`
+        ];
+        for (let l of lines) {
+            if (/^requires:/.test(l)) {
+                newLines.push(l);
+            }
+        }
+        manifest.setContent(newLines.join("\n"));
     }
 }
 

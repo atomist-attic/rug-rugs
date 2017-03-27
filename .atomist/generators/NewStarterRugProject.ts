@@ -21,7 +21,7 @@ import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators';
 
 import { removeUnnecessaryFiles, cleanReadMe, cleanChangeLog } from './RugGeneratorFunctions';
 
-@Generator("NewStarterRugProject", "creates a new Rug archive project using standard setup and sensible defaults")
+@Generator("NewStarterRugProject", "creates a new Rug archive project using standard setup, sensible defaults, and starter Rugs")
 @Tags("atomist", "rug", "starter")
 export class NewStarterRugProject implements PopulateProject {
 

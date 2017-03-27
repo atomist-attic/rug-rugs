@@ -23,7 +23,7 @@ import { File } from '@atomist/rug/model/File';
 
 import { removeUnnecessaryFiles, cleanReadMe } from './RugGeneratorFunctions';
 
-@Generator("NewRugProject", "creates a new Rug archive project")
+@Generator("NewRugProject", "creates a minimal Rug archive project with metadata and no Rugs")
 @Tags("rug", "atomist")
 export class NewRugProject implements PopulateProject {
 

@@ -102,7 +102,7 @@ Then("not result fileContains README md Atomist rug editors for NewStarterRugPro
 });
 
 Then("fileContains README md Atomist Rug archive project for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains("README.md", "Atomist Rug archive project.");
+    return p.fileContains("README.md", "Atomist Rug archive project");
 });
 
 Then("not result fileContains README md editors to create a Rug archive project for NewStarterRugProjectTestProject", (p, world) => {
@@ -177,8 +177,8 @@ Then("fileExists atomist editors MyFirstEditor ts for NewStarterRugProjectTestPr
     return p.fileExists(".atomist/editors/MyFirstEditor.ts");
 });
 
-Then("fileContains atomist editors MyFirstEditor ts A sample Rug TypeScript editor to start playing with for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains(".atomist/editors/MyFirstEditor.ts", '"A sample Rug TypeScript editor to start playing with."');
+Then("the starter editor contains the starter description", (p, world) => {
+    return p.fileContains(".atomist/editors/MyFirstEditor.ts", '"sample Rug TypeScript editor"');
 });
 
 Then("fileExists atomist tests project MyFirstEditorTest feature for NewStarterRugProjectTestProject", (p, world) => {
@@ -191,4 +191,12 @@ Then("fileExists atomist tests project MyFirstEditorTest ts for NewStarterRugPro
 
 Then("fileContains atomist tests project MyFirstEditorTest ts MyFirstEditor for NewStarterRugProjectTestProject", (p, world) => {
     return p.fileContains(".atomist/tests/project/MyFirstEditorSteps.ts", "MyFirstEditor");
+});
+
+Then("the starter command handler file exists", p => {
+    return p.fileExists(".atomist/handlers/command/MyFirstCommandHandler.ts");
+});
+
+Then("the starter event handler file exists", p => {
+    return p.fileExists(".atomist/handlers/event/MyFirstEventHandler.ts");
 });

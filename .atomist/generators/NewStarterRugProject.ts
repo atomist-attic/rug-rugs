@@ -28,7 +28,7 @@ export class NewStarterRugProject implements PopulateProject {
     populate(project: Project) {
         removeUnnecessaryFiles(project);
 
-        const description: string = "Atomist Rug archive project.";
+        const description: string = "Atomist Rug archive project";
         const owner: string = "atomist-rugs";
 
         cleanReadMe(project, description, owner);
@@ -43,11 +43,25 @@ export class NewStarterRugProject implements PopulateProject {
         project.editWith("AddManifestYml", manifestParams);
         project.editWith("AddTypeScript", {});
         project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
+
         const editorParams = {
             editorName: "MyFirstEditor",
-            description: "A sample Rug TypeScript editor to start playing with."
+            description: "sample Rug TypeScript editor"
         };
         project.editWith("AddTypeScriptEditor", editorParams);
+
+        const commandParams = {
+            handlerName: "MyFirstCommandHandler",
+            description: "sample Rug TypeScript command handler",
+            intent: "run MyFirstCommandHandler"
+        }
+        project.editWith("AddTypeScriptCommandHandler", commandParams);
+
+        const eventParams = {
+            handlerName: "MyFirstEventHandler",
+            description: "sample Rug TypeScript event handler"
+        }
+        project.editWith("AddTypeScriptEventHandler", eventParams);
     }
 }
 

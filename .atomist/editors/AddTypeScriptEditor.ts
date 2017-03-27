@@ -30,21 +30,21 @@ export class AddTypeScriptEditor implements EditProject {
     @Parameter({
         ...RugParameters.Name,
         displayName: "Editor Name",
-        description: "name of new editor to add to Rug archive project"
+        description: "name of new editor to add to Rug project"
     })
     editorName: string;
 
     @Parameter({
         ...RugParameters.Description,
         displayName: "Editor Description",
-        description: "short description of editor to add to Rug archive project"
+        description: "short description of editor to add to Rug project"
     })
     description: string;
 
     edit(project: Project) {
 
         if (!IsRugArchive(project)) {
-            console.log("This project does not appear to be a Rug archive project");
+            console.log("This project does not appear to be a Rug project");
             return;
         }
 

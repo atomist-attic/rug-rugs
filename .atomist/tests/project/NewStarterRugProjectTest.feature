@@ -61,7 +61,9 @@ Feature: Tests from NewStarterRugProject.rt
     Then directoryExists atomist node modules atomist rug for NewStarterRugProjectTestProject
     Then fileExists atomist node modules atomist rug model Project ts for NewStarterRugProjectTestProject
     Then fileExists atomist editors MyFirstEditor ts for NewStarterRugProjectTestProject
-    Then fileContains atomist editors MyFirstEditor ts A sample Rug TypeScript editor to start playing with for NewStarterRugProjectTestProject
+    Then the starter editor contains the starter description
     Then fileExists atomist tests project MyFirstEditorTest feature for NewStarterRugProjectTestProject
     Then fileExists atomist tests project MyFirstEditorTest ts for NewStarterRugProjectTestProject
     Then fileContains atomist tests project MyFirstEditorTest ts MyFirstEditor for NewStarterRugProjectTestProject
+    Then the starter command handler file exists
+    Then the starter event handler file exists

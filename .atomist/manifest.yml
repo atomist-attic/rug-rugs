@@ -1,7 +1,7 @@
 group: atomist-rugs
 artifact: rug-editors
 version: "0.21.0"
-requires: "[0.17.3,1.0.0)"
+requires: "[0.18.2,1.0.0)"
 dependencies:
 extensions:
 excludes:
@@ -9,3 +9,7 @@ excludes:
     - TypeScriptEditor
   generators:
     - TypeScriptGenerator
+  command_handlers:
+    - TypeScriptCommandHandler
+  event_handlers:
+    - TypeScriptEventHandler

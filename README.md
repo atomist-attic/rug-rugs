@@ -188,10 +188,47 @@ $ rug edit atomist-rugs:rug-editors:AddTypeScriptGenerator \
 This will add the files `.atomist/editors/MyNewGenerator.ts` and
 `.atomist/tests/MyNewGenerator.rt` to the project.
 
-### AddTypeScriptHandler
+### AddTypeScriptCommandHandler
 
-The AddTypeScriptHandler editor adds a sample TypeScript handler
-and corresponding test to your Rug project.
+The AddTypeScriptCommandHandler editor adds a simple TypeScript
+command handler to your Rug project.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug archive source code repository set up for TypeScript
+
+#### Parameters
+
+To run this editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`handlerName` | Yes | | A valid Rug handler name between 1-100 characters, starting with a capital letter, and containing only alphanumeric characters
+`description` | Yes | | A description of the handler being added
+`intent` | Yes |  | Message the bot will associate with this command
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd rug/project/directory
+$ rug edit atomist-rugs:rug-editors:AddTypeScriptCommandHandler \
+    handlerName=MyNewCommandHandler \
+    description="new command handler" \
+    intent="run this"
+```
+
+This will add the file
+`.atomist/handlers/command/MyNewCommandHandler.ts` to the project.
+
+### AddTypeScriptEventHandler
+
+The AddTypeScriptEventHandler editor adds a simple TypeScript
+event handler to your Rug project.
 
 #### Prerequisites
 
@@ -216,14 +253,14 @@ Run it as follows:
 
 ```
 $ cd rug/project/directory
-$ rug edit atomist-rugs:rug-editors:AddTypeScriptHandler \
-    handlerName=MyNewHandler \
-    description="This is my newest handler." \
+$ rug edit atomist-rugs:rug-editors:AddTypeScriptEventHandler \
+    handlerName=MyNewEventHandler \
+    description="new event handler" \
     pathExpression="/Issue()"
 ```
 
-This will add the file `.atomist/handlers/MyNewHandler.ts` to the
-project.
+This will add the file `.atomist/handlers/event/MyNewEventHandler.ts`
+to the project.
 
 ### ConvertExistingProjectToGenerator
 
@@ -359,9 +396,10 @@ this project to add Rugs to the generated project.
 ### NewStarterRugProject
 
 The NewStarterRugProject generator creates a new Rug archive project
-using a standard layout, sensible defaults, TypeScript dependencies,
-and a simple TypeScript editor.  It is a great way to get started
-writing Rugs!
+using a standard layout and sensible defaults and adds the TypeScript
+dependencies, a simple TypeScript editor, a simple TypeScript command
+handler, and a simple TypeScriptEventHandler.  It is a great way to
+get started writing Rugs!
 
 #### Prerequisites
 

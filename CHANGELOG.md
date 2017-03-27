@@ -7,7 +7,30 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.20.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.21.0...HEAD
+
+## [0.21.0] - 2017-03-26
+
+[0.21.0]: https://github.com/atomist-rugs/rug-editors/compare/0.20.0...0.21.0
+
+Handlers release
+
+### Added
+
+-   AddTypeScriptCommandHandler and AddTypeScriptEventHandler editors
+
+### Removed
+
+-   AddTypeScriptHandler was invalid
+
+### Fixed
+
+-   Do a better job cleaning the manifest added by AddManifestYml
+
+### Changed
+
+-   NewStarteRugProject also adds a command handler and an event
+    handler
 
 ## [0.20.0] - 2017-03-26
 

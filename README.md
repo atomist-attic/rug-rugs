@@ -191,7 +191,7 @@ This will add the files `.atomist/editors/MyNewGenerator.ts` and
 ### AddTypeScriptCommandHandler
 
 The AddTypeScriptCommandHandler editor adds a simple TypeScript
-command handler to your Rug project.
+command handler and test to your Rug project.
 
 #### Prerequisites
 
@@ -222,13 +222,14 @@ $ rug edit atomist-rugs:rug-editors:AddTypeScriptCommandHandler \
     intent="run this"
 ```
 
-This will add the file
-`.atomist/handlers/command/MyNewCommandHandler.ts` to the project.
+This will add a sample command handler at
+`.atomist/handlers/command/MyNewCommandHandler.ts` and corresponding
+tests to the project.
 
 ### AddTypeScriptEventHandler
 
 The AddTypeScriptEventHandler editor adds a simple TypeScript
-event handler to your Rug project.
+event handler and test to your Rug project.
 
 #### Prerequisites
 
@@ -259,7 +260,8 @@ $ rug edit atomist-rugs:rug-editors:AddTypeScriptEventHandler \
     pathExpression="/Issue()"
 ```
 
-This will add the file `.atomist/handlers/event/MyNewEventHandler.ts`
+This will add the an event handler at
+`.atomist/handlers/event/MyNewEventHandler.ts` and corresponding tests
 to the project.
 
 ### ConvertExistingProjectToGenerator
@@ -398,8 +400,8 @@ this project to add Rugs to the generated project.
 The NewStarterRugProject generator creates a new Rug archive project
 using a standard layout and sensible defaults and adds the TypeScript
 dependencies, a simple TypeScript editor, a simple TypeScript command
-handler, and a simple TypeScriptEventHandler.  It is a great way to
-get started writing Rugs!
+handler, a simple TypeScriptEventHandler, and tests.  It is a great
+way to get started writing Rugs!
 
 #### Prerequisites
 
@@ -426,8 +428,8 @@ Note the project name parameter is different in that you do not need
 to supply the name of the parameter, just the value.  This is because
 the project name parameter is required for all generators.  This will
 create a directory named `ruggery` and populate it with a working Rug
-archive project with a standard layout and TypeScript dependencies and
-a simple editor.  It will also contain supporting files, e.g., a
+archive project with a standard layout, TypeScript dependencies, a few
+Rugs, and tests.  It will also contain supporting files, e.g., a
 license and code of conduct.  You can use the editors in this project
 to add more Rugs to the generated project.
 

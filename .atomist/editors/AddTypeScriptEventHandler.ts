@@ -60,11 +60,18 @@ export class AddTypeScriptEventHandler implements EditProject {
         project.editWith("AddTypeScript", {});
 
         const srcHandlerName = "TypeScriptEventHandler";
-        const srcDescription = "sample TypeScript event handler used by AddTypeScriptEventHandler";
         const srcHandlerPath = `.atomist/handlers/event/${srcHandlerName}.ts`;
+        const srcTestPath = `.atomist/tests/handlers/event/${srcHandlerName}Steps.ts`;
+        const srcFeaturePath = `.atomist/tests/handlers/event/${srcHandlerName}Test.feature`;
         const handlerPath = srcHandlerPath.replace(srcHandlerName, this.handlerName);
-        project.copyEditorBackingFileOrFailToDestination(srcHandlerPath, handlerPath);
+        const testPath = srcTestPath.replace(srcHandlerName, this.handlerName);
+        const featurePath = srcFeaturePath.replace(srcHandlerName, this.handlerName);
 
+        project.copyEditorBackingFileOrFailToDestination(srcHandlerPath, handlerPath);
+        project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
+        project.copyEditorBackingFileOrFailToDestination(srcFeaturePath, featurePath);
+
+        const srcDescription = "sample TypeScript event handler used by AddTypeScriptEventHandler";
         const srcPathExpression = "/Tag()";
         const srcHandlerConstName = "typeScriptEventHandler";
         const handlerConstName = this.handlerName.charAt(0).toLowerCase() + this.handlerName.slice(1);
@@ -74,6 +81,12 @@ export class AddTypeScriptEventHandler implements EditProject {
         handler.replace(srcHandlerName, this.handlerName);
         handler.replace(srcHandlerConstName, handlerConstName);
         handler.replace(srcPathExpression, this.pathExpression);
+
+        let testFile: File = project.findFile(testPath);
+        testFile.replace(srcHandlerName, this.handlerName);
+
+        let featureFile: File = project.findFile(featurePath);
+        featureFile.replace(srcHandlerName, this.handlerName);
     }
 }
 

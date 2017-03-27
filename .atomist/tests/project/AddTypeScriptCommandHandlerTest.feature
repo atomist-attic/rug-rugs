@@ -32,6 +32,12 @@ Feature: AddTypeScriptCommandHandler should add a sample command handler
     Then the command handler file does not contain the original name
     Then the command handler file does not contain the original description
     Then the command handler file does not contain the original intent
+    Then the command handler test feature file should exist
+    Then the command handler test feature file contains the name
+    Then the command handler test feature file does not contain the original name
+    Then the command handler test steps file should exist
+    Then the command handler test steps file contains the name
+    Then the command handler test steps file does not contain the original name
 
 
   Scenario: AddTypeScriptCommandHandler should fail if not a Rug project

@@ -90,3 +90,35 @@ Then("the event handler file does not contain the original description", (p, wor
 Then("the event handler file does not contain the original path expression", (p, world) => {
     return !p.fileContains(handlerPath, "/Tag()");
 });
+
+const featurePath = `.atomist/tests/handlers/event/${handlerName}Test.feature`;
+
+Then("the event handler test feature file should exist", (p, world) => {
+    return p.fileExists(featurePath);
+});
+
+Then("the event handler test feature file contains the name", (p, world) => {
+    return p.fileContains(featurePath, handlerName);
+});
+
+Then("the event handler test feature file does not contain the original name", (p, world) => {
+    return !p.fileContains(featurePath, "TypeScriptEventHandler");
+});
+
+Then("the event handler file does not contain the original intent", (p, world) => {
+    return !p.fileContains(handlerPath, "run TypeScriptEventHandler");
+});
+
+const stepsPath = `.atomist/tests/handlers/event/${handlerName}Steps.ts`;
+
+Then("the event handler test steps file should exist", (p, world) => {
+    return p.fileExists(stepsPath);
+});
+
+Then("the event handler test steps file contains the name", (p, world) => {
+    return p.fileContains(stepsPath, handlerName);
+});
+
+Then("the event handler test steps file does not contain the original name", (p, world) => {
+    return !p.fileContains(stepsPath, "TypeScriptEventHandler");
+});

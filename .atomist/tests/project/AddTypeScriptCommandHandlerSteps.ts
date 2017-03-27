@@ -31,7 +31,7 @@ When("AddTypeScriptCommandHandler is run", (p, world) => {
     });
 });
 
-const handlerPath = ".atomist/handlers/command/MyNewHandler.ts"
+const handlerPath = `.atomist/handlers/command/${handlerName}.ts`;
 
 Then("the command handler file exists", (p, world) => {
     return p.fileExists(handlerPath);
@@ -59,4 +59,36 @@ Then("the command handler file does not contain the original description", (p, w
 
 Then("the command handler file does not contain the original intent", (p, world) => {
     return !p.fileContains(handlerPath, "run TypeScriptCommandHandler");
+});
+
+const featurePath = `.atomist/tests/handlers/command/${handlerName}Test.feature`;
+
+Then("the command handler test feature file should exist", (p, world) => {
+    return p.fileExists(featurePath);
+});
+
+Then("the command handler test feature file contains the name", (p, world) => {
+    return p.fileContains(featurePath, handlerName);
+});
+
+Then("the command handler test feature file does not contain the original name", (p, world) => {
+    return !p.fileContains(featurePath, "TypeScriptCommandHandler");
+});
+
+Then("the command handler file does not contain the original intent", (p, world) => {
+    return !p.fileContains(handlerPath, "run TypeScriptCommandHandler");
+});
+
+const stepsPath = `.atomist/tests/handlers/command/${handlerName}Steps.ts`;
+
+Then("the command handler test steps file should exist", (p, world) => {
+    return p.fileExists(stepsPath);
+});
+
+Then("the command handler test steps file contains the name", (p, world) => {
+    return p.fileContains(stepsPath, handlerName);
+});
+
+Then("the command handler test steps file does not contain the original name", (p, world) => {
+    return !p.fileContains(stepsPath, "TypeScriptCommandHandler");
 });

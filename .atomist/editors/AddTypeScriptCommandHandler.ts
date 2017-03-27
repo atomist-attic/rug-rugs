@@ -59,11 +59,18 @@ export class AddTypeScriptCommandHandler implements EditProject {
         project.editWith("AddTypeScript", {});
 
         const srcHandlerName = "TypeScriptCommandHandler";
-        const srcDescription = "sample TypeScript command handler used by AddTypeScriptCommandHandler";
         const srcHandlerPath = `.atomist/handlers/command/${srcHandlerName}.ts`;
+        const srcTestPath = `.atomist/tests/handlers/command/${srcHandlerName}Steps.ts`;
+        const srcFeaturePath = `.atomist/tests/handlers/command/${srcHandlerName}Test.feature`;
         const handlerPath = srcHandlerPath.replace(srcHandlerName, this.handlerName);
-        project.copyEditorBackingFileOrFailToDestination(srcHandlerPath, handlerPath);
+        const testPath = srcTestPath.replace(srcHandlerName, this.handlerName);
+        const featurePath = srcFeaturePath.replace(srcHandlerName, this.handlerName);
 
+        project.copyEditorBackingFileOrFailToDestination(srcHandlerPath, handlerPath);
+        project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
+        project.copyEditorBackingFileOrFailToDestination(srcFeaturePath, featurePath);
+
+        const srcDescription = "sample TypeScript command handler used by AddTypeScriptCommandHandler";
         const srcIntent = `run ${srcHandlerName}`;
         const srcHandlerConstName = "typeScriptCommandHandler";
         const handlerConstName = this.handlerName.charAt(0).toLowerCase() + this.handlerName.slice(1);
@@ -73,6 +80,12 @@ export class AddTypeScriptCommandHandler implements EditProject {
         handler.replace(srcIntent, this.intent);
         handler.replace(srcHandlerName, this.handlerName);
         handler.replace(srcHandlerConstName, handlerConstName);
+
+        let testFile: File = project.findFile(testPath);
+        testFile.replace(srcHandlerName, this.handlerName);
+
+        let featureFile: File = project.findFile(featurePath);
+        featureFile.replace(srcHandlerName, this.handlerName);
     }
 }
 

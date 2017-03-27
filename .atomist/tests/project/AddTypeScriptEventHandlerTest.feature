@@ -31,6 +31,12 @@ Feature: AddTypeScriptEventHandler should add a sample event handler
     Then the event handler file contains the default path expression
     Then the event handler file does not contain the original name
     Then the event handler file does not contain the original description
+    Then the event handler test feature file should exist
+    Then the event handler test feature file contains the name
+    Then the event handler test feature file does not contain the original name
+    Then the event handler test steps file should exist
+    Then the event handler test steps file contains the name
+    Then the event handler test steps file does not contain the original name
 
 
   Scenario: AddTypeScriptEventHandler should add an event handler to a Rug project

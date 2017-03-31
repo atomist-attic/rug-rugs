@@ -43,8 +43,7 @@ $ rug edit atomist-rugs:rug-editors:AddLocalEditor \
 This will add a Rug editor as `.atomist/editors/MyLocalEditor.ts`.  If
 the project is currently set up for Atomist, it will also create the
 `.atomist` directory with appropriate initial contents like the
-`manifest.yml` and `package.json` files and the Rug TypeScript typings
-in the `node_modules` directory.
+`manifest.yml` and `package.json` files.
 
 ### AddManifestYml
 
@@ -431,7 +430,13 @@ create a directory named `ruggery` and populate it with a working Rug
 archive project with a standard layout, TypeScript dependencies, a few
 Rugs, and tests.  It will also contain supporting files, e.g., a
 license and code of conduct.  You can use the editors in this project
-to add more Rugs to the generated project.
+to add more Rugs to the generated project.  Before you start editing
+Rugs, you should install the NPM dependencies with the following
+command:
+
+```
+$ ( cd .atomist && npm install )
+```
 
 ## Support
 

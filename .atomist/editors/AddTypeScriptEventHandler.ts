@@ -82,6 +82,17 @@ export class AddTypeScriptEventHandler implements EditProject {
         handler.replace(srcHandlerConstName, handlerConstName);
         handler.replace(srcPathExpression, this.pathExpression);
 
+        let rootMatches = /^\/(\w+)\(\)/.exec(this.pathExpression);
+        if (rootMatches == null || rootMatches.length < 2) {
+            console.log(`failed to match type of root node in path expression: ${this.pathExpression}`);
+        } else {
+            const newRoot = rootMatches[1];
+            console.log(`found root node: ${newRoot}`);
+            const handlerContents = handler.content();
+            const newHandlerContents = handlerContents.replace(/\bTag\b/g, newRoot);
+            handler.setContent(newHandlerContents);
+        }
+
         let testFile: File = project.findFile(testPath);
         testFile.replace(srcHandlerName, this.handlerName);
 

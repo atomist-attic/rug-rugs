@@ -46,6 +46,7 @@ When("AddTypeScriptEventHandler is run with default path expression", (p, world)
 });
 
 const pathExpression = "/Push()[/on::Repo()/channel::ChatChannel()][/contains::Commit()/author::GitHubId()[/hasGithubIdentity::Person()/hasChatIdentity::ChatId()]?]";
+const newRootNode = "Push";
 
 When("AddTypeScriptEventHandler is run providing a path expression", (p, world) => {
     let psworld = world as ProjectScenarioWorld;
@@ -121,4 +122,28 @@ Then("the event handler test steps file contains the name", (p, world) => {
 
 Then("the event handler test steps file does not contain the original name", (p, world) => {
     return !p.fileContains(stepsPath, "TypeScriptEventHandler");
+});
+
+Then("the event handler file should import the proper node type", (p, world) => {
+    return p.fileContains(handlerPath, `import { ${newRootNode} } from "@atomist/cortex/stub/${newRootNode}";`);
+});
+
+Then("the event handler file should use the proper type parameters", (p, world) => {
+    return p.fileContains(handlerPath, `implements HandleEvent<${newRootNode}, ${newRootNode}>`);
+});
+
+Then("the event handler file should have the proper root node type", (p, world) => {
+    return p.fileContains(handlerPath, `let root: ${newRootNode} = event.root();`);
+});
+
+Then("the event handler file should not import the original root node", (p, world) => {
+    return !p.fileContains(handlerPath, "import { Tag }");
+});
+
+Then("the event handler file should not use the original type parameters", (p, world) => {
+    return !p.fileContains(handlerPath, "HandleEvent<Tag, Tag>");
+});
+
+Then("the event handler file should not have the original root node type", (p, world) => {
+    return !p.fileContains(handlerPath, "let root: Tag = event.root();");
 });

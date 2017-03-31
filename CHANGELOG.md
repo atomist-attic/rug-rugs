@@ -7,7 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.23.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.24.0...HEAD
+
+## [0.24.0] - 2017-03-31
+
+[0.24.0]: https://github.com/atomist-rugs/rug-editors/compare/0.23.0...0.24.0
+
+Rugs release
+
+### Changed
+
+-   Updated handler tests for rug 0.22.0
+-   Switch NPM dependency to @atomist/rugs
+-   No longer include node_modules when generating using
+    NewStarterRugProject, it seems to frequently trigger GitHub rate
+    limiting
+
+### Fixed
+
+-   AddTypeScriptEventHandler now replaces the type parameters
 
 ## [0.23.0] - 2017-03-29
 

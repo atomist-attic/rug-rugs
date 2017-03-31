@@ -42,7 +42,9 @@ export class NewStarterRugProject implements PopulateProject {
         };
         project.editWith("AddManifestYml", manifestParams);
         project.editWith("AddTypeScript", {});
-        project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
+        // The following line works with the CLI but when used through the
+        // bot, it often triggers GitHub rate limiting.
+        //project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
 
         const editorParams = {
             editorName: "MyFirstEditor",

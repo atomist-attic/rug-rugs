@@ -47,7 +47,9 @@ export class AddLocalEditor implements EditProject {
         project.editWith("ConvertExistingProjectToRugArchive", { description: this.description, archiveName: project.name(), groupId: this.groupId });
         project.editWith("AddTypeScript", {});
         if (!project.directoryExists(".atomist/node_modules")) {
-            project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
+            // The following line works with the CLI but when used through the
+            // bot, it often triggers GitHub rate limiting.
+            //project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
         }
 
         project.editWith("AddTypeScriptEditor", this);

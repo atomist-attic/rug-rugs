@@ -55,7 +55,6 @@ Feature: Add a local editor to current project
     Then the Atomist directory should exist
     Then the manifest file should exist
     Then the npm package file should exist
-    Then the TypeScript typings should exist
     Then the new editor file should exist
     Then the new editor file should contain the editor name
     Then the new editor file should contain the default description

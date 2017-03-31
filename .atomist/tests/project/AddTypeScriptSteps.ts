@@ -32,7 +32,7 @@ Then("there should be a package file", p => {
 });
 
 Then("the package file depends on rug", p => {
-    return p.fileContains(".atomist/package.json", '"@atomist/rug"');
+    return p.fileContains(".atomist/package.json", '"@atomist/rugs"');
 });
 
 Then("there should be a tsconfig file", p => {

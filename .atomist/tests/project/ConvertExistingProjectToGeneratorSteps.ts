@@ -69,26 +69,6 @@ Then("fileContains manifest version for ConvertExistingProjectToGenerator should
     return p.fileContains(manifest, version);
 });
 
-Then("fileExists atomist package json for ConvertExistingProjectToGenerator should add Rug archive files and default generator", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    let generatorName = "MyNewGenerator";
-    let description = "Description of MyNewGenerator";
-    return p.fileExists(".atomist/package.json");
-});
-
-Then("fileContains atomist package json atomist rug for ConvertExistingProjectToGenerator should add Rug archive files and default generator", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    let generatorName = "MyNewGenerator";
-    let description = "Description of MyNewGenerator";
-    return p.fileContains(".atomist/package.json", '"@atomist/rug"');
-});
-
 Then("fileExists atomist tsconfig json for ConvertExistingProjectToGenerator should add Rug archive files and default generator", (p, world) => {
     let archiveName = "my-rug-archive";
     let groupId = "my-rug-group";
@@ -307,26 +287,6 @@ Then("fileContains manifest version for ConvertExistingProjectToGenerator should
     let generatorName = "MyNewGenerator";
     let description = "Description of MyNewGenerator";
     return p.fileContains(manifest, version);
-});
-
-Then("fileExists atomist package json for ConvertExistingProjectToGenerator should add appropriate generator tests assertions", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    let generatorName = "MyNewGenerator";
-    let description = "Description of MyNewGenerator";
-    return p.fileExists(".atomist/package.json");
-});
-
-Then("fileContains atomist package json atomist rug for ConvertExistingProjectToGenerator should add appropriate generator tests assertions", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    let generatorName = "MyNewGenerator";
-    let description = "Description of MyNewGenerator";
-    return p.fileContains(".atomist/package.json", '"@atomist/rug"');
 });
 
 Then("fileExists atomist tsconfig json for ConvertExistingProjectToGenerator should add appropriate generator tests assertions", (p, world) => {

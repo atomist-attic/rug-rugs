@@ -161,10 +161,6 @@ Then("fileExists atomist package json for NewStarterRugProjectTestProject", (p, 
     return p.fileExists(".atomist/package.json");
 });
 
-Then("fileContains atomist package json atomist rug for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains(".atomist/package.json", '"@atomist/rug":');
-});
-
 Then("directoryExists atomist node modules atomist rug for NewStarterRugProjectTestProject", (p, world) => {
     return p.directoryExists(".atomist/node_modules/@atomist/rug");
 });

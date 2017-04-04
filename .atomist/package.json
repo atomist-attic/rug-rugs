@@ -1,9 +1,8 @@
 {
   "dependencies": {
-    "@atomist/rugs": "^0.16.0"
+    "@atomist/rugs": "^0.21.0"
   },
   "scripts": {
-    "test": "rug test",
-    "clean": "find .atomist/{editors,generators,handlers,tests} -name '*.js' -print0 | xargs -0 rm; rm -rf node_modules; npm install && rug clean"
+    "test": "rug test"
   }
 }

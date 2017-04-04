@@ -460,6 +460,13 @@ $ rug test
 $ rug install
 ```
 
+To clean up cached files and update TypeScript dependencies, run this
+command.
+
+```
+$ ( cd .atomist && find editors generators handlers tests -name '*.js' -print0 | xargs -0 rm; rm -rf node_modules; npm install && rug clean )
+```
+
 To create a new release of the project, simply push a tag of the form
 `M.N.P` where `M`, `N`, and `P` are integers that form the next
 appropriate [semantic version][semver] for release.  For example:

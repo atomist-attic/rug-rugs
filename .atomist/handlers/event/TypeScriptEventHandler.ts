@@ -1,4 +1,4 @@
-import { HandleEvent, Message, Plan } from '@atomist/rug/operations/Handlers';
+import { HandleEvent, DirectedMessage, ChannelAddress, Plan } from '@atomist/rug/operations/Handlers';
 import { Match } from '@atomist/rug/tree/PathExpression';
 import { EventHandler, Tags } from '@atomist/rug/operations/Decorators';
 import { Tag } from "@atomist/cortex/stub/Tag";
@@ -11,10 +11,8 @@ import { Tag } from "@atomist/cortex/stub/Tag";
 export class TypeScriptEventHandler implements HandleEvent<Tag, Tag> {
     handle(event: Match<Tag, Tag>): Plan {
         let root: Tag = event.root();
-        let plan: Plan = new Plan();
-        let message = new Message(`${root.nodeName()} event: ${root.name()}`);
-        message.withNode(root)
-        return plan.add(message);
+        let message = new DirectedMessage(`${root.nodeName()} event: ${root.name}`, new ChannelAddress("general"));
+        return Plan.ofMessage(message);
     }
 }
 

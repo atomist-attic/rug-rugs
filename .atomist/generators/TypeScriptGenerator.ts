@@ -22,7 +22,7 @@ export class TypeScriptGenerator implements PopulateProject {
     inputParameter: string = "input";
 
     populate(project: Project) {
-        console.log(`Creating ${project.name()} with parameter ${this.inputParameter}`);
+        console.log(`Creating ${project.name} with parameter ${this.inputParameter}`);
     }
 }
 

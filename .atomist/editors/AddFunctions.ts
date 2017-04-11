@@ -29,7 +29,7 @@ import { File } from '@atomist/rug/model/File';
  * @param instructions  Text to insert. It should contain all headers, text, and internal new lines.
  */
 export function addInstructionsToReadMe(project: Project, instructions: string): void {
-    const eng: PathExpressionEngine = project.context().pathExpressionEngine();
+    const eng: PathExpressionEngine = project.context.pathExpressionEngine;
     eng.with<File>(project, "/*[@name='README.md']", r => {
         if (r.containsMatch("\n## Rugs[\\S\\s]*\n## Support")) {
             r.regexpReplace("\n## Support", instructions + "\n## Support");

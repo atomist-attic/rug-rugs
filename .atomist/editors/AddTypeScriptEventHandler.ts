@@ -88,7 +88,7 @@ export class AddTypeScriptEventHandler implements EditProject {
         } else {
             const newRoot = rootMatches[1];
             console.log(`found root node: ${newRoot}`);
-            const handlerContents = handler.content();
+            const handlerContents = handler.content;
             const newHandlerContents = handlerContents.replace(/\bTag\b/g, newRoot);
             handler.setContent(newHandlerContents);
         }

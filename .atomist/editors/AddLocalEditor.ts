@@ -44,7 +44,7 @@ export class AddLocalEditor implements EditProject {
     groupId: string = "local";
 
     edit(project: Project) {
-        project.editWith("ConvertExistingProjectToRugArchive", { description: this.description, archiveName: project.name(), groupId: this.groupId });
+        project.editWith("ConvertExistingProjectToRugArchive", { description: this.description, archiveName: project.name, groupId: this.groupId });
         project.editWith("AddTypeScript", {});
         if (!project.directoryExists(".atomist/node_modules")) {
             // The following line works with the CLI but when used through the

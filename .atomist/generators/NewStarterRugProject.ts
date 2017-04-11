@@ -36,7 +36,7 @@ export class NewStarterRugProject implements PopulateProject {
 
         const version: string = "0.1.0";
         const manifestParams = {
-            archiveName: project.name(),
+            archiveName: project.name,
             groupId: owner,
             version: version
         };

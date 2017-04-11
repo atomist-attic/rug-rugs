@@ -1,5 +1,7 @@
 import { Given, When, Then, HandlerScenarioWorld, EventHandlerScenarioWorld } from "@atomist/rug/test/handler/Core";
+import { DirectedMessage } from '@atomist/rug/operations/Handlers'
 import { Tag } from "@atomist/cortex/stub/Tag";
+
 
 Given("the TypeScriptEventHandler is registered", (world: HandlerScenarioWorld) => {
     let w: EventHandlerScenarioWorld = world as EventHandlerScenarioWorld;
@@ -16,6 +18,6 @@ When("a new Tag is received", (world: HandlerScenarioWorld) => {
 
 Then("the event handler should respond with the correct message", (world: HandlerScenarioWorld) => {
     const expected = `Tag event: ${tagName}`;
-    const message = world.plan().messages[0].body;
+    const message = (world.plan().messages[0] as DirectedMessage).body;
     return message == expected;
 });

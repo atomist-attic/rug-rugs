@@ -69,7 +69,7 @@ export class NewRugProject implements PopulateProject {
         cleanReadMe(project, this.description, this.owner);
 
         let params = {
-            archiveName: project.name(),
+            archiveName: project.name,
             groupId: this.owner,
             version: this.version
         };

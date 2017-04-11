@@ -42,7 +42,7 @@ export class HavePathExpressionEngine implements EditProject {
             console.log(`did not find ${rugPath}`);
             return;
         }
-        console.log(`Found file ${rug.path()}`)
+        console.log(`Found file ${rug.path}`)
         if (!rug.contains("project.context().pathExpressionEngine()")) {
             // microgrammars would look better. Need rug 0.13
             rug.regexpReplace("(edit\\(.*\\) \\{)", "$1\n        let eng: PathExpressionEngine = project.context().pathExpressionEngine();\n");

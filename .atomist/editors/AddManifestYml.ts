@@ -60,7 +60,7 @@ export class AddManifestYml implements EditProject {
         project.copyEditorBackingFileOrFail(manifestPath);
 
         let manifest: File = project.findFile(".atomist/manifest.yml");
-        let lines: string[] = manifest.content().split("\n");
+        let lines: string[] = manifest.content.split("\n");
         let newLines: string[] = [
             `group: "${this.groupId}"`,
             `artifact: "${this.archiveName}"`,

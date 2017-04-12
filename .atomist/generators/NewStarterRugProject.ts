@@ -28,7 +28,7 @@ export class NewStarterRugProject implements PopulateProject {
     populate(project: Project) {
         removeUnnecessaryFiles(project);
 
-        const description: string = "Atomist Rug archive project";
+        const description: string = "an Atomist Rug archive project";
         const owner: string = "atomist-rugs";
 
         cleanReadMe(project, description, owner);

@@ -7,11 +7,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.24.0...HEAD
+[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.25.0...HEAD
 
 ### Changed
 
--   Update to rug 0.24.0, @atomist/rugs 0.21.0
+-   Update TypeScript compiler and linter configurations
+-   Update to rug 0.25.3 and @atomist/rugs 0.24.3
+
+## [0.25.0] - 2017-04-11
+
+[0.25.0]: https://github.com/atomist-rugs/rug-editors/compare/0.24.0...0.25.0
+
+Springtime release
+
+### Changed
+
+-   Update to rug 0.25.0, @atomist/rugs 0.24.0
 
 ## [0.24.0] - 2017-03-31
 

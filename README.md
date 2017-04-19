@@ -1,6 +1,6 @@
 # Atomist 'rug-editors'
 
-[![Build Status](https://travis-ci.org/atomist-rugs/rug-editors.svg?branch=master)](https://travis-ci.org/atomist-rugs/rug-editors)
+[![Build Status](https://travis-ci.org/atomist/rug-editors.svg?branch=master)](https://travis-ci.org/atomist/rug-editors)
 [![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
 
 [rug]: http://docs.atomist.com/

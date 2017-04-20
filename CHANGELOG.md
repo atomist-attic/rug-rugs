@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist-rugs/rug-editors/compare/0.25.0...HEAD
+[Unreleased]: https://github.com/atomist/rug-editors/compare/0.25.0...HEAD
 
 ### Changed
 
@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.25.0] - 2017-04-11
 
-[0.25.0]: https://github.com/atomist-rugs/rug-editors/compare/0.24.0...0.25.0
+[0.25.0]: https://github.com/atomist/rug-editors/compare/0.24.0...0.25.0
 
 Springtime release
 
@@ -26,7 +26,7 @@ Springtime release
 
 ## [0.24.0] - 2017-03-31
 
-[0.24.0]: https://github.com/atomist-rugs/rug-editors/compare/0.23.0...0.24.0
+[0.24.0]: https://github.com/atomist/rug-editors/compare/0.23.0...0.24.0
 
 Rugs release
 
@@ -44,7 +44,7 @@ Rugs release
 
 ## [0.23.0] - 2017-03-29
 
-[0.23.0]: https://github.com/atomist-rugs/rug-editors/compare/0.22.0...0.23.0
+[0.23.0]: https://github.com/atomist/rug-editors/compare/0.22.0...0.23.0
 
 Uptest release
 
@@ -54,7 +54,7 @@ Uptest release
 
 ## [0.22.0] - 2017-03-27
 
-[0.22.0]: https://github.com/atomist-rugs/rug-editors/compare/0.21.0...0.22.0
+[0.22.0]: https://github.com/atomist/rug-editors/compare/0.21.0...0.22.0
 
 Handler tests release
 
@@ -64,7 +64,7 @@ Handler tests release
 
 ## [0.21.0] - 2017-03-27
 
-[0.21.0]: https://github.com/atomist-rugs/rug-editors/compare/0.20.0...0.21.0
+[0.21.0]: https://github.com/atomist/rug-editors/compare/0.20.0...0.21.0
 
 Handlers release
 
@@ -87,7 +87,7 @@ Handlers release
 
 ## [0.20.0] - 2017-03-26
 
-[0.20.0]: https://github.com/atomist-rugs/rug-editors/compare/0.19.0...0.20.0
+[0.20.0]: https://github.com/atomist/rug-editors/compare/0.19.0...0.20.0
 
 Format release
 
@@ -99,7 +99,7 @@ Format release
 
 ## [0.19.0] - 2017-03-26
 
-[0.19.0]: https://github.com/atomist-rugs/rug-editors/compare/0.18.0...0.19.0
+[0.19.0]: https://github.com/atomist/rug-editors/compare/0.18.0...0.19.0
 
 Hidden release
 
@@ -111,13 +111,13 @@ Hidden release
 
 ## [0.18.0] - 2017-03-24
 
-[0.18.0]: https://github.com/atomist-rugs/rug-editors/compare/0.17.0...0.18.0
+[0.18.0]: https://github.com/atomist/rug-editors/compare/0.17.0...0.18.0
 
 Nothing release
 
 ## [0.17.0] - 2017-03-21
 
-[0.17.0]: https://github.com/atomist-rugs/rug-editors/compare/0.16.0...0.17.0
+[0.17.0]: https://github.com/atomist/rug-editors/compare/0.16.0...0.17.0
 
 Spring has sprung release
 
@@ -128,7 +128,7 @@ Spring has sprung release
 
 ## [0.16.0] - 2017-03-15
 
-[0.16.0]: https://github.com/atomist-rugs/rug-editors/compare/0.15.0...0.16.0
+[0.16.0]: https://github.com/atomist/rug-editors/compare/0.15.0...0.16.0
 
 Beware the ides of March release
 
@@ -142,7 +142,7 @@ Beware the ides of March release
 
 ## [0.15.0] - 2017-03-13
 
-[0.15.0]: https://github.com/atomist-rugs/rug-editors/compare/0.14.0...0.15.0
+[0.15.0]: https://github.com/atomist/rug-editors/compare/0.14.0...0.15.0
 
 Look ma, no tests release
 
@@ -162,7 +162,7 @@ Look ma, no tests release
 
 ## [0.14.0] - 2017-03-07
 
-[0.14.0]: https://github.com/atomist-rugs/rug-editors/compare/0.13.0...0.14.0
+[0.14.0]: https://github.com/atomist/rug-editors/compare/0.13.0...0.14.0
 
 Less is more release
 
@@ -182,7 +182,7 @@ Less is more release
 
 ## [0.13.0] - 2017-03-03
 
-[0.13.0]: https://github.com/atomist-rugs/rug-editors/compare/0.12.0...0.13.0
+[0.13.0]: https://github.com/atomist/rug-editors/compare/0.12.0...0.13.0
 
 One-step generator release
 
@@ -192,7 +192,7 @@ One-step generator release
 
 ## [0.12.0] - 2017-03-01
 
-[0.12.0]: https://github.com/atomist-rugs/rug-editors/compare/0.11.0...0.12.0
+[0.12.0]: https://github.com/atomist/rug-editors/compare/0.11.0...0.12.0
 
 README release
 
@@ -203,7 +203,7 @@ README release
 
 ## [0.11.0] - 2017-02-27
 
-[0.11.0]: https://github.com/atomist-rugs/rug-editors/compare/0.10.0...0.11.0
+[0.11.0]: https://github.com/atomist/rug-editors/compare/0.10.0...0.11.0
 
 Non-DSL release
 
@@ -230,7 +230,7 @@ Non-DSL release
 
 ## [0.10.0] - 2017-02-24
 
-[0.10.0]: https://github.com/atomist-rugs/rug-editors/compare/0.9.0...0.10.0
+[0.10.0]: https://github.com/atomist/rug-editors/compare/0.9.0...0.10.0
 
 ### Added
 
@@ -244,7 +244,7 @@ Non-DSL release
 
 ## [0.9.0] - 2017-02-17
 
-[0.9.0]: https://github.com/atomist-rugs/rug-editors/compare/0.8.0...0.9.0
+[0.9.0]: https://github.com/atomist/rug-editors/compare/0.8.0...0.9.0
 
 TypeScript is good
 
@@ -260,7 +260,7 @@ TypeScript is good
 
 ## [0.8.0] - 2017-02-09
 
-[0.8.0]: https://github.com/atomist-rugs/rug-editors/compare/0.7.0...0.8.0
+[0.8.0]: https://github.com/atomist/rug-editors/compare/0.7.0...0.8.0
 
 Templates are bad, mkay release
 
@@ -270,7 +270,7 @@ Templates are bad, mkay release
 
 ## [0.7.0] - 2017-02-09
 
-[0.7.0]: https://github.com/atomist-rugs/rug-editors/compare/0.6.0...0.7.0
+[0.7.0]: https://github.com/atomist/rug-editors/compare/0.6.0...0.7.0
 
 TypeScripty release
 
@@ -285,7 +285,7 @@ TypeScripty release
 
 ## [0.6.0] - 2017-02-06
 
-[0.6.0]: https://github.com/atomist-rugs/rug-editors/compare/0.5.0...0.6.0
+[0.6.0]: https://github.com/atomist/rug-editors/compare/0.5.0...0.6.0
 
 Repair release
 
@@ -295,7 +295,7 @@ Repair release
 
 ## [0.5.0] - 2017-01-31
 
-[0.5.0]: https://github.com/atomist-rugs/rug-editors/compare/0.4.0...0.5.0
+[0.5.0]: https://github.com/atomist/rug-editors/compare/0.4.0...0.5.0
 
 Added an editor that introduces a Rug executor to an existing Rug Archive.
 
@@ -305,7 +305,7 @@ Added an editor that introduces a Rug executor to an existing Rug Archive.
 
 ## [0.4.0] - 2017-01-24
 
-[0.4.0]: https://github.com/atomist-rugs/rug-editors/compare/0.3.0...0.4.0
+[0.4.0]: https://github.com/atomist/rug-editors/compare/0.3.0...0.4.0
 
 Lengthy release
 
@@ -316,7 +316,7 @@ Lengthy release
 
 ## [0.3.0] - 2017-01-05
 
-[0.3.0]: https://github.com/atomist-rugs/rug-editors/compare/0.2.0...0.3.0
+[0.3.0]: https://github.com/atomist/rug-editors/compare/0.2.0...0.3.0
 
 Brand new Rug release
 
@@ -326,7 +326,7 @@ Brand new Rug release
 
 ## [0.2.0] - 2016-12-19
 
-[0.2.0]: https://github.com/atomist-rugs/rug-editors/compare/0.1.0...0.2.0
+[0.2.0]: https://github.com/atomist/rug-editors/compare/0.1.0...0.2.0
 
 Update your Rug release
 
@@ -336,7 +336,7 @@ Update your Rug release
 
 ## [0.1.0] - 2016-12-13
 
-[0.1.0]: https://github.com/atomist-rugs/rug-editors/tree/0.1.0
+[0.1.0]: https://github.com/atomist/rug-editors/tree/0.1.0
 
 Initial release
 

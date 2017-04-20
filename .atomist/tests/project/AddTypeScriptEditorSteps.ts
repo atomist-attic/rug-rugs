@@ -106,7 +106,7 @@ Then("fileContains README md inputParameter Yes Example input parameter for AddT
 
 Then("fileContains README md MyNewEditor usage for AddTypeScriptEditor should add a TypeScript editor to a Rug archive", (p, world) => {
 
-    return p.fileContains("README.md", ":MyNewEditor \\");
+    return p.fileContains("README.md", "-l MyNewEditor ");
 });
 
 Then("fileContains README md Explain what your editor does here for AddTypeScriptEditor should add a TypeScript editor to a Rug archive", (p, world) => {

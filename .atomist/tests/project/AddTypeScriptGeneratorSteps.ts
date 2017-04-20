@@ -106,7 +106,7 @@ Then("fileContains README md projectName Yes Name of project to be created for A
 
 Then("fileContains README md MyNewGenerator example for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {
 
-    return p.fileContains("README.md", ":MyNewGenerator \\");
+    return p.fileContains("README.md", "-l MyNewGenerator ");
 });
 
 Then("fileContains README md Explain what your generator does here for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project", (p, world) => {

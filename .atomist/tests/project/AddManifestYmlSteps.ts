@@ -72,7 +72,7 @@ Then("not result fileContains manifest atomist rugs for AddManifestYml should ad
     let groupId = "my-rug-group";
     let version = "0.0.1";
     let manifest = ".atomist/manifest.yml";
-    return !p.fileContains(manifest, "atomist-rugs");;
+    return !p.fileContains(manifest, "atomist");;
 });
 
 Then("not result fileContains manifest repo for AddManifestYml should add the Rug manifest", (p, world) => {

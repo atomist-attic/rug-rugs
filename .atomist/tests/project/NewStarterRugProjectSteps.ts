@@ -38,7 +38,7 @@ Then("fileContains atomist manifest yml pName for NewStarterRugProjectTestProjec
 });
 
 Then("fileContains atomist manifest yml atomist rugs for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains(".atomist/manifest.yml", "atomist-rugs");
+    return p.fileContains(".atomist/manifest.yml", "atomist-contrib");
 });
 
 Then("fileExists CHANGELOG md for NewStarterRugProjectTestProject", (p, world) => {
@@ -54,7 +54,7 @@ Then("fileContains CHANGELOG md All notable changes to this project will be docu
 });
 
 Then("fileContains CHANGELOG md https github com atomist rugs pName compare 0 1 0 HEAD for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains("CHANGELOG.md", "https://github.com/atomist-rugs/" + pName + "/compare/0.1.0...HEAD");
+    return p.fileContains("CHANGELOG.md", "https://github.com/atomist-contrib/" + pName + "/compare/0.1.0...HEAD");
 });
 
 Then("not result fileContains CHANGELOG md rug editors for NewStarterRugProjectTestProject", (p, world) => {
@@ -114,7 +114,7 @@ Then("not result fileContains README md AddTypeScript editor adds support files 
 });
 
 Then("fileContains README md https travis ci org atomist rugs pName svg branch master for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains("README.md", "https://travis-ci.org/atomist-rugs/" + pName + ".svg?branch=master");
+    return p.fileContains("README.md", "https://travis-ci.org/atomist-contrib/" + pName + ".svg?branch=master");
 });
 
 Then("fileContains README md not Slack Status https join atomist com badge svg https join atomist com for NewStarterRugProjectTestProject", (p, world) => {

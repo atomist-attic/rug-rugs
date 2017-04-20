@@ -52,9 +52,10 @@ export function cleanReadMe(project: Project, description: string, owner: string
     let readMe: File = eng.scalar(project, readMePE);
     readMe.replace("# Atomist 'rug-editors'", "# " + project.name);
     readMe.regexpReplace("generators for creating a Rug archive[\\s\\S]*?\n## Rugs\n", description + "\n\n## Rugs\n\n");
-    readMe.regexpReplace("\n### AddManifestYml[\\s\\S]*\n## Support\n", "\n## Support\n");
-    readMe.replace("rug-editors", project.name);
-    readMe.replace("atomist-rugs", owner);
+    readMe.regexpReplace("\n## Rugs\n[\\s\\S]*\n## Support\n", "\n## Rugs\n\n## Support\n");
+    readMe.replace("/rug-editors", `/${project.name}`);
+    readMe.replace("/atomist/", `/${owner}/`);
+    readMe.replace(`/${owner}/rug-cli`, "/atomist/rug-cli");
 }
 
 /**
@@ -71,5 +72,5 @@ export function cleanChangeLog(project: Project, owner: string): void {
     changeLog.regexpReplace("\\d+\\.\\d+\\.\\d+\\.\\.\\.HEAD\n\n[\\S\\s]*## \\[0\\.1\\.0\\]", "0.1.0...HEAD\n\n## [0.1.0]");
     changeLog.regexpReplace("\n### Added[\\S\\s]*", "\nAdded\n\n-   Everything\n");
     changeLog.replace("rug-editors", project.name);
-    changeLog.replace("atomist-rugs", owner);
+    changeLog.replace("/atomist/", `/${owner}/`);
 }

@@ -77,11 +77,8 @@ export class AddTypeScriptGenerator implements EditProject {
         featureFile.replace(srcDescription, this.description);
         featureFile.replace(srcGeneratorName, this.generatorName);
 
-        const example = `\$ cd parent/directory
-\$ rug generate atomist-rugs:rug-editors:${this.generatorName} \\\\
-    my-new-project`;
+        const example = `\$ rug generate -C ../parent/directory -l ${this.generatorName} my-new-project`;
         const exampleText = "Explain what your generator does here.";
-        const prerequisites = "Put your editor prerequisites here.";
         let parameters: string[] = ["`projectName` | Yes | | Name of project to be created"];
         const instructions = readMeInstructions(
             this.generatorName,

@@ -78,9 +78,7 @@ export class AddTypeScriptEditor implements EditProject {
         featureFile.replace(srcDescription, this.description);
         featureFile.replace(srcEditorName, this.editorName);
 
-        const example = `\$ cd project/directory
-\$ rug edit atomist-rugs:rug-editors:${this.editorName} \\\\
-    inputParameter='some value'`;
+        const example = `\$ rug edit -C ../project/directory -l ${this.editorName} inputParameter='some value'`;
         const exampleText = "Explain what your editor does here.";
         const prerequisites = "Put your editor prerequisites here.";
         let parameters: string[] = ["`inputParameter` | Yes | | Example input parameter"];

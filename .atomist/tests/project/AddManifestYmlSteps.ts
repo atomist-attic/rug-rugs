@@ -157,3 +157,7 @@ When("AddManifestYml archiveName is my-rug-archive, groupId is my-rug-group, ver
 
     psworld.editWith(editor, { archiveName: "my-rug-archive", groupId: "my-rug-group", version: "0.0.1" });
 });
+
+Then("the gitignore file should ignore npm debug log", (p, world) => {
+    return p.fileContains(".atomist/.gitignore", "npm-debug.log");
+});

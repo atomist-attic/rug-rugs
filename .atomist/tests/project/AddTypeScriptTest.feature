@@ -24,8 +24,6 @@ Feature: Ready Rug Project for TypeScript
     Then the package file depends on rug
     Then there should be a tsconfig file
     Then the tsconfig file should have standard contents
-    Then there should be a gitignore file
-    Then the gitignore file should ignore node modules
     Then the node modules directory should not exist
     Then the rug interfaces should not exist
 

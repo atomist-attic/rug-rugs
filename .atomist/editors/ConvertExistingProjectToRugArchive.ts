@@ -51,6 +51,7 @@ export class ConvertExistingProjectToRugArchive implements EditProject {
 
     edit(project: Project) {
         project.editWith("AddManifestYml", this);
+        project.editWith("AddTypeScript", {});
     }
 }
 

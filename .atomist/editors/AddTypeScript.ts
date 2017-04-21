@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
-import { Editor, Tags } from '@atomist/rug/operations/Decorators';
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { IsRugArchive, IsSetUpForTypeScript } from './RugEditorsPredicates';
+import { IsRugArchive, IsSetUpForTypeScript } from "./RugEditorsPredicates";
 
 @Editor("AddTypeScript", "adds TypeScript supporting files to a Rug archive project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScript implements EditProject {
 
-    edit(project: Project) {
+    public edit(project: Project) {
         if (!IsRugArchive(project)) {
             console.log("This project does not appear to be a Rug archive project");
             return;
@@ -37,7 +37,7 @@ export class AddTypeScript implements EditProject {
 
         project.copyEditorBackingFileOrFail(".atomist/package.json");
         project.copyEditorBackingFileOrFail(".atomist/tsconfig.json");
-        project.copyEditorBackingFileOrFail(".atomist/.gitignore");
+        project.copyEditorBackingFileOrFail(".atomist/tslint.json");
         console.log("TypeScript files added, run `cd .atomist && npm install`");
     }
 }

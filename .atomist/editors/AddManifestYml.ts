@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { File } from '@atomist/rug/model/File';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { File } from "@atomist/rug/model/File";
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { IsRugArchive } from './RugEditorsPredicates';
-import { RugParameters } from './RugParameters';
+import { IsRugArchive } from "./RugEditorsPredicates";
+import { RugParameters } from "./RugParameters";
 
 @Editor("AddManifestYml", "adds a Rug archive manifest")
 @Tags("rug", "atomist")
@@ -33,12 +33,12 @@ export class AddManifestYml implements EditProject {
         pattern: Pattern.project_name,
         validInput: "a valid GitHub repo name containing only alphanumeric, ., -, and _ characters",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    archiveName: string;
+    public archiveName: string;
 
     @Parameter(RugParameters.GroupId)
-    groupId: string;
+    public groupId: string;
 
     @Parameter({
         displayName: "Rug Archive Version",
@@ -49,9 +49,9 @@ export class AddManifestYml implements EditProject {
         maxLength: 100,
         required: false,
     })
-    version: string = "0.1.0";
+    public version: string = "0.1.0";
 
-    edit(project: Project) {
+    public edit(project: Project) {
         if (IsRugArchive(project)) {
             return;
         }
@@ -59,19 +59,20 @@ export class AddManifestYml implements EditProject {
         const manifestPath = ".atomist/manifest.yml";
         project.copyEditorBackingFileOrFail(manifestPath);
 
-        let manifest: File = project.findFile(".atomist/manifest.yml");
-        let lines: string[] = manifest.content.split("\n");
-        let newLines: string[] = [
+        const manifest: File = project.findFile(".atomist/manifest.yml");
+        const lines: string[] = manifest.content.split("\n");
+        const newLines: string[] = [
             `group: "${this.groupId}"`,
             `artifact: "${this.archiveName}"`,
-            `version: "${this.version}"`
+            `version: "${this.version}"`,
         ];
-        for (let l of lines) {
+        for (const l of lines) {
             if (/^requires:/.test(l)) {
                 newLines.push(l);
             }
         }
         manifest.setContent(newLines.join("\n"));
+        project.copyEditorBackingFileOrFail(".atomist/.gitignore");
     }
 }
 

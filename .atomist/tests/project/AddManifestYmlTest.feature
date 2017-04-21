@@ -34,6 +34,9 @@ Feature: Tests from AddManifestYml.rt
     Then not result fileContains manifest branch for AddManifestYml should add the Rug manifest
     Then not result fileContains manifest sha for AddManifestYml should add the Rug manifest
     Then not result fileContains manifest for AddManifestYml should add the Rug manifest
+    Then there should be a gitignore file
+    Then the gitignore file should ignore node modules
+    Then the gitignore file should ignore npm debug log
 
 
   Scenario: AddManifestYml should add the Rug manifest using default version

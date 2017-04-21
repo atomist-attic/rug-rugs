@@ -5,7 +5,7 @@ jdk:
 - oraclejdk8
 branches:
   except:
-  - /\+travis\d+$/
+  - "/\\+travis\\d+$/"
 env:
   global:
   - MAVEN_BASE_URL=https://atomist.jfrog.io/atomist
@@ -27,4 +27,11 @@ notifications:
     on_error: always
 cache:
   directories:
-  - $HOME/.atomist
+  - "$HOME/.atomist"
+deploy:
+  provider: releases
+  api_key:
+    secure: L0gE4yiZ4GfLJ9eRk6kghUJxyfanbX6/vFJDo1bUgIXtIodZc3gKAxPr1kPCcf7xvhr3wRE6g2EYlF/Jq8D1N0zJL6ZqwwI+c2E5GXjGerhEhSg8NVbhBvRxfcTLFIN+cC5eNk4/9MB+vybzGj2odctyBwjq6bQm0+XLqoe6fnErCQ/AWBAhKaiRuPtisROYHO0Y/jSmr5yXCeMdllrgYgKurnxxhDYbQQavN0qvGVrXxUh1Y/L34r+DBLpC9RBT4LCdTYvLiwS0TaAjUgpsfphLosSQQV2diN5of0P2zC4ykrwdilaGHxKbLvdw11ikekvAi9W30eY6YJekFpGuJEUqReAzhUJz8nWRIBm0eb6oBoYnJFb7cW0zWlOJlgJlt5jkz8VJyhgQAB7jVSoOn7NrHbanBZRHPHLb6uKjPivgxqTZt7TOM0j8UMaenD5y1PQXAeWHFCGsQ3n6mKwJOdqvQkP9ZtNAIQ98nJ+ZaolX3yC8ude7eESO52nGCRKvbEdeLuZq9hPeHXeTQyCzHSVzSUvfykQ65oCz8zrOI591V7P7pa+JCdvONBMc68S2mT//+Db/Nw8L+QP+7vNoJfsNEKykC4g3HT1nntj70XbEa6KIcTGi97576Jyvvy2l7jozADqtLT7wKNiNPtd9z4B2SfNKmtkgWHgu7AMJGiI=
+  on:
+    tags: true
+    condition: $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$

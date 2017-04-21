@@ -1,6 +1,6 @@
-import { HandleCommand, HandlerContext, ResponseMessage, Plan } from '@atomist/rug/operations/Handlers';
-import { CommandHandler, Parameter, Tags, Intent } from '@atomist/rug/operations/Decorators';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { CommandHandler, Intent, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { HandleCommand, HandlerContext, Plan, ResponseMessage } from "@atomist/rug/operations/Handlers";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
 /**
  * A sample TypeScript command handler used by AddTypeScriptCommandHandler.
@@ -17,12 +17,12 @@ export class TypeScriptCommandHandler implements HandleCommand {
         validInput: "a description of the valid input",
         minLength: 1,
         maxLength: 100,
-        required: false
+        required: false,
     })
-    inputParameter: string = "default value";
+    public inputParameter: string = "default value";
 
-    handle(command: HandlerContext): Plan {
-        let message = new ResponseMessage(`Successfully ran TypeScriptCommandHandler: ${this.inputParameter}`);
+    public handle(command: HandlerContext): Plan {
+        const message = new ResponseMessage(`Successfully ran TypeScriptCommandHandler: ${this.inputParameter}`);
         return Plan.ofMessage(message);
     }
 }

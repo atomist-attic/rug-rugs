@@ -15,50 +15,52 @@
  */
 
 import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-Given("a manifest file", p => {
+Given("a manifest file", (p) => {
     p.addFile(".atomist/manifest.yml", `group: test-rugs
 artifact: test-manifest
 version: "0.1.0"
 requires: "[0.18.2,1.0.0)"
 dependencies:
 extensions:
-`)
+`);
 });
 
-Given("an NPM package file", p => {
+Given("an NPM package file", (p) => {
     p.addFile(".atomist/package.json", `{
   "dependencies": {
     "@atomist/rug": "0.18.2"
   }
 }
-`)
+`);
 });
 
 const handlerName = "MyNewHandler";
 const description = "This handler rocks";
 
 When("AddTypeScriptEventHandler is run with default path expression", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddTypeScriptEventHandler");
-    psworld.editWith(editor, { handlerName: handlerName, description: description });
+    const psworld = world as ProjectScenarioWorld;
+    const editor = psworld.editor("AddTypeScriptEventHandler");
+    psworld.editWith(editor, { handlerName, description });
 });
 
-const pathExpression = "/Push()[/on::Repo()/channel::ChatChannel()][/contains::Commit()/author::GitHubId()[/hasGithubIdentity::Person()/hasChatIdentity::ChatId()]?]";
+const pathExpression = `/Push()[/on::Repo()/channel::ChatChannel()]
+                            [/contains::Commit()/author::GitHubId()
+                                [/hasGithubIdentity::Person()/hasChatIdentity::ChatId()]?]`;
 const newRootNode = "Push";
 
 When("AddTypeScriptEventHandler is run providing a path expression", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddTypeScriptEventHandler");
+    const psworld = world as ProjectScenarioWorld;
+    const editor = psworld.editor("AddTypeScriptEventHandler");
     psworld.editWith(editor, {
-        handlerName: handlerName,
-        description: description,
-        pathExpression: pathExpression
+        handlerName,
+        description,
+        pathExpression,
     });
 });
 
-const handlerPath = ".atomist/handlers/event/MyNewHandler.ts"
+const handlerPath = ".atomist/handlers/event/MyNewHandler.ts";
 
 Then("the event handler file exists", (p, world) => {
     return p.fileExists(handlerPath);
@@ -125,7 +127,7 @@ Then("the event handler test steps file does not contain the original name", (p,
 });
 
 Then("the event handler file should import the proper node type", (p, world) => {
-    return p.fileContains(handlerPath, `import { ${newRootNode} } from "@atomist/cortex/stub/${newRootNode}";`);
+    return p.fileContains(handlerPath, `import { ${newRootNode} } from "@atomist/cortex/${newRootNode}";`);
 });
 
 Then("the event handler file should use the proper type parameters", (p, world) => {
@@ -133,7 +135,7 @@ Then("the event handler file should use the proper type parameters", (p, world) 
 });
 
 Then("the event handler file should have the proper root node type", (p, world) => {
-    return p.fileContains(handlerPath, `let root: ${newRootNode} = event.root();`);
+    return p.fileContains(handlerPath, `const root: ${newRootNode} = event.root();`);
 });
 
 Then("the event handler file should not import the original root node", (p, world) => {
@@ -145,5 +147,17 @@ Then("the event handler file should not use the original type parameters", (p, w
 });
 
 Then("the event handler file should not have the original root node type", (p, world) => {
-    return !p.fileContains(handlerPath, "let root: Tag = event.root();");
+    return !p.fileContains(handlerPath, "const root: Tag = event.root();");
+});
+
+Then("the event handler file should define tags", (p, world) => {
+    return p.fileContains(handlerPath, "@Tags");
+});
+
+Then("the event handler test steps file does not contain the original root node type", (p, world) => {
+    return !p.fileContains(stepsPath, "Tag");
+});
+
+Then("the event handler test feature file does not contain the original root node type", (p, world) => {
+    return !p.fileContains(featurePath, "Tag");
 });

@@ -6,4 +6,4 @@ Feature: TypeScriptEventHandler handler handles events
   Scenario: Executing a sample event handler
     Given the TypeScriptEventHandler is registered
     When a new Tag is received
-    Then the event handler should respond with the correct message
+    Then the TypeScriptEventHandler event handler should respond with the correct message

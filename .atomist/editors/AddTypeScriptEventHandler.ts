@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
-import { File } from '@atomist/rug/model/File';
+import { File } from "@atomist/rug/model/File";
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 
-import { IsRugArchive } from './RugEditorsPredicates';
-import { RugParameters } from './RugParameters';
+import { IsRugArchive } from "./RugEditorsPredicates";
+import { RugParameters } from "./RugParameters";
 
 @Editor("AddTypeScriptEventHandler", "adds a TypeScript Rug event handler to a Rug project")
 @Tags("rug", "atomist", "typescript")
@@ -29,16 +29,16 @@ export class AddTypeScriptEventHandler implements EditProject {
     @Parameter({
         ...RugParameters.Name,
         displayName: "Event Handler Name",
-        description: "name of new event handler to add to Rug project"
+        description: "name of new event handler to add to Rug project",
     })
-    handlerName: string;
+    public handlerName: string;
 
     @Parameter({
         ...RugParameters.Description,
         displayName: "Handler Description",
-        description: "short description of event handler to add to Rug project"
+        description: "short description of event handler to add to Rug project",
     })
-    description: string;
+    public description: string;
 
     @Parameter({
         displayName: "Path Expression",
@@ -46,12 +46,12 @@ export class AddTypeScriptEventHandler implements EditProject {
         pattern: "^/[\\s\\S]*$",
         validInput: "a valid path expression",
         minLength: 1,
-        maxLength: 200,
-        required: false
+        maxLength: 500,
+        required: false,
     })
-    pathExpression: string = "/Tag()";
+    public pathExpression: string = "/Tag()";
 
-    edit(project: Project) {
+    public edit(project: Project) {
         if (!IsRugArchive(project)) {
             console.log("This project does not appear to be a Rug archive project");
             return;
@@ -76,28 +76,29 @@ export class AddTypeScriptEventHandler implements EditProject {
         const srcHandlerConstName = "typeScriptEventHandler";
         const handlerConstName = this.handlerName.charAt(0).toLowerCase() + this.handlerName.slice(1);
 
-        let handler: File = project.findFile(handlerPath);
+        const handler: File = project.findFile(handlerPath);
         handler.replace(srcDescription, this.description);
         handler.replace(srcHandlerName, this.handlerName);
         handler.replace(srcHandlerConstName, handlerConstName);
         handler.replace(srcPathExpression, this.pathExpression);
 
-        let rootMatches = /^\/(\w+)\(\)/.exec(this.pathExpression);
+        const testFile: File = project.findFile(testPath);
+        testFile.replace(srcHandlerName, this.handlerName);
+
+        const featureFile: File = project.findFile(featurePath);
+        featureFile.replace(srcHandlerName, this.handlerName);
+
+        const rootMatches = /^\/(\w+)\(\)/.exec(this.pathExpression);
         if (rootMatches == null || rootMatches.length < 2) {
             console.log(`failed to match type of root node in path expression: ${this.pathExpression}`);
         } else {
             const newRoot = rootMatches[1];
-            console.log(`found root node: ${newRoot}`);
             const handlerContents = handler.content;
             const newHandlerContents = handlerContents.replace(/\bTag\b/g, newRoot);
             handler.setContent(newHandlerContents);
+            testFile.replace("Tag", newRoot);
+            featureFile.replace("Tag", newRoot);
         }
-
-        let testFile: File = project.findFile(testPath);
-        testFile.replace(srcHandlerName, this.handlerName);
-
-        let featureFile: File = project.findFile(featurePath);
-        featureFile.replace(srcHandlerName, this.handlerName);
     }
 }
 

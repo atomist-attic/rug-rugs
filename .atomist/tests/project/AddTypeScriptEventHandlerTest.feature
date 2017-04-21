@@ -58,6 +58,9 @@ Feature: AddTypeScriptEventHandler should add a sample event handler
     Then the event handler file should not import the original root node
     Then the event handler file should not use the original type parameters
     Then the event handler file should not have the original root node type
+    Then the event handler file should define tags
+    Then the event handler test steps file does not contain the original root node type
+    Then the event handler test feature file does not contain the original root node type
 
 
   Scenario: AddTypeScriptEventHandler should fail if not a Rug project

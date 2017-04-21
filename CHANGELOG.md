@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 -   Update TypeScript compiler and linter configurations
 -   Update to rug 0.25.3 and @atomist/rugs 0.24.3
 
+### Fixed
+
+-   The event handler added by AddTypeScriptEventHandler should now
+    work with all types of events
+
 ## [0.25.0] - 2017-04-11
 
 [0.25.0]: https://github.com/atomist/rug-editors/compare/0.24.0...0.25.0

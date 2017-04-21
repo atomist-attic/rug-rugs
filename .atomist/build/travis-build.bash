@@ -54,6 +54,7 @@ function main () {
         fi
     fi
     rug="$rug --timer --quiet --update --resolver-report --error --settings=$PWD/.atomist/build/cli.yml"
+    export TEAM_ID=rugs-dev
 
     if [[ -f .atomist/package.json ]]; then
         msg "running npm install"
@@ -105,9 +106,7 @@ function main () {
             return 1
         fi
         project_version=$archive_version-$timestamp
-        TEAM_ID=rugs-dev
     fi
-    export TEAM_ID
     msg "branch: $TRAVIS_BRANCH"
     msg "archive version: $project_version"
 

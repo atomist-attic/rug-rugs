@@ -57,9 +57,9 @@ function main () {
     export TEAM_ID=rugs-dev
 
     if [[ -f .atomist/package.json ]]; then
-        msg "running npm install"
-        if ! ( cd .atomist && npm install ); then
-            err "npm install failed"
+        msg "running yarn install"
+        if ! ( cd .atomist && yarn install ); then
+            err "yarn install failed"
             return 1
         fi
     fi

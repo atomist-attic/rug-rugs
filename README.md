@@ -438,6 +438,43 @@ command:
 $ ( cd .atomist && npm install )
 ```
 
+### UpdateSupportFiles
+
+The UpdateSupportFiles editor updates the TypeScript support and build
+files to the latest versions.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug archive source code repository
+
+#### Parameters
+
+This editor has no parameters.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd rug/project/directory
+$ rug edit atomist:rug-editors:UpdateSupportFiles
+```
+
+This will update `package.json`, `tsconfig.json`, `tslint.json`, and
+`.gitignore` files to the `.atomist` directory in the project.  It
+will also update the Travis CI build files under `.atomist/build`.  It
+will modify the `.travis.yml` to make sure [yarn][] is installed.  You
+should update your [Node][node] dependencies after running this.
+
+```
+$ ( cd .atomist && yarn )
+```
+
+[yarn]: https://yarnpkg.com/
+
 ## Support
 
 General support questions should be discussed in the `#support`

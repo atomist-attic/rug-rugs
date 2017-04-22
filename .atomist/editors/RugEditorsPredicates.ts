@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Project } from '@atomist/rug/model/Project';
+import { Project } from "@atomist/rug/model/Project";
 
 export function IsRugArchive(p: Project): boolean {
     return p.fileExists(".atomist/manifest.yml");

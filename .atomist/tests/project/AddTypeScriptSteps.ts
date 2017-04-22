@@ -15,46 +15,50 @@
  */
 
 import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-Given("a file named .atomist/manifest.yml", p => {
-    p.addFile(".atomist/manifest.yml", "requires: \"0.12.0\"\n");
+Given("a Rug archive manifest", (p: Project) => {
+    p.addFile(".atomist/manifest.yml", `group: non-atomist
+artifact: some-rugs
+version: "28.8.1963"
+requires: "[0.25.3,0.26.0)"
+`);
 });
 
 When("edit with AddTypeScript", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddTypeScript");
-    psworld.editWith(editor, {});
+    const w = world as ProjectScenarioWorld;
+    const editor = w.editor("AddTypeScript");
+    w.editWith(editor, {});
 });
 
-Then("there should be a package file", p => {
+Then("there should be a package file", (p: Project) => {
     return p.fileExists(".atomist/package.json");
 });
 
-Then("the package file depends on rug", p => {
+Then("the package file depends on rug", (p: Project) => {
     return p.fileContains(".atomist/package.json", '"@atomist/rugs"');
 });
 
-Then("there should be a tsconfig file", p => {
+Then("there should be a tsconfig file", (p: Project) => {
     return p.fileExists(".atomist/tsconfig.json");
 });
 
-Then("the tsconfig file should have standard contents", p => {
+Then("the tsconfig file should have standard contents", (p: Project) => {
     return p.fileContains(".atomist/tsconfig.json", "suppressImplicitAnyIndexErrors");
 });
 
-Then("there should be a gitignore file", p => {
+Then("there should be a gitignore file", (p: Project) => {
     return p.fileExists(".atomist/.gitignore");
 });
 
-Then("the gitignore file should ignore node modules", p => {
+Then("the gitignore file should ignore node modules", (p: Project) => {
     return p.fileContains(".atomist/.gitignore", "node_modules");
 });
 
-Then("the node modules directory should not exist", p => {
+Then("the node modules directory should not exist", (p: Project) => {
     return !p.directoryExists(".atomist/node_modules/@atomist/rug");
 });
 
-Then("the rug interfaces should not exist", p => {
+Then("the rug interfaces should not exist", (p: Project) => {
     return !p.fileExists(".atomist/node_modules/@atomist/rug/model/Core.ts");
 });

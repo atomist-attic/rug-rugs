@@ -4,7 +4,7 @@
 set -o pipefail
 
 declare Pkg=travis-build
-declare Version=0.3.0
+declare Version=0.4.0
 
 function msg() {
     echo "$Pkg: $*"
@@ -62,9 +62,9 @@ function main () {
     export TEAM_ID=T1L0VDKJP
 
     if [[ -f .atomist/package.json ]]; then
-        msg "running yarn install"
-        if ! ( cd .atomist && yarn install ); then
-            err "yarn install failed"
+        msg "running yarn"
+        if ! ( cd .atomist && yarn ); then
+            err "yarn failed"
             return 1
         fi
     fi

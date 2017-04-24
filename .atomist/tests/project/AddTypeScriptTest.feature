@@ -21,7 +21,7 @@ Feature: Ready Rug Project for TypeScript
     Given a Rug archive manifest
     When edit with AddTypeScript
     Then there should be a package file
-    Then the package file depends on rug
+    Then the package file depends on rugs
     Then there should be a tsconfig file
     Then the tsconfig file should have standard contents
     Then the node modules directory should not exist

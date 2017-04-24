@@ -35,7 +35,7 @@ Then("there should be a package file", (p: Project) => {
     return p.fileExists(".atomist/package.json");
 });
 
-Then("the package file depends on rug", (p: Project) => {
+Then("the package file depends on rugs", (p: Project) => {
     return p.fileContains(".atomist/package.json", '"@atomist/rugs"');
 });
 

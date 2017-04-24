@@ -57,7 +57,7 @@ Feature: Tests from NewStarterRugProject.rt
     Then fileExists atomist tsconfig json for NewStarterRugProjectTestProject
     Then fileContains atomist tsconfig json experimentalDecorators true for NewStarterRugProjectTestProject
     Then fileExists atomist package json for NewStarterRugProjectTestProject
-    Then the package file depends on rug
+    Then the package file depends on rugs
     Then fileExists atomist editors MyFirstEditor ts for NewStarterRugProjectTestProject
     Then the starter editor contains the starter description
     Then fileExists atomist tests project MyFirstEditorTest feature for NewStarterRugProjectTestProject

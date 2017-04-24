@@ -29,7 +29,7 @@ Feature: Tests from ConvertExistingProjectToGenerator.rt
     Then fileContains manifest group groupId for ConvertExistingProjectToGenerator should add Rug archive files and default generator
     Then fileContains manifest version for ConvertExistingProjectToGenerator should add Rug archive files and default generator
     Then there should be a package file
-    Then the package file depends on rug
+    Then the package file depends on rugs
     Then fileExists atomist tsconfig json for ConvertExistingProjectToGenerator should add Rug archive files and default generator
     Then fileContains atomist tsconfig json suppressImplicitAnyIndexErrors for ConvertExistingProjectToGenerator should add Rug archive files and default generator
     Then fileExists atomist gitignore for ConvertExistingProjectToGenerator should add Rug archive files and default generator
@@ -61,7 +61,7 @@ Feature: Tests from ConvertExistingProjectToGenerator.rt
     Then fileContains manifest group groupId for ConvertExistingProjectToGenerator should add appropriate generator tests assertions
     Then fileContains manifest version for ConvertExistingProjectToGenerator should add appropriate generator tests assertions
     Then there should be a package file
-    Then the package file depends on rug
+    Then the package file depends on rugs
     Then fileExists atomist tsconfig json for ConvertExistingProjectToGenerator should add appropriate generator tests assertions
     Then fileContains atomist tsconfig json suppressImplicitAnyIndexErrors for ConvertExistingProjectToGenerator should add appropriate generator tests assertions
     Then fileExists atomist gitignore for ConvertExistingProjectToGenerator should add appropriate generator tests assertions

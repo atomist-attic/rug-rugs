@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist/rug-editors/compare/0.27.0...HEAD
+[Unreleased]: https://github.com/atomist/rug-editors/compare/0.27.1...HEAD
+
+## [0.27.1] - 2017-04-24
+
+[0.27.1]: https://github.com/atomist/rug-editors/compare/0.27.0...0.27.1
+
+Safer release
+
+### Changed
+
+-   UpdateSupportFiles edits, rather than overwrites, the package.json
 
 ## [0.27.0] - 2017-04-24
 

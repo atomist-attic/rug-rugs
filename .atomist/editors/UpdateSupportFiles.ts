@@ -41,7 +41,6 @@ export class UpdateSupportFiles implements EditProject {
         }
 
         const supportFiles = [
-            ".atomist/package.json",
             ".atomist/tsconfig.json",
             ".atomist/tslint.json",
             ".atomist/.gitignore",
@@ -57,6 +56,26 @@ export class UpdateSupportFiles implements EditProject {
         if (travisYml != null) {
             travisYml.regexpReplace("install:\\s*?-?\\s*?nvm install 6.9.2\\s*?\n",
                 "install: nvm install 6.9.2 && npm install -g yarn && yarn global add tslint typescript\n");
+        }
+
+        const pkgJsonPath = ".atomist/package.json";
+        const pkgJson = project.findFile(pkgJsonPath);
+        if (pkgJson != null) {
+            const tmpFile = pkgJsonPath + ".tmp";
+            project.copyEditorBackingFileOrFailToDestination(pkgJsonPath, tmpFile);
+            const pkgJsonObj = JSON.parse(project.findFile(tmpFile).content);
+            project.deleteFile(tmpFile);
+            const rugsName = "@atomist/rugs";
+            const rugsVersion = pkgJsonObj.dependencies[rugsName];
+            pkgJson.regexpReplace(`"@atomist/rugs"\\s*:\\s*"[^"]+"(,?)`, `"@atomist/rugs": "${rugsVersion}"$1`);
+            if (!pkgJson.containsMatch(`"test"\s*:\s*"rug test"`)) {
+                pkgJson.regexpReplace(`(?m)^  \}$`, `  },
+  "scripts": {
+    "test": "rug test"
+  }`);
+            }
+        } else {
+            project.copyEditorBackingFileOrFail(pkgJsonPath);
         }
     }
 }

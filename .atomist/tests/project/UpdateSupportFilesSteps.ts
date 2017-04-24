@@ -31,6 +31,25 @@ script: bash .atomist/build/travis-build.bash
 `);
 });
 
+Given("an NPM package file", (p: Project) => {
+    p.addFile(".atomist/package.json", `{
+  "dependencies": {
+    "@atomist/rugs": "^0.24.2",
+    "mustache": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/mustache": "^0.8.29"
+  }
+}
+`);
+});
+
+Given("old build CLI configs", (p: Project) => {
+    p.addFile(".atomist/build/cli-build.yml", "chavo: guerrero");
+    p.addFile(".atomist/build/cli-dev.yml", "foreign: object");
+    p.addFile(".atomist/build/cli-publish.yml", "choked: out");
+});
+
 When("edit with UpdateSupportFiles", (p, world) => {
     const w = world as ProjectScenarioWorld;
     const editor = w.editor("UpdateSupportFiles");
@@ -65,4 +84,28 @@ Then("the travis build script should set team ID", (p: Project) => {
 
 Then("the travis config should install yarn", (p: Project) => {
     return p.fileContains(".travis.yml", "install: nvm install 6.9.2 && npm install -g yarn");
+});
+
+const packageJson = ".atomist/package.json";
+
+Then("the package file depends on the right rugs version", (p: Project) => {
+    const tmpFile = "package.tmp";
+    p.copyEditorBackingFileOrFailToDestination(packageJson, tmpFile);
+    const pkgJsonObj = JSON.parse(p.findFile(tmpFile).content);
+    p.deleteFile(tmpFile);
+    const rugsName = "@atomist/rugs";
+    const rugsVersion = pkgJsonObj.dependencies[rugsName];
+    return p.fileContains(packageJson, `"@atomist/rugs": "${rugsVersion}",`);
+});
+
+Then("the package tmp file should not exist", (p: Project) => {
+    return !p.fileExists(packageJson + ".tmp");
+});
+
+Then("the package file should still depend on mustache", (p: Project) => {
+    return p.fileContains(packageJson, `"mustache": "^2.3.0"`);
+});
+
+Then("the package file should provide a test script", (p: Project) => {
+    return p.fileContains(packageJson, `"test": "rug test"`);
 });

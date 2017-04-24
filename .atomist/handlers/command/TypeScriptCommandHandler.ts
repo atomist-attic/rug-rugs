@@ -1,5 +1,5 @@
 import { CommandHandler, Intent, Parameter, Tags } from "@atomist/rug/operations/Decorators";
-import { HandleCommand, HandlerContext, Plan, ResponseMessage } from "@atomist/rug/operations/Handlers";
+import { CommandPlan, HandleCommand, HandlerContext, ResponseMessage } from "@atomist/rug/operations/Handlers";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
 /**
@@ -21,9 +21,9 @@ export class TypeScriptCommandHandler implements HandleCommand {
     })
     public inputParameter: string = "default value";
 
-    public handle(command: HandlerContext): Plan {
+    public handle(command: HandlerContext): CommandPlan {
         const message = new ResponseMessage(`Successfully ran TypeScriptCommandHandler: ${this.inputParameter}`);
-        return Plan.ofMessage(message);
+        return CommandPlan.ofMessage(message);
     }
 }
 

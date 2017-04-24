@@ -486,6 +486,15 @@ If you find a problem, please create an [issue][].
 
 [issue]: https://github.com/atomist/rug-editors/issues
 
+## Contributing
+
+If you are interested in contributing to the Atomist open source
+projects, please see our [contributing guidelines][contrib] and
+our [code of conduct][code].
+
+[contrib]: https://github.com/atomist/welcome/blob/master/CONTRIBUTING.md
+[code]: https://github.com/atomist/welcome/blob/master/CODE_OF_CONDUCT.md
+
 ## Development
 
 You can build, test, and install the project locally with

@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist/rug-editors/compare/0.26.0...HEAD
 
+### Changed
+
+-   Update rug and rugs dependencies
+
+### Fixed
+
+-   UpdateSupportFiles will properly overwrite existing files
+
 ## [0.26.0] - 2017-04-22
 
 [0.26.0]: https://github.com/atomist/rug-editors/compare/0.25.0...0.26.0

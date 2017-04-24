@@ -49,6 +49,7 @@ export class UpdateSupportFiles implements EditProject {
             ".atomist/build/travis-build.bash",
         ];
         for (const f of supportFiles) {
+            project.deleteFile(f);
             project.copyEditorBackingFileOrFail(f);
         }
 

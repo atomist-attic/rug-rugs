@@ -22,6 +22,8 @@ Feature: Keep TypeScript support and build files up to date
     Given a Rug archive manifest
     Given a Travis CI config
     When edit with UpdateSupportFiles
+    Then parameters were valid
+    Then changes were made
     Then there should be a package file
     Then the package file depends on rug
     Then there should be a tsconfig file
@@ -31,6 +33,25 @@ Feature: Keep TypeScript support and build files up to date
     Then the gitignore file should ignore npm logs
     Then the node modules directory should not exist
     Then the rug interfaces should not exist
+    Then there should be a tslint file
+    Then there should be a CLI config file
+    Then there should not be deprecated CLI config files
+    Then the travis build script should set team ID
+    Then the travis config should install yarn
+
+
+  Scenario: UpdateSupportFiles should overwrite existing files
+    Given the archive root
+    When edit with UpdateSupportFiles
+    Then parameters were valid
+    Then changes were made
+    Then there should be a package file
+    Then the package file depends on rug
+    Then there should be a tsconfig file
+    Then the tsconfig file should have standard contents
+    Then the tsconfig file should set output directory
+    Then there should be a gitignore file
+    Then the gitignore file should ignore npm logs
     Then there should be a tslint file
     Then there should be a CLI config file
     Then there should not be deprecated CLI config files

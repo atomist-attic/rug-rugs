@@ -15,14 +15,14 @@
  */
 
 import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
 const pName = "new-starter-project";
 
 When("NewStarterRugProject for NewStarterRugProjectTestProject", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let generator = psworld.generator("NewStarterRugProject");
-    psworld.generateWith(generator, pName, {});
+    const w = world as ProjectScenarioWorld;
+    const generator = w.generator("NewStarterRugProject");
+    w.generateWith(generator, pName, {});
 });
 
 Then("fileExists atomist manifest yml for NewStarterRugProjectTestProject", (p, world) => {
@@ -49,11 +49,11 @@ Then("fileContains CHANGELOG md 0 1 0 for NewStarterRugProjectTestProject", (p, 
     return p.fileContains("CHANGELOG.md", "[0.1.0]");
 });
 
-Then("fileContains CHANGELOG md All notable changes to this project will be documented in this file for NewStarterRugProjectTestProject", (p, world) => {
+Then("the change log contains header", (p, world) => {
     return p.fileContains("CHANGELOG.md", "All notable changes to this project will be documented in this file.");
 });
 
-Then("fileContains CHANGELOG md https github com atomist rugs pName compare 0 1 0 HEAD for NewStarterRugProjectTestProject", (p, world) => {
+Then("the change log contains the proper compare link", (p, world) => {
     return p.fileContains("CHANGELOG.md", "https://github.com/atomist-contrib/" + pName + "/compare/0.1.0...HEAD");
 });
 
@@ -69,14 +69,6 @@ Then("not result fileContains CHANGELOG md NewRugProject for NewStarterRugProjec
     return !p.fileContains("CHANGELOG.md", "NewRugProject");
 });
 
-Then("fileExists CODE OF CONDUCT md for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileExists("CODE_OF_CONDUCT.md");
-});
-
-Then("fileContains CODE OF CONDUCT md This Code of Conduct applies both within project spaces and in public spaces for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains("CODE_OF_CONDUCT.md", "This Code of Conduct applies both within project spaces and in public spaces");
-});
-
 Then("not result fileExists travis yml for NewStarterRugProjectTestProject", (p, world) => {
     return !p.fileExists(".travis.yml");
 });
@@ -85,7 +77,7 @@ Then("fileExists LICENSE for NewStarterRugProjectTestProject", (p, world) => {
     return p.fileExists("LICENSE");
 });
 
-Then("fileContains LICENSE APPENDIX How to apply the Apache License to your work for NewStarterRugProjectTestProject", (p, world) => {
+Then("the license file contains the appendix", (p, world) => {
     return p.fileContains("LICENSE", "APPENDIX: How to apply the Apache License to your work.");
 });
 
@@ -105,20 +97,21 @@ Then("fileContains README md Atomist Rug archive project for NewStarterRugProjec
     return p.fileContains("README.md", "Atomist Rug archive project");
 });
 
-Then("not result fileContains README md editors to create a Rug archive project for NewStarterRugProjectTestProject", (p, world) => {
+Then("the readme does not contain the old description", (p, world) => {
     return !p.fileContains("README.md", "editors to create a Rug archive project");
 });
 
-Then("not result fileContains README md AddTypeScript editor adds support files for NewStarterRugProjectTestProject", (p, world) => {
+Then("the readme does not contain information on the AddTypeScipt editor", (p, world) => {
     return !p.fileContains("README.md", "AddTypeScript editor adds support files");
 });
 
-Then("fileContains README md https travis ci org atomist rugs pName svg branch master for NewStarterRugProjectTestProject", (p, world) => {
+Then("the readme contains the correct Travis CI badge link", (p, world) => {
     return p.fileContains("README.md", "https://travis-ci.org/atomist-contrib/" + pName + ".svg?branch=master");
 });
 
-Then("fileContains README md not Slack Status https join atomist com badge svg https join atomist com for NewStarterRugProjectTestProject", (p, world) => {
-    return p.fileContains("README.md", "[![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)");
+Then("the readme contains the join atomist-communirty badge", (p, world) => {
+    return p.fileContains("README.md",
+        "[![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)");
 });
 
 Then("not result fileContains README md NewRugProject for NewStarterRugProjectTestProject", (p, world) => {
@@ -153,7 +146,7 @@ Then("fileExists atomist tsconfig json for NewStarterRugProjectTestProject", (p,
     return p.fileExists(".atomist/tsconfig.json");
 });
 
-Then("fileContains atomist tsconfig json experimentalDecorators true for NewStarterRugProjectTestProject", (p, world) => {
+Then("the tsconfig file declares experimental decorator support", (p, world) => {
     return p.fileContains(".atomist/tsconfig.json", '"experimentalDecorators": true');
 });
 
@@ -185,14 +178,14 @@ Then("fileExists atomist tests project MyFirstEditorTest ts for NewStarterRugPro
     return p.fileExists(".atomist/tests/project/MyFirstEditorSteps.ts");
 });
 
-Then("fileContains atomist tests project MyFirstEditorTest ts MyFirstEditor for NewStarterRugProjectTestProject", (p, world) => {
+Then("the test file contains a reference to the sample editor", (p, world) => {
     return p.fileContains(".atomist/tests/project/MyFirstEditorSteps.ts", "MyFirstEditor");
 });
 
-Then("the starter command handler file exists", p => {
+Then("the starter command handler file exists", (p) => {
     return p.fileExists(".atomist/handlers/command/MyFirstCommandHandler.ts");
 });
 
-Then("the starter event handler file exists", p => {
+Then("the starter event handler file exists", (p) => {
     return p.fileExists(".atomist/handlers/event/MyFirstEventHandler.ts");
 });

@@ -29,24 +29,22 @@ Feature: Tests from NewStarterRugProject.rt
     Then fileContains atomist manifest yml atomist rugs for NewStarterRugProjectTestProject
     Then fileExists CHANGELOG md for NewStarterRugProjectTestProject
     Then fileContains CHANGELOG md 0 1 0 for NewStarterRugProjectTestProject
-    Then fileContains CHANGELOG md All notable changes to this project will be documented in this file for NewStarterRugProjectTestProject
-    Then fileContains CHANGELOG md https github com atomist rugs pName compare 0 1 0 HEAD for NewStarterRugProjectTestProject
+    Then the change log contains header
+    Then the change log contains the proper compare link
     Then not result fileContains CHANGELOG md rug editors for NewStarterRugProjectTestProject
     Then not result fileContains CHANGELOG md 0 2 0 for NewStarterRugProjectTestProject
     Then not result fileContains CHANGELOG md NewRugProject for NewStarterRugProjectTestProject
-    Then fileExists CODE OF CONDUCT md for NewStarterRugProjectTestProject
-    Then fileContains CODE OF CONDUCT md This Code of Conduct applies both within project spaces and in public spaces for NewStarterRugProjectTestProject
     Then not result fileExists travis yml for NewStarterRugProjectTestProject
     Then fileExists LICENSE for NewStarterRugProjectTestProject
-    Then fileContains LICENSE APPENDIX How to apply the Apache License to your work for NewStarterRugProjectTestProject
+    Then the license file contains the appendix
     Then fileExists README md for NewStarterRugProjectTestProject
     Then fileContains README md pName for NewStarterRugProjectTestProject
     Then not result fileContains README md Atomist rug editors for NewStarterRugProjectTestProject
     Then fileContains README md Atomist Rug archive project for NewStarterRugProjectTestProject
-    Then not result fileContains README md editors to create a Rug archive project for NewStarterRugProjectTestProject
-    Then not result fileContains README md AddTypeScript editor adds support files for NewStarterRugProjectTestProject
-    Then fileContains README md https travis ci org atomist rugs pName svg branch master for NewStarterRugProjectTestProject
-    Then fileContains README md not Slack Status https join atomist com badge svg https join atomist com for NewStarterRugProjectTestProject
+    Then the readme does not contain the old description
+    Then the readme does not contain information on the AddTypeScipt editor
+    Then the readme contains the correct Travis CI badge link
+    Then the readme contains the join atomist-communirty badge
     Then not result fileContains README md NewRugProject for NewStarterRugProjectTestProject
     Then not result fileContains README md ruggery for NewStarterRugProjectTestProject
     Then fileContains README md rug http docs atomist com for NewStarterRugProjectTestProject
@@ -55,13 +53,13 @@ Feature: Tests from NewStarterRugProject.rt
     Then fileContains README md Created by Atomist atomist for NewStarterRugProjectTestProject
     Then fileContains README md Need Help Join our Slack team slack for NewStarterRugProjectTestProject
     Then fileExists atomist tsconfig json for NewStarterRugProjectTestProject
-    Then fileContains atomist tsconfig json experimentalDecorators true for NewStarterRugProjectTestProject
+    Then the tsconfig file declares experimental decorator support
     Then fileExists atomist package json for NewStarterRugProjectTestProject
     Then the package file depends on rugs
     Then fileExists atomist editors MyFirstEditor ts for NewStarterRugProjectTestProject
     Then the starter editor contains the starter description
     Then fileExists atomist tests project MyFirstEditorTest feature for NewStarterRugProjectTestProject
     Then fileExists atomist tests project MyFirstEditorTest ts for NewStarterRugProjectTestProject
-    Then fileContains atomist tests project MyFirstEditorTest ts MyFirstEditor for NewStarterRugProjectTestProject
+    Then the test file contains a reference to the sample editor
     Then the starter command handler file exists
     Then the starter event handler file exists

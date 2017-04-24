@@ -57,7 +57,6 @@ export class NewRugProject implements PopulateProject {
     public populate(project: Project) {
         const toRemove: string[] = [
             "CHANGELOG.md",
-            "CODE_OF_CONDUCT.md",
             "LICENSE",
         ];
         removeUnnecessaryFiles(project, toRemove);

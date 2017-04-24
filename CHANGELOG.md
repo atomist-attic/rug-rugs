@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist/rug-editors/compare/0.27.1...HEAD
 
+### Removed
+
+-   Code of conduct is now references from the atomist/welcome repo
+
 ## [0.27.1] - 2017-04-24
 
 [0.27.1]: https://github.com/atomist/rug-editors/compare/0.27.0...0.27.1

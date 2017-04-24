@@ -54,7 +54,7 @@ function main () {
         fi
     fi
     rug="$rug --timer --quiet --update --resolver-report --error --settings=$PWD/.atomist/build/cli.yml"
-    export TEAM_ID=rugs-dev
+    export TEAM_ID=T1L0VDKJP
 
     if [[ -f .atomist/package.json ]]; then
         msg "running yarn install"

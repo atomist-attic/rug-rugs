@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator';
-import { Project } from '@atomist/rug/model/Project';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
-import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { Project } from "@atomist/rug/model/Project";
+import { Generator, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { PopulateProject } from "@atomist/rug/operations/ProjectGenerator";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { removeUnnecessaryFiles, cleanReadMe, cleanChangeLog } from './RugGeneratorFunctions';
+import { cleanChangeLog, cleanReadMe, removeUnnecessaryFiles } from "./RugGeneratorFunctions";
 
-@Generator("NewStarterRugProject", "creates a new Rug archive project using standard setup, sensible defaults, and starter Rugs")
+@Generator("NewStarterRugProject",
+    "creates a new Rug archive project using standard setup, sensible defaults, and starter Rugs")
 @Tags("atomist", "rug", "starter")
 export class NewStarterRugProject implements PopulateProject {
 
-    populate(project: Project) {
+    public populate(project: Project) {
         removeUnnecessaryFiles(project);
 
         const description: string = "Atomist Rug archive project";
@@ -38,31 +39,31 @@ export class NewStarterRugProject implements PopulateProject {
         const manifestParams = {
             archiveName: project.name,
             groupId: owner,
-            version: version
+            version,
         };
         project.editWith("AddManifestYml", manifestParams);
         project.editWith("AddTypeScript", {});
         // The following line works with the CLI but when used through the
         // bot, it often triggers GitHub rate limiting.
-        //project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
+        // project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
 
         const editorParams = {
             editorName: "MyFirstEditor",
-            description: "sample Rug TypeScript editor"
+            description: "sample Rug TypeScript editor",
         };
         project.editWith("AddTypeScriptEditor", editorParams);
 
         const commandParams = {
             handlerName: "MyFirstCommandHandler",
             description: "sample Rug TypeScript command handler",
-            intent: "run MyFirstCommandHandler"
-        }
+            intent: "run MyFirstCommandHandler",
+        };
         project.editWith("AddTypeScriptCommandHandler", commandParams);
 
         const eventParams = {
             handlerName: "MyFirstEventHandler",
-            description: "sample Rug TypeScript event handler"
-        }
+            description: "sample Rug TypeScript event handler",
+        };
         project.editWith("AddTypeScriptEventHandler", eventParams);
     }
 }

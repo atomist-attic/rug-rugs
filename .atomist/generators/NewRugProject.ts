@@ -14,38 +14,34 @@
  * limitations under the License.
  */
 
-import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator';
-import { Project } from '@atomist/rug/model/Project';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
-import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators';
-import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression';
-import { File } from '@atomist/rug/model/File';
+import { File } from "@atomist/rug/model/File";
+import { Project } from "@atomist/rug/model/Project";
+import { Generator, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { PopulateProject } from "@atomist/rug/operations/ProjectGenerator";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
+import { PathExpression, PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
 
-import { removeUnnecessaryFiles, cleanReadMe } from './RugGeneratorFunctions';
+import { RugParameters } from "../editors/RugParameters";
+import { cleanReadMe, removeUnnecessaryFiles } from "./RugGeneratorFunctions";
 
 @Generator("NewRugProject", "creates a minimal Rug archive project with metadata and no Rugs")
 @Tags("rug", "atomist")
 export class NewRugProject implements PopulateProject {
 
     @Parameter({
-        displayName: "Group ID",
-        description: "Maven group identifier, often used to provide a namespace for your rugs, e.g., company-rugs, typically the GitHub owner",
-        pattern: Pattern.group_id,
-        validInput: "a valid Maven group ID, which starts with a letter, -, or _ and contains only alphanumeric, -, and _ characters and may having leading period separated identifiers starting with letters or underscores and containing only alphanumeric and _ characters",
-        minLength: 1,
-        maxLength: 100
+        ...RugParameters.GroupId,
     })
-    owner: string;
+    public owner: string;
 
     @Parameter({
         displayName: "Project Description",
-        description: "short descriptive text describing the new project",
+        description: "short descriptive text describing the new Rug project",
         pattern: Pattern.any,
         validInput: "free text",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    description: string;
+    public description: string;
 
     @Parameter({
         displayName: "Version",
@@ -54,26 +50,27 @@ export class NewRugProject implements PopulateProject {
         validInput: "a valid semantic version, http://semver.org",
         minLength: 5,
         maxLength: 100,
-        required: false
+        required: false,
     })
-    version: string = "0.1.0";
+    public version: string = "0.1.0";
 
-    populate(project: Project) {
-        let toRemove: string[] = [
+    public populate(project: Project) {
+        const toRemove: string[] = [
             "CHANGELOG.md",
             "CODE_OF_CONDUCT.md",
-            "LICENSE"
+            "LICENSE",
         ];
         removeUnnecessaryFiles(project, toRemove);
 
         cleanReadMe(project, this.description, this.owner);
 
-        let params = {
+        const params = {
             archiveName: project.name,
             groupId: this.owner,
-            version: this.version
+            version: this.version,
         };
         project.editWith("AddManifestYml", params);
+        project.editWith("AddTypeScript", {});
     }
 }
 

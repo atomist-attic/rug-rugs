@@ -15,21 +15,21 @@
  */
 
 import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-When("HavePathExpressionEngine rugNameisTypeScriptEditor for HavePathExpressionEngine puts a path expression in the typescript", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("HavePathExpressionEngine");
-    let target = ".atomist/editors/TypeScriptEditor.ts";
-    psworld.editWith(editor, { rugName: "TypeScriptEditor", target: ".atomist/editors/TypeScriptEditor.ts" });
+const target = ".atomist/editors/TypeScriptEditor.ts";
+
+When("HavePathExpressionEngine is run on TypeScriptEditor", (p, world) => {
+    const psworld = world as ProjectScenarioWorld;
+    const editor = psworld.editor("HavePathExpressionEngine");
+    psworld.editWith(editor, { rugName: "TypeScriptEditor", target });
 });
 
-Then("fileContains target let eng PathExpressionEngine project context pathExpressionEngine for HavePathExpressionEngine puts a path expression in the typescript", (p, world) => {
-    let target = ".atomist/editors/TypeScriptEditor.ts";
-    return p.fileContains(target, "let eng: PathExpressionEngine = project.context().pathExpressionEngine();");
+Then("TypeScriptEditor has a path expression const", (p, world) => {
+    return p.fileContains(target, "const eng: PathExpressionEngine = project.context.pathExpressionEngine;");
 });
 
-Then("fileContains target import PathExpression PathExpressionEngine from atomist rug tree PathExpression for HavePathExpressionEngine puts a path expression in the typescript", (p, world) => {
-    let target = ".atomist/editors/TypeScriptEditor.ts";
-    return p.fileContains(target, "import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression");
+Then("TypeScriptEditor has the path expression imports", (p, world) => {
+    return p.fileContains(target,
+        `import { PathExpression, PathExpressionEngine } from "@atomist/rug/tree/PathExpression"`);
 });

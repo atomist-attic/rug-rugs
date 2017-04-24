@@ -33,6 +33,11 @@ function main () {
     fi
     msg "rug CLI version: $version"
 
+    if ! ( cd .atomist && tslint **/*.ts ); then
+        err "tslint failed"
+        return 1
+    fi
+
     local rug=$HOME/.atomist/rug-cli-$version/bin/rug
     if [[ ! -x $rug ]]; then
         msg "downloading rug CLI"

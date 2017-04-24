@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { Project } from '@atomist/rug/model/Project'
-import { PathExpression, PathExpressionEngine } from '@atomist/rug/tree/PathExpression'
-import { File } from '@atomist/rug/model/File'
+import { File } from "@atomist/rug/model/File";
+import { Project } from "@atomist/rug/model/Project";
+import { PathExpression, PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
 
 /**
  * Remove files in this project that do not belong in the generated
@@ -28,12 +28,12 @@ import { File } from '@atomist/rug/model/File'
 export function removeUnnecessaryFiles(project: Project, extra?: string[]): void {
     let toRemove: string[] = [
         ".atomist.yml",
-        ".travis.yml"
+        ".travis.yml",
     ];
     if (extra != null) {
         toRemove = toRemove.concat(extra);
     }
-    for (let f of toRemove) {
+    for (const f of toRemove) {
         project.deleteFile(f);
     }
 }
@@ -46,10 +46,10 @@ export function removeUnnecessaryFiles(project: Project, extra?: string[]): void
  * @param owner        GitHub owner (user or org) of project.
  */
 export function cleanReadMe(project: Project, description: string, owner: string): void {
-    let eng: PathExpressionEngine = project.context.pathExpressionEngine;
+    const eng: PathExpressionEngine = project.context.pathExpressionEngine;
 
-    let readMePE = new PathExpression<Project, File>("/*[@name='README.md']");
-    let readMe: File = eng.scalar(project, readMePE);
+    const readMePE = new PathExpression<Project, File>("/*[@name='README.md']");
+    const readMe: File = eng.scalar(project, readMePE);
     readMe.replace("# Atomist 'rug-editors'", "# " + project.name);
     readMe.regexpReplace("generators for creating a Rug archive[\\s\\S]*?\n## Rugs\n", description + "\n\n## Rugs\n\n");
     readMe.regexpReplace("\n## Rugs\n[\\s\\S]*\n## Support\n", "\n## Rugs\n\n## Support\n");
@@ -65,11 +65,12 @@ export function cleanReadMe(project: Project, description: string, owner: string
  * @param owner    GitHub owner (user or org) of project.
  */
 export function cleanChangeLog(project: Project, owner: string): void {
-    let eng: PathExpressionEngine = project.context.pathExpressionEngine;
+    const eng: PathExpressionEngine = project.context.pathExpressionEngine;
 
-    let changeLogPE = new PathExpression<Project, File>("/*[@name='CHANGELOG.md']");
-    let changeLog: File = eng.scalar(project, changeLogPE);
-    changeLog.regexpReplace("\\d+\\.\\d+\\.\\d+\\.\\.\\.HEAD\n\n[\\S\\s]*## \\[0\\.1\\.0\\]", "0.1.0...HEAD\n\n## [0.1.0]");
+    const changeLogPE = new PathExpression<Project, File>("/*[@name='CHANGELOG.md']");
+    const changeLog: File = eng.scalar(project, changeLogPE);
+    changeLog.regexpReplace("\\d+\\.\\d+\\.\\d+\\.\\.\\.HEAD\n\n[\\S\\s]*## \\[0\\.1\\.0\\]",
+        "0.1.0...HEAD\n\n## [0.1.0]");
     changeLog.regexpReplace("\n### Added[\\S\\s]*", "\nAdded\n\n-   Everything\n");
     changeLog.replace("rug-editors", project.name);
     changeLog.replace("/atomist/", `/${owner}/`);

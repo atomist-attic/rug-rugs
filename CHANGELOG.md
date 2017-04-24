@@ -19,10 +19,14 @@ Publish release
 
 -   Update rug and rugs dependencies
 -   Publish non-releases to staging team
+-   Run tslint as part of Travis CI build
+-   NewRugProject now adds TypeScript support files
 
 ### Fixed
 
 -   UpdateSupportFiles will properly overwrite existing files
+-   Fix lint errors
+-   Update HavePathExpressionEngine to use property access
 
 ## [0.26.0] - 2017-04-22
 

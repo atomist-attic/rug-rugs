@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
-import { File } from '@atomist/rug/model/File';
+import { File } from "@atomist/rug/model/File";
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 
-import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
-import { IsRugArchive } from './RugEditorsPredicates';
-import { RugParameters } from './RugParameters';
+import { addInstructionsToReadMe, readMeInstructions } from "./AddFunctions";
+import { IsRugArchive } from "./RugEditorsPredicates";
+import { RugParameters } from "./RugParameters";
 
 @Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug project")
 @Tags("rug", "atomist", "typescript")
@@ -30,18 +30,18 @@ export class AddTypeScriptGenerator implements EditProject {
     @Parameter({
         ...RugParameters.Name,
         displayName: "Generator Name",
-        description: "name of generator to add to Rug archive project"
+        description: "name of generator to add to Rug archive project",
     })
-    generatorName: string;
+    public generatorName: string;
 
     @Parameter({
         ...RugParameters.Description,
         displayName: "Generator Description",
-        description: "description of generator to add to Rug archive project"
+        description: "description of generator to add to Rug archive project",
     })
-    description: string;
+    public description: string;
 
-    edit(project: Project) {
+    public edit(project: Project) {
         if (!IsRugArchive(project)) {
             console.log("This project does not appear to be a Rug archive project");
             return;
@@ -65,28 +65,28 @@ export class AddTypeScriptGenerator implements EditProject {
         const srcGeneratorConstName = "typeScriptGenerator";
         const generatorConstName = this.generatorName[0].toLowerCase() + this.generatorName.slice(1);
 
-        let generatorFile: File = project.findFile(generatorPath);
+        const generatorFile: File = project.findFile(generatorPath);
         generatorFile.replace(srcDescription, this.description);
         generatorFile.replace(srcGeneratorName, this.generatorName);
         generatorFile.replace(srcGeneratorConstName, generatorConstName);
 
-        let testFile: File = project.findFile(testPath);
+        const testFile: File = project.findFile(testPath);
         testFile.replace(srcGeneratorName, this.generatorName);
 
-        let featureFile: File = project.findFile(featurePath);
+        const featureFile: File = project.findFile(featurePath);
         featureFile.replace(srcDescription, this.description);
         featureFile.replace(srcGeneratorName, this.generatorName);
 
         const example = `\$ rug generate -C ../parent/directory -l ${this.generatorName} my-new-project`;
         const exampleText = "Explain what your generator does here.";
-        let parameters: string[] = ["`projectName` | Yes | | Name of project to be created"];
+        const parameters: string[] = ["`projectName` | Yes | | Name of project to be created"];
         const instructions = readMeInstructions(
             this.generatorName,
             this.description,
             example,
             exampleText,
             "",
-            parameters
+            parameters,
         );
         addInstructionsToReadMe(project, instructions);
     }

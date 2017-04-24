@@ -56,7 +56,7 @@ export class UpdateSupportFiles implements EditProject {
         const travisYml = project.findFile(".travis.yml");
         if (travisYml != null) {
             travisYml.regexpReplace("install:\\s*?-?\\s*?nvm install 6.9.2\\s*?\n",
-                "install: nvm install 6.9.2 && npm install -g yarn\n");
+                "install: nvm install 6.9.2 && npm install -g yarn && yarn global add tslint typescript\n");
         }
     }
 }

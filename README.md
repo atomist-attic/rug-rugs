@@ -355,9 +355,10 @@ This will add the file `.atomist/manifest.yml` to the project.
 
 The NewRugProject generator creates a new empty Rug archive project.
 The generated project will have a `.atomist` directory and an
-appropriate `.atomist/manifest.yml` file, but no Rugs.  If you want a
-simple way to create a more complete Rug project with a sample editor
-and tests, see [NewStarterRugProject](#newstarterrugproject).
+appropriate `.atomist/manifest.yml` and TypeScript files, but no Rugs.
+If you want a simple way to create a more complete Rug project with a
+sample Rugs and tests,
+see [NewStarterRugProject](#newstarterrugproject).
 
 #### Prerequisites
 
@@ -389,10 +390,10 @@ $ rug generate atomist:rug-editors:NewRugProject \
 
 Note the first parameter, the `projectName`, is different in that you
 do not need to supply the name of the parameter, just the value.  This
-is because the `projectName` parameter is required for all
-generators.  This will create a directory named `ruggery` and populate
-it with a working Rug archive project.  You can use the editors in
-this project to add Rugs to the generated project.
+is because the `projectName` parameter is required for all generators.
+This will create a directory named `ruggery` and populate it with a
+working Rug archive project.  You can use the other editors in this
+project to add Rugs to the generated project.
 
 ### NewStarterRugProject
 

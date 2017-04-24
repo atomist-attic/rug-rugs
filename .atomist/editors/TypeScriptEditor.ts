@@ -1,7 +1,7 @@
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
 /**
  * Sample TypeScript editor used by AddTypeScriptEditor.
@@ -16,11 +16,11 @@ export class TypeScriptEditor implements EditProject {
         pattern: Pattern.any,
         validInput: "a description of the valid input",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    inputParameter: string;
+    public inputParameter: string;
 
-    edit(project: Project) {
+    public edit(project: Project) {
         project.addFile("hello.txt", "Hello, World!\n" + this.inputParameter + "\n");
     }
 }

@@ -1,7 +1,7 @@
-import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator';
-import { Project } from '@atomist/rug/model/Project';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
-import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { Project } from "@atomist/rug/model/Project";
+import { Generator, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { PopulateProject } from "@atomist/rug/operations/ProjectGenerator";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
 /**
  * Sample TypeScript generator used by AddTypeScriptGenerator.
@@ -17,11 +17,11 @@ export class TypeScriptGenerator implements PopulateProject {
         validInput: "a description of the valid input",
         minLength: 1,
         maxLength: 100,
-        required: false
+        required: false,
     })
-    inputParameter: string = "input";
+    public inputParameter: string = "input";
 
-    populate(project: Project) {
+    public populate(project: Project) {
         console.log(`Creating ${project.name} with parameter ${this.inputParameter}`);
     }
 }

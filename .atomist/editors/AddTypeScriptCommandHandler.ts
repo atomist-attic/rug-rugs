@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
-import { File } from '@atomist/rug/model/File';
+import { File } from "@atomist/rug/model/File";
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 
-import { IsRugArchive } from './RugEditorsPredicates';
-import { RugParameters } from './RugParameters';
+import { IsRugArchive } from "./RugEditorsPredicates";
+import { RugParameters } from "./RugParameters";
 
 @Editor("AddTypeScriptCommandHandler", "adds a TypeScript Rug event handler to a Rug project")
 @Tags("rug", "atomist", "typescript")
@@ -29,16 +29,16 @@ export class AddTypeScriptCommandHandler implements EditProject {
     @Parameter({
         ...RugParameters.Name,
         displayName: "Event Handler Name",
-        description: "name of new event handler to add to Rug project"
+        description: "name of new event handler to add to Rug project",
     })
-    handlerName: string;
+    public handlerName: string;
 
     @Parameter({
         ...RugParameters.Description,
         displayName: "Handler Description",
-        description: "short description of event handler to add to Rug project"
+        description: "short description of event handler to add to Rug project",
     })
-    description: string;
+    public description: string;
 
     @Parameter({
         displayName: "Bot Intent",
@@ -46,11 +46,11 @@ export class AddTypeScriptCommandHandler implements EditProject {
         pattern: "^[A-Za-z][-\\w ]*$",
         validInput: "a phrase starting with a letter and containing only word characters and spaces",
         minLength: 1,
-        maxLength: 200
+        maxLength: 200,
     })
-    intent: string;
+    public intent: string;
 
-    edit(project: Project) {
+    public edit(project: Project) {
         if (!IsRugArchive(project)) {
             console.log("This project does not appear to be a Rug archive project");
             return;
@@ -75,16 +75,16 @@ export class AddTypeScriptCommandHandler implements EditProject {
         const srcHandlerConstName = "typeScriptCommandHandler";
         const handlerConstName = this.handlerName.charAt(0).toLowerCase() + this.handlerName.slice(1);
 
-        let handler: File = project.findFile(handlerPath);
+        const handler: File = project.findFile(handlerPath);
         handler.replace(srcDescription, this.description);
         handler.replace(srcIntent, this.intent);
         handler.replace(srcHandlerName, this.handlerName);
         handler.replace(srcHandlerConstName, handlerConstName);
 
-        let testFile: File = project.findFile(testPath);
+        const testFile: File = project.findFile(testPath);
         testFile.replace(srcHandlerName, this.handlerName);
 
-        let featureFile: File = project.findFile(featurePath);
+        const featureFile: File = project.findFile(featurePath);
         featureFile.replace(srcHandlerName, this.handlerName);
     }
 }

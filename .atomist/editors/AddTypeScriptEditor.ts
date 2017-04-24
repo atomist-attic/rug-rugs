@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
-import { File } from '@atomist/rug/model/File';
+import { File } from "@atomist/rug/model/File";
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 
-import { IsRugArchive, IsSetUpForTypeScript } from './RugEditorsPredicates';
-import { addInstructionsToReadMe, readMeInstructions } from './AddFunctions';
-import { RugParameters } from './RugParameters';
+import { addInstructionsToReadMe, readMeInstructions } from "./AddFunctions";
+import { IsRugArchive, IsSetUpForTypeScript } from "./RugEditorsPredicates";
+import { RugParameters } from "./RugParameters";
 
 @Editor("AddTypeScriptEditor", "adds a TypeScript Rug editor to a Rug project")
 @Tags("rug", "atomist", "typescript")
@@ -30,18 +30,18 @@ export class AddTypeScriptEditor implements EditProject {
     @Parameter({
         ...RugParameters.Name,
         displayName: "Editor Name",
-        description: "name of new editor to add to Rug project"
+        description: "name of new editor to add to Rug project",
     })
-    editorName: string;
+    public editorName: string;
 
     @Parameter({
         ...RugParameters.Description,
         displayName: "Editor Description",
-        description: "short description of editor to add to Rug project"
+        description: "short description of editor to add to Rug project",
     })
-    description: string;
+    public description: string;
 
-    edit(project: Project) {
+    public edit(project: Project) {
 
         if (!IsRugArchive(project)) {
             console.log("This project does not appear to be a Rug project");
@@ -66,29 +66,29 @@ export class AddTypeScriptEditor implements EditProject {
         const srcEditorConstName = "typeScriptEditor";
         const editorConstName = this.editorName.charAt(0).toLowerCase() + this.editorName.slice(1);
 
-        let editorFile: File = project.findFile(editorPath);
+        const editorFile: File = project.findFile(editorPath);
         editorFile.replace(srcDescription, this.description);
         editorFile.replace(srcEditorName, this.editorName);
         editorFile.replace(srcEditorConstName, editorConstName);
 
-        let testFile: File = project.findFile(testPath);
+        const testFile: File = project.findFile(testPath);
         testFile.replace(srcEditorName, this.editorName);
 
-        let featureFile: File = project.findFile(featurePath);
+        const featureFile: File = project.findFile(featurePath);
         featureFile.replace(srcDescription, this.description);
         featureFile.replace(srcEditorName, this.editorName);
 
         const example = `\$ rug edit -C ../project/directory -l ${this.editorName} inputParameter='some value'`;
         const exampleText = "Explain what your editor does here.";
         const prerequisites = "Put your editor prerequisites here.";
-        let parameters: string[] = ["`inputParameter` | Yes | | Example input parameter"];
+        const parameters: string[] = ["`inputParameter` | Yes | | Example input parameter"];
         const instructions = readMeInstructions(
             this.editorName,
             this.description,
             example,
             exampleText,
             prerequisites,
-            parameters
+            parameters,
         );
         addInstructionsToReadMe(project, instructions);
     }

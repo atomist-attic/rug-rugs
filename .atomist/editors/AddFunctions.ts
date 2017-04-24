@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { Project } from '@atomist/rug/model/Project';
-import { PathExpressionEngine } from '@atomist/rug/tree/PathExpression';
-import { File } from '@atomist/rug/model/File';
+import { File } from "@atomist/rug/model/File";
+import { Project } from "@atomist/rug/model/Project";
+import { PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
 
 /**
  * Append the provided instructions to the "Rugs" section of the
@@ -30,7 +30,7 @@ import { File } from '@atomist/rug/model/File';
  */
 export function addInstructionsToReadMe(project: Project, instructions: string): void {
     const eng: PathExpressionEngine = project.context.pathExpressionEngine;
-    eng.with<File>(project, "/*[@name='README.md']", r => {
+    eng.with<File>(project, "/*[@name='README.md']", (r) => {
         if (r.containsMatch("\n## Rugs[\\S\\s]*\n## Support")) {
             r.regexpReplace("\n## Support", instructions + "\n## Support");
         }
@@ -57,11 +57,11 @@ export function readMeInstructions(
     example: string,
     exampleText: string,
     prerequisites?: string,
-    parameters?: string[]
+    parameters?: string[],
 ): string {
     let instructions: string = "\n### " + name + "\n\n";
     instructions += description + "\n\n";
-    if (prerequisites != null && prerequisites != "") {
+    if (prerequisites != null && prerequisites !== "") {
         instructions += "#### Prerequisites\n\n" + prerequisites + "\n\n";
     } else {
         instructions += "#### Prerequisites\n\nThis Rug has no prerequisites.\n\n";
@@ -71,7 +71,7 @@ export function readMeInstructions(
             + "Name | Required | Default | Description\n-----|----------|---------|------------\n"
             + parameters.join("\n") + "\n\n";
     } else {
-        instructions += "#### Parameters\n\n This Rug has no parameters.\n\n"
+        instructions += "#### Parameters\n\n This Rug has no parameters.\n\n";
     }
     instructions += "#### Running\n\nRun this Rug as follows:\n\n```\n"
         + example + "\n```\n\n" + exampleText + "\n";

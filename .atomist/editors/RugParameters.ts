@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-import { Pattern } from '@atomist/rug/operations/RugOperation';
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
 export const RugParameters = {
     Name: {
         displayName: "Rug Name",
         description: "name of a Rug",
         pattern: "^[A-Z][A-Za-z0-9]*$",
-        validInput: "a valid Rug name starting with a capital letter and containing only alphanumeric characters, from one to 100 characters long",
+        validInput: "a valid Rug name starting with a capital letter and containing only alphanumeric" +
+        " characters, from one to 100 characters long",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     },
     Description: {
         displayName: "Rug Description",
@@ -31,14 +32,17 @@ export const RugParameters = {
         pattern: Pattern.any,
         validInput: "free text",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     },
     GroupId: {
         displayName: "Rug Archive Group ID",
-        description: "Maven group identifier, often used to provide a namespace for your rugs, e.g., company-rugs, typically the GitHub owner",
+        description: "Maven group identifier, often used to provide a namespace for your rugs, e.g.," +
+        " company-rugs, typically the GitHub owner",
         pattern: Pattern.group_id,
-        validInput: "a valid Maven group ID, which starts with a letter, -, or _ and contains only alphanumeric, -, and _ characters and may having leading period separated identifiers starting with letters or underscores and containing only alphanumeric and _ characters",
+        validInput: "a valid Maven group ID, which starts with a letter, -, or _ and contains only alphanumeric," +
+        " -, and _ characters and may having leading period separated identifiers starting with letters or" +
+        " underscores and containing only alphanumeric and _ characters",
         minLength: 1,
-        maxLength: 100
-    }
+        maxLength: 100,
+    },
 };

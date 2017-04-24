@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-@Editor("ConvertExistingProjectToGenerator", "converts and existing project to a Rug archive project with a basic Generator")
+@Editor("ConvertExistingProjectToGenerator",
+    "converts and existing project to a Rug archive project with a basic Generator")
 @Tags("rug", "atomist")
 export class ConvertExistingProjectToGenerator implements EditProject {
 
@@ -29,19 +30,22 @@ export class ConvertExistingProjectToGenerator implements EditProject {
         pattern: Pattern.project_name,
         validInput: "a valid GitHub repo name containing only alphanumeric, ., -, and _ characters",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    archiveName: string;
+    public archiveName: string;
 
     @Parameter({
         displayName: "Rug Archive Group ID",
-        description: "Maven group identifier, often used to provide a namespace for your rugs, e.g., company-rugs, typically the GitHub owner",
+        description: "Maven group identifier, often used to provide a namespace for your rugs," +
+        " e.g., company-rugs, typically the GitHub owner",
         pattern: Pattern.group_id,
-        validInput: "a valid Maven group ID, which starts with a letter, -, or _ and contains only alphanumeric, -, and _ characters and may having leading period separated identifiers starting with letters or underscores and containing only alphanumeric and _ characters",
+        validInput: "a valid Maven group ID, which starts with a letter, -, or _ and contains only" +
+        " alphanumeric, -, and _ characters and may having leading period separated identifiers starting" +
+        " with letters or underscores and containing only alphanumeric and _ characters",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    groupId: string;
+    public groupId: string;
 
     @Parameter({
         displayName: "Rug Archive Version",
@@ -52,17 +56,18 @@ export class ConvertExistingProjectToGenerator implements EditProject {
         maxLength: 100,
         required: false,
     })
-    version: string = "0.1.0";
+    public version: string = "0.1.0";
 
     @Parameter({
         displayName: "Generator Name",
         description: "name of generator to add to Rug archive project",
         pattern: "^[A-Z][A-Za-z0-9]*$",
-        validInput: "a valid generator name starting with a capital letter and consisting of alphanumeric characters from one to 100 characters long",
+        validInput: "a valid generator name starting with a capital letter and consisting of" +
+        " alphanumeric characters from one to 100 characters long",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    generatorName: string;
+    public generatorName: string;
 
     @Parameter({
         displayName: "Generator Description",
@@ -70,11 +75,11 @@ export class ConvertExistingProjectToGenerator implements EditProject {
         pattern: Pattern.any,
         validInput: "a string between one and 100 characters",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    description: string;
+    public description: string;
 
-    edit(project: Project) {
+    public edit(project: Project) {
         if (project.fileExists(".atomist/manifest.yml")) {
             return;
         }

@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import { EditProject } from '@atomist/rug/operations/ProjectEditor';
-import { Project } from '@atomist/rug/model/Project';
-import { Pattern } from '@atomist/rug/operations/RugOperation';
-import { Editor, Parameter, Tags } from '@atomist/rug/operations/Decorators';
+import { Project } from "@atomist/rug/model/Project";
+import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { EditProject } from "@atomist/rug/operations/ProjectEditor";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { RugParameters } from './RugParameters';
+import { RugParameters } from "./RugParameters";
 
 @Editor("ConvertExistingProjectToRugArchive", "converts an existing project to a Rug archive project")
 @Tags("rug", "atomist")
@@ -31,12 +31,12 @@ export class ConvertExistingProjectToRugArchive implements EditProject {
         pattern: Pattern.project_name,
         validInput: "a valid GitHub repo name containing only alphanumeric, ., -, and _ characters",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    archiveName: string;
+    public archiveName: string;
 
     @Parameter(RugParameters.GroupId)
-    groupId: string;
+    public groupId: string;
 
     @Parameter({
         displayName: "Rug Archive Version",
@@ -47,9 +47,9 @@ export class ConvertExistingProjectToRugArchive implements EditProject {
         maxLength: 100,
         required: false,
     })
-    version: string = "0.1.0";
+    public version: string = "0.1.0";
 
-    edit(project: Project) {
+    public edit(project: Project) {
         project.editWith("AddManifestYml", this);
         project.editWith("AddTypeScript", {});
     }

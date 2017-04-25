@@ -1,13 +1,14 @@
-# Atomist 'rug-editors'
+# Atomist 'rug-rugs'
 
-[![Build Status](https://travis-ci.org/atomist/rug-editors.svg?branch=master)](https://travis-ci.org/atomist/rug-editors)
+[![Build Status](https://travis-ci.org/atomist/rug-rugs.svg?branch=master)](https://travis-ci.org/atomist/rug-rugs)
 [![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
 
 [rug]: http://docs.atomist.com/
 
 This [Rug][rug] project contains generators for creating a Rug archive
 project, editors to create a Rug archive project from an existing
-project, and editors to add Rugs to Rug projects.  Most meta.
+project, editors to add Rugs to Rug projects, and various Rug
+handlers.  Most meta.
 
 ## Rugs
 
@@ -35,7 +36,7 @@ Run this Rug as follows:
 
 ```
 $ cd project/directory
-$ rug edit atomist:rug-editors:AddLocalEditor \
+$ rug edit atomist:rug-rugs:AddLocalEditor \
     editorName=MyLocalEditor \
     description='does something useful'
 ```
@@ -74,7 +75,7 @@ Run it as follows:
 
 ```
 $ cd project/directory
-$ rug edit atomist:rug-editors:AddManifestYml \
+$ rug edit atomist:rug-rugs:AddManifestYml \
     archiveName=my-new-archive \
     groupId=my-rugs \
     version=2.71.828
@@ -104,7 +105,7 @@ Run it as follows:
 
 ```
 $ cd rug/project/directory
-$ rug edit atomist:rug-editors:AddTypeScript
+$ rug edit atomist:rug-rugs:AddTypeScript
 ```
 
 This will add `package.json`, `tsconfig.json`, and `.gitignore` files
@@ -144,7 +145,7 @@ Run it as follows:
 
 ```
 $ cd rug/project/directory
-$ rug edit atomist:rug-editors:AddTypeScriptEditor \
+$ rug edit atomist:rug-rugs:AddTypeScriptEditor \
     editorName=MyNewEditor \
     description="This is my newest editor... in TypeScript!"
 ```
@@ -179,7 +180,7 @@ Run it as follows:
 
 ```
 $ cd rug/project/directory
-$ rug edit atomist:rug-editors:AddTypeScriptGenerator \
+$ rug edit atomist:rug-rugs:AddTypeScriptGenerator \
     generatorName=MyNewGenerator \
     description="This is my newest generator."
 ```
@@ -215,7 +216,7 @@ Run it as follows:
 
 ```
 $ cd rug/project/directory
-$ rug edit atomist:rug-editors:AddTypeScriptCommandHandler \
+$ rug edit atomist:rug-rugs:AddTypeScriptCommandHandler \
     handlerName=MyNewCommandHandler \
     description="new command handler" \
     intent="run this"
@@ -253,7 +254,7 @@ Run it as follows:
 
 ```
 $ cd rug/project/directory
-$ rug edit atomist:rug-editors:AddTypeScriptEventHandler \
+$ rug edit atomist:rug-rugs:AddTypeScriptEventHandler \
     handlerName=MyNewEventHandler \
     description="new event handler" \
     pathExpression="/Issue()"
@@ -295,7 +296,7 @@ Run it as follows:
 
 ```
 $ cd project/directory
-$ rug edit atomist:rug-editors:ConvertExistingProjectToGenerator \
+$ rug edit atomist:rug-rugs:ConvertExistingProjectToGenerator \
     archiveName=my-new-archive \
     groupId=my-rugs \
     version=2.71.828 \
@@ -343,7 +344,7 @@ Run it as follows:
 
 ```
 $ cd project/directory
-$ rug edit atomist:rug-editors:ConvertExistingProjectToRugArchive \
+$ rug edit atomist:rug-rugs:ConvertExistingProjectToRugArchive \
     archiveName=my-new-archive \
     groupId=my-rugs \
     version=2.71.828
@@ -381,7 +382,7 @@ Run it as follows:
 
 ```
 $ cd parent/directory
-$ rug generate atomist:rug-editors:NewRugProject \
+$ rug generate atomist:rug-rugs:NewRugProject \
     ruggery \
     groupId=persian-rugs \
     description="Rug archive to hold my Rugs" \
@@ -421,7 +422,7 @@ Run it as follows:
 
 ```
 $ cd parent/directory
-$ rug generate atomist:rug-editors:NewStarterRugProject ruggery
+$ rug generate atomist:rug-rugs:NewStarterRugProject ruggery
 ```
 
 Note the project name parameter is different in that you do not need
@@ -461,7 +462,7 @@ Run it as follows:
 
 ```
 $ cd rug/project/directory
-$ rug edit atomist:rug-editors:UpdateSupportFiles
+$ rug edit atomist:rug-rugs:UpdateSupportFiles
 ```
 
 This will update `package.json`, `tsconfig.json`, `tslint.json`, and
@@ -484,7 +485,7 @@ at [atomist-community.slack.com][slack].
 
 If you find a problem, please create an [issue][].
 
-[issue]: https://github.com/atomist/rug-editors/issues
+[issue]: https://github.com/atomist/rug-rugs/issues
 
 ## Contributing
 
@@ -511,7 +512,7 @@ To clean up cached files and update TypeScript dependencies, run this
 command.
 
 ```
-$ ( cd .atomist && find editors generators handlers tests -name '*.js' -print0 | xargs -0 rm; rm -rf node_modules; npm install && rug clean )
+$ ( cd .atomist && find editors generators handlers tests -name '*.js' -print0 | xargs -0 rm; rm -rf node_modules; yarn && rug clean )
 ```
 
 To create a new release of the project, simply push a tag of the form

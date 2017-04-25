@@ -1,5 +1,5 @@
 group: atomist
-artifact: rug-editors
+artifact: rug-rugs
 version: "0.28.0"
 requires: "[0.26.1,0.27.0)"
 dependencies:

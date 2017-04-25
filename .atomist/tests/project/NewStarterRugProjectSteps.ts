@@ -58,7 +58,7 @@ Then("the change log contains the proper compare link", (p, world) => {
 });
 
 Then("not result fileContains CHANGELOG md rug editors for NewStarterRugProjectTestProject", (p, world) => {
-    return !p.fileContains("CHANGELOG.md", "rug-editors");
+    return !p.fileContains("CHANGELOG.md", "rug-rugs");
 });
 
 Then("not result fileContains CHANGELOG md 0 2 0 for NewStarterRugProjectTestProject", (p, world) => {
@@ -90,7 +90,7 @@ Then("fileContains README md pName for NewStarterRugProjectTestProject", (p, wor
 });
 
 Then("not result fileContains README md Atomist rug editors for NewStarterRugProjectTestProject", (p, world) => {
-    return !p.fileContains("README.md", "Atomist 'rug-editors'");
+    return !p.fileContains("README.md", "Atomist 'rug-rugs'");
 });
 
 Then("fileContains README md Atomist Rug archive project for NewStarterRugProjectTestProject", (p, world) => {

@@ -23,9 +23,9 @@ Feature: Tests from NewRugProject.rt
     Given an empty project
     When NewRugProject for NewRugProjectSetParameters
     Then parameters were valid
-    Then fileExists atomist manifest yml for NewRugProjectSetParameters
+    Then the Rug archive manifest file exists
     Then fileContains atomist manifest yml version for NewRugProjectSetParameters
-    Then fileContains atomist manifest yml pName for NewRugProjectSetParameters
+    Then the Rug archive manifest file contains the project name
     Then fileContains atomist manifest yml owner for NewRugProjectSetParameters
     Then not result fileExists CHANGELOG md for NewRugProjectSetParameters
     Then not result fileExists CODE OF CONDUCT md for NewRugProjectSetParameters
@@ -37,7 +37,7 @@ Feature: Tests from NewRugProject.rt
     Then not result fileContains README md editors to create a Rug archive project for NewRugProjectSetParameters
     Then not result fileContains README md AddTypeScript editor adds support files for NewRugProjectSetParameters
     Then fileContains README md https travis ci org owner pName svg branch master for NewRugProjectSetParameters
-    Then fileContains README md not Slack Status https join atomist com badge svg https join atomist com for NewRugProjectSetParameters
+    Then the README contains the Slack badge
     Then not result fileContains README md NewRugProject for NewRugProjectSetParameters
     Then not result fileContains README md ruggery for NewRugProjectSetParameters
     Then fileContains README md rug http docs atomist com for NewRugProjectSetParameters
@@ -51,9 +51,9 @@ Feature: Tests from NewRugProject.rt
     Given an empty project
     When NewRugProject for NewRugProjectDefaultParameters
     Then parameters were valid
-    Then fileExists atomist manifest yml for NewRugProjectDefaultParameters
+    Then the Rug archive manifest file exists
     Then fileContains atomist manifest yml 0 1 0 for NewRugProjectDefaultParameters
-    Then fileContains atomist manifest yml pName for NewRugProjectDefaultParameters
+    Then the Rug archive manifest file contains the project name
     Then fileContains atomist manifest yml owner for NewRugProjectDefaultParameters
     Then not result fileExists CHANGELOG md for NewRugProjectDefaultParameters
     Then not result fileExists CODE OF CONDUCT md for NewRugProjectDefaultParameters
@@ -65,7 +65,7 @@ Feature: Tests from NewRugProject.rt
     Then not result fileContains README md editors to create a Rug archive project for NewRugProjectDefaultParameters
     Then not result fileContains README md AddTypeScript editor adds support files for NewRugProjectDefaultParameters
     Then fileContains README md https travis ci org owner pName svg branch master for NewRugProjectDefaultParameters
-    Then fileContains README md not Slack Status https join atomist com badge svg https join atomist com for NewRugProjectDefaultParameters
+    Then the README contains the Slack badge
     Then not result fileContains README md NewRugProject for NewRugProjectDefaultParameters
     Then not result fileContains README md ruggery for NewRugProjectDefaultParameters
     Then fileContains README md rug http docs atomist com for NewRugProjectDefaultParameters

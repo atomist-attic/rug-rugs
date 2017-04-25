@@ -52,6 +52,8 @@ export class UpdateSupportFiles implements EditProject {
             project.copyEditorBackingFileOrFail(f);
         }
 
+        // TODO update manifest.yml requires
+
         const travisYml = project.findFile(".travis.yml");
         if (travisYml != null) {
             travisYml.regexpReplace("install:\\s*?-?\\s*?nvm install 6.9.2\\s*?\n",
@@ -66,7 +68,7 @@ export class UpdateSupportFiles implements EditProject {
             const pkgJsonObj = JSON.parse(project.findFile(tmpFile).content);
             project.deleteFile(tmpFile);
             const rugsName = "@atomist/rugs";
-            const rugsVersion = pkgJsonObj.dependencies[rugsName];
+            const rugsVersion: string = pkgJsonObj.dependencies[rugsName];
             pkgJson.regexpReplace(`"@atomist/rugs"\\s*:\\s*"[^"]+"(,?)`, `"@atomist/rugs": "${rugsVersion}"$1`);
             if (!pkgJson.containsMatch(`"test"\s*:\s*"rug test"`)) {
                 pkgJson.regexpReplace(`(?m)^  \}$`, `  },

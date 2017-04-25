@@ -15,88 +15,88 @@
  */
 
 import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
 import { addLocalEditor } from "../../editors/AddLocalEditor";
 
-let testEditorName = "TestEditorName";
-let testEditorDescription = "this is just a test";
-let testEditorGroup = "testing-group";
-let testEditorPath = `.atomist/editors/${testEditorName}.ts`;
+const testEditorName = "TestEditorName";
+const testEditorDescription = "this is just a test";
+const testEditorGroup = "testing-group";
+const testEditorPath = `.atomist/editors/${testEditorName}.ts`;
 
 When("edit with AddLocalEditor using defaults", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddLocalEditor");
-    psworld.editWith(editor, { editorName: testEditorName });
+    const w = world as ProjectScenarioWorld;
+    const editor = w.editor("AddLocalEditor");
+    w.editWith(editor, { editorName: testEditorName });
 });
 
 When("edit with AddLocalEditor using description", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddLocalEditor");
-    let params = {
+    const w = world as ProjectScenarioWorld;
+    const editor = w.editor("AddLocalEditor");
+    const params = {
         editorName: testEditorName,
         description: testEditorDescription,
-        groupId: testEditorGroup
-    }
-    psworld.editWith(editor, params);
+        groupId: testEditorGroup,
+    };
+    w.editWith(editor, params);
 });
 
-Then("the new editor file should exist", p => {
+Then("the new editor file should exist", (p) => {
     return p.fileExists(testEditorPath);
 });
 
-Then("the new editor file should contain the editor name", p => {
+Then("the new editor file should contain the editor name", (p) => {
     return p.fileContains(testEditorPath, `@Editor("${testEditorName}"`);
 });
 
-Then("the new editor file should contain the default description", p => {
+Then("the new editor file should contain the default description", (p) => {
     return p.fileContains(testEditorPath, `"${addLocalEditor.description}"`);
 });
 
-Then("the new editor file should contain the editor description", p => {
+Then("the new editor file should contain the editor description", (p) => {
     return p.fileContains(testEditorPath, `"${testEditorDescription}"`);
 });
 
-Then("the new editor file should contain the editor class", p => {
+Then("the new editor file should contain the editor class", (p) => {
     return p.fileContains(testEditorPath, `class ${testEditorName}`);
 });
 
-Then("the new editor file should contain the editor instance", p => {
+Then("the new editor file should contain the editor instance", (p) => {
     return p.fileContains(testEditorPath, `new ${testEditorName}()`);
 });
 
-Then("the new editor file should not contain the sample editor name", p => {
+Then("the new editor file should not contain the sample editor name", (p) => {
     return !p.fileContains(testEditorPath, "TypeScriptEditor");
 });
 
-Then("the new editor file should not contain the sample editor description", p => {
+Then("the new editor file should not contain the sample editor description", (p) => {
     return !p.fileContains(testEditorPath, "sample TypeScript editor used by");
 });
 
-Then("the new editor file should not contain the sample editor variable", p => {
+Then("the new editor file should not contain the sample editor variable", (p) => {
     return !p.fileContains(testEditorPath, "typeScriptEditor");
 });
 
-Then("the new editor feature file should exist", p => {
+Then("the new editor feature file should exist", (p) => {
     return p.fileExists(`.atomist/tests/project/${testEditorName}Test.feature`);
 });
 
-Then("the new editor test file should exist", p => {
+Then("the new editor test file should exist", (p) => {
     return p.fileExists(`.atomist/tests/project/${testEditorName}Steps.ts`);
 });
 
-Then("the Atomist directory should exist", p => {
+Then("the Atomist directory should exist", (p) => {
     return p.directoryExists(".atomist");
 });
 
-Then("the manifest file should exist", p => {
+Then("the manifest file should exist", (p) => {
     return p.fileExists(".atomist/manifest.yml");
 });
 
-Then("the npm package file should exist", p => {
+Then("the npm package file should exist", (p) => {
     return p.fileExists(".atomist/package.json");
 });
 
-Then("the TypeScript typings should exist", p => {
+Then("the TypeScript typings should exist", (p) => {
     return p.directoryExists(".atomist/node_modules/@atomist/rug");
 });

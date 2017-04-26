@@ -135,7 +135,7 @@ Then("the event handler file should use the proper type parameters", (p, world) 
 });
 
 Then("the event handler file should have the proper root node type", (p, world) => {
-    return p.fileContains(handlerPath, `const root: ${newRootNode} = event.root();`);
+    return p.fileContains(handlerPath, `const root: ${newRootNode} = event.root;`);
 });
 
 Then("the event handler file should not import the original root node", (p, world) => {
@@ -147,7 +147,7 @@ Then("the event handler file should not use the original type parameters", (p, w
 });
 
 Then("the event handler file should not have the original root node type", (p, world) => {
-    return !p.fileContains(handlerPath, "const root: Tag = event.root();");
+    return !p.fileContains(handlerPath, "const root: Tag = event.root;");
 });
 
 Then("the event handler file should define tags", (p, world) => {

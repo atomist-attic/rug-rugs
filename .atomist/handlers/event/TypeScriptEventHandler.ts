@@ -11,7 +11,7 @@ import { Tag } from "@atomist/cortex/Tag";
 @Tags("documentation")
 export class TypeScriptEventHandler implements HandleEvent<Tag, Tag> {
     public handle(event: Match<Tag, Tag>): EventPlan {
-        const root: Tag = event.root();
+        const root: Tag = event.root;
         const message = new DirectedMessage(`${root.nodeName()} event received`, new ChannelAddress("#general"));
         return EventPlan.ofMessage(message);
     }

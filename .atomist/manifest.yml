@@ -1,7 +1,7 @@
 group: atomist
 artifact: rug-rugs
-version: "0.28.0"
-requires: "[0.26.1,0.27.0)"
+version: "0.29.0"
+requires: "[1.0.0-m.1,2.0.0)"
 dependencies:
 extensions:
 excludes:

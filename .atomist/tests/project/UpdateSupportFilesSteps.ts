@@ -81,31 +81,3 @@ Then("there should not be deprecated CLI config files", (p: Project) => {
 Then("the travis build script should set team ID", (p: Project) => {
     return p.fileContains(".atomist/build/travis-build.bash", "export TEAM_ID=");
 });
-
-Then("the travis config should install yarn", (p: Project) => {
-    return p.fileContains(".travis.yml", "install: nvm install 6.9.2 && npm install -g yarn");
-});
-
-const packageJson = ".atomist/package.json";
-
-Then("the package file depends on the right rugs version", (p: Project) => {
-    const tmpFile = "package.tmp";
-    p.copyEditorBackingFileOrFailToDestination(packageJson, tmpFile);
-    const pkgJsonObj = JSON.parse(p.findFile(tmpFile).content);
-    p.deleteFile(tmpFile);
-    const rugsName = "@atomist/rugs";
-    const rugsVersion = pkgJsonObj.dependencies[rugsName];
-    return p.fileContains(packageJson, `"@atomist/rugs": "${rugsVersion}",`);
-});
-
-Then("the package tmp file should not exist", (p: Project) => {
-    return !p.fileExists(packageJson + ".tmp");
-});
-
-Then("the package file should still depend on mustache", (p: Project) => {
-    return p.fileContains(packageJson, `"mustache": "^2.3.0"`);
-});
-
-Then("the package file should provide a test script", (p: Project) => {
-    return p.fileContains(packageJson, `"test": "rug test"`);
-});

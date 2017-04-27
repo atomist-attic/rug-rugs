@@ -52,31 +52,17 @@ export class UpdateSupportFiles implements EditProject {
             project.copyEditorBackingFileOrFail(f);
         }
 
-        // TODO update manifest.yml requires
-
-        const travisYml = project.findFile(".travis.yml");
-        if (travisYml != null) {
-            travisYml.regexpReplace("install:\\s*?-?\\s*?nvm install 6.9.2\\s*?\n",
-                "install: nvm install 6.9.2 && npm install -g yarn && yarn global add tslint typescript\n");
-        }
+        /*
+        const manifestPath = ".atomist/manifest.yml";
+        const manifest = project.findFile(manifestPath);
+        const archiveManifest = manifestPath + "-archive";
+        project.copyEditorBackingFileOrFailToDestination(manifestPath, archiveManifest);
+        const archiveManifestContents = project.findFile(archiveManifest).content;
+        project.deleteFile(archiveManifest);
+        */
 
         const pkgJsonPath = ".atomist/package.json";
-        const pkgJson = project.findFile(pkgJsonPath);
-        if (pkgJson != null) {
-            const tmpFile = pkgJsonPath + ".tmp";
-            project.copyEditorBackingFileOrFailToDestination(pkgJsonPath, tmpFile);
-            const pkgJsonObj = JSON.parse(project.findFile(tmpFile).content);
-            project.deleteFile(tmpFile);
-            const rugsName = "@atomist/rugs";
-            const rugsVersion: string = pkgJsonObj.dependencies[rugsName];
-            pkgJson.regexpReplace(`"@atomist/rugs"\\s*:\\s*"[^"]+"(,?)`, `"@atomist/rugs": "${rugsVersion}"$1`);
-            if (!pkgJson.containsMatch(`"test"\s*:\s*"rug test"`)) {
-                pkgJson.regexpReplace(`(?m)^  \}$`, `  },
-  "scripts": {
-    "test": "rug test"
-  }`);
-            }
-        } else {
+        if (!project.fileExists(pkgJsonPath)) {
             project.copyEditorBackingFileOrFail(pkgJsonPath);
         }
     }

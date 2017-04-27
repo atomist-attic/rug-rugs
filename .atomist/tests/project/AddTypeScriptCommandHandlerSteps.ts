@@ -15,19 +15,19 @@
  */
 
 import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
 const handlerName = "MyNewHandler";
 const description = "This handler rocks";
 const intent = "rock and roll";
 
 When("AddTypeScriptCommandHandler is run", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddTypeScriptCommandHandler");
+    const psworld = world as ProjectScenarioWorld;
+    const editor = psworld.editor("AddTypeScriptCommandHandler");
     psworld.editWith(editor, {
-        handlerName: handlerName,
-        description: description,
-        intent: intent
+        handlerName,
+        description,
+        intent,
     });
 });
 

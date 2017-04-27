@@ -15,148 +15,161 @@
  */
 
 import { Project } from "@atomist/rug/model/Project";
-import { Given, When, Then, ProjectScenarioWorld } from "@atomist/rug/test/project/Core";
+import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
 When("AddManifestYml for AddManifestYml should add the Rug manifest", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddManifestYml");
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    psworld.editWith(editor, { archiveName: "my-rug-archive", groupId: "my-rug-group", version: "0.0.1", manifest: ".atomist/manifest.yml" });
+    const psworld = world as ProjectScenarioWorld;
+    const editor = psworld.editor("AddManifestYml");
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
+    psworld.editWith(editor, {
+        archiveName: "my-rug-archive",
+        groupId: "my-rug-group",
+        version: "0.0.1",
+        manifest: ".atomist/manifest.yml",
+    });
 });
 
 Then("fileExists manifest for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
     return p.fileExists(manifest);
 });
 
 Then("fileContains manifest artifact archiveName for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
     return p.fileContains(manifest, 'artifact: "' + archiveName + '"');
 });
 
 Then("fileContains manifest group groupId for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
     return p.fileContains(manifest, 'group: "' + groupId + '"');
 });
 
 Then("fileContains manifest version for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
     return p.fileContains(manifest, version);
 });
 
 Then("not result fileContains manifest rug editors for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    return !p.fileContains(manifest, "rug-editors");;
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
+    return !p.fileContains(manifest, "rug-editors");
 });
 
 Then("not result fileContains manifest atomist rugs for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    return !p.fileContains(manifest, "atomist");;
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
+    return !p.fileContains(manifest, "atomist");
 });
 
 Then("not result fileContains manifest repo for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    return !p.fileContains(manifest, "repo:");;
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
+    return !p.fileContains(manifest, "repo:");
 });
 
 Then("not result fileContains manifest branch for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    return !p.fileContains(manifest, "branch:");;
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
+    return !p.fileContains(manifest, "branch:");
 });
 
 Then("not result fileContains manifest sha for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    return !p.fileContains(manifest, "sha:");;
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
+    return !p.fileContains(manifest, "sha:");
 });
 
 Then("not result fileContains manifest for AddManifestYml should add the Rug manifest", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let version = "0.0.1";
-    let manifest = ".atomist/manifest.yml";
-    return !p.fileContains(manifest, "---");;
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const version = "0.0.1";
+    const manifest = ".atomist/manifest.yml";
+    return !p.fileContains(manifest, "---");
 });
 
 When("AddManifestYml for AddManifestYml should add the Rug manifest using default version", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddManifestYml");
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let manifest = ".atomist/manifest.yml";
-    psworld.editWith(editor, { archiveName: "my-rug-archive", groupId: "my-rug-group", manifest: ".atomist/manifest.yml" });
+    const psworld = world as ProjectScenarioWorld;
+    const editor = psworld.editor("AddManifestYml");
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const manifest = ".atomist/manifest.yml";
+    psworld.editWith(editor, {
+        archiveName: "my-rug-archive",
+        groupId: "my-rug-group",
+        manifest: ".atomist/manifest.yml",
+    });
 });
 
 Then("fileExists manifest for AddManifestYml should add the Rug manifest using default version", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let manifest = ".atomist/manifest.yml";
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const manifest = ".atomist/manifest.yml";
     return p.fileExists(manifest);
 });
 
-Then("fileContains manifest artifact archiveName for AddManifestYml should add the Rug manifest using default version", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let manifest = ".atomist/manifest.yml";
-    return p.fileContains(manifest, 'artifact: "' + archiveName + '"');
-});
+Then("fileContains manifest artifact archiveName for AddManifestYml should add the Rug manifest using default version",
+    (p, world) => {
+        const archiveName = "my-rug-archive";
+        const groupId = "my-rug-group";
+        const manifest = ".atomist/manifest.yml";
+        return p.fileContains(manifest, 'artifact: "' + archiveName + '"');
+    });
 
-Then("fileContains manifest group groupId for AddManifestYml should add the Rug manifest using default version", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let manifest = ".atomist/manifest.yml";
-    return p.fileContains(manifest, 'group: "' + groupId + '"');
-});
+Then("fileContains manifest group groupId for AddManifestYml should add the Rug manifest using default version",
+    (p, world) => {
+        const archiveName = "my-rug-archive";
+        const groupId = "my-rug-group";
+        const manifest = ".atomist/manifest.yml";
+        return p.fileContains(manifest, 'group: "' + groupId + '"');
+    });
 
 Then("fileContains manifest 0 1 0 for AddManifestYml should add the Rug manifest using default version", (p, world) => {
-    let archiveName = "my-rug-archive";
-    let groupId = "my-rug-group";
-    let manifest = ".atomist/manifest.yml";
+    const archiveName = "my-rug-archive";
+    const groupId = "my-rug-group";
+    const manifest = ".atomist/manifest.yml";
     return p.fileContains(manifest, "0.1.0");
 });
 
-When("AddManifestYml archiveName is my-rug-archive for AddManifestYml should fail if parameters are missing", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddManifestYml");
+When("AddManifestYml archiveName is my-rug-archive for AddManifestYml should fail if parameters are missing",
+    (p, world) => {
+        const psworld = world as ProjectScenarioWorld;
+        const editor = psworld.editor("AddManifestYml");
 
-    psworld.editWith(editor, { archiveName: "my-rug-archive" });
-});
+        psworld.editWith(editor, { archiveName: "my-rug-archive" });
+    });
 
-When("AddManifestYml archiveName is my-rug-archive, groupId is my-rug-group, version is 0.0.1 for AddManifestYml should make no change if project already contains a manifest", (p, world) => {
-    let psworld = world as ProjectScenarioWorld;
-    let editor = psworld.editor("AddManifestYml");
+When("AddManifestYml archiveName is my-rug-archive, groupId is my-rug-group, version is 0.0.1 for AddManifestYml" +
+    " should make no change if project already contains a manifest", (p, world) => {
+        const psworld = world as ProjectScenarioWorld;
+        const editor = psworld.editor("AddManifestYml");
 
-    psworld.editWith(editor, { archiveName: "my-rug-archive", groupId: "my-rug-group", version: "0.0.1" });
-});
+        psworld.editWith(editor, { archiveName: "my-rug-archive", groupId: "my-rug-group", version: "0.0.1" });
+    });
 
 Then("the gitignore file should ignore npm debug log", (p, world) => {
     return p.fileContains(".atomist/.gitignore", "npm-debug.log");

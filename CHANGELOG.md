@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist/rug-rugs/compare/0.29.0...HEAD
 
+### Changed
+
+-   Improved sample BDD tests to result in more tslint compliant tests
+    when used by editors
+
 ### Added
 
 -   Command handler `show latest versions` that displays the latest versions

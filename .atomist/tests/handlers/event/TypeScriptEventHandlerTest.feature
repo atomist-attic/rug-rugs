@@ -1,7 +1,8 @@
 Feature: TypeScriptEventHandler handler handles events
-  The TypeScriptEventHandler event handler should
-  respond with the appropriate message.
-  This is a sample test.
+  This is the sample Gherkin feature file for the BDD tests of
+  the sample TypeScript event handler used by AddTypeScriptEventHandler.
+  Feel free to modify and extend to suit the needs of your handler.
+
 
   Scenario: Executing a sample event handler
     Given the TypeScriptEventHandler is registered

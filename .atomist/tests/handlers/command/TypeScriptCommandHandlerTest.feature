@@ -1,7 +1,8 @@
 Feature: TypeScriptCommandHandler handlers responds to commands
-  The TypeScriptCommandHandler command handler should
-  respond with the appropriate message.
-  This is a sample test.
+  This is the sample Gherkin feature file for the BDD tests of
+  the sample TypeScript command handler used by AddTypeScriptCommandHandler.
+  Feel free to modify and extend to suit the needs of your handler.
+
 
   Scenario: Executing a sample command handler
     Given nothing

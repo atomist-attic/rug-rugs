@@ -1,5 +1,7 @@
 import { ResponseMessage } from "@atomist/rug/operations/Handlers";
-import { CommandHandlerScenarioWorld, Given, Then, When } from "@atomist/rug/test/handler/Core";
+import {
+    CommandHandlerScenarioWorld, Given, Then, When,
+} from "@atomist/rug/test/handler/Core";
 
 Given("nothing", (f) => { return; });
 

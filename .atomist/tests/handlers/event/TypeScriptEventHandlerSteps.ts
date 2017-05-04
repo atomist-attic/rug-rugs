@@ -1,5 +1,7 @@
 import { DirectedMessage } from "@atomist/rug/operations/Handlers";
-import { EventHandlerScenarioWorld, Given, Then, When } from "@atomist/rug/test/handler/Core";
+import {
+    EventHandlerScenarioWorld, Given, Then, When,
+} from "@atomist/rug/test/handler/Core";
 
 import { Tag } from "@atomist/cortex/stub/Tag";
 
@@ -17,4 +19,5 @@ Then("the TypeScriptEventHandler event handler should respond with the correct m
         const expected = `Tag event received`;
         const message = (w.plan().messages[0] as DirectedMessage).body;
         return message === expected;
-    });
+    },
+);

@@ -1,8 +1,23 @@
 {
   "dependencies": {
-    "@atomist/rugs": "^1.0.0-m.1"
+    "@atomist/rugs": "^1.0.0-m.3"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.40",
+    "@types/power-assert": "^1.4.29",
+    "espower-typescript": "^8.0.0",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "tslint": "^5.0.0",
+    "typescript": "2.3.2",
+    "yarn": "^0.23.4"
+  },
+  "directories": {
+    "test": "mocha"
   },
   "scripts": {
-    "test": "rug test"
+    "mocha": "mocha --compilers ts:espower-typescript/guess 'mocha/**/*.ts'",
+    "test": "yarn run mocha && rug test",
+    "lint": "tslint '**/*.ts' --exclude 'node_modules/**' -t verbose"
   }
 }

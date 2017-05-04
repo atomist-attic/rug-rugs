@@ -4,7 +4,7 @@
 set -o pipefail
 
 declare Pkg=travis-build
-declare Version=0.5.0
+declare Version=0.6.0
 
 function msg() {
     echo "$Pkg: $*"
@@ -24,24 +24,19 @@ function main () {
         return 1
     fi
 
-    local version
-    version=$(echo "$formula" | awk '$1 == "version" { print $2 }' | sed 's/"//g')
-    if [[ $? -ne 0 || ! $version ]]; then
-        version=$(echo "$formula" | sed -En '/^ *url /s/.*\/([0-9]+\.[0-9]+\.[0-9]+(-(m|rc)\.[0-9]+)?)\/.*/\1/p')
-        if [[ $? -ne 0 || ! $version ]]; then
-            err "failed to parse brew formula for version: $version"
+    local cli_version
+    cli_version=$(echo "$formula" | awk '$1 == "version" { print $2 }' | sed 's/"//g')
+    if [[ $? -ne 0 || ! $cli_version ]]; then
+        cli_version=$(echo "$formula" | sed -En '/^ *url /s/.*\/([0-9]+\.[0-9]+\.[0-9]+(-(m|rc)\.[0-9]+)?)\/.*/\1/p')
+        if [[ $? -ne 0 || ! $cli_version ]]; then
+            err "failed to parse brew formula for version: $cli_version"
             err "$formula"
             return 1
         fi
     fi
-    msg "rug CLI version: $version"
+    msg "rug CLI version: $cli_version"
 
-    if ! ( cd .atomist && tslint '**/*.ts' --exclude 'node_modules/**' ); then
-        err "tslint failed"
-        return 1
-    fi
-
-    local rug=$HOME/.atomist/rug-cli-$version/bin/rug
+    local rug=$HOME/.atomist/rug-cli-$cli_version/bin/rug
     if [[ ! -x $rug ]]; then
         msg "downloading rug CLI"
         if ! mkdir -p "$HOME/.atomist"; then
@@ -49,8 +44,8 @@ function main () {
             return 1
         fi
 
-        local rug_cli_url=https://github.com/atomist/rug-cli/releases/download/$version/rug-cli-$version-bin.tar.gz
-        local rug_cli_tgz=$HOME/.atomist/rug-cli-$version.tar.gz
+        local rug_cli_url=https://github.com/atomist/rug-cli/releases/download/$cli_version/rug-cli-$cli_version-bin.tar.gz
+        local rug_cli_tgz=$HOME/.atomist/rug-cli-$cli_version.tar.gz
         if ! curl -s -f -L -o "$rug_cli_tgz" "$rug_cli_url"; then
             err "failed to download rug CLI from $rug_cli_url"
             return 1
@@ -66,9 +61,25 @@ function main () {
 
     if [[ -f .atomist/package.json ]]; then
         msg "running yarn"
-        if ! ( cd .atomist && yarn ); then
+        # this should use --frozen-lockfile but
+        # https://github.com/yarnpkg/yarn/issues/3313
+        if ! ( cd .atomist && yarn --pure-lockfile ); then
             err "yarn failed"
             return 1
+        fi
+
+        msg "running lint"
+        if ! ( cd .atomist && yarn run lint ); then
+            err "tslint failed"
+            return 1
+        fi
+
+        if [[ -d .atomist/mocha ]]; then
+            msg "running mocha tests"
+            if ! ( cd .atomist && yarn run mocha ); then
+                err "mocha tests failed"
+                return 1
+            fi
         fi
     fi
 
@@ -122,6 +133,7 @@ function main () {
         msg "publishing archive to $TEAM_ID"
         if ! $rug publish -a "$project_version"; then
             err "failed to publish archive $project_version"
+            git diff
             return 1
         fi
 

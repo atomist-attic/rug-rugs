@@ -477,6 +477,42 @@ $ ( cd .atomist && yarn )
 
 [yarn]: https://yarnpkg.com/
 
+## ShowLatestVersions
+
+The ShowLatestVerrsions command handler displays the latest versions of
+`com.atomist:rug` and `@atomist/rugs` in Slack. 
+
+### Parameters
+
+This command handler has no parameters.
+
+### Running
+
+Run it as follows:
+
+```
+@atomist show latest versions
+```
+
+This will print the following output:
+
+```
+Lastest version of com.atomist:rug is 1.0.0-m.2 and @atomist/rugs is 1.0.0-m.3.
+In .atomist/manifest.yml use:
+
+requires: "[1.0.0-m.2,2.0.0)"
+
+and in .atomist/package.json use:
+
+{
+    "dependencies": {
+        "@atomist/rugs": "^1.0.0-m.3"
+   }
+}
+
+Latest Rug CLI version is 1.0.0-m.1.
+```
+
 ## Support
 
 General support questions should be discussed in the `#support`

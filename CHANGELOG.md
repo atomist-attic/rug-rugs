@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist/rug-rugs/compare/0.29.0...HEAD
 
+### Added
+
+-   Command handler `show latest versions` that displays the latest versions
+    of `com.atomist:rug` and `@atomist/rugs`
+
 ## [0.29.0] - 2017-04-26
 
 [0.29.0]: https://github.com/atomist/rug-rugs/compare/0.28.0...0.29.0

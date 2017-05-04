@@ -24,7 +24,7 @@ import {
 } from "@atomist/rug/operations/Handlers";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { HttpGet } from "../../util/HttpClient";
+import { HttpGet } from "../util/HttpClient";
 
 const rugUrl = "https://atomist.jfrog.io/atomist/rugs/com/atomist/rug/[RELEASE]/rug-[RELEASE].pom";
 const rugCliUrl = "https://atomist.jfrog.io/atomist/rugs/com/atomist/rug-cli/[RELEASE]/rug-cli-[RELEASE].pom";
@@ -34,7 +34,7 @@ const rugsUrl = "https://registry.npmjs.org/@atomist%2Frugs/";
 /**
  * Shows the latest versions for rug and rugs.
  */
-@CommandHandler("ShowLatestVersions", "Shows the latest versions for rug and rugs")
+@CommandHandler("ShowLatestVersions", "Shows the latest versions for rug, @atomist/rugs and Rug CLI")
 @Tags("community", "rug")
 @Intent("show latest versions")
 export class GetLatestVersions implements HandleCommand {
@@ -75,7 +75,7 @@ class ReceiveRugResponse implements HandleResponse<string> {
 @ResponseHandler("ReceiveRugCliResponse", "Receive the pom.xml for the latest Rug CLI release")
 class ReceiveRugCliResponse implements HandleResponse<string> {
 
-    @Parameter({ description: "Rug version from JFrog", pattern: "^.*$" })
+    @Parameter({ description: "Rug version from JFrog", pattern: Pattern.semantic_version })
     public rugVersion: string;
 
     public handle(response: Response<string>): CommandPlan {
@@ -98,10 +98,10 @@ class ReceiveRugCliResponse implements HandleResponse<string> {
 @ResponseHandler("ReceiveNpmResponse", "Receive JSON for the latest @atomist/rugs release")
 class ReceiveNpmResponse implements HandleResponse<any> {
 
-    @Parameter({ description: "Rug version from JFrog", pattern: "^.*$" })
+    @Parameter({ description: "Rug version from JFrog", pattern: Pattern.semantic_version })
     public rugVersion: string;
 
-    @Parameter({ description: "Rug CLI version from JFrog", pattern: "^.*$" })
+    @Parameter({ description: "Rug CLI version from JFrog", pattern: Pattern.semantic_version })
     public rugCliVersion: string;
 
     public handle( @ParseJson response: Response<any>): CommandPlan {
@@ -145,7 +145,7 @@ function getVersion(pom: string): string {
 function revVersion(version: string): string {
     const parts = version.split(".", 2);
     console.log(parts[0]);
-    const major = parseInt(parts[0]);
+    const major = parseInt(parts[0], 10);
     return `${major + 1}.0.0`;
 }
 

@@ -18,6 +18,7 @@ import {
     CommandPlan, CommandRespondable, Execute, HandleCommand, HandlerContext,
     Respond, ResponseMessage,
 } from "@atomist/rug/operations/Handlers";
+import { GenericErrorHandler, handleErrors } from "@atomist/rugs/operations/CommonHandlers";
 
 export type Method = "post" | "get" | "patch" | "delete" | "put" | "head";
 
@@ -40,6 +41,8 @@ export class HttpRequest implements CommandRespondable<Execute> {
                 },
             },
         };
+        // Add default error handler
+        handleErrors(this);
     }
 }
 
@@ -48,7 +51,6 @@ export class HttpGet extends HttpRequest {
     constructor(url: string, headers?: {}, body?: any) {
         super("get", url, headers, body);
     }
-
 }
 
 export class HttpPost extends HttpRequest {
@@ -56,5 +58,6 @@ export class HttpPost extends HttpRequest {
     constructor(url: string, headers?: {}, body?: any) {
         super("post", url, headers, body);
     }
-
 }
+
+export let errorHandler = new GenericErrorHandler();

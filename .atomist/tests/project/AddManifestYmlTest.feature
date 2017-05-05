@@ -58,7 +58,7 @@ Feature: Tests from AddManifestYml.rt
 
 
   Scenario: AddManifestYml should make no change if project already contains a manifest
-    Given the archive root
+    Given a Rug archive manifest
     When AddManifestYml archiveName is my-rug-archive, groupId is my-rug-group, version is 0.0.1 for AddManifestYml should make no change if project already contains a manifest
     Then parameters were valid
     Then no changes were made

@@ -19,10 +19,15 @@ import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/proje
 
 const target = ".atomist/editors/TypeScriptEditor.ts";
 
-When("HavePathExpressionEngine is run on TypeScriptEditor", (p, world) => {
-    const psworld = world as ProjectScenarioWorld;
-    const editor = psworld.editor("HavePathExpressionEngine");
-    psworld.editWith(editor, { rugName: "TypeScriptEditor", target });
+Given("a TypeScript editor", (p: Project, world) => {
+    const w = world as ProjectScenarioWorld;
+    p.copyEditorBackingFileOrFail(target);
+});
+
+When("HavePathExpressionEngine is run on TypeScriptEditor", (p: Project, world) => {
+    const w = world as ProjectScenarioWorld;
+    const editor = w.editor("HavePathExpressionEngine");
+    w.editWith(editor, { rugName: "TypeScriptEditor", target });
 });
 
 Then("TypeScriptEditor has a path expression const", (p, world) => {

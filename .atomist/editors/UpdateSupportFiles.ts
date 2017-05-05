@@ -52,15 +52,6 @@ export class UpdateSupportFiles implements EditProject {
             project.copyEditorBackingFileOrFail(f);
         }
 
-        /*
-        const manifestPath = ".atomist/manifest.yml";
-        const manifest = project.findFile(manifestPath);
-        const archiveManifest = manifestPath + "-archive";
-        project.copyEditorBackingFileOrFailToDestination(manifestPath, archiveManifest);
-        const archiveManifestContents = project.findFile(archiveManifest).content;
-        project.deleteFile(archiveManifest);
-        */
-
         const pkgJsonPath = ".atomist/package.json";
         if (!project.fileExists(pkgJsonPath)) {
             project.copyEditorBackingFileOrFail(pkgJsonPath);

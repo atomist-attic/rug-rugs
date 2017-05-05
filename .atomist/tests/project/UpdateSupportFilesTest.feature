@@ -39,24 +39,6 @@ Feature: Keep TypeScript support and build files up to date
     Then the travis build script should set team ID
 
 
-  Scenario: UpdateSupportFiles should overwrite existing files
-    Given the archive root
-    When edit with UpdateSupportFiles
-    Then parameters were valid
-    Then changes were made
-    Then there should be a package file
-    Then the package file depends on rugs
-    Then there should be a tsconfig file
-    Then the tsconfig file should have standard contents
-    Then the tsconfig file should set output directory
-    Then there should be a gitignore file
-    Then the gitignore file should ignore npm logs
-    Then there should be a tslint file
-    Then there should be a CLI config file
-    Then there should not be deprecated CLI config files
-    Then the travis build script should set team ID
-
-
   Scenario: UpdateSupportFile should not make changes if the target project is not a Rug archive
     Given an empty project
     When edit with UpdateSupportFiles

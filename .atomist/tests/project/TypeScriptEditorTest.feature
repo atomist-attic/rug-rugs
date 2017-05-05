@@ -5,7 +5,7 @@ Feature: Make sure the sample TypeScript Editor has some tests
 
 
   Scenario: TypeScriptEditor should edit a project correctly
-    Given the archive root
+    Given an empty project
     When the TypeScriptEditor is run
     Then parameters were valid
     Then changes were made

@@ -17,256 +17,113 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-When("AddTypeScriptEditor editorNameisMyNewEditor, descriptionisThe newest of the new for AddTypeScriptEditor" +
-    " should add a TypeScript editor to a Rug archive", (p, world) => {
-        const psworld = world as ProjectScenarioWorld;
-        const editor = psworld.editor("AddTypeScriptEditor");
-
-        psworld.editWith(editor, { editorName: "MyNewEditor", description: "The newest of the new" });
-    });
-
-Then("fileExists atomist editors MyNewEditor ts for AddTypeScriptEditor should add a TypeScript editor" +
-    " to a Rug archive", (p, world) => {
-        return p.fileExists(".atomist/editors/MyNewEditor.ts");
-    });
-
-Then("fileContains atomist editors MyNewEditor ts Editor MyNewEditor for AddTypeScriptEditor should add a" +
-    " TypeScript editor to a Rug archive", (p, world) => {
-        return p.fileContains(".atomist/editors/MyNewEditor.ts", '@Editor("MyNewEditor"');
-    });
-
-Then("fileContains atomist editors MyNewEditor ts description for AddTypeScriptEditor should add a TypeScript" +
-    " editor to a Rug archive", (p, world) => {
-        const description = "The newest of the new";
-        return p.fileContains(".atomist/editors/MyNewEditor.ts", '"' + description + '"');
-    });
-
-Then("fileContains atomist editors MyNewEditor ts class MyNewEditor for AddTypeScriptEditor should add a" +
-    " TypeScript editor to a Rug archive", (p, world) => {
-        return p.fileContains(".atomist/editors/MyNewEditor.ts", "class MyNewEditor");
-    });
-
-Then("fileContains atomist editors MyNewEditor ts new MyNewEditor for AddTypeScriptEditor should add a" +
-    " TypeScript editor to a Rug archive", (p, world) => {
-        return p.fileContains(".atomist/editors/MyNewEditor.ts", "new MyNewEditor()");
-    });
-
-Then("not result fileContains atomist editors MyNewEditor ts TypeScriptEditor for AddTypeScriptEditor" +
-    " should add a TypeScript editor to a Rug archive", (p, world) => {
-        return !p.fileContains(".atomist/editors/MyNewEditor.ts", "TypeScriptEditor");
-    });
-
-Then("not result fileContains atomist editors MyNewEditor ts sample TypeScript editor used by for AddTypeScriptEditor"
-    + " should add a TypeScript editor to a Rug archive", (p, world) => {
-        return !p.fileContains(".atomist/editors/MyNewEditor.ts", "sample TypeScript editor used by");
-    });
-
-Then("not result fileContains atomist editors MyNewEditor ts helloTypeScript for AddTypeScriptEditor should" +
-    " add a TypeScript editor to a Rug archive", (p, world) => {
-        return !p.fileContains(".atomist/editors/MyNewEditor.ts", "helloTypeScript");
-    });
-
-Then("fileExists atomist tests project MyNewEditorTest ts for AddTypeScriptEditor should add a TypeScript" +
-    " editor to a Rug archive", (p, world) => {
-        return p.fileExists(".atomist/tests/project/MyNewEditorSteps.ts");
-    });
-
-Then("fileContains atomist tests project MyNewEditorTest ts scenario MyNewEditor for AddTypeScriptEditor" +
-    " should add a TypeScript editor to a Rug archive", (p, world) => {
-        return p.fileContains(".atomist/tests/project/MyNewEditorTest.feature", "Scenario: MyNewEditor");
-    });
-
-Then("not result fileContains atomist tests project MyNewEditorTest ts TypeScriptEditor for AddTypeScriptEditor" +
-    " should add a TypeScript editor to a Rug archive", (p, world) => {
-        return !p.fileContains(".atomist/tests/project/MyNewEditorSteps.ts", "TypeScriptEditor");
-    });
-
-Then("fileExists README md for AddTypeScriptEditor should add a TypeScript editor to a Rug archive", (p, world) => {
-
-    return p.fileExists("README.md");
+Given("a Rug README", (p: Project) => {
+    p.copyEditorBackingFileOrFail("README.md");
 });
 
-Then("fileContains README md MyNewEditor for AddTypeScriptEditor should add a TypeScript editor to a Rug archive",
-    (p, world) => {
-
-        return p.fileContains("README.md", "### MyNewEditor");
-    });
-
-Then("fileContains README md The newest of the new for AddTypeScriptEditor should add a TypeScript editor" +
-    " to a Rug archive", (p, world) => {
-        return p.fileContains("README.md", "The newest of the new");
-    });
-
-Then("fileContains README md Put your editor prerequisites here for AddTypeScriptEditor should add a" +
-    " TypeScript editor to a Rug archive", (p, world) => {
-        return p.fileContains("README.md", "Put your editor prerequisites here.");
-    });
-
-Then("fileContains README md inputParameter Yes Example input parameter for AddTypeScriptEditor should add" +
-    " a TypeScript editor to a Rug archive", (p, world) => {
-        return p.fileContains("README.md", "`inputParameter` | Yes | | Example input parameter");
-    });
-
-Then("fileContains README md MyNewEditor usage for AddTypeScriptEditor should add a TypeScript editor to a Rug archive",
-    (p, world) => {
-        return p.fileContains("README.md", "-l MyNewEditor ");
-    });
-
-Then("fileContains README md Explain what your editor does here for AddTypeScriptEditor should add a TypeScript" +
-    " editor to a Rug archive", (p, world) => {
-        return p.fileContains("README.md", "Explain what your editor does here.");
-    });
-
-Given("a file named .atomist/manifest.yml for AddTypeScriptEditor should add a TypeScript editor even if no README",
-    (p) => {
-        p.addFile(".atomist/manifest.yml", `group: test-rugs
-artifact: test-manifest
-version: "0.1.0"
-requires: "[0.12.0,1.0.0)"
-dependencies:
-extensions:
-`);
-    });
-
-Given("a file named .atomist/package.json for AddTypeScriptEditor should add a TypeScript editor even if no README",
-    (p) => {
-        p.addFile(".atomist/package.json", `{"dependencies":{"@atomist/rug":"0.12.0"}}`);
-    });
-
-When("AddTypeScriptEditor editorNameisMyNewEditor, descriptionisThe newest of the new for AddTypeScriptEditor" +
-    " should add a TypeScript editor even if no README", (p, world) => {
-        const psworld = world as ProjectScenarioWorld;
-        const editor = psworld.editor("AddTypeScriptEditor");
-
-        psworld.editWith(editor, { editorName: "MyNewEditor", description: "The newest of the new" });
-    });
-
-Then("fileExists atomist editors MyNewEditor ts for AddTypeScriptEditor should add a TypeScript editor even" +
-    " if no README", (p, world) => {
-        return p.fileExists(".atomist/editors/MyNewEditor.ts");
-    });
-
-Then("fileContains atomist editors MyNewEditor ts Editor MyNewEditor for AddTypeScriptEditor should add a" +
-    " TypeScript editor even if no README", (p, world) => {
-        return p.fileContains(".atomist/editors/MyNewEditor.ts", '@Editor("MyNewEditor"');
-    });
-
-Then("fileContains atomist editors MyNewEditor ts description for AddTypeScriptEditor should add a TypeScript" +
-    " editor even if no README", (p, world) => {
-        const description = "The newest of the new";
-        return p.fileContains(".atomist/editors/MyNewEditor.ts", '"' + description + '"');
-    });
-
-Then("fileContains atomist editors MyNewEditor ts class MyNewEditor for AddTypeScriptEditor should add" +
-    " a TypeScript editor even if no README", (p, world) => {
-        return p.fileContains(".atomist/editors/MyNewEditor.ts", "class MyNewEditor");
-    });
-
-Then("fileContains atomist editors MyNewEditor ts new MyNewEditor for AddTypeScriptEditor should add a TypeScript" +
-    " editor even if no README", (p, world) => {
-        return p.fileContains(".atomist/editors/MyNewEditor.ts", "new MyNewEditor()");
-    });
-
-Then("not result fileContains atomist editors MyNewEditor ts TypeScriptEditor for AddTypeScriptEditor should" +
-    " add a TypeScript editor even if no README", (p, world) => {
-        return !p.fileContains(".atomist/editors/MyNewEditor.ts", "TypeScriptEditor");
-    });
-
-Then("not result fileContains atomist editors MyNewEditor ts sample TypeScript editor used by for AddTypeScriptEditor" +
-    " should add a TypeScript editor even if no README", (p, world) => {
-        return !p.fileContains(".atomist/editors/MyNewEditor.ts", "sample TypeScript editor used by");
-    });
-
-Then("not result fileContains atomist editors MyNewEditor ts helloTypeScript for AddTypeScriptEditor should" +
-    " add a TypeScript editor even if no README", (p, world) => {
-        return !p.fileContains(".atomist/editors/MyNewEditor.ts", "helloTypeScript");
-    });
-
-Then("fileExists atomist tests project MyNewEditorTest ts for AddTypeScriptEditor should add a TypeScript" +
-    " editor even if no README", (p, world) => {
-        return p.fileExists(".atomist/tests/project/MyNewEditorSteps.ts");
-    });
-
-Then("fileContains atomist tests project MyNewEditorTest ts scenario MyNewEditor for AddTypeScriptEditor should" +
-    " add a TypeScript editor even if no README", (p, world) => {
-        return p.fileContains(".atomist/tests/project/MyNewEditorTest.feature", "Scenario: MyNewEditor");
-    });
-
-Then("not result fileContains atomist tests project MyNewEditorTest ts TypeScriptEditor for AddTypeScriptEditor" +
-    " should add a TypeScript editor even if no README", (p, world) => {
-        return !p.fileContains(".atomist/tests/project/MyNewEditorSteps.ts", "TypeScriptEditor");
-    });
-
-Then("not result fileExists README md for AddTypeScriptEditor should add a TypeScript editor even if no README",
-    (p, world) => {
-        return !p.fileExists("README.md");
-    });
-
-Given("a file named .atomist/package.json for AddTypeScriptEditor should not make any changes if the target project" +
-    " is not a Rug archive", (p) => {
-        p.addFile(".atomist/package.json", `{"dependencies":{"@atomist/rug":"0.12.0"}}`);
-    });
-
-When("AddTypeScriptEditor editorNameisSillyPerson, descriptionisDance! for AddTypeScriptEditor should not make any" +
-    " changes if the target project is not a Rug archive", (p, world) => {
-        const psworld = world as ProjectScenarioWorld;
-        const editor = psworld.editor("AddTypeScriptEditor");
-
-        psworld.editWith(editor, { editorName: "SillyPerson", description: "Dance!" });
-    });
-
-Given("a file named .atomist/manifest.yml for AddTypeScriptEditor should make ready for typescript if not ready",
-    (p) => {
-        p.addFile(".atomist/manifest.yml", `group: test-rugs
-artifact: test-manifest
-version: "0.1.0"
-requires: "[0.12.0,1.0.0)"
-dependencies:
-extensions:
-`);
-    });
-
-When("AddTypeScriptEditor editorNameisSillyPerson, descriptionisDance! for AddTypeScriptEditor should make ready" +
-    " for typescript if not ready", (p, world) => {
-        const psworld = world as ProjectScenarioWorld;
-        const editor = psworld.editor("AddTypeScriptEditor");
-        psworld.editWith(editor, { editorName: "SillyPerson", description: "Dance!" });
-    });
-
-Then("fileExists atomist editors SillyPerson ts for AddTypeScriptEditor should make ready for typescript if not ready",
-    (p, world) => {
-        return p.fileExists(".atomist/editors/SillyPerson.ts");
-    });
-
-Then("fileContains atomist editors SillyPerson ts Editor SillyPerson for AddTypeScriptEditor should make ready" +
-    " for typescript if not ready", (p, world) => {
-        return p.fileContains(".atomist/editors/SillyPerson.ts", '@Editor("SillyPerson"');
-    });
-
-Then("fileExists atomist package json for AddTypeScriptEditor should make ready for typescript if not ready",
-    (p, world) => {
-        return p.fileExists(".atomist/package.json");
-    });
-
-Given("a file named .atomist/manifest.yml for AddTypeScriptEditor should fail if no editor name provided", (p) => {
-    p.addFile(".atomist/manifest.yml", `group: test-rugs
-artifact: test-manifest
-version: "0.1.0"
-requires: "[0.12.0,1.0.0)"
-dependencies:
-extensions:
-`);
+Given("a Rug archive package.json", (p: Project) => {
+    p.addFile(".atomist/package.json", `{"dependencies":{"@atomist/rugs":"1.0.0"}}`);
 });
 
-Given("a file named .atomist/package.json for AddTypeScriptEditor should fail if no editor name provided",
-    (p) => {
-        p.addFile(".atomist/package.json", `{"dependencies":{"@atomist/rug":"0.12.0"}}`);
-    });
+const testEditorName = "JoeHenry";
+const testEditorDescription = "Richard Pryor addresses a tearful nation";
 
-When("AddTypeScriptEditor descriptionisDance! for AddTypeScriptEditor should fail if no editor name provided",
-    (p, world) => {
-        const psworld = world as ProjectScenarioWorld;
-        const editor = psworld.editor("AddTypeScriptEditor");
+When("AddTypeScriptEditor is run", (p: Project, world) => {
+    const w = world as ProjectScenarioWorld;
+    const editor = w.editor("AddTypeScriptEditor");
+    w.editWith(editor, { editorName: testEditorName, description: testEditorDescription });
+});
 
-        psworld.editWith(editor, { description: "Dance!" });
-    });
+When("AddTypeScriptEditor is run with no editor name provided", (p: Project, world) => {
+    const w = world as ProjectScenarioWorld;
+    const editor = w.editor("AddTypeScriptEditor");
+    w.editWith(editor, { description: "Pryor reprise" });
+});
+
+const testEditorPath = `.atomist/editors/${testEditorName}.ts`;
+
+Then("the editor file exists", (p: Project, world) => {
+    return p.fileExists(testEditorPath);
+});
+
+Then("the editor file contains the editor annotation", (p: Project, world) => {
+    return p.fileContains(testEditorPath, `@Editor("${testEditorName}"`);
+});
+
+Then("the editor file contains the description", (p: Project, world) => {
+    return p.fileContains(testEditorPath, `"${testEditorDescription}"`);
+});
+
+Then("the editor file contains the editor class", (p: Project, world) => {
+    return p.fileContains(testEditorPath, `class ${testEditorName}`);
+});
+
+Then("the editor file instantiates the class", (p: Project, world) => {
+    return p.fileContains(testEditorPath, `new ${testEditorName}()`);
+});
+
+Then("the editor file does not contain the original editor name", (p: Project, world) => {
+    return !p.fileContains(testEditorPath, "TypeScriptEditor");
+});
+
+Then("the editor file does not contain the original description", (p: Project, world) => {
+    return !p.fileContains(testEditorPath, "sample TypeScript editor used by");
+});
+
+Then("the editor file does not contain the original export", (p: Project, world) => {
+    return !p.fileContains(testEditorPath, "helloTypeScript");
+});
+
+const testEditorStepsPath = `.atomist/tests/project/${testEditorName}Steps.ts`;
+
+Then("the editor test steps file exists", (p: Project, world) => {
+    return p.fileExists(testEditorStepsPath);
+});
+
+const testEditorFeaturePath = `.atomist/tests/project/${testEditorName}Test.feature`;
+
+Then("the editor feature file has the proper scenario", (p: Project, world) => {
+    return p.fileContains(testEditorFeaturePath, `Scenario: ${testEditorName}`);
+});
+
+Then("the editor test steps file does not contain the original editor name", (p: Project, world) => {
+    return !p.fileContains(testEditorStepsPath, "TypeScriptEditor");
+});
+
+const readmePath = "README.md";
+
+Then("the README exists", (p: Project, world) => {
+    return p.fileExists(readmePath);
+});
+
+Then("the README contains a section for the editor", (p: Project, world) => {
+    return p.fileContains(readmePath, `### ${testEditorName}`);
+});
+
+Then("the README contains the editor description", (p: Project, world) => {
+    return p.fileContains(readmePath, testEditorDescription);
+});
+
+Then("the README contains default editor prerequisites", (p: Project, world) => {
+    return p.fileContains(readmePath, "Put your editor prerequisites here.");
+});
+
+Then("the README contains the editor parameter", (p: Project, world) => {
+    return p.fileContains(readmePath, "`inputParameter` | Yes | | Example input parameter");
+});
+
+Then("the README contains the editor usage", (p: Project, world) => {
+    return p.fileContains(readmePath, `-l ${testEditorName} `);
+});
+
+Then("the README contains default editor text", (p: Project, world) => {
+    return p.fileContains(readmePath, "Explain what your editor does here.");
+});
+
+Then("the README does not exist", (p: Project, world) => {
+    return !p.fileExists(readmePath);
+});
+
+Then("the Rug archive package.json exists", (p: Project, world) => {
+    return p.fileExists(".atomist/package.json");
+});

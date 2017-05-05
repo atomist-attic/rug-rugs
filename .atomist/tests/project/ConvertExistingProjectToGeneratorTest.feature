@@ -82,7 +82,7 @@ Feature: Tests from ConvertExistingProjectToGenerator.rt
 
 
   Scenario: ConvertExistingProjectToGenerator should make no change if project already contains a manifest
-    Given the archive root
+    Given a Rug archive manifest
     When ConvertExistingProjectToGenerator for ConvertExistingProjectToGenerator should make no change if project already contains a manifest
     Then parameters were valid
     Then no changes were made

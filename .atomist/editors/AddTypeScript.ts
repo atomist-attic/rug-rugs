@@ -38,7 +38,7 @@ export class AddTypeScript implements EditProject {
         project.copyEditorBackingFileOrFail(".atomist/package.json");
         project.copyEditorBackingFileOrFail(".atomist/tsconfig.json");
         project.copyEditorBackingFileOrFail(".atomist/tslint.json");
-        console.log("TypeScript files added, run `cd .atomist && npm install`");
+        console.log("TypeScript files added, run `cd .atomist && npm install -g yarn && yarn`");
     }
 }
 

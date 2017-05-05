@@ -20,7 +20,7 @@ Feature: Add a local editor to current project
 
 
   Scenario: AddLocalEditor should work using defaults
-    Given the archive root
+    Given a Rug archive manifest
     When edit with AddLocalEditor using defaults
     Then the new editor file should exist
     Then the new editor file should contain the editor name
@@ -35,7 +35,7 @@ Feature: Add a local editor to current project
 
 
   Scenario: AddLocalEditor should use the provided description
-    Given the archive root
+    Given a Rug archive manifest
     When edit with AddLocalEditor using description
     Then the new editor file should exist
     Then the new editor file should contain the editor name

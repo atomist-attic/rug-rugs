@@ -23,68 +23,67 @@ Feature: Add a TypeScript generator to an existing Rug project
     Given a Rug archive manifest
     Given a Rug archive package.json
     Given a Rug README
-    When AddTypeScriptGenerator generatorName is MyNewGenerator, description is Description of MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
+    When AddTypeScriptGenerator is run
     Then parameters were valid
     Then changes were made
-    Then fileExists atomist editors MyNewGenerator ts for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains atomist editors MyNewGenerator ts Generator MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains atomist editors MyNewGenerator ts description for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains atomist editors MyNewGenerator ts class MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains atomist editors MyNewGenerator ts new MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then not result fileContains atomist editors MyNewGenerator ts TypeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then not result fileContains atomist editors MyNewGenerator ts sample TypeScript generator used by for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then not result fileContains atomist editors MyNewGenerator ts typeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileExists atomist tests project MyNewGeneratorTest ts for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains atomist tests project MyNewGeneratorTest ts scenario MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then not result fileContains atomist tests project MyNewGeneratorTest ts TypeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileExists README md for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains README md MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains README md Description of MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains README md This Rug has no prerequisites for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains README md projectName Yes Name of project to be created for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains README md MyNewGenerator example for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Then fileContains README md Explain what your generator does here for AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
+    Then file at .atomist/generators/MyNewGenerator.ts should exist
+    Then file at .atomist/generators/MyNewGenerator.ts should contain @Generator("MyNewGenerator"
+    Then file at .atomist/generators/MyNewGenerator.ts should contain "description of MyNewGenerator"
+    Then file at .atomist/generators/MyNewGenerator.ts should contain class MyNewGenerator
+    Then file at .atomist/generators/MyNewGenerator.ts should contain new MyNewGenerator()
+    Then file at .atomist/generators/MyNewGenerator.ts should not contain TypeScriptGenerator
+    Then file at .atomist/generators/MyNewGenerator.ts should not contain sample TypeScript generator used by
+    Then file at .atomist/generators/MyNewGenerator.ts should not contain typeScriptGenerator
+    Then file at .atomist/tests/project/MyNewGeneratorSteps.ts should exist
+    Then file at .atomist/tests/project/MyNewGeneratorTest.feature should contain Scenario: MyNewGenerator
+    Then file at .atomist/tests/project/MyNewGeneratorSteps.ts should not contain TypeScriptGenerator
+    Then file at README.md should exist
+    Then file at README.md should contain ### MyNewGenerator
+    Then file at README.md should contain description of MyNewGenerator
+    Then file at README.md should contain This Rug has no prerequisites.
+    Then file at README.md should contain `projectName` | Yes | | Name of project to be created
+    Then file at README.md should contain -l MyNewGenerator
+    Then file at README.md should contain Explain what your generator does here.
 
 
   Scenario: AddTypeScriptGenerator should add a new TypeScript generator even if no README
     Given a Rug archive manifest
     Given a Rug archive package.json
-    When AddTypeScriptGenerator generatorName is MyNewGenerator, description is Description of MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README
+    When AddTypeScriptGenerator is run
     Then parameters were valid
     Then changes were made
-    Then fileExists atomist editors MyNewGenerator ts for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then fileContains atomist editors MyNewGenerator ts Generator MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then fileContains atomist editors MyNewGenerator ts description for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then fileContains atomist editors MyNewGenerator ts class MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then fileContains atomist editors MyNewGenerator ts new MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then not result fileContains atomist editors MyNewGenerator ts TypeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then not result fileContains atomist editors MyNewGenerator ts sample TypeScript generator used by for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then not result fileContains atomist editors MyNewGenerator ts typeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then fileExists atomist tests project MyNewGeneratorTest ts for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then fileContains atomist tests project MyNewGeneratorTest ts scenario MyNewGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then not result fileContains atomist tests project MyNewGeneratorTest ts TypeScriptGenerator for AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Then not result fileExists README md for AddTypeScriptGenerator should add a new TypeScript generator even if no README
+    Then file at .atomist/generators/MyNewGenerator.ts should exist
+    Then file at .atomist/generators/MyNewGenerator.ts should contain @Generator("MyNewGenerator"
+    Then file at .atomist/generators/MyNewGenerator.ts should contain "description of MyNewGenerator"
+    Then file at .atomist/generators/MyNewGenerator.ts should contain class MyNewGenerator
+    Then file at .atomist/generators/MyNewGenerator.ts should contain new MyNewGenerator()
+    Then file at .atomist/generators/MyNewGenerator.ts should not contain TypeScriptGenerator
+    Then file at .atomist/generators/MyNewGenerator.ts should not contain sample TypeScript generator used by
+    Then file at .atomist/generators/MyNewGenerator.ts should not contain typeScriptGenerator
+    Then file at .atomist/tests/project/MyNewGeneratorSteps.ts should exist
+    Then file at .atomist/tests/project/MyNewGeneratorTest.feature should contain Scenario: MyNewGenerator
+    Then file at .atomist/tests/project/MyNewGeneratorSteps.ts should not contain TypeScriptGenerator
+    Then file at README.md should not exist
 
 
   Scenario: AddTypeScriptGenerator should make no changes if no manifest.yml
     Given a Rug archive package.json
-    When AddTypeScriptGenerator generatorName is MyNewGenerator, description is Description of MyNewGenerator for AddTypeScriptGenerator should make no changes if no manifest.yml
-    Then parameters were valid
-    Then no changes were made
+    When AddTypeScriptGenerator is run
+    Then the scenario aborted
 
 
   Scenario: AddTypeScriptGenerator should add package.json if not preset
     Given a Rug archive manifest
-    When AddTypeScriptGenerator generatorName is MyNewGenerator, description is Description of MyNewGenerator for AddTypeScriptGenerator should add package.json if not preset
+    When AddTypeScriptGenerator is run
     Then parameters were valid
     Then changes were made
-    Then fileExists atomist editors MyNewGenerator ts for AddTypeScriptGenerator should add package json if not preset
-    Then fileExists atomist package json for AddTypeScriptGenerator should add package json if not preset
+    Then file at .atomist/generators/MyNewGenerator.ts should exist
+    Then file at .atomist/package.json should exist
 
 
   Scenario: AddTypeScriptGenerator should fail if no generator name provided
     Given a Rug archive manifest
     Given a Rug archive package.json
-    When AddTypeScriptGenerator descriptionisSomething wicked this way comes for AddTypeScriptGenerator should fail if no generator name provided
+    When AddTypeScriptGenerator is run without generator name
     Then parameters were invalid
     Then no changes were made

@@ -66,5 +66,4 @@ Feature: AddTypeScriptEventHandler should add a sample event handler
   Scenario: AddTypeScriptEventHandler should fail if not a Rug project
     Given an empty project
     When AddTypeScriptEventHandler is run with default path expression
-    Then parameters were valid
-    Then no changes were made
+    Then the scenario aborted

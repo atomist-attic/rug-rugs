@@ -42,4 +42,4 @@ Feature: Keep TypeScript support and build files up to date
   Scenario: UpdateSupportFile should not make changes if the target project is not a Rug archive
     Given an empty project
     When edit with UpdateSupportFiles
-    Then no changes were made
+    Then the scenario aborted

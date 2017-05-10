@@ -68,8 +68,7 @@ Feature: Add a TypeScript editor to an existing Rug project
   Scenario: AddTypeScriptEditor should not make any changes if the target project is not a Rug archive
     Given an empty project
     When AddTypeScriptEditor is run
-    Then parameters were valid
-    Then no changes were made
+    Then the scenario aborted
 
 
   Scenario: AddTypeScriptEditor should make ready for typescript if not ready

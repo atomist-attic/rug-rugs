@@ -27,8 +27,9 @@ export class AddTypeScript implements EditProject {
 
     public edit(project: Project) {
         if (!IsRugArchive(project)) {
-            console.log("This project does not appear to be a Rug archive project");
-            return;
+            const err = "project does not appear to be a Rug project";
+            console.log(err);
+            throw new Error(err);
         }
 
         if (IsSetUpForTypeScript(project)) {

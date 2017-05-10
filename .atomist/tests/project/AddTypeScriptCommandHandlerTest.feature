@@ -43,5 +43,4 @@ Feature: AddTypeScriptCommandHandler should add a sample command handler
   Scenario: AddTypeScriptCommandHandler should fail if not a Rug project
     Given an empty project
     When AddTypeScriptCommandHandler is run
-    Then parameters were valid
-    Then no changes were made
+    Then the scenario aborted

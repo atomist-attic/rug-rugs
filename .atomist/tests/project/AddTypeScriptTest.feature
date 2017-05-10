@@ -31,4 +31,4 @@ Feature: Ready Rug Project for TypeScript
   Scenario: AddTypeScript should not make changes if the target project is not a Rug archive
     Given an empty project
     When edit with AddTypeScript
-    Then no changes were made
+    Then the scenario aborted

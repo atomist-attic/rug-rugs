@@ -13,12 +13,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 -   Improved sample BDD tests to result in more tslint compliant tests
     when used by editors
+-   Editors throw exceptions when they cannot be applied to a project
+    because of a missing .atomist/manifest.yml [#51][51]
 
 ### Added
 
 -   Command handler `show latest versions` that displays the latest versions
     of `com.atomist:rug` and `@atomist/rugs`
 -   BumpVersion editor
+
+[51]: https://github.com/atomist/rug-rugs/issues/51
 
 ## [0.29.0] - 2017-04-26
 

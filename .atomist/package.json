@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@atomist/rugs": "^1.0.0-m.3"
+    "@atomist/rugs": "^1.0.0-m.4"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

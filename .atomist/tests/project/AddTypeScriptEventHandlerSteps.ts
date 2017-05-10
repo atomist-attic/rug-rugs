@@ -21,7 +21,7 @@ Given("a manifest file", (p) => {
     p.addFile(".atomist/manifest.yml", `group: test-rugs
 artifact: test-manifest
 version: "0.1.0"
-requires: "[0.18.2,1.0.0)"
+requires: "[0.18.2,0.99.99)"
 dependencies:
 extensions:
 `);

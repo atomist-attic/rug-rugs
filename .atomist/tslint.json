@@ -11,8 +11,7 @@
         ],
         "max-classes-per-file": false,
         "object-literal-sort-keys": false,
-        "no-console": false,
-        "radix": false
+        "no-console": false
     },
     "rulesDirectory": []
 }

@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 -   Command handler `show latest versions` that displays the latest versions
     of `com.atomist:rug` and `@atomist/rugs`
+-   BumpVersion editor
 
 ## [0.29.0] - 2017-04-26
 

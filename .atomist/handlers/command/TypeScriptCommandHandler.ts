@@ -5,7 +5,7 @@ import { Pattern } from "@atomist/rug/operations/RugOperation";
 /**
  * A sample TypeScript command handler used by AddTypeScriptCommandHandler.
  */
-@CommandHandler("TypeScriptCommandHandler", "sample TypeScript command handler used by AddTypeScriptCommandHandler")
+@CommandHandler("TypeScriptCommandHandler", "A sample TypeScript command handler used by AddTypeScriptCommandHandler")
 @Tags("documentation")
 @Intent("run TypeScriptCommandHandler")
 export class TypeScriptCommandHandler implements HandleCommand {
@@ -21,7 +21,7 @@ export class TypeScriptCommandHandler implements HandleCommand {
     })
     public inputParameter: string = "default value";
 
-    public handle(command: HandlerContext): CommandPlan {
+    public handle(context: HandlerContext): CommandPlan {
         const message = new ResponseMessage(`Successfully ran TypeScriptCommandHandler: ${this.inputParameter}`);
         return CommandPlan.ofMessage(message);
     }

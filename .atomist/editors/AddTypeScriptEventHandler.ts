@@ -72,7 +72,7 @@ export class AddTypeScriptEventHandler implements EditProject {
         project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
         project.copyEditorBackingFileOrFailToDestination(srcFeaturePath, featurePath);
 
-        const srcDescription = "sample TypeScript event handler used by AddTypeScriptEventHandler";
+        const srcDescription = "A sample TypeScript event handler used by AddTypeScriptEventHandler";
         const srcPathExpression = "/Tag()";
         const srcHandlerConstName = "typeScriptEventHandler";
         const handlerConstName = this.handlerName.charAt(0).toLowerCase() + this.handlerName.slice(1);

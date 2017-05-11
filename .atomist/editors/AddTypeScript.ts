@@ -19,20 +19,18 @@ import { Editor, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { IsRugArchive, IsSetUpForTypeScript } from "./RugEditorsPredicates";
+import { isRugArchive, isSetUpForTypeScript, NotRugArchiveError } from "./RugEditorsPredicates";
 
 @Editor("AddTypeScript", "adds TypeScript supporting files to a Rug archive project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScript implements EditProject {
 
     public edit(project: Project) {
-        if (!IsRugArchive(project)) {
-            const err = "project does not appear to be a Rug project";
-            console.log(err);
-            throw new Error(err);
+        if (!isRugArchive(project)) {
+            throw new NotRugArchiveError();
         }
 
-        if (IsSetUpForTypeScript(project)) {
+        if (isSetUpForTypeScript(project)) {
             return;
         }
 

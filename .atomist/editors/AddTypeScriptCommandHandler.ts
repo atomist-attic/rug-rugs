@@ -19,24 +19,24 @@ import { Project } from "@atomist/rug/model/Project";
 import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 
-import { IsRugArchive } from "./RugEditorsPredicates";
+import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
-@Editor("AddTypeScriptCommandHandler", "adds a TypeScript Rug event handler to a Rug project")
+@Editor("AddTypeScriptCommandHandler", "adds a TypeScript Rug command handler to a Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptCommandHandler implements EditProject {
 
     @Parameter({
         ...RugParameters.Name,
-        displayName: "Event Handler Name",
-        description: "name of new event handler to add to Rug project",
+        displayName: "Command Handler Name",
+        description: "name of new command handler to add to Rug project",
     })
     public handlerName: string;
 
     @Parameter({
         ...RugParameters.Description,
         displayName: "Handler Description",
-        description: "short description of event handler to add to Rug project",
+        description: "short description of command handler to add to Rug project",
     })
     public description: string;
 
@@ -51,10 +51,8 @@ export class AddTypeScriptCommandHandler implements EditProject {
     public intent: string;
 
     public edit(project: Project) {
-        if (!IsRugArchive(project)) {
-            const err = "project does not appear to be a Rug project";
-            console.log(err);
-            throw new Error(err);
+        if (!isRugArchive(project)) {
+            throw new NotRugArchiveError();
         }
 
         project.editWith("AddTypeScript", {});
@@ -71,7 +69,7 @@ export class AddTypeScriptCommandHandler implements EditProject {
         project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
         project.copyEditorBackingFileOrFailToDestination(srcFeaturePath, featurePath);
 
-        const srcDescription = "A sample TypeScript command handler used by AddTypeScriptCommandHandler";
+        const srcDescription = "sample TypeScript command handler used by AddTypeScriptCommandHandler";
         const srcIntent = `run ${srcHandlerName}`;
         const srcHandlerConstName = "typeScriptCommandHandler";
         const handlerConstName = this.handlerName.charAt(0).toLowerCase() + this.handlerName.slice(1);

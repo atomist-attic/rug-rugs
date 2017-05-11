@@ -20,7 +20,7 @@ import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { IsRugArchive } from "./RugEditorsPredicates";
+import { isRugArchive } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
 @Editor("AddManifestYml", "adds a Rug archive manifest")
@@ -52,7 +52,8 @@ export class AddManifestYml implements EditProject {
     public version: string = "0.1.0";
 
     public edit(project: Project) {
-        if (IsRugArchive(project)) {
+        if (isRugArchive(project)) {
+            console.log("project already appears to be a Rug archive project");
             return;
         }
 

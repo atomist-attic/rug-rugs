@@ -20,7 +20,7 @@ import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 
 import { addInstructionsToReadMe, readMeInstructions } from "./AddFunctions";
-import { IsRugArchive } from "./RugEditorsPredicates";
+import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
 @Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug project")
@@ -42,10 +42,8 @@ export class AddTypeScriptGenerator implements EditProject {
     public description: string;
 
     public edit(project: Project) {
-        if (!IsRugArchive(project)) {
-            const err = "project does not appear to be a Rug project";
-            console.log(err);
-            throw new Error(err);
+        if (!isRugArchive(project)) {
+            throw new NotRugArchiveError();
         }
 
         project.editWith("AddTypeScript", {});

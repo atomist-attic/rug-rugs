@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 -   Command handler `show latest versions` that displays the latest versions
     of `com.atomist:rug` and `@atomist/rugs`
 -   BumpVersion editor
+-   UpdateRug editor
+-   isRugArchive and isSetupForTypeScript functions
+-   NotRugArchiveError class
+
+### Deprecated
+
+-   IsRugArchive and IsSetupForTypeScript functions
 
 [51]: https://github.com/atomist/rug-rugs/issues/51
 

@@ -22,11 +22,14 @@ Given("a Rug archive manifest", (p: Project) => {
 artifact: some-rugs
 version: "28.8.1963"
 requires: "[0.25.3,0.26.0)"
+dependencies:
+- "atomist:rug-rugs:[0.30.0,1.0.0)"
+extensions:
+- "com.atomist.rug:rug-function-http:[0.7.3,1.0.0)"
 `);
 });
 
-When("edit with AddTypeScript", (p, world) => {
-    const w = world as ProjectScenarioWorld;
+When("edit with AddTypeScript", (p: Project, w: ProjectScenarioWorld) => {
     const editor = w.editor("AddTypeScript");
     w.editWith(editor, {});
 });

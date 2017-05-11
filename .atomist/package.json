@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@atomist/rugs": "^1.0.0-m.4"
+    "@atomist/rugs": "^1.0.0-m.4",
+    "deprecated-decorator": "0.1.6"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

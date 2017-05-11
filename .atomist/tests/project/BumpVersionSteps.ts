@@ -17,10 +17,10 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-Given("a bad manifest file", (p: Project, w: ProjectScenarioWorld) => {
+Given("a manifest file with version (.*)", (p: Project, w: ProjectScenarioWorld, version: string) => {
     p.addFile(".atomist/manifest.yml", `group: test-rugs
 artifact: test-manifest
-version: "1.0"
+version: ${version}
 requires: "[1.0.0-m.3,2.0.0)"
 `);
 });

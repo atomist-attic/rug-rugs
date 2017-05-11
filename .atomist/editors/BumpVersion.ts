@@ -27,7 +27,7 @@ export class BumpVersion implements EditProject {
 
     @Parameter({
         displayName: "version component",
-        description: "how bumped is it? major/minor/patch",
+        description: "which component of the version to increment, major|minor|patch",
         pattern: "^(major|minor|patch)$",
         validInput: "one of: major, minor, patch",
         minLength: 5,
@@ -37,37 +37,51 @@ export class BumpVersion implements EditProject {
     public component: string = "minor";
 
     public edit(project: Project) {
-        const versionRegex = /version: "?(\d+)\.(\d+)\.(\d+)"?/;
         const manifest = project.findFile(".atomist/manifest.yml");
         if (manifest == null) {
-            // not a rug archive
-            return;
+            const err = "project does not appear to be a Rug project";
+            console.log(err);
+            throw new Error(err);
         }
-        const versionMatch = versionRegex.exec(manifest.content);
+
+        const extractVersionRegex = /^version\s*:\s*(?:"(.*?)"|(.*))\s*$/m;
+        const versionMatch = extractVersionRegex.exec(manifest.content);
         if (!versionMatch) {
-            throw new Error(
-                // tslint:disable-next-line:max-line-length
-                `Unable to parse current version. I can only increment a nice simple 1.2.3 format. But I see: ${manifest.content}`);
+            const err = `unable to extract version from manifest.yml: ${manifest.content}`;
+            console.log(err);
+            throw new Error(err);
         }
 
-        let major = parseInt(versionMatch[1], 10);
-        let minor = parseInt(versionMatch[2], 10);
-        let patch = parseInt(versionMatch[3], 10);
-        if (this.component === "major") {
-            major = major + 1;
-            minor = 0;
-            patch = 0;
-        } else if (this.component === "minor") {
-            minor = minor + 1;
-            patch = 0;
-        } else if (this.component === "patch") {
-            patch = patch + 1;
-        } else {
-            throw new Error(`Unknown version component '${this.component}'. Should be major|minor|patch`);
-        }
+        const comp = this.component as "major" | "minor" | "patch";
+        const newVersion = incrementVersion(versionMatch[1] || versionMatch[2], comp);
 
-        manifest.regexpReplace("version:.*", `version: "${major}.${minor}.${patch}"`);
+        manifest.regexpReplace("version:.*", `version: "${newVersion}"`);
     }
 }
 
 export const bumpVersion = new BumpVersion();
+
+export function incrementVersion(version: string, component: "major" | "minor" | "patch"): string {
+    const versionRegex = /^(\d+)\.(\d+)\.(\d+)([-.].*)?$/;
+    const versionMatch = versionRegex.exec(version);
+    if (versionMatch === null || versionMatch.length < 4) {
+        throw new Error(`version does not appear to be valid: ${version}`);
+    }
+
+    let major = parseInt(versionMatch[1], 10);
+    let minor = parseInt(versionMatch[2], 10);
+    let patch = parseInt(versionMatch[3], 10);
+    const rest = (versionMatch[4] !== null && versionMatch[4] !== undefined) ? versionMatch[4] : "";
+
+    if (component === "major") {
+        major = major + 1;
+        minor = 0;
+        patch = 0;
+    } else if (component === "minor") {
+        minor = minor + 1;
+        patch = 0;
+    } else if (component === "patch") {
+        patch = patch + 1;
+    }
+    return `${major}.${minor}.${patch}${rest}`;
+}

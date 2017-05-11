@@ -42,7 +42,29 @@ Feature: Automatically increment Rug archive version
     Then file at .atomist/manifest.yml should contain version: "0.1.1"
 
 
+  Scenario: BumpVersion should increment version without quotes
+    Given a manifest file with version 17.6.3
+    When BumpVersion bumps the minor version
+    Then parameters were valid
+    Then changes were made
+    Then file at .atomist/manifest.yml should contain version: "17.7.0"
+
+
+  Scenario: BumpVersion should increment prerelease version
+    Given a manifest file with version 17.6.3-SNAPSHOT
+    When BumpVersion bumps the patch version
+    Then parameters were valid
+    Then changes were made
+    Then file at .atomist/manifest.yml should contain version: "17.6.4-SNAPSHOT"
+
+
   Scenario: AddManifestYml should refuse to change bad version
-    Given a bad manifest file
+    Given a manifest file with version "1.0"
     When BumpVersion bumps the major version
+    Then the scenario aborted
+
+
+  Scenario: AddManifestYml should fail if no manifest
+    Given an empty project
+    When BumpVersion bumps the minor version
     Then the scenario aborted

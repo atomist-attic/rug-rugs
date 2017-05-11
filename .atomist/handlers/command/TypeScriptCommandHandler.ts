@@ -5,7 +5,7 @@ import { Pattern } from "@atomist/rug/operations/RugOperation";
 /**
  * A sample TypeScript command handler used by AddTypeScriptCommandHandler.
  */
-@CommandHandler("TypeScriptCommandHandler", "sample TypeScript command handler used by AddTypeScriptCommandHandler")
+@CommandHandler("TypeScriptCommandHandler", "A sample TypeScript command handler used by AddTypeScriptCommandHandler")
 @Tags("documentation")
 @Intent("run TypeScriptCommandHandler")
 export class TypeScriptCommandHandler implements HandleCommand {

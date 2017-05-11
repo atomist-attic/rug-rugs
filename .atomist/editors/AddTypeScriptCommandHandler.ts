@@ -71,7 +71,7 @@ export class AddTypeScriptCommandHandler implements EditProject {
         project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
         project.copyEditorBackingFileOrFailToDestination(srcFeaturePath, featurePath);
 
-        const srcDescription = "sample TypeScript command handler used by AddTypeScriptCommandHandler";
+        const srcDescription = "A sample TypeScript command handler used by AddTypeScriptCommandHandler";
         const srcIntent = `run ${srcHandlerName}`;
         const srcHandlerConstName = "typeScriptCommandHandler";
         const handlerConstName = this.handlerName.charAt(0).toLowerCase() + this.handlerName.slice(1);

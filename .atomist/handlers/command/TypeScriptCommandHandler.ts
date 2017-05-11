@@ -21,7 +21,7 @@ export class TypeScriptCommandHandler implements HandleCommand {
     })
     public inputParameter: string = "default value";
 
-    public handle(command: HandlerContext): CommandPlan {
+    public handle(context: HandlerContext): CommandPlan {
         const message = new ResponseMessage(`Successfully ran TypeScriptCommandHandler: ${this.inputParameter}`);
         return CommandPlan.ofMessage(message);
     }

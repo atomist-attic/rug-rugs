@@ -19,45 +19,47 @@ import { Editor, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { IsRugArchive } from "./RugEditorsPredicates";
+import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 
 @Editor("UpdateSupportFiles", "updates Rug project TypeScript and build files")
 @Tags("rug", "atomist", "typescript")
 export class UpdateSupportFiles implements EditProject {
 
     public edit(project: Project) {
-        if (!IsRugArchive(project)) {
-            const err = "project does not appear to be a Rug project";
-            console.log(err);
-            throw new Error(err);
+        if (!isRugArchive(project)) {
+            throw new NotRugArchiveError();
         }
 
-        const oldFiles = [
-            ".atomist/build/cli-build.yml",
-            ".atomist/build/cli-dev.yml",
-            ".atomist/build/cli-release.yml",
-        ];
-        for (const f of oldFiles) {
-            project.deleteFile(f);
-        }
-
-        const supportFiles = [
-            ".atomist/tsconfig.json",
-            ".atomist/tslint.json",
-            ".atomist/.gitignore",
-            ".atomist/build/cli.yml",
-            ".atomist/build/travis-build.bash",
-        ];
-        for (const f of supportFiles) {
-            project.deleteFile(f);
-            project.copyEditorBackingFileOrFail(f);
-        }
-
-        const pkgJsonPath = ".atomist/package.json";
-        if (!project.fileExists(pkgJsonPath)) {
-            project.copyEditorBackingFileOrFail(pkgJsonPath);
-        }
+        updateRugFiles(project);
     }
 }
 
 export const updateSupportFiles = new UpdateSupportFiles();
+
+export function updateRugFiles(project: Project) {
+    const oldFiles = [
+        ".atomist/build/cli-build.yml",
+        ".atomist/build/cli-dev.yml",
+        ".atomist/build/cli-release.yml",
+    ];
+    for (const f of oldFiles) {
+        project.deleteFile(f);
+    }
+
+    const supportFiles = [
+        ".atomist/tsconfig.json",
+        ".atomist/tslint.json",
+        ".atomist/.gitignore",
+        ".atomist/build/cli.yml",
+        ".atomist/build/travis-build.bash",
+    ];
+    for (const f of supportFiles) {
+        project.deleteFile(f);
+        project.copyEditorBackingFileOrFail(f);
+    }
+
+    const pkgJsonPath = ".atomist/package.json";
+    if (!project.fileExists(pkgJsonPath)) {
+        project.copyEditorBackingFileOrFail(pkgJsonPath);
+    }
+}

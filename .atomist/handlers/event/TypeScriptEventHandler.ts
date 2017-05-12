@@ -7,7 +7,7 @@ import { Tag } from "@atomist/cortex/Tag";
 /**
  * A sample TypeScript event handler used by AddTypeScriptEventHandler.
  */
-@EventHandler("TypeScriptEventHandler", "A sample TypeScript event handler used by AddTypeScriptEventHandler", "/Tag()")
+@EventHandler("TypeScriptEventHandler", "sample TypeScript event handler used by AddTypeScriptEventHandler", "/Tag()")
 @Tags("documentation")
 export class TypeScriptEventHandler implements HandleEvent<Tag, Tag> {
     public handle(event: Match<Tag, Tag>): EventPlan {

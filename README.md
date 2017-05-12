@@ -264,6 +264,39 @@ This will add the an event handler at
 `.atomist/handlers/event/MyNewEventHandler.ts` and corresponding tests
 to the project.
 
+### BumpVersion
+
+The BumpVersion editor increments one of the elements of
+the [semantic version][semver] your Rug project, setting all trailing
+elements to zero.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug project with a `.atomist/manifest.yml` file having a version
+
+#### Parameters
+
+To run this editor, you must supply the following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`component` | No | minor | Element of the semantic version of the project to increment.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist:rug-rugs:BumpVersion component=patch
+```
+
+This will increment the last element of the version in
+`.atomist/manifest.yml`.
+
 ### ConvertExistingProjectToGenerator
 
 The ConvertExistingProjectToGenerator editor creates a valid Rug
@@ -443,7 +476,7 @@ $ ( cd .atomist && npm install )
 ## ShowLatestVersions
 
 The ShowLatestVerrsions command handler displays the latest versions of
-`com.atomist:rug` and `@atomist/rugs` in Slack. 
+`com.atomist:rug` and `@atomist/rugs` in Slack.
 
 ### Parameters
 
@@ -475,6 +508,36 @@ and in .atomist/package.json use:
 
 Latest Rug CLI version is 1.0.0-m.1.
 ```
+
+### UpdateRug
+
+The UpdateRug editor updates the Rug dependencies and support files of
+a Rug project to the values in this Rug archive project.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A Rug project with a `.atomist/manifest.yml` file
+
+#### Parameters
+
+This editor has no parameters.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist:rug-rugs:UpdateRug
+```
+
+This will update the required version in the `.atomist/manifest.yml`
+file and the `@atomist/rugs` dependency in the `.atomist/package.json`
+file.  It will also update all the Rug support files,
+see [UpdateSupportFiles](#updatesupportfiles).
 
 ### UpdateSupportFiles
 

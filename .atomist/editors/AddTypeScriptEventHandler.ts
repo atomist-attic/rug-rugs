@@ -19,7 +19,7 @@ import { Project } from "@atomist/rug/model/Project";
 import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 
-import { IsRugArchive } from "./RugEditorsPredicates";
+import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
 @Editor("AddTypeScriptEventHandler", "adds a TypeScript Rug event handler to a Rug project")
@@ -52,10 +52,8 @@ export class AddTypeScriptEventHandler implements EditProject {
     public pathExpression: string = "/Tag()";
 
     public edit(project: Project) {
-        if (!IsRugArchive(project)) {
-            const err = "project does not appear to be a Rug project";
-            console.log(err);
-            throw new Error(err);
+        if (!isRugArchive(project)) {
+            throw new NotRugArchiveError();
         }
 
         project.editWith("AddTypeScript", {});
@@ -72,7 +70,7 @@ export class AddTypeScriptEventHandler implements EditProject {
         project.copyEditorBackingFileOrFailToDestination(srcTestPath, testPath);
         project.copyEditorBackingFileOrFailToDestination(srcFeaturePath, featurePath);
 
-        const srcDescription = "A sample TypeScript event handler used by AddTypeScriptEventHandler";
+        const srcDescription = "sample TypeScript event handler used by AddTypeScriptEventHandler";
         const srcPathExpression = "/Tag()";
         const srcHandlerConstName = "typeScriptEventHandler";
         const handlerConstName = this.handlerName.charAt(0).toLowerCase() + this.handlerName.slice(1);

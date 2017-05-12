@@ -20,7 +20,7 @@ Feature: AddTypeScriptEventHandler should add a sample event handler
 
 
   Scenario: AddTypeScriptEventHandler should add an event handler using default path expression to a Rug project
-    Given a manifest file
+    Given a Rug archive manifest
     Given an NPM package file
     When AddTypeScriptEventHandler is run with default path expression
     Then parameters were valid
@@ -40,7 +40,7 @@ Feature: AddTypeScriptEventHandler should add a sample event handler
 
 
   Scenario: AddTypeScriptEventHandler should add an event handler to a Rug project
-    Given a manifest file
+    Given a Rug archive manifest
     Given an NPM package file
     When AddTypeScriptEventHandler is run providing a path expression
     Then parameters were valid

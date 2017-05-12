@@ -31,19 +31,6 @@ script: bash .atomist/build/travis-build.bash
 `);
 });
 
-Given("an NPM package file", (p: Project) => {
-    p.addFile(".atomist/package.json", `{
-  "dependencies": {
-    "@atomist/rugs": "^0.24.2",
-    "mustache": "^2.3.0"
-  },
-  "devDependencies": {
-    "@types/mustache": "^0.8.29"
-  }
-}
-`);
-});
-
 Given("old build CLI configs", (p: Project) => {
     p.addFile(".atomist/build/cli-build.yml", "chavo: guerrero");
     p.addFile(".atomist/build/cli-dev.yml", "foreign: object");

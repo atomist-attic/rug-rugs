@@ -17,7 +17,7 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-Given("a manifest file with version (.*)", (p: Project, w: ProjectScenarioWorld, version: string) => {
+Given("a Rug archive manifest with version (.*)", (p: Project, w: ProjectScenarioWorld, version: string) => {
     p.addFile(".atomist/manifest.yml", `group: test-rugs
 artifact: test-manifest
 version: ${version}

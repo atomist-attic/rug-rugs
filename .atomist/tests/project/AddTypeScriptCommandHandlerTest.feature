@@ -20,7 +20,7 @@ Feature: AddTypeScriptCommandHandler should add a sample command handler
 
 
   Scenario: AddTypeScriptCommandHandler should add a command handler
-    Given a manifest file
+    Given a Rug archive manifest
     Given an NPM package file
     When AddTypeScriptCommandHandler is run
     Then parameters were valid

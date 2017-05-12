@@ -19,31 +19,31 @@ Feature: Automatically increment Rug archive version
 
 
   Scenario: BumpVersion should increment the major version
-    Given a manifest file
+    Given a Rug archive manifest
     When BumpVersion bumps the major version
     Then parameters were valid
     Then changes were made
-    Then file at .atomist/manifest.yml should contain version: "1.0.0"
+    Then file at .atomist/manifest.yml should contain version: "29.0.0"
 
 
   Scenario: BumpVersion should increment the minor version
-    Given a manifest file
+    Given a Rug archive manifest
     When BumpVersion bumps the minor version
     Then parameters were valid
     Then changes were made
-    Then file at .atomist/manifest.yml should contain version: "0.2.0"
+    Then file at .atomist/manifest.yml should contain version: "28.9.0"
 
 
   Scenario: BumpVersion should increment the patch level
-    Given a manifest file
+    Given a Rug archive manifest
     When BumpVersion bumps the patch version
     Then parameters were valid
     Then changes were made
-    Then file at .atomist/manifest.yml should contain version: "0.1.1"
+    Then file at .atomist/manifest.yml should contain version: "28.8.1964"
 
 
   Scenario: BumpVersion should increment version without quotes
-    Given a manifest file with version 17.6.3
+    Given a Rug archive manifest with version 17.6.3
     When BumpVersion bumps the minor version
     Then parameters were valid
     Then changes were made
@@ -51,7 +51,7 @@ Feature: Automatically increment Rug archive version
 
 
   Scenario: BumpVersion should increment prerelease version
-    Given a manifest file with version 17.6.3-SNAPSHOT
+    Given a Rug archive manifest with version 17.6.3-SNAPSHOT
     When BumpVersion bumps the patch version
     Then parameters were valid
     Then changes were made
@@ -59,7 +59,7 @@ Feature: Automatically increment Rug archive version
 
 
   Scenario: AddManifestYml should refuse to change bad version
-    Given a manifest file with version "1.0"
+    Given a Rug archive manifest with version "1.0"
     When BumpVersion bumps the major version
     Then the scenario aborted
 

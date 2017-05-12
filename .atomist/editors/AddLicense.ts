@@ -30,12 +30,11 @@ import { PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
 @Tags("rug", "atomist", "license")
 export class AddLicense implements EditProject {
     @Parameter({
-        // tslint:disable-next-line:max-line-length
-        displayName: "Comma separated list of paths to include (relative to project root), or entire project if left blank",
-        // tslint:disable-next-line:max-line-length
-        description: "Editor will only add license headers to *.ts files in specified directories.  For example: 'typescript/src, typescript/test'",
+        displayName: "Search Path",
+        description: "if provided, editor will only add license headers to *.ts files under specified paths," +
+        ` e.g., "typescript/src,typescript/test"`,
         pattern: Pattern.any,
-        validInput: "a comma separated list of paths to include",
+        validInput: "a comma separated list of paths to search",
         minLength: 1,
         maxLength: 100,
         required: false,
@@ -45,11 +44,11 @@ export class AddLicense implements EditProject {
     // TODO: Add more license types
     @Parameter({
         displayName: "License type",
-        description: "License type (currently only supporting aslv2: Apache version 2)",
+        description: "license type (currently only supporting aslv2: Apache version 2)",
         pattern: "^aslv2$",
         validInput: "Possible values: aslv2",
-        minLength: 1,
-        maxLength: 100,
+        minLength: 5,
+        maxLength: 5,
         required: false,
     })
     public license: string = "aslv2";
@@ -61,9 +60,8 @@ export class AddLicense implements EditProject {
 
     private addLicenseFile(project: Project) {
         if (project.findFile("LICENSE") === null) {
-            const licensePath = `.atomist/license-${this.license}.txt`;
-            project.copyEditorBackingFileOrFailToDestination(licensePath,
-                "LICENSE");
+            const licensePath = `.atomist/resources/licenses/${this.license}.txt`;
+            project.copyEditorBackingFileOrFailToDestination(licensePath, "LICENSE");
         }
     }
 
@@ -79,14 +77,17 @@ export class AddLicense implements EditProject {
     }
 
     private typeScriptFile(file: File): boolean {
-        return file.filename.match(/\.ts$/) !== null;
+        return /\.ts$/.test(file.filename);
     }
 
     private addLicenseHeaders(project: Project) {
-        const headerPath = `.atomist/license-${this.license}-header.txt`;
-        project.copyEditorBackingFileOrFailToDestination(headerPath,
-            headerPath);
-        const licenseHeader: File = project.findFile(headerPath);
+        const headerPath = `.atomist/resources/licenses/${this.license}-header.txt`;
+        const tmpHeaderPath = "header-tmp.txt";
+        project.copyEditorBackingFileOrFailToDestination(headerPath, tmpHeaderPath);
+        const licenseHeader: File = project.findFile(tmpHeaderPath);
+        const header = licenseHeader.content;
+        project.deleteFile(tmpHeaderPath);
+
         const eng: PathExpressionEngine = project.context.pathExpressionEngine;
         // TODO: We should be able to filter by file extension in path expression
         // But obvious *.ts or [@name='*.ts'] don't work"
@@ -97,10 +98,9 @@ export class AddLicense implements EditProject {
             if (this.typeScriptFile(f)
                 && this.fileUnderPath(f, paths)
                 && !f.containsMatch("(?i)licensed under")) {
-                f.prepend(licenseHeader.content);
+                f.prepend(header);
             }
         });
-        project.deleteFile(headerPath);
     }
 }
 

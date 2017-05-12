@@ -11,9 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
- 
+
 Feature: Add license file and license headers to all TS files
-  Use an editor to add appropriate LICENSE file to project 
+  Use an editor to add appropriate LICENSE file to project
   as well to add matching license header comment to each *.ts
   file under specified root directory
 
@@ -23,11 +23,11 @@ Feature: Add license file and license headers to all TS files
     Then parameters were valid
     Then changes were made
     Then the project has new LICENSE
-    Then the hello1.ts file has license
-    Then the hello2.ts file has license
-    Then the hello3.txt file does not have license
+    Then the src/hello1.ts file has license
+    Then the src/subdir/hello2.ts file has license
+    Then the src/hello3.txt file does not have license
     Then the hello1.ts file has previous code
-    Then the test/hello4.ts has license
+    Then the test/hello4.ts file has license
     Then the other/hello4.ts file does not have license
 
   Scenario: AddLicense should edit all TS files
@@ -37,5 +37,5 @@ Feature: Add license file and license headers to all TS files
     Then changes were made
     Then the project has old LICENSE
     Then the hello5.ts file has license
-    Then the hello6.ts file has license
-    Then the hello7.ts file has license
+    Then the src/hello6.ts file has license
+    Then the test/hello7.ts file has license

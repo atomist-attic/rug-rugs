@@ -25,9 +25,9 @@ notifications:
     on_cancel: always
     on_error: always
 cache:
-  yarn: true
   directories:
-  - "$HOME/.atomist"
+  - $HOME/.atomist
+  - $HOME/.cache/yarn
 deploy:
   provider: releases
   api_key:

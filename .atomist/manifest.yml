@@ -1,6 +1,6 @@
 group: atomist
 artifact: rug-rugs
-version: "0.30.0"
+version: "0.31.0"
 requires: "[1.0.0-m.3,2.0.0)"
 dependencies:
 extensions:

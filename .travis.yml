@@ -25,6 +25,7 @@ notifications:
     on_cancel: always
     on_error: always
 cache:
+  yarn: true
   directories:
   - "$HOME/.atomist"
 deploy:

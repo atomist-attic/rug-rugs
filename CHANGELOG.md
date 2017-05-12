@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist/rug-rugs/compare/0.29.0...HEAD
+[Unreleased]: https://github.com/atomist/rug-rugs/compare/0.30.0...HEAD
+
+## [0.30.0] - 2017-05-12
+
+[0.30.0]: https://github.com/atomist/rug-rugs/compare/0.29.0...0.30.0
+
+Version release
 
 ### Changed
 
@@ -20,16 +26,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 -   Command handler `show latest versions` that displays the latest versions
     of `com.atomist:rug` and `@atomist/rugs`
--   BumpVersion editor
--   UpdateRug editor
+-   BumpVersion editor [#49][49]
+-   UpdateRug editor [#49][49]
 -   isRugArchive and isSetupForTypeScript functions
 -   NotRugArchiveError class
+-   AddLicense editor
 
 ### Deprecated
 
 -   IsRugArchive and IsSetupForTypeScript functions
 
 [51]: https://github.com/atomist/rug-rugs/issues/51
+[49]: https://github.com/atomist/rug-rugs/issues/49
 
 ## [0.29.0] - 2017-04-26
 

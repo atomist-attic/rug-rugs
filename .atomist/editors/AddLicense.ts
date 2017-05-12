@@ -43,7 +43,7 @@ export class AddLicense implements EditProject {
 
     // TODO: Add more license types
     @Parameter({
-        displayName: "License type",
+        displayName: "License Type",
         description: "license type (currently only supporting aslv2: Apache version 2)",
         pattern: "^aslv2$",
         validInput: "Possible values: aslv2",

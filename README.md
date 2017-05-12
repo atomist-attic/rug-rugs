@@ -12,6 +12,39 @@ handlers.  Most meta.
 
 ## Rugs
 
+### AddLicense
+
+The AddLicense editor adds a LICENSE file to a project and license
+header comments to TypeScript files in a project.
+
+#### Prerequisites
+
+A source code project.
+
+#### Parameters
+
+This Rug takes following parameters.
+
+Name | Required | Default | Description
+-----|----------|---------|------------
+`include` | No | "" | Comma-separated list of paths under which to search for files, search under all paths if empty
+`license` | No | "aslv2" | License to add, currently only "aslv2" is supported
+
+#### Running
+
+Run this Rug as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist:rug-rugs:AddLicense \
+    include=src,test \
+    license=aslv2
+```
+
+This will add the ASLv2 license as `LICENSE` to the file and add a
+license header comment to all TypeScript files under the `src` and
+`test` directories in the project.
+
 ### AddLocalEditor
 
 The AddLocalEditor editor adds an editor for modifying the local

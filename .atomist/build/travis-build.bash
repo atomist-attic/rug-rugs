@@ -4,7 +4,7 @@
 set -o pipefail
 
 declare Pkg=travis-build
-declare Version=0.6.0
+declare Version=0.7.0
 
 function msg() {
     echo "$Pkg: $*"
@@ -150,7 +150,11 @@ function main () {
             err "failed to create git tag: $git_tag"
             return 1
         fi
-        if ! git push --quiet --tags "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG" > /dev/null 2>&1; then
+        local remote=origin
+        if [[ $GITHUB_TOKEN ]]; then
+            remote=https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG
+        fi
+        if ! git push --quiet --tags "$remote" > /dev/null 2>&1; then
             err "failed to push git tags"
             return 1
         fi

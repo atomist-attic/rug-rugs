@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist/rug-rugs/compare/0.30.1...HEAD
 
+### Added
+
+-   Added ConvertManifestToPackageJson editor to convert from
+    `manifest.yml` to `package.json`
+
 ## [0.30.1] - 2017-05-15
 
 [0.30.1]: https://github.com/atomist/rug-rugs/compare/0.30.0...0.30.1
@@ -21,11 +26,6 @@ Find file release
     expressions [atomist/rug#602][rug-602]
 
 [rug-602]: https://github.com/atomist/rug/issues/602
-
-### Added
-
--   Added ConvertManifestToPackageJson editor to convert from `manifest.yml``
-    to `package.json`
 
 ## [0.30.0] - 2017-05-12
 

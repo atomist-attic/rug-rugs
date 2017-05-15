@@ -22,16 +22,18 @@ Feature: Convert manifest.yml to package.json
     When the ConvertManifestToPackageJson is run
     Then no changes were made
 
-Scenario: Merge manifest.yml into existing package.json
-    Given a manifest.yml and package.json
+  Scenario: Merge manifest.yml into existing package.json
+    Given a manifest.yml
+    Given a package.json
     When the ConvertManifestToPackageJson is run
     Then the manifest.yml got merged into package.json
     Then the package.json has previous entries
     Then the manifest.yml got deleted
 
-Scenario: Convert manifest.yml into new package.json
+  Scenario: Convert manifest.yml into new package.json
     Given a manifest.yml
     When the ConvertManifestToPackageJson is run
     Then the manifest.yml got merged into package.json
+    Then the package.json has previous entries
     Then the manifest.yml got deleted
 

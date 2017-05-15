@@ -21,17 +21,17 @@ import { Pattern } from "@atomist/rug/operations/RugOperation";
 
 import * as yaml from "js-yaml";
 
-const packageJsonName = ".atomist/package.json";
-const manifestYamlName = ".atomist/manifest.yml";
-
 @Editor("ConvertManifestToPackageJson",
     "converts an existing Rug archive manifest.yml to a package.json")
 @Tags("rug", "atomist")
 export class ConvertManifestToPackageJson implements EditProject {
 
+    private packageJsonName = ".atomist/package.json";
+    private manifestYamlName = ".atomist/manifest.yml";
+
     public edit(project: Project) {
-        if (project.fileExists(manifestYamlName)) {
-            const manifestContent = project.findFile(manifestYamlName).content;
+        if (project.fileExists(this.manifestYamlName)) {
+            const manifestContent = project.findFile(this.manifestYamlName).content;
             const manifestYaml = yaml.load(manifestContent);
             const packageJson = this.loadPackageJson(project);
 
@@ -57,7 +57,7 @@ export class ConvertManifestToPackageJson implements EditProject {
             atomist.requires = manifestYaml.requires;
 
             // Add in dependencies
-            if (manifestYaml.dependencies != null) {
+            if (manifestYaml.dependencies !== null) {
                 atomist.dependencies = {};
                 for (const d of manifestYaml.dependencies) {
                     const parts = (d as string).split(":");
@@ -66,7 +66,7 @@ export class ConvertManifestToPackageJson implements EditProject {
             }
 
             // Add in extensions
-            if (manifestYaml.extensions != null) {
+            if (manifestYaml.extensions !== null) {
                 atomist.extensions = {};
                 for (const d of manifestYaml.extensions) {
                     const parts = (d as string).split(":");
@@ -74,7 +74,7 @@ export class ConvertManifestToPackageJson implements EditProject {
                 }
             }
 
-            if (manifestYaml.excludes != null) {
+            if (manifestYaml.excludes !== null) {
                 atomist.excludes = {};
                 // The json keys don't use _. So we convert them to -
                 atomist.excludes.editors = manifestYaml.excludes.editors;
@@ -85,18 +85,16 @@ export class ConvertManifestToPackageJson implements EditProject {
             }
 
             const newPackageJsonContent = JSON.stringify(newPackageJson, null, 2);
-            project.findFile(packageJsonName).setContent(newPackageJsonContent);
-            project.deleteFile(manifestYamlName);
+            project.findFile(this.packageJsonName).setContent(newPackageJsonContent);
+            project.deleteFile(this.manifestYamlName);
         }
     }
 
     private loadPackageJson(project: Project): any {
-        if (project.fileExists(packageJsonName)) {
-            return JSON.parse(project.findFile(packageJsonName).content);
-        } else {
-            project.addFile(packageJsonName, "{}");
-            return {};
+        if (!project.fileExists(this.packageJsonName)) {
+            project.copyEditorBackingFileOrFail(this.packageJsonName);
         }
+        return JSON.parse(project.findFile(this.packageJsonName).content);
     }
 }
 

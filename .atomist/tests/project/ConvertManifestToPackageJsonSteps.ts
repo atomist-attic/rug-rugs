@@ -65,13 +65,12 @@ const packageJsonContent = `{
 }
 `;
 
-Given("a manifest.yml and package.json", (p: Project) => {
-    p.addFile(manifestYmlName, maniestYmlContents);
-    p.addFile(packageJsonName, packageJsonContent);
-});
-
 Given("a manifest.yml", (p: Project) => {
     p.addFile(manifestYmlName, maniestYmlContents);
+});
+
+Given("a package.json", (p: Project) => {
+    p.addFile(packageJsonName, packageJsonContent);
 });
 
 When("the ConvertManifestToPackageJson is run", (p: Project, world) => {

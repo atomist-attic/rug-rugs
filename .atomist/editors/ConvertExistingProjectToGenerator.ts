@@ -20,7 +20,7 @@ import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
 @Editor("ConvertExistingProjectToGenerator",
-    "converts and existing project to a Rug archive project with a basic Generator")
+    "converts an existing project to a Rug archive project with a basic Generator")
 @Tags("rug", "atomist")
 export class ConvertExistingProjectToGenerator implements EditProject {
 

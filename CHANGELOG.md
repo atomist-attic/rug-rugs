@@ -7,7 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist/rug-rugs/compare/0.30.0...HEAD
+[Unreleased]: https://github.com/atomist/rug-rugs/compare/0.30.1...HEAD
+
+## [0.30.1] - 2017-05-15
+
+[0.30.1]: https://github.com/atomist/rug-rugs/compare/0.30.0...0.30.1
+
+Find file release
+
+### Changed
+
+-   Work around issue with generator path
+    expressions [atomist/rug#602][rug-602]
+
+[rug-602]: https://github.com/atomist/rug/issues/602
 
 ## [0.30.0] - 2017-05-12
 

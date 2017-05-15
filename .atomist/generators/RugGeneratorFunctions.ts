@@ -46,10 +46,7 @@ export function removeUnnecessaryFiles(project: Project, extra?: string[]): void
  * @param owner        GitHub owner (user or org) of project.
  */
 export function cleanReadMe(project: Project, description: string, owner: string): void {
-    const eng: PathExpressionEngine = project.context.pathExpressionEngine;
-
-    const readMePE = new PathExpression<Project, File>("/*[@name='README.md']");
-    const readMe: File = eng.scalar(project, readMePE);
+    const readMe: File = project.findFile("README.md");
     readMe.replace("# Atomist 'rug-rugs'", "# " + project.name);
     readMe.regexpReplace("generators for creating a Rug archive[\\s\\S]*?\n## Rugs\n", description + "\n\n## Rugs\n\n");
     readMe.regexpReplace("\n## Rugs\n[\\s\\S]*\n## Support\n", "\n## Rugs\n\n## Support\n");
@@ -65,10 +62,7 @@ export function cleanReadMe(project: Project, description: string, owner: string
  * @param owner    GitHub owner (user or org) of project.
  */
 export function cleanChangeLog(project: Project, owner: string): void {
-    const eng: PathExpressionEngine = project.context.pathExpressionEngine;
-
-    const changeLogPE = new PathExpression<Project, File>("/*[@name='CHANGELOG.md']");
-    const changeLog: File = eng.scalar(project, changeLogPE);
+    const changeLog: File = project.findFile("CHANGELOG.md");
     changeLog.regexpReplace("\\d+\\.\\d+\\.\\d+\\.\\.\\.HEAD\n\n[\\S\\s]*## \\[0\\.1\\.0\\]",
         "0.1.0...HEAD\n\n## [0.1.0]");
     changeLog.regexpReplace("\n### Added[\\S\\s]*", "\nAdded\n\n-   Everything\n");

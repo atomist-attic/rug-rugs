@@ -29,12 +29,11 @@ import { PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
  * @param instructions  Text to insert. It should contain all headers, text, and internal new lines.
  */
 export function addInstructionsToReadMe(project: Project, instructions: string): void {
-    const eng: PathExpressionEngine = project.context.pathExpressionEngine;
-    eng.with<File>(project, "/*[@name='README.md']", (r) => {
-        if (r.containsMatch("\n## Rugs[\\S\\s]*\n## Support")) {
-            r.regexpReplace("\n## Support", instructions + "\n## Support");
-        }
-    });
+    const readme = project.findFile("README.md");
+    if (readme === null || !readme.containsMatch("\n## Rugs[\\S\\s]*\n## Support")) {
+        return;
+    }
+    readme.regexpReplace("\n## Support", instructions + "\n## Support");
 }
 
 /**
@@ -45,7 +44,7 @@ export function addInstructionsToReadMe(project: Project, instructions: string):
  * @param name           Name of the Rug.
  * @param description    Text description to introduction the function of the Rug.
  * @param example        Verbatim block showing how to invoke Rug using the CLI.
- * @param exampleText   Text to follow example explaining what it does.
+ * @param exampleText    Text to follow example explaining what it does.
  * @param prerequisites  Text explaining prerequisites for running the Rug, if any.
  * @param parameters     Array of parameter table row text.
  *

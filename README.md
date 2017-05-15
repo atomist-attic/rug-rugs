@@ -418,6 +418,35 @@ $ rug edit atomist:rug-rugs:ConvertExistingProjectToRugArchive \
 
 This will add the file `.atomist/manifest.yml` to the project.
 
+### ConvertManifestToPackageJson
+
+The ConvertManifestToPackageJson editor converts a `maniest.yml` into
+a `package.json`.  After conversation the `manifest.yml` file will get
+deleted.
+
+#### Prerequisites
+
+Before running this editor, you must have the following prerequisites
+satisfied.
+
+*   A source code repository that does not have a
+    `.atomist/manifest.yml`
+
+#### Parameters
+
+This editor does not need any parameters.
+
+#### Running
+
+Run it as follows:
+
+```
+$ cd project/directory
+$ rug edit atomist:rug-rugs:ConvertManifestToPackageJson \
+```
+
+This will convert the `.atomist/manifest.yml` to `.atomist/package.yml`.
+
 ### NewRugProject
 
 The NewRugProject generator creates a new empty Rug archive project.

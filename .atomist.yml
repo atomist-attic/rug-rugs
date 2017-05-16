@@ -272,19 +272,3 @@ editor:
     branch: "master"
     sha: "9800ee6*"
 
----
-kind: "operation"
-client: "rug-cli 1.0.0-m.2"
-editor:
-  name: "AddLicense"
-  group: "atomist"
-  artifact: "rug-rugs"
-  version: "0.31.1"
-  origin:
-    repo: "git@github.com:atomist/rug-rugs.git"
-    branch: "master"
-    sha: "37dbfe2*"
-  parameters:
-    - "license": "aslv2"
-    - "include": ".atomist/handlers, .atomist/test"
-

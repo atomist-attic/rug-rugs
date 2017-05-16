@@ -82,11 +82,8 @@ export class AddLicense implements EditProject {
 
     private addLicenseHeaders(project: Project) {
         const headerPath = `.atomist/resources/licenses/${this.license}-header.txt`;
-        const tmpHeaderPath = "header-tmp.txt";
-        project.copyEditorBackingFileOrFailToDestination(headerPath, tmpHeaderPath);
-        const licenseHeader: File = project.findFile(tmpHeaderPath);
+        const licenseHeader: File = project.backingArchiveProject().findFile(headerPath);
         const header = licenseHeader.content;
-        project.deleteFile(tmpHeaderPath);
 
         const eng: PathExpressionEngine = project.context.pathExpressionEngine;
         // TODO: We should be able to filter by file extension in path expression

@@ -12,6 +12,24 @@ handlers.  Most meta.
 
 ## Rugs
 
+Rugs are typically run using the Atomist Bot in Slack.  To run Rugs
+locally, you must first install the following tools:
+
+-   [Rug CLI][rug-cli]
+-   [Node.js][node]
+-   [Yarn][yarn]
+
+[rug-cli]: http://docs.atomist.com/user-guide/interfaces/cli/install/
+[node]: https://nodejs.org/
+[yarn]: https://yarnpkg.com/
+
+Once those tools are installed, you can clone this repository and
+install its dependencies with the following command.
+
+```
+$ ( cd .atomist && yarn )
+```
+
 ### AddLicense
 
 The AddLicense editor adds a LICENSE file to a project and license

@@ -5,8 +5,8 @@ Feature: Make sure the sample TypeScript Editor has some tests
 
 
   Scenario: TypeScriptEditor should edit a project correctly
-    Given an empty project
+    Given a project with a certain file
     When the TypeScriptEditor is run
     Then parameters were valid
     Then changes were made
-    Then the hello file says hello
+    Then that certain file looks different

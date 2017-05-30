@@ -1,4 +1,4 @@
-import { Project } from "@atomist/rug/model/Project";
+import { Project } from "@atomist/rug/model/Core";
 import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";

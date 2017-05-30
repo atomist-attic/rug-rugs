@@ -3,13 +3,34 @@ import {
     Given, ProjectScenarioWorld, Then, When,
 } from "@atomist/rug/test/project/Core";
 
+const CERTAIN_INPUT_FILEPATH = "hello.txt";
+
+const CERTAIN_FILE_CONTENT_BEFORE = `I love to say hello
+
+to the world
+`;
+
+const CERTAIN_FILE_CONTENT_AFTER = `I love to say hello
+
+to you
+`;
+
+Given("a project with a certain file", (p: Project, world) => {
+    p.addFile(CERTAIN_INPUT_FILEPATH, CERTAIN_FILE_CONTENT_BEFORE);
+});
+
 When("the TypeScriptEditor is run", (p: Project, world) => {
     const w = world as ProjectScenarioWorld;
     const editor = w.editor("TypeScriptEditor");
-    w.editWith(editor, { inputParameter: "the inputParameter value" });
+    w.editWith(editor, { inputParameter: "you" });
 });
 
-Then("the hello file says hello", (p: Project, world) => {
+Then("that certain file looks different", (p: Project, world) => {
     const w = world as ProjectScenarioWorld;
-    return p.fileContains("hello.txt", "Hello, World!");
+    const after = p.findFile(CERTAIN_INPUT_FILEPATH).content;
+    const passing = (after === CERTAIN_FILE_CONTENT_AFTER);
+    if (!passing) {
+        console.log(`FAILURE: ${CERTAIN_INPUT_FILEPATH} --->\n${after}\n<---`);
+    }
+    return passing;
 });

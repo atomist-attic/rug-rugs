@@ -1,4 +1,4 @@
-import { Project } from "@atomist/rug/model/Project";
+import { File, Project } from "@atomist/rug/model/Core";
 import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
@@ -21,7 +21,9 @@ export class TypeScriptEditor implements EditProject {
     public inputParameter: string;
 
     public edit(project: Project) {
-        project.addFile("hello.txt", "Hello, World!\n" + this.inputParameter + "\n");
+        const certainFile = project.findFile("hello.txt");
+        const newContent = certainFile.content.replace(/the world/, this.inputParameter);
+        certainFile.setContent(newContent);
     }
 }
 

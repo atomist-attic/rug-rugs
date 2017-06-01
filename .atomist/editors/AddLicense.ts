@@ -35,7 +35,7 @@ export class AddLicense implements EditProject {
         ` e.g., "typescript/src,typescript/test"`,
         pattern: Pattern.any,
         validInput: "a comma separated list of paths to search",
-        minLength: 1,
+        minLength: 0,
         maxLength: 100,
         required: false,
     })

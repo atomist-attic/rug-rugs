@@ -7,12 +7,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist/rug-rugs/compare/0.30.1...HEAD
+[Unreleased]: https://github.com/atomist/rug-rugs/compare/0.31.0...HEAD
+
+## [0.31.0] - 2017-06-01
+
+[0.31.0]: https://github.com/atomist/rug-rugs/compare/0.30.1...0.31.0
+
+Find file release
 
 ### Added
 
 -   Added ConvertManifestToPackageJson editor to convert from
     `manifest.yml` to `package.json`
+-   More information on running Rugs locally
+
+### Changed
+
+-   Update to latest rug and @atomist/rugs
+-   Update .gitattributes in UpdateSupportFiles
+-   Make sample TypeScript editor more expressive
+-   Fix AddLicense parameter [#62][62]
+
+[62]: https://github.com/atomist/rug-rugs/issues/62
 
 ## [0.30.1] - 2017-05-15
 

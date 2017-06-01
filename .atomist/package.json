@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@atomist/rugs": "^1.0.0-m.4",
+    "@atomist/rugs": "^1.0.0-m.5",
     "deprecated-decorator": "0.1.6",
     "js-yaml": "^3.8.4"
   },

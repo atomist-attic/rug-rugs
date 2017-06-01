@@ -62,4 +62,14 @@ export function updateRugFiles(project: Project) {
     if (!project.fileExists(pkgJsonPath)) {
         project.copyEditorBackingFileOrFail(pkgJsonPath);
     }
+
+    const gitAttributes = ".gitattributes";
+    if (project.fileExists(gitAttributes)) {
+        if (!project.fileContains(gitAttributes, ".atomist.yml")) {
+            const ga = project.findFile(gitAttributes);
+            ga.setContent(ga.content + "\n.atomist.yml linguist-generated=true\n");
+        }
+    } else {
+        project.copyEditorBackingFileOrFail(gitAttributes);
+    }
 }

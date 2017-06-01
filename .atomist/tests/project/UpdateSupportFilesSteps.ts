@@ -37,34 +37,20 @@ Given("old build CLI configs", (p: Project) => {
     p.addFile(".atomist/build/cli-publish.yml", "choked: out");
 });
 
+Given("a gitattributes file", (p: Project) => {
+    p.addFile(".gitattributes", `*.class binary
+*.dll binary
+`);
+});
+
 When("edit with UpdateSupportFiles", (p, world) => {
     const w = world as ProjectScenarioWorld;
     const editor = w.editor("UpdateSupportFiles");
     w.editWith(editor, {});
 });
 
-Then("the tsconfig file should set output directory", (p: Project) => {
-    return p.fileContains(".atomist/tsconfig.json", "outDir");
-});
-
-Then("the gitignore file should ignore npm logs", (p: Project) => {
-    return p.fileContains(".atomist/.gitignore", "npm-debug.log");
-});
-
-Then("there should be a tslint file", (p: Project) => {
-    return p.fileExists(".atomist/tslint.json");
-});
-
-Then("there should be a CLI config file", (p: Project) => {
-    return p.fileExists(".atomist/build/cli.yml");
-});
-
 Then("there should not be deprecated CLI config files", (p: Project) => {
     return !p.fileExists(".atomist/build/cli-build.yml") &&
         !p.fileExists(".atomist/build/cli-dev.yml") &&
         !p.fileExists(".atomist/build/cli-release.yml");
-});
-
-Then("the travis build script should set team ID", (p: Project) => {
-    return p.fileContains(".atomist/build/travis-build.bash", "export TEAM_ID=");
 });

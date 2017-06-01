@@ -26,20 +26,33 @@ Feature: Keep TypeScript support and build files up to date
     Then changes were made
     Then there should be a package file
     Then the package file depends on rugs
-    Then there should be a tsconfig file
+    Then file at .atomist/tsconfig.json should exist
     Then the tsconfig file should have standard contents
-    Then the tsconfig file should set output directory
-    Then there should be a gitignore file
-    Then the gitignore file should ignore npm logs
+    Then file at .atomist/tsconfig.json should contain outDir
+    Then file at .atomist/.gitignore should exist
+    Then file at .atomist/.gitignore should contain npm-debug.log
     Then the node modules directory should not exist
     Then the rug interfaces should not exist
-    Then there should be a tslint file
-    Then there should be a CLI config file
+    Then file at .atomist/tslint.json should exist
+    Then file at .atomist/build/cli.yml should exist
     Then there should not be deprecated CLI config files
-    Then the travis build script should set team ID
+    Then file at .atomist/build/travis-build.bash should contain export TEAM_ID=
+    Then file at .gitattributes should contain .atomist.yml linguist-generated=true
 
 
   Scenario: UpdateSupportFile should not make changes if the target project is not a Rug archive
     Given an empty project
     When edit with UpdateSupportFiles
     Then the scenario aborted
+
+
+  Scenario: UpdateSupportFiles should safely update gitattributes
+    Given a Rug archive manifest
+    Given a Travis CI config
+    Given a gitattributes file
+    When edit with UpdateSupportFiles
+    Then parameters were valid
+    Then changes were made
+    Then file at .gitattributes should contain .atomist.yml linguist-generated=true
+    Then file at .gitattributes should contain *.class binary
+    Then file at .gitattributes should contain *.dll binary

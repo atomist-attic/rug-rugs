@@ -19,8 +19,14 @@ import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
+import { isRugArchive } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
+/**
+ * Add an editor for modifying the local project.  Useful when you
+ * editors are specific to a project and you want to store them with
+ * the project.
+ */
 @Editor("AddLocalEditor", "adds an editor for modifying the local project, initiating a Rug archive if needed")
 @Tags("rug", "atomist", "typescript")
 export class AddLocalEditor implements EditProject {
@@ -44,18 +50,13 @@ export class AddLocalEditor implements EditProject {
     public groupId: string = "local";
 
     public edit(project: Project) {
-        project.editWith("ConvertExistingProjectToRugArchive", {
-            description: this.description,
-            archiveName: project.name,
-            groupId: this.groupId,
-        });
-        project.editWith("AddTypeScript", {});
-        if (!project.directoryExists(".atomist/node_modules")) {
-            // The following line works with the CLI but when used through the
-            // bot, it often triggers GitHub rate limiting.
-            // project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
+        if (!isRugArchive(project)) {
+            project.editWith("ConvertExistingProjectToRugArchive", {
+                description: this.description,
+                archiveName: project.name,
+                groupId: this.groupId,
+            });
         }
-
         project.editWith("AddTypeScriptEditor", this);
     }
 }

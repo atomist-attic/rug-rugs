@@ -20,7 +20,7 @@ Feature: Add a local editor to current project
 
 
   Scenario: AddLocalEditor should work using defaults
-    Given a Rug archive manifest
+    Given a Rug archive package.json
     When edit with AddLocalEditor using defaults
     Then the new editor file should exist
     Then the new editor file should contain the editor name
@@ -35,7 +35,7 @@ Feature: Add a local editor to current project
 
 
   Scenario: AddLocalEditor should use the provided description
-    Given a Rug archive manifest
+    Given a Rug archive package.json
     When edit with AddLocalEditor using description
     Then the new editor file should exist
     Then the new editor file should contain the editor name
@@ -53,7 +53,6 @@ Feature: Add a local editor to current project
     Given an empty project
     When edit with AddLocalEditor using defaults
     Then the Atomist directory should exist
-    Then the manifest file should exist
     Then the npm package file should exist
     Then the new editor file should exist
     Then the new editor file should contain the editor name

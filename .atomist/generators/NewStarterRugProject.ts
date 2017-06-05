@@ -19,7 +19,7 @@ import { Generator, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { PopulateProject } from "@atomist/rug/operations/ProjectGenerator";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
-import { cleanChangeLog, cleanReadMe, removeUnnecessaryFiles } from "./RugGeneratorFunctions";
+import { cleanChangeLog, generateRugProject } from "./RugGeneratorFunctions";
 
 @Generator("NewStarterRugProject",
     "creates a new Rug archive project using standard setup, sensible defaults, and starter Rugs")
@@ -27,42 +27,30 @@ import { cleanChangeLog, cleanReadMe, removeUnnecessaryFiles } from "./RugGenera
 export class NewStarterRugProject implements PopulateProject {
 
     public populate(project: Project) {
-        removeUnnecessaryFiles(project);
 
         const description: string = "an Atomist Rug archive project";
         const owner: string = "atomist-contrib";
-
-        cleanReadMe(project, description, owner);
-        cleanChangeLog(project, owner);
-
         const version: string = "0.1.0";
-        const manifestParams = {
-            archiveName: project.name,
-            groupId: owner,
-            version,
-        };
-        project.editWith("AddManifestYml", manifestParams);
-        project.editWith("AddTypeScript", {});
-        // The following line works with the CLI but when used through the
-        // bot, it often triggers GitHub rate limiting.
-        // project.copyEditorBackingFilesPreservingPath(".atomist/node_modules");
+        generateRugProject(project, owner, description, version, []);
+
+        cleanChangeLog(project, owner);
 
         const editorParams = {
             editorName: "MyFirstEditor",
-            description: "sample Rug TypeScript editor",
+            description: "a sample Rug TypeScript editor",
         };
         project.editWith("AddTypeScriptEditor", editorParams);
 
         const commandParams = {
             handlerName: "MyFirstCommandHandler",
-            description: "sample Rug TypeScript command handler",
+            description: "a sample Rug TypeScript command handler",
             intent: "run MyFirstCommandHandler",
         };
         project.editWith("AddTypeScriptCommandHandler", commandParams);
 
         const eventParams = {
             handlerName: "MyFirstEventHandler",
-            description: "sample Rug TypeScript event handler",
+            description: "a sample Rug TypeScript event handler",
         };
         project.editWith("AddTypeScriptEventHandler", eventParams);
     }

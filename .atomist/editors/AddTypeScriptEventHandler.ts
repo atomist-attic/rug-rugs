@@ -22,6 +22,10 @@ import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
+/**
+ * Add an event handler to a Rug project.  If the project is not a Rug project
+ * an Error is thrown.
+ */
 @Editor("AddTypeScriptEventHandler", "adds a TypeScript Rug event handler to a Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptEventHandler implements EditProject {
@@ -55,8 +59,6 @@ export class AddTypeScriptEventHandler implements EditProject {
         if (!isRugArchive(project)) {
             throw new NotRugArchiveError();
         }
-
-        project.editWith("AddTypeScript", {});
 
         const srcHandlerName = "TypeScriptEventHandler";
         const srcHandlerPath = `.atomist/handlers/event/${srcHandlerName}.ts`;

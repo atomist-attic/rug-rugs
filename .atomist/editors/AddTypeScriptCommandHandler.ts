@@ -22,6 +22,10 @@ import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
+/**
+ * Add a command handler to a Rug project.  If the project is not a Rug project
+ * an Error is thrown.
+ */
 @Editor("AddTypeScriptCommandHandler", "adds a TypeScript Rug command handler to a Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptCommandHandler implements EditProject {
@@ -54,8 +58,6 @@ export class AddTypeScriptCommandHandler implements EditProject {
         if (!isRugArchive(project)) {
             throw new NotRugArchiveError();
         }
-
-        project.editWith("AddTypeScript", {});
 
         const srcHandlerName = "TypeScriptCommandHandler";
         const srcHandlerPath = `.atomist/handlers/command/${srcHandlerName}.ts`;

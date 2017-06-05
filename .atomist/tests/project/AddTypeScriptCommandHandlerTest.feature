@@ -20,24 +20,23 @@ Feature: AddTypeScriptCommandHandler should add a sample command handler
 
 
   Scenario: AddTypeScriptCommandHandler should add a command handler
-    Given a Rug archive manifest
-    Given an NPM package file
+    Given a Rug archive package.json
     When AddTypeScriptCommandHandler is run
     Then parameters were valid
     Then changes were made
-    Then the command handler file exists
-    Then the command handler file contains the name
-    Then the command handler file contains the description
-    Then the command handler file contains the intent
-    Then the command handler file does not contain the original name
-    Then the command handler file does not contain the original description
-    Then the command handler file does not contain the original intent
-    Then the command handler test feature file should exist
-    Then the command handler test feature file contains the name
-    Then the command handler test feature file does not contain the original name
-    Then the command handler test steps file should exist
-    Then the command handler test steps file contains the name
-    Then the command handler test steps file does not contain the original name
+    Then file at .atomist/handlers/command/BoDeans.ts should exist
+    Then file at .atomist/handlers/command/BoDeans.ts should contain class BoDeans
+    Then file at .atomist/handlers/command/BoDeans.ts should contain fourth studio album
+    Then file at .atomist/handlers/command/BoDeans.ts should contain @Intent("black and white")
+    Then file at .atomist/handlers/command/BoDeans.ts should not contain TypeScriptCommandHandler
+    Then file at .atomist/handlers/command/BoDeans.ts should not contain sample TypeScript command handler
+    Then file at .atomist/handlers/command/BoDeans.ts should not contain run TypeScriptCommandHandler
+    Then file at .atomist/tests/handlers/command/BoDeansTest.feature should exist
+    Then file at .atomist/tests/handlers/command/BoDeansTest.feature should contain BoDeans
+    Then file at .atomist/tests/handlers/command/BoDeansTest.feature should not contain TypeScriptCommandHandler
+    Then file at .atomist/tests/handlers/command/BoDeansSteps.ts should exist
+    Then file at .atomist/tests/handlers/command/BoDeansSteps.ts should contain BoDeans
+    Then file at .atomist/tests/handlers/command/BoDeansSteps.ts should not contain TypeScriptCommandHandler
 
 
   Scenario: AddTypeScriptCommandHandler should fail if not a Rug project

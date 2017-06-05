@@ -23,6 +23,10 @@ import { addInstructionsToReadMe, readMeInstructions } from "./AddFunctions";
 import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
+/**
+ * Add a editor to a Rug project.  If the project is not a Rug project
+ * an Error is thrown.
+ */
 @Editor("AddTypeScriptEditor", "adds a TypeScript Rug editor to a Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptEditor implements EditProject {
@@ -46,8 +50,6 @@ export class AddTypeScriptEditor implements EditProject {
         if (!isRugArchive(project)) {
             throw new NotRugArchiveError();
         }
-
-        project.editWith("AddTypeScript", {});
 
         const srcEditorName = "TypeScriptEditor";
         const srcEditorPath = `.atomist/editors/${srcEditorName}.ts`;

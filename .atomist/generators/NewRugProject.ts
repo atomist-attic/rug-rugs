@@ -22,8 +22,11 @@ import { Pattern } from "@atomist/rug/operations/RugOperation";
 import { PathExpression, PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
 
 import { RugParameters } from "../editors/RugParameters";
-import { cleanReadMe, removeUnnecessaryFiles } from "./RugGeneratorFunctions";
+import { generateRugProject } from "./RugGeneratorFunctions";
 
+/**
+ * Create a new Rug project based on this project.
+ */
 @Generator("NewRugProject", "creates a minimal Rug archive project with metadata and no Rugs")
 @Tags("rug", "atomist")
 export class NewRugProject implements PopulateProject {
@@ -59,17 +62,7 @@ export class NewRugProject implements PopulateProject {
             "CHANGELOG.md",
             "LICENSE",
         ];
-        removeUnnecessaryFiles(project, toRemove);
-
-        cleanReadMe(project, this.description, this.owner);
-
-        const params = {
-            archiveName: project.name,
-            groupId: this.owner,
-            version: this.version,
-        };
-        project.editWith("AddManifestYml", params);
-        project.editWith("AddTypeScript", {});
+        generateRugProject(project, this.owner, this.description, this.version, toRemove);
     }
 }
 

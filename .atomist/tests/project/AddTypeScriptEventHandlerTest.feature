@@ -20,47 +20,49 @@ Feature: AddTypeScriptEventHandler should add a sample event handler
 
 
   Scenario: AddTypeScriptEventHandler should add an event handler using default path expression to a Rug project
-    Given a Rug archive manifest
-    Given an NPM package file
+    Given a Rug archive package.json
     When AddTypeScriptEventHandler is run with default path expression
     Then parameters were valid
     Then changes were made
-    Then the event handler file exists
-    Then the event handler file contains the name
-    Then the event handler file contains the description
-    Then the event handler file contains the default path expression
-    Then the event handler file does not contain the original name
-    Then the event handler file does not contain the original description
-    Then the event handler test feature file should exist
-    Then the event handler test feature file contains the name
-    Then the event handler test feature file does not contain the original name
-    Then the event handler test steps file should exist
-    Then the event handler test steps file contains the name
-    Then the event handler test steps file does not contain the original name
+    Then file at .atomist/handlers/event/PattiSmith.ts should exist
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain class PattiSmith
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain debut album released in 1975
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain /Tag()
+    Then file at .atomist/handlers/event/PattiSmith.ts should not contain TypeScriptEventHandler
+    Then file at .atomist/handlers/event/PattiSmith.ts should not contain sample TypeScript event handler
+    Then file at .atomist/tests/handlers/event/PattiSmithTest.feature should exist
+    Then file at .atomist/tests/handlers/event/PattiSmithTest.feature should contain PattiSmith
+    Then file at .atomist/tests/handlers/event/PattiSmithTest.feature should not contain TypeScriptEventHandler
+    Then file at .atomist/tests/handlers/event/PattiSmithSteps.ts should exist
+    Then file at .atomist/tests/handlers/event/PattiSmithSteps.ts should contain PattiSmith
+    Then file at .atomist/tests/handlers/event/PattiSmithSteps.ts should not contain TypeScriptEventHandler
 
 
   Scenario: AddTypeScriptEventHandler should add an event handler to a Rug project
-    Given a Rug archive manifest
-    Given an NPM package file
+    Given a Rug archive package.json
     When AddTypeScriptEventHandler is run providing a path expression
     Then parameters were valid
     Then changes were made
-    Then the event handler file exists
-    Then the event handler file contains the name
-    Then the event handler file contains the description
-    Then the event handler file contains the provided path expression
-    Then the event handler file does not contain the original name
-    Then the event handler file does not contain the original description
-    Then the event handler file does not contain the original path expression
-    Then the event handler file should import the proper node type
-    Then the event handler file should use the proper type parameters
-    Then the event handler file should have the proper root node type
-    Then the event handler file should not import the original root node
-    Then the event handler file should not use the original type parameters
-    Then the event handler file should not have the original root node type
-    Then the event handler file should define tags
-    Then the event handler test steps file does not contain the original root node type
-    Then the event handler test feature file does not contain the original root node type
+    Then file at .atomist/handlers/event/PattiSmith.ts should exist
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain class PattiSmith
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain debut album released in 1975
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain /Horses()/track2::RedondoBeach()
+    Then file at .atomist/handlers/event/PattiSmith.ts should not contain TypeScriptEventHandler
+    Then file at .atomist/handlers/event/PattiSmith.ts should not contain sample TypeScript event handler
+    Then file at .atomist/handlers/event/PattiSmith.ts should not contain /Tag()
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain import { Horses } from "@atomist/cortex/Types";
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain implements HandleEvent<Horses, Horses>
+    Then file at .atomist/handlers/event/PattiSmith.ts should not contain import { Tag }
+    Then file at .atomist/handlers/event/PattiSmith.ts should not contain HandleEvent<Tag, Tag>
+    Then file at .atomist/handlers/event/PattiSmith.ts should contain @Tags
+    Then file at .atomist/tests/handlers/event/PattiSmithTest.feature should exist
+    Then file at .atomist/tests/handlers/event/PattiSmithTest.feature should contain PattiSmith
+    Then file at .atomist/tests/handlers/event/PattiSmithTest.feature should not contain TypeScriptEventHandler
+    Then file at .atomist/tests/handlers/event/PattiSmithTest.feature should not contain Tag
+    Then file at .atomist/tests/handlers/event/PattiSmithSteps.ts should exist
+    Then file at .atomist/tests/handlers/event/PattiSmithSteps.ts should contain PattiSmith
+    Then file at .atomist/tests/handlers/event/PattiSmithSteps.ts should not contain TypeScriptEventHandler
+    Then file at .atomist/tests/handlers/event/PattiSmithSteps.ts should not contain Tag
 
 
   Scenario: AddTypeScriptEventHandler should fail if not a Rug project

@@ -17,24 +17,20 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-const manifest = ".atomist/manifest.yml";
-const packageJson = ".atomist/package.json";
+import { packageJsonPath } from "../../editors/ConvertManifestToPackageJson";
 
 When("UpdateRug is run", (p: Project, w: ProjectScenarioWorld) => {
     const editor = w.editor("UpdateRug");
     w.editWith(editor, {});
 });
 
-Then("the manifest file requires the current version of rug", (p: Project, w: ProjectScenarioWorld) => {
-    const archiveManifest = "manny.yml";
-    p.copyEditorBackingFileOrFailToDestination(manifest, archiveManifest);
-    const req = p.findFile(archiveManifest).content.split("\n").filter((l) => /^requires:/.test(l));
-    return p.fileContains(manifest, req[0]);
+Then("the package file requires the current version of rug", (p: Project, w: ProjectScenarioWorld) => {
+    const rugVersion = JSON.parse(p.backingArchiveProject().findFile(".atomist/package.json").content).atomist.requires;
+    return p.fileContains(packageJsonPath, `"${rugVersion}"`);
 });
 
 Then("the package file depends on the current version of rugs", (p: Project, w: ProjectScenarioWorld) => {
-    const archivePkg = "pkg.json";
-    p.copyEditorBackingFileOrFailToDestination(packageJson, archivePkg);
-    const dep = p.findFile(archivePkg).content.split("\n").filter((l) => /"@atomist\/rugs":/.test(l));
-    return p.fileContains(packageJson, dep[0]);
+    const rugsVersion = JSON.parse(p.backingArchiveProject().findFile(".atomist/package.json").content)
+        .dependencies["@atomist/rugs"];
+    return p.fileContains(packageJsonPath, `"@atomist/rugs": "${rugsVersion}"`);
 });

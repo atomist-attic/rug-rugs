@@ -23,6 +23,10 @@ import { addInstructionsToReadMe, readMeInstructions } from "./AddFunctions";
 import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
 
+/**
+ * Add a generator to a Rug project.  If the project is not a Rug project
+ * an Error is thrown.
+ */
 @Editor("AddTypeScriptGenerator", "adds a TypeScript generator to a Rug project")
 @Tags("rug", "atomist", "typescript")
 export class AddTypeScriptGenerator implements EditProject {
@@ -45,8 +49,6 @@ export class AddTypeScriptGenerator implements EditProject {
         if (!isRugArchive(project)) {
             throw new NotRugArchiveError();
         }
-
-        project.editWith("AddTypeScript", {});
 
         const srcGeneratorName = "TypeScriptGenerator";
         const srcGeneratorPath = `.atomist/generators/${srcGeneratorName}.ts`;

@@ -30,7 +30,7 @@ import { PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
  */
 export function addInstructionsToReadMe(project: Project, instructions: string): void {
     const readme = project.findFile("README.md");
-    if (readme === null || !readme.containsMatch("\n## Rugs[\\S\\s]*\n## Support")) {
+    if (readme == null || !readme.containsMatch("\n## Rugs[\\S\\s]*\n## Support")) {
         return;
     }
     readme.regexpReplace("\n## Support", instructions + "\n## Support");

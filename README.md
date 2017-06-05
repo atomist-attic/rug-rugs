@@ -17,17 +17,15 @@ locally, you must first install the following tools:
 
 -   [Rug CLI][rug-cli]
 -   [Node.js][node]
--   [Yarn][yarn]
 
 [rug-cli]: http://docs.atomist.com/user-guide/interfaces/cli/install/
 [node]: https://nodejs.org/
-[yarn]: https://yarnpkg.com/
 
 Once those tools are installed, you can clone this repository and
 install its dependencies with the following command.
 
 ```
-$ ( cd .atomist && yarn )
+$ ( cd .atomist && npm install )
 ```
 
 ### AddLicense
@@ -96,78 +94,6 @@ This will add a Rug editor as `.atomist/editors/MyLocalEditor.ts`.  If
 the project is currently set up for Atomist, it will also create the
 `.atomist` directory with appropriate initial contents like the
 `manifest.yml` and `package.json` files.
-
-### AddManifestYml
-
-The AddManifestYml editor adds the Rug archive `manifest.yml` file to
-your project.
-
-#### Prerequisites
-
-Before running this editor, you must have the following prerequisites
-satisfied.
-
-*   A source code repository that does not have a
-    `.atomist/manifest.yml`
-
-#### Parameters
-
-To run this editor, you must supply the following parameters.
-
-Name | Required | Default | Description
------|----------|---------|------------
-`archiveName` | Yes | | Name of the new Rug archive, typically the same as the repo name
-`groupId` | Yes | | Maven group ID, e.g., "company-rugs", typically the GitHub owner of the repo
-`version` | No | 0.1.0 | [Semantic version][semver] of the project.
-
-#### Running
-
-Run it as follows:
-
-```
-$ cd project/directory
-$ rug edit atomist:rug-rugs:AddManifestYml \
-    archiveName=my-new-archive \
-    groupId=my-rugs \
-    version=2.71.828
-```
-
-This will add the file `.atomist/manifest.yml` to the project.
-
-### AddTypeScript
-
-The AddTypeScript editor adds support files so that you can write your
-Rugs in TypeScript.
-
-#### Prerequisites
-
-Before running this editor, you must have the following prerequisites
-satisfied.
-
-*   A Rug archive source code repository
-
-#### Parameters
-
-This editor has no parameters.
-
-#### Running
-
-Run it as follows:
-
-```
-$ cd rug/project/directory
-$ rug edit atomist:rug-rugs:AddTypeScript
-```
-
-This will add `package.json`, `tsconfig.json`, and `.gitignore` files
-to the `.atomist` directory in the project.  You will need to install
-the [node][] dependencies using NPM.
-
-```
-$ ( cd .atomist && npm install )
-```
-
-[node]: https://nodejs.org/
 
 ### AddTypeScriptEditor
 
@@ -647,14 +573,12 @@ $ rug edit atomist:rug-rugs:UpdateSupportFiles
 This will update `package.json`, `tsconfig.json`, `tslint.json`, and
 `.gitignore` files to the `.atomist` directory in the project.  It
 will also update the Travis CI build files under `.atomist/build`.  It
-will modify the `.travis.yml` to make sure [yarn][] is installed.  You
-should update your [Node][node] dependencies after running this.
+will modify the `.travis.yml` to make sure [Node.js][] is installed.
+You should update your Node.js dependencies after running this.
 
 ```
-$ ( cd .atomist && yarn )
+$ ( cd .atomist && npm install )
 ```
-
-[yarn]: https://yarnpkg.com/
 
 ## Support
 
@@ -691,7 +615,7 @@ To clean up cached files and update TypeScript dependencies, run this
 command.
 
 ```
-$ ( cd .atomist && find editors generators handlers tests -name '*.js' -print0 | xargs -0 rm; rm -rf node_modules; yarn && rug clean )
+$ ( cd .atomist && find editors generators handlers tests -name '*.js' -print0 | xargs -0 rm; rm -rf node_modules; npm install && rug clean )
 ```
 
 To create a new release of the project, simply push a tag of the form
@@ -711,6 +635,7 @@ of the release notes.  It will also automatically upload the needed
 artifacts.
 
 ---
+
 Created by [Atomist][atomist].
 Need Help?  [Join our Slack team][slack].
 

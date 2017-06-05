@@ -17,78 +17,13 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-const handlerName = "MyNewHandler";
-const description = "This handler rocks";
-const intent = "rock and roll";
+const params = {
+    handlerName: "BoDeans",
+    description: "fourth studio album",
+    intent: "black and white",
+};
 
-When("AddTypeScriptCommandHandler is run", (p, world) => {
-    const psworld = world as ProjectScenarioWorld;
-    const editor = psworld.editor("AddTypeScriptCommandHandler");
-    psworld.editWith(editor, {
-        handlerName,
-        description,
-        intent,
-    });
-});
-
-const handlerPath = `.atomist/handlers/command/${handlerName}.ts`;
-
-Then("the command handler file exists", (p, world) => {
-    return p.fileExists(handlerPath);
-});
-
-Then("the command handler file contains the name", (p, world) => {
-    return p.fileContains(handlerPath, `class ${handlerName}`);
-});
-
-Then("the command handler file contains the description", (p, world) => {
-    return p.fileContains(handlerPath, description);
-});
-
-Then("the command handler file contains the intent", (p, world) => {
-    return p.fileContains(handlerPath, `@Intent("${intent}")`);
-});
-
-Then("the command handler file does not contain the original name", (p, world) => {
-    return !p.fileContains(handlerPath, "TypeScriptCommandHandler");
-});
-
-Then("the command handler file does not contain the original description", (p, world) => {
-    return !p.fileContains(handlerPath, "sample TypeScript command handler");
-});
-
-Then("the command handler file does not contain the original intent", (p, world) => {
-    return !p.fileContains(handlerPath, "run TypeScriptCommandHandler");
-});
-
-const featurePath = `.atomist/tests/handlers/command/${handlerName}Test.feature`;
-
-Then("the command handler test feature file should exist", (p, world) => {
-    return p.fileExists(featurePath);
-});
-
-Then("the command handler test feature file contains the name", (p, world) => {
-    return p.fileContains(featurePath, handlerName);
-});
-
-Then("the command handler test feature file does not contain the original name", (p, world) => {
-    return !p.fileContains(featurePath, "TypeScriptCommandHandler");
-});
-
-Then("the command handler file does not contain the original intent", (p, world) => {
-    return !p.fileContains(handlerPath, "run TypeScriptCommandHandler");
-});
-
-const stepsPath = `.atomist/tests/handlers/command/${handlerName}Steps.ts`;
-
-Then("the command handler test steps file should exist", (p, world) => {
-    return p.fileExists(stepsPath);
-});
-
-Then("the command handler test steps file contains the name", (p, world) => {
-    return p.fileContains(stepsPath, handlerName);
-});
-
-Then("the command handler test steps file does not contain the original name", (p, world) => {
-    return !p.fileContains(stepsPath, "TypeScriptCommandHandler");
+When("AddTypeScriptCommandHandler is run", (p: Project, w: ProjectScenarioWorld) => {
+    const editor = w.editor("AddTypeScriptCommandHandler");
+    w.editWith(editor, params);
 });

@@ -17,30 +17,24 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-const archiveName = "my-rug-archive";
-const groupId = "my-rug-group";
-const version = "0.0.1";
+const params = {
+    archiveName: "reckoning",
+    groupId: "rem",
+    version: "1984.4.9",
+};
 
-When("ConvertExistingProjectToRugArchive is run", (p: Project, world) => {
-    const w = world as ProjectScenarioWorld;
+When("ConvertExistingProjectToRugArchive is run", (p: Project, w: ProjectScenarioWorld) => {
     const editor = w.editor("ConvertExistingProjectToRugArchive");
-    w.editWith(editor, { archiveName, groupId, version });
+    w.editWith(editor, params);
 });
 
-const manifest = ".atomist/manifest.yml";
-
-Then("the Rug archive manifest exists", (p, world) => {
-    return p.fileExists(manifest);
+Then("dump file at ([^\\s]+)", (p: Project, w: ProjectScenarioWorld, path: string) => {
+    console.log(path + ":\n" + p.findFile(path).content);
+    return true;
 });
 
-Then("the Rug archive manifest contains the archive name", (p: Project, world) => {
-    return p.fileContains(manifest, `artifact: "${archiveName}"`);
-});
-
-Then("the Rug archive manifest contains the group", (p: Project, world) => {
-    return p.fileContains(manifest, 'group: "' + groupId + '"');
-});
-
-Then("the Rug archive manifest contains the version", (p: Project, world) => {
-    return p.fileContains(manifest, version);
-});
+Then("file at ([^\\s]+) should not contain (.+)",
+    (p: Project, w: ProjectScenarioWorld, path: string, content: string) => {
+        return !p.fileContains(path, content);
+    },
+);

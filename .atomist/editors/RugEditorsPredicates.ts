@@ -19,16 +19,29 @@ import { Project } from "@atomist/rug/model/Project";
 import deprecated from "deprecated-decorator";
 
 export function isRugArchive(p: Project): boolean {
-    return p.fileExists(".atomist/manifest.yml");
-}
-
-export function isSetUpForTypeScript(p: Project): boolean {
+    if (p.fileExists(".atomist/manifest.yml")) {
+        console.log("merging Rug archive manifest.yml into package.json");
+        p.editWith("ConvertManifestToPackageJson", {});
+    }
     return p.fileExists(".atomist/package.json");
 }
+
+export const isSetUpForTypeScript = deprecated({
+    alternative: "isRugArchive",
+    version: "0.31.0",
+}, function isSetUpForTypeScript(p: Project): boolean {
+    return isRugArchive(p);
+});
 
 export class NotRugArchiveError extends Error {
     constructor() {
         super("project does not appear to be a Rug project");
+    }
+}
+
+export class AlreadyRugArchiveError extends Error {
+    constructor() {
+        super("project appears to already be a Rug project");
     }
 }
 
@@ -40,8 +53,8 @@ export const IsRugArchive = deprecated({
 });
 
 export const IsSetUpForTypeScript = deprecated({
-    alternative: "isSetUpForTypeScript",
+    alternative: "isRugArchive",
     version: "0.30.0",
 }, function IsSetUpForTypeScript(p: Project): boolean {
-    return isSetUpForTypeScript(p);
+    return isRugArchive(p);
 });

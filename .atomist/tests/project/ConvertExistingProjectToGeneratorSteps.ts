@@ -17,25 +17,18 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-const archiveName = "my-rug-archive";
-const groupId = "my-rug-group";
-const version = "0.0.1";
-const generatorName = "MyNewGenerator";
-const description = "Description of MyNewGenerator";
+const params = {
+    archiveName: "coloring-book",
+    groupId: "chance-the-wrapper",
+    version: "2016.5.13",
+    generatorName: "NoProblem",
+    description: "third mixtape, track 2",
+};
 
 When("ConvertExistingProjectToGenerator is run", (p: Project, w: ProjectScenarioWorld) => {
     const editor = w.editor("ConvertExistingProjectToGenerator");
-    const params = {
-        archiveName,
-        groupId,
-        version,
-        generatorName,
-        description,
-    };
     w.editWith(editor, params);
 });
-
-const manifest = ".atomist/manifest.yml";
 
 Then("directory at ([^\\s]+) should not exist", (p: Project, w: ProjectScenarioWorld, path: string) => {
     return !p.directoryExists(path);

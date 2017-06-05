@@ -19,8 +19,15 @@ import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
+import { customizePackageJson, formatPackageJson, packageJsonPath } from "./ConvertManifestToPackageJson";
+import { AlreadyRugArchiveError, isRugArchive } from "./RugEditorsPredicates";
 import { RugParameters } from "./RugParameters";
+import { updateRugFiles } from "./UpdateSupportFiles";
 
+/**
+ * Convert an existing project into a Rug archive project.  If the project
+ * appears to already be a Rug archive project, an error is thrown.
+ */
 @Editor("ConvertExistingProjectToRugArchive", "converts an existing project to a Rug archive project")
 @Tags("rug", "atomist")
 export class ConvertExistingProjectToRugArchive implements EditProject {
@@ -50,9 +57,28 @@ export class ConvertExistingProjectToRugArchive implements EditProject {
     public version: string = "0.1.0";
 
     public edit(project: Project) {
-        project.editWith("AddManifestYml", this);
-        project.editWith("AddTypeScript", {});
+        if (isRugArchive(project)) {
+            throw new AlreadyRugArchiveError();
+        }
+        populateAtomistDirectory(project, this.archiveName, this.groupId, this.version);
     }
 }
 
 export const convertExistingProjectToRugArchive = new ConvertExistingProjectToRugArchive();
+
+/**
+ * Create and populate the .atomist directory based on the contents of
+ * this project.
+ */
+export function populateAtomistDirectory(project: Project, name: string, group: string, version: string) {
+    const packageJson = customizePackageJson(project, name, group, version, true);
+    const packageJsonContent = formatPackageJson(packageJson);
+    const packageJsonFile = project.findFile(packageJsonPath);
+    if (!packageJsonFile) {
+        throw new Error(`${packageJsonPath} has disappeared`);
+    }
+    packageJsonFile.setContent(packageJsonContent);
+    updateRugFiles(project);
+    // mocha fails with no tests, so add one that always passes
+    project.copyEditorBackingFileOrFail(".atomist/mocha/SimpleTest.ts");
+}

@@ -21,6 +21,10 @@ import { Pattern } from "@atomist/rug/operations/RugOperation";
 
 import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 
+/**
+ * Update files related to Rugs, e.g., TypeScript configs, build scripts,
+ * and Git files.
+ */
 @Editor("UpdateSupportFiles", "updates Rug project TypeScript and build files")
 @Tags("rug", "atomist", "typescript")
 export class UpdateSupportFiles implements EditProject {
@@ -56,11 +60,6 @@ export function updateRugFiles(project: Project) {
     for (const f of supportFiles) {
         project.deleteFile(f);
         project.copyEditorBackingFileOrFail(f);
-    }
-
-    const pkgJsonPath = ".atomist/package.json";
-    if (!project.fileExists(pkgJsonPath)) {
-        project.copyEditorBackingFileOrFail(pkgJsonPath);
     }
 
     const gitAttributes = ".gitattributes";

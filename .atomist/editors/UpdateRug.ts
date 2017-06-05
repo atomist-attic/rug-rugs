@@ -19,6 +19,7 @@ import { Editor, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
+import { formatPackageJson } from "./ConvertManifestToPackageJson";
 import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 import { updateRugFiles } from "./UpdateSupportFiles";
 
@@ -33,35 +34,24 @@ export class UpdateRug implements EditProject {
 
         updateRugFiles(project);
 
-        const manifestPath = ".atomist/manifest.yml";
-        const manifest = project.findFile(manifestPath);
-        if (manifest === null || manifest === undefined) {
-            const err = "failed to load manifest";
-            throw new Error(err);
-        }
-        const archiveManifest = manifestPath + "-archive.tmp";
-        project.copyEditorBackingFileOrFailToDestination(manifestPath, archiveManifest);
-        const archiveManifestContents = project.findFile(archiveManifest).content;
-        project.deleteFile(archiveManifest);
-        const versionRegex = /^requires\s*:\s*(.*)\s*$/m;
-        const archiveRugVersionMatch = versionRegex.exec(archiveManifestContents);
-        if (archiveRugVersionMatch === null || archiveRugVersionMatch.length < 2) {
-            throw new Error(`failed to match version in archive manifest: ${archiveManifestContents}`);
-        }
-        manifest.regexpReplace("(?m)^requires\\s*:.*", `requires: ${archiveRugVersionMatch[1]}`);
-
         const pkgJsonPath = ".atomist/package.json";
-        const pkgJson = project.findFile(pkgJsonPath);
-        if (pkgJson === null || pkgJson === undefined) {
-            throw new Error("failed to load package.json");
+        const pkgJsonFile = project.findFile(pkgJsonPath);
+        if (!pkgJsonFile) {
+            throw new Error(`failed to load ${pkgJsonPath} from this project`);
         }
-        const archivePkgJson = pkgJsonPath + "-archive.tmp";
-        project.copyEditorBackingFileOrFailToDestination(pkgJsonPath, archivePkgJson);
-        const pkgJsonObj = JSON.parse(project.findFile(archivePkgJson).content);
-        project.deleteFile(archivePkgJson);
+        const pkgJson = JSON.parse(pkgJsonFile.content);
+
+        const archivePkgJsonFile = project.backingArchiveProject().findFile(pkgJsonPath);
+        if (!archivePkgJsonFile) {
+            throw new Error(`failed to load ${pkgJsonPath} from rug-rugs archive`);
+        }
+        const archivePkgJson = JSON.parse(archivePkgJsonFile.content);
+
         const rugsName = "@atomist/rugs";
-        const rugsVersion: string = pkgJsonObj.dependencies[rugsName];
-        pkgJson.regexpReplace(`"@atomist/rugs"\\s*:\\s*"[^"]+"(,?)`, `"@atomist/rugs": "${rugsVersion}"$1`);
+        pkgJson.dependencies[rugsName] = archivePkgJson.dependencies[rugsName];
+        pkgJson.atomist.requires = archivePkgJson.atomist.requires;
+
+        pkgJsonFile.setContent(formatPackageJson(pkgJson));
     }
 }
 

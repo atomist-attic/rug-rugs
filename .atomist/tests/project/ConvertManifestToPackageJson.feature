@@ -14,7 +14,7 @@
 
 Feature: Convert manifest.yml to package.json
   Use an editor to convert an existing manfiest.yml to a package.json
-  honoring existing content in package.json. The editor create a new 
+  honoring existing content in package.json. The editor create a new
   package.json file if non exists.
 
   Scenario: Do not convert package.json if no manifest.yml exists
@@ -28,12 +28,22 @@ Feature: Convert manifest.yml to package.json
     When the ConvertManifestToPackageJson is run
     Then the manifest.yml got merged into package.json
     Then the package.json has previous entries
-    Then the manifest.yml got deleted
+    Then file at .atomist/manifest.yml should not exist
 
   Scenario: Convert manifest.yml into new package.json
     Given a manifest.yml
     When the ConvertManifestToPackageJson is run
     Then the manifest.yml got merged into package.json
-    Then the package.json has previous entries
-    Then the manifest.yml got deleted
+    Then file at .atomist/package.json should exist
+    Then file at .atomist/manifest.yml should not exist
+    Then file at .atomist/package.json should not contain rug-rugs
+    Then file at .atomist/package.json should not contain js-yaml
+    Then file at .atomist/package.json should not contain TypeScriptEditor
+    Then file at .atomist/package.json should not contain rug-function-http
 
+  Scenario: Convert manifest.yml saving package.json contents
+    Given a manifest.yml
+    Given a package.json with description
+    When the ConvertManifestToPackageJson is run
+    Then the manifest.yml got merged into original package.json
+    Then file at .atomist/manifest.yml should not exist

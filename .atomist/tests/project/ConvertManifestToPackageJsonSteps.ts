@@ -17,42 +17,39 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-const manifestYmlName = ".atomist/manifest.yml";
-const maniestYmlContents = `group: atomist
-artifact: rug-rugs
-version: "0.31.0"
-requires: "1.0.0-m.3"
+import { packageJsonPath } from "../../editors/ConvertManifestToPackageJson";
+
+const manifestYmlPath = ".atomist/manifest.yml";
+const maniestYmlContents = `group: presley
+artifact: graceland-rugs
+version: "1935.1.8"
+requires: "1977.8.16"
 dependencies:
 extensions:
-- "com.atomist.rug:rug-function-http:[0.7.3,1.0.0)"
+- "com.atomist.rug:under-african-skies:3.3.7"
 excludes:
   editors:
-    - TypeScriptEditor
+    - BoyInTheBubble
   generators:
-    - TypeScriptGenerator
+    - IKnowWhatIKnow
   command_handlers:
-    - TypeScriptCommandHandler
+    - Gumboots
   event_handlers:
-    - TypeScriptEventHandler
+    - YouCanCallMeAl
 `;
 
-const packageJsonName = ".atomist/package.json";
 const packageJsonContent = `{
   "dependencies": {
-    "@atomist/rugs": "^1.0.0-m.4",
-    "deprecated-decorator": "0.1.6",
-    "js-yaml": "^3.8.4"
+    "@atomist/rugs": "^1.0.0-m.4"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
     "@types/power-assert": "^1.4.29",
-    "@types/js-yaml": "^3.5.30",
     "espower-typescript": "^8.0.0",
     "mocha": "^3.2.0",
     "power-assert": "^1.4.2",
     "tslint": "^5.0.0",
-    "typescript": "2.3.2",
-    "yarn": "^0.23.4"
+    "typescript": "2.3.2"
   },
   "directories": {
     "test": "mocha"
@@ -60,17 +57,48 @@ const packageJsonContent = `{
   "scripts": {
     "lint": "tslint '**/*.ts' --exclude 'node_modules/**' -t verbose",
     "mocha": "mocha --compilers ts:espower-typescript/guess 'mocha/**/*.ts'",
-    "test": "yarn run mocha && rug test"
+    "test": "npm run mocha && rug test"
+  }
+}
+`;
+
+const packageJsonWithDescriptionContent = `{
+  "author": "Paul Simon",
+  "description": "we are going to Graceland",
+  "dependencies": {
+    "@atomist/rugs": "^1.0.0-m.4"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.40",
+    "@types/power-assert": "^1.4.29",
+    "espower-typescript": "^8.0.0",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "tslint": "^5.0.0",
+    "typescript": "2.3.2"
+  },
+  "directories": {
+    "test": "mocha"
+  },
+  "homepage": "http://www.graceland.com",
+  "scripts": {
+    "lint": "tslint '**/*.ts' --exclude 'node_modules/**' -t verbose",
+    "mocha": "mocha --compilers ts:espower-typescript/guess 'mocha/**/*.ts'",
+    "test": "npm run mocha && rug test"
   }
 }
 `;
 
 Given("a manifest.yml", (p: Project) => {
-    p.addFile(manifestYmlName, maniestYmlContents);
+    p.addFile(manifestYmlPath, maniestYmlContents);
 });
 
 Given("a package.json", (p: Project) => {
-    p.addFile(packageJsonName, packageJsonContent);
+    p.addFile(packageJsonPath, packageJsonContent);
+});
+
+Given("a package.json with description", (p: Project) => {
+    p.addFile(packageJsonPath, packageJsonWithDescriptionContent);
 });
 
 When("the ConvertManifestToPackageJson is run", (p: Project, world) => {
@@ -80,8 +108,7 @@ When("the ConvertManifestToPackageJson is run", (p: Project, world) => {
 });
 
 Then("the package.json has previous entries", (p: Project, w) => {
-    const packageJson = JSON.parse(p.findFile(packageJsonName).content);
-
+    const packageJson = JSON.parse(p.findFile(packageJsonPath).content);
     return packageJson.dependencies != null
         && packageJson.devDependencies != null
         && packageJson.directories != null
@@ -89,16 +116,29 @@ Then("the package.json has previous entries", (p: Project, w) => {
 });
 
 Then("the manifest.yml got merged into package.json", (p: Project, w) => {
-    const packageJson = JSON.parse(p.findFile(packageJsonName).content);
-    const atomist = packageJson.atomist;
-    return packageJson.name === "@atomist/rug-rugs"
-        && packageJson.version === "0.31.0"
-        && atomist.requires === "1.0.0-m.3"
-        && atomist.extensions["com.atomist.rug:rug-function-http"] === "[0.7.3,1.0.0)"
-        && atomist.excludes.editors.length === 1
-        && atomist.excludes["command-handlers"][0] === "TypeScriptCommandHandler";
+    const slug = "presley/graceland-rugs";
+    return checkPkgJson(p, "presley", `Atomist Rugs from ${slug}`,
+        `https://github.com/${slug}#readme`);
 });
 
-Then("the manifest.yml got deleted", (p: Project, w: ProjectScenarioWorld, path: string) => {
-    return !p.fileExists(manifestYmlName);
+Then("the manifest.yml got merged into original package.json", (p: Project, w) => {
+    return checkPkgJson(p, "Paul Simon", "we are going to Graceland",
+        "http://www.graceland.com");
 });
+
+function checkPkgJson(p: Project, author: string, description: string, homepage: string): boolean {
+    const packageJson = JSON.parse(p.findFile(packageJsonPath).content);
+    const atomist = packageJson.atomist;
+    const slug = "presley/graceland-rugs";
+    return packageJson.name === `@${slug}`
+        && packageJson.description === description
+        && packageJson.version === "1935.1.8"
+        && packageJson.author === author
+        && packageJson.repository.url === `https://github.com/${slug}.git`
+        && packageJson.homepage === homepage
+        && packageJson.bugs.url === `https://github.com/${slug}/issues`
+        && atomist.requires === "1977.8.16"
+        && atomist.extensions["com.atomist.rug:under-african-skies"] === "3.3.7"
+        && atomist.excludes.editors.length === 1
+        && atomist.excludes["command-handlers"][0] === "Gumboots";
+}

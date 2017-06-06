@@ -1,6 +1,6 @@
 {
   "name": "@atomist/rug-rugs",
-  "description": "Atomist Rugs for working with Atomist Rugs",
+  "description": "Atomist Rugs for working with Rugs",
   "version": "0.31.0",
   "author": "Atomist",
   "license": "Apache-2.0",
@@ -9,8 +9,8 @@
     "url": "https://github.com/atomist/rug-rugs.git"
   },
   "keywords": [
-    "Atomist",
-    "Rug"
+    "atomist",
+    "rug"
   ],
   "homepage": "https://github.com/atomist/rug-rugs#readme",
   "bugs": {
@@ -22,9 +22,9 @@
     "js-yaml": "^3.8.4"
   },
   "devDependencies": {
+    "@types/js-yaml": "^3.5.30",
     "@types/mocha": "^2.2.40",
     "@types/power-assert": "^1.4.29",
-    "@types/js-yaml": "^3.5.30",
     "espower-typescript": "^8.0.0",
     "mocha": "^3.2.0",
     "power-assert": "^1.4.2",
@@ -36,10 +36,10 @@
     "test": "mocha"
   },
   "scripts": {
-    "autotest": "supervisor -q -n exit -e ts -x yarn -- run mocha",
+    "autotest": "supervisor -q -n exit -e ts -x npm -- run mocha",
     "lint": "tslint '**/*.ts' --exclude 'node_modules/**' -t verbose",
     "mocha": "mocha --compilers ts:espower-typescript/guess 'mocha/**/*.ts'",
-    "test": "yarn run mocha && rug test"
+    "test": "npm run mocha && rug test"
   },
   "atomist": {
     "requires": "[1.0.0-m.4,2.0.0)",

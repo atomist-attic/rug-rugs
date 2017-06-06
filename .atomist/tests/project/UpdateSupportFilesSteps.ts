@@ -32,9 +32,9 @@ script: bash .atomist/build/travis-build.bash
 });
 
 Given("old build CLI configs", (p: Project) => {
-    p.addFile(".atomist/build/cli-build.yml", "chavo: guerrero");
-    p.addFile(".atomist/build/cli-dev.yml", "foreign: object");
-    p.addFile(".atomist/build/cli-publish.yml", "choked: out");
+    p.addFile(".atomist/build/cli-build.yml", "chavo: guerrero\n");
+    p.addFile(".atomist/build/cli-dev.yml", "foreign: object\n");
+    p.addFile(".atomist/build/cli-publish.yml", "choked: out\n");
 });
 
 Given("a gitattributes file", (p: Project) => {

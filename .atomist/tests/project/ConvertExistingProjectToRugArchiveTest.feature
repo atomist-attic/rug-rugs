@@ -23,15 +23,18 @@ Feature: Convert an existing project to a Rug archive project
     When ConvertExistingProjectToRugArchive is run
     Then parameters were valid
     Then changes were made
-    Then the Rug archive manifest exists
-    Then the Rug archive manifest contains the archive name
-    Then the Rug archive manifest contains the group
-    Then the Rug archive manifest contains the version
+    Then file at .atomist/package.json should exist
+    Then file at .atomist/.gitignore should exist
+    Then file at .atomist/build/cli.yml should exist
+    Then file at .atomist/tsconfig.json should exist
+    Then file at .atomist/tslint.json should exist
+    Then file at .atomist/package.json should contain "name": "@rem/reckoning"
+    Then file at .atomist/package.json should contain "version": "1984.4.9"
+    Then file at .atomist/package.json should not contain js-yaml
+    Then file at .atomist/package.json should not contain deprecated-decorator
 
 
-  Scenario: ConvertExistingProjectToRugArchive should do nothing to a Rug archive project
-    Given a Rug archive manifest
+  Scenario: ConvertExistingProjectToRugArchive should abort when run on a Rug archive project
+    Given a package.json
     When ConvertExistingProjectToRugArchive is run
-    Then parameters were valid
-    # adding the manifest in the Given step means changes were made
-    # Then no changes were made
+    Then the scenario aborted

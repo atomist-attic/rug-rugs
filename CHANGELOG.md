@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist/rug-rugs/compare/0.31.0...HEAD
 
-## [0.31.0] - 2017-06-01
+## [0.31.0] - 2017-06-05
 
 [0.31.0]: https://github.com/atomist/rug-rugs/compare/0.30.1...0.31.0
 
-Find file release
+Package release
 
 ### Added
 
@@ -27,6 +27,18 @@ Find file release
 -   Update .gitattributes in UpdateSupportFiles
 -   Make sample TypeScript editor more expressive
 -   Fix AddLicense parameter [#62][62]
+-   Update everything to work from package.json instead of
+    manifest.yml
+-   isRugArchive will convert a manifest.yml into a package.json
+
+### Removed
+
+-   AddManifestYml and AddTypeScript editors since they are no longer
+    relevant with the removal of the manifest.yml
+
+### Deprecated
+
+-   The isSetupForTypeScript function now defers to isRugArchive
 
 [62]: https://github.com/atomist/rug-rugs/issues/62
 
@@ -68,7 +80,9 @@ Version release
 
 ### Deprecated
 
--   IsRugArchive and IsSetupForTypeScript functions
+-   IsRugArchive and IsSetupForTypeScript functions in favor of the
+    more standardly-TypeScript-named isRugArchive and
+    isSetupForTypeScript
 
 [51]: https://github.com/atomist/rug-rugs/issues/51
 [49]: https://github.com/atomist/rug-rugs/issues/49

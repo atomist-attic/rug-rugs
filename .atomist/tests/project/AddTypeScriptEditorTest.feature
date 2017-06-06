@@ -19,50 +19,48 @@ Feature: Add a TypeScript editor to an existing Rug project
 
 
   Scenario: AddTypeScriptEditor should add a TypeScript editor to a Rug archive
-    Given a Rug archive manifest
     Given a Rug archive package.json
     Given a Rug README
     When AddTypeScriptEditor is run
     Then parameters were valid
     Then changes were made
-    Then the editor file exists
-    Then the editor file contains the editor annotation
-    Then the editor file contains the description
-    Then the editor file contains the editor class
-    Then the editor file instantiates the class
-    Then the editor file does not contain the original editor name
-    Then the editor file does not contain the original description
-    Then the editor file does not contain the original export
-    Then the editor test steps file exists
-    Then the editor feature file has the proper scenario
-    Then the editor test steps file does not contain the original editor name
-    Then the README exists
-    Then the README contains a section for the editor
-    Then the README contains the editor description
-    Then the README contains default editor prerequisites
-    Then the README contains the editor parameter
-    Then the README contains the editor usage
-    Then the README contains default editor text
+    Then file at .atomist/editors/JoeHenry.ts should exist
+    Then file at .atomist/editors/JoeHenry.ts should contain @Editor("JoeHenry"
+    Then file at .atomist/editors/JoeHenry.ts should contain "wherein Richard Pryor addresses a tearful nation"
+    Then file at .atomist/editors/JoeHenry.ts should contain class JoeHenry
+    Then file at .atomist/editors/JoeHenry.ts should contain new JoeHenry()
+    Then file at .atomist/editors/JoeHenry.ts should not contain TypeScriptEditor
+    Then file at .atomist/editors/JoeHenry.ts should not contain sample TypeScript editor used by
+    Then file at .atomist/editors/JoeHenry.ts should not contain export const typeScriptEditor
+    Then file at .atomist/tests/project/JoeHenrySteps.ts should exist
+    Then file at .atomist/tests/project/JoeHenryTest.feature should contain Scenario: JoeHenry
+    Then file at .atomist/tests/project/JoeHenryTest.feature should not contain TypeScriptEditor
+    Then file at README.md should exist
+    Then file at README.md should contain ### JoeHenry
+    Then file at README.md should contain Richard Pryor addresses a tearful nation
+    Then file at README.md should contain Put your editor prerequisites here.
+    Then file at README.md should contain `inputParameter` | Yes | | Example input parameter
+    Then file at README.md should contain -l JoeHenry
+    Then file at README.md should contain Explain what your editor does here.
 
 
   Scenario: AddTypeScriptEditor should add a TypeScript editor even if no README
-    Given a Rug archive manifest
     Given a Rug archive package.json
     When AddTypeScriptEditor is run
     Then parameters were valid
     Then changes were made
-    Then the editor file exists
-    Then the editor file contains the editor annotation
-    Then the editor file contains the description
-    Then the editor file contains the editor class
-    Then the editor file instantiates the class
-    Then the editor file does not contain the original editor name
-    Then the editor file does not contain the original description
-    Then the editor file does not contain the original export
-    Then the editor test steps file exists
-    Then the editor feature file has the proper scenario
-    Then the editor test steps file does not contain the original editor name
-    Then the README does not exist
+    Then file at .atomist/editors/JoeHenry.ts should exist
+    Then file at .atomist/editors/JoeHenry.ts should contain @Editor("JoeHenry"
+    Then file at .atomist/editors/JoeHenry.ts should contain "wherein Richard Pryor addresses a tearful nation"
+    Then file at .atomist/editors/JoeHenry.ts should contain class JoeHenry
+    Then file at .atomist/editors/JoeHenry.ts should contain new JoeHenry()
+    Then file at .atomist/editors/JoeHenry.ts should not contain TypeScriptEditor
+    Then file at .atomist/editors/JoeHenry.ts should not contain sample TypeScript editor used by
+    Then file at .atomist/editors/JoeHenry.ts should not contain export const typeScriptEditor
+    Then file at .atomist/tests/project/JoeHenrySteps.ts should exist
+    Then file at .atomist/tests/project/JoeHenryTest.feature should contain Scenario: JoeHenry
+    Then file at .atomist/tests/project/JoeHenryTest.feature should not contain TypeScriptEditor
+    Then file at README.md should not exist
 
 
   Scenario: AddTypeScriptEditor should not make any changes if the target project is not a Rug archive
@@ -72,17 +70,17 @@ Feature: Add a TypeScript editor to an existing Rug project
 
 
   Scenario: AddTypeScriptEditor should make ready for typescript if not ready
-    Given a Rug archive manifest
+    Given a manifest.yml
     When AddTypeScriptEditor is run
     Then parameters were valid
     Then changes were made
-    Then the editor file exists
-    Then the editor file contains the editor annotation
-    Then the Rug archive package.json exists
+    Then file at .atomist/editors/JoeHenry.ts should exist
+    Then file at .atomist/editors/JoeHenry.ts should contain @Editor("JoeHenry"
+    Then file at .atomist/package.json should exist
+    Then file at .atomist/manifest.yml should not exist
 
 
   Scenario: AddTypeScriptEditor should fail if no editor name provided
-    Given a Rug archive manifest
     Given a Rug archive package.json
     When AddTypeScriptEditor is run with no editor name provided
     Then parameters were invalid

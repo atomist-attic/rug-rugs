@@ -15,56 +15,65 @@
 
 Feature: Automatically increment Rug archive version
   Use an editor to safely and easily increment the
-  version of a Rug archive in the manifest file.
+  version of a Rug archive in the package.json file.
 
 
   Scenario: BumpVersion should increment the major version
-    Given a Rug archive manifest
+    Given a Rug archive package.json
     When BumpVersion bumps the major version
     Then parameters were valid
     Then changes were made
-    Then file at .atomist/manifest.yml should contain version: "29.0.0"
+    Then file at .atomist/package.json should contain "version": "2002.0.0"
 
 
   Scenario: BumpVersion should increment the minor version
-    Given a Rug archive manifest
+    Given a Rug archive package.json
     When BumpVersion bumps the minor version
     Then parameters were valid
     Then changes were made
-    Then file at .atomist/manifest.yml should contain version: "28.9.0"
+    Then file at .atomist/package.json should contain "version": "2001.6.0"
 
 
   Scenario: BumpVersion should increment the patch level
-    Given a Rug archive manifest
+    Given a Rug archive package.json
     When BumpVersion bumps the patch version
     Then parameters were valid
     Then changes were made
-    Then file at .atomist/manifest.yml should contain version: "28.8.1964"
+    Then file at .atomist/package.json should contain "version": "2001.5.16"
 
 
-  Scenario: BumpVersion should increment version without quotes
-    Given a Rug archive manifest with version 17.6.3
+  Scenario: BumpVersion should increment different version
+    Given a Rug archive package.json with version 1963.8.28
     When BumpVersion bumps the minor version
     Then parameters were valid
     Then changes were made
-    Then file at .atomist/manifest.yml should contain version: "17.7.0"
+    Then file at .atomist/package.json should contain "version": "1963.9.0"
 
 
   Scenario: BumpVersion should increment prerelease version
-    Given a Rug archive manifest with version 17.6.3-SNAPSHOT
+    Given a Rug archive package.json with version 1963.8.28-SNAPSHOT
     When BumpVersion bumps the patch version
     Then parameters were valid
     Then changes were made
-    Then file at .atomist/manifest.yml should contain version: "17.6.4-SNAPSHOT"
+    Then file at .atomist/package.json should contain "version": "1963.8.29-SNAPSHOT"
 
 
-  Scenario: AddManifestYml should refuse to change bad version
-    Given a Rug archive manifest with version "1.0"
+  Scenario: BumpVersion should refuse to change bad version
+    Given a Rug archive package.json with version "1.0"
     When BumpVersion bumps the major version
     Then the scenario aborted
 
 
-  Scenario: AddManifestYml should fail if no manifest
+  Scenario: BumpVersion should fail if no package.json
     Given an empty project
     When BumpVersion bumps the minor version
     Then the scenario aborted
+
+
+ Scenario: BumpVersion should convert manifest to package.json when incrementing
+    Given a Rug archive manifest with version 1963.8.28
+    When BumpVersion bumps the minor version
+    Then parameters were valid
+    Then changes were made
+    Then the manifest was deleted
+    Then file at .atomist/package.json should contain "version": "1963.9.0"

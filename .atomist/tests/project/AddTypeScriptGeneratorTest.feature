@@ -20,7 +20,6 @@ Feature: Add a TypeScript generator to an existing Rug project
 
 
   Scenario: AddTypeScriptGenerator should add a new TypeScript generator to an existing Rug Archive project
-    Given a Rug archive manifest
     Given a Rug archive package.json
     Given a Rug README
     When AddTypeScriptGenerator is run
@@ -47,7 +46,6 @@ Feature: Add a TypeScript generator to an existing Rug project
 
 
   Scenario: AddTypeScriptGenerator should add a new TypeScript generator even if no README
-    Given a Rug archive manifest
     Given a Rug archive package.json
     When AddTypeScriptGenerator is run
     Then parameters were valid
@@ -67,22 +65,22 @@ Feature: Add a TypeScript generator to an existing Rug project
 
 
   Scenario: AddTypeScriptGenerator should make no changes if no manifest.yml
-    Given a Rug archive package.json
+    Given an empty project
     When AddTypeScriptGenerator is run
     Then the scenario aborted
 
 
   Scenario: AddTypeScriptGenerator should add package.json if not preset
-    Given a Rug archive manifest
+    Given a manifest.yml
     When AddTypeScriptGenerator is run
     Then parameters were valid
     Then changes were made
     Then file at .atomist/generators/MyNewGenerator.ts should exist
     Then file at .atomist/package.json should exist
+    Then file at .atomist/manifest.yml should not exist
 
 
   Scenario: AddTypeScriptGenerator should fail if no generator name provided
-    Given a Rug archive manifest
     Given a Rug archive package.json
     When AddTypeScriptGenerator is run without generator name
     Then parameters were invalid

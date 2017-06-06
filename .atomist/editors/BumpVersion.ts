@@ -18,8 +18,10 @@ import { Project } from "@atomist/rug/model/Project";
 import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 
+import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
+
 /**
- * Increment the Rug archive version in manifest.yml
+ * Increment the Rug archive version in .atomist/package.json.
  */
 @Editor("BumpVersion", "bump the version of this Rug archive project")
 @Tags("rug", "version")
@@ -37,25 +39,29 @@ export class BumpVersion implements EditProject {
     public component: string = "minor";
 
     public edit(project: Project) {
-        const manifest = project.findFile(".atomist/manifest.yml");
-        if (manifest == null) {
-            const err = "project does not appear to be a Rug project";
+        if (!isRugArchive(project)) {
+            throw new NotRugArchiveError();
+        }
+        const pkgJsonPath = ".atomist/package.json";
+        const pkgJson = project.findFile(pkgJsonPath);
+        if (pkgJson == null) {
+            const err = `failed to open file: ${pkgJsonPath}`;
             console.log(err);
             throw new Error(err);
         }
 
-        const extractVersionRegex = /^version\s*:\s*(?:"(.*?)"|(.*))\s*$/m;
-        const versionMatch = extractVersionRegex.exec(manifest.content);
+        const extractVersionRegex = /"version"\s*:\s*"(.*?)"/;
+        const versionMatch = extractVersionRegex.exec(pkgJson.content);
         if (!versionMatch) {
-            const err = `unable to extract version from manifest.yml: ${manifest.content}`;
+            const err = `unable to extract version from ${pkgJsonPath}: ${pkgJson.content}`;
             console.log(err);
             throw new Error(err);
         }
 
         const comp = this.component as "major" | "minor" | "patch";
-        const newVersion = incrementVersion(versionMatch[1] || versionMatch[2], comp);
+        const newVersion = incrementVersion(versionMatch[1], comp);
 
-        manifest.regexpReplace("version:.*", `version: "${newVersion}"`);
+        pkgJson.regexpReplace(`"version"\\s*:\\s*".*?"`, `"version": "${newVersion}"`);
     }
 }
 
@@ -71,7 +77,7 @@ export function incrementVersion(version: string, component: "major" | "minor" |
     let major = parseInt(versionMatch[1], 10);
     let minor = parseInt(versionMatch[2], 10);
     let patch = parseInt(versionMatch[3], 10);
-    const rest = (versionMatch[4] !== null && versionMatch[4] !== undefined) ? versionMatch[4] : "";
+    const rest = (versionMatch[4] != null) ? versionMatch[4] : "";
 
     if (component === "major") {
         major = major + 1;

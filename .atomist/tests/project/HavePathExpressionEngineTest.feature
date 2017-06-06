@@ -20,7 +20,6 @@ Feature: Automatically add path expression to a Rug
 
 
   Scenario: HavePathExpressionEngine puts a path expression in the typescript
-    Given a Rug archive manifest
     Given a Rug archive package.json
     Given a TypeScript editor
     When HavePathExpressionEngine is run on TypeScriptEditor

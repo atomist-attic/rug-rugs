@@ -18,6 +18,29 @@ import { File } from "@atomist/rug/model/File";
 import { Project } from "@atomist/rug/model/Project";
 import { PathExpression, PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
 
+import { populateAtomistDirectory } from "../editors/ConvertExistingProjectToRugArchive";
+
+/**
+ * Curate the contents of a Rug archive project based on this project.
+ *
+ * @param project      project to curate
+ * @param owner        owner, typically GitHub org, of Rug project
+ * @param description  sentence fragment describing Rug project
+ * @param version      initial version of Rug project
+ * @param toRemove     files to remove beyond the standard files
+ */
+export function generateRugProject(
+    project: Project,
+    owner: string,
+    description: string,
+    version: string,
+    toRemove: string[]) {
+
+    removeUnnecessaryFiles(project, toRemove);
+    cleanReadMe(project, description, owner);
+    populateAtomistDirectory(project, project.name, owner, version);
+}
+
 /**
  * Remove files in this project that do not belong in the generated
  * project.

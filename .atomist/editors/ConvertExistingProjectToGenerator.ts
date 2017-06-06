@@ -19,6 +19,12 @@ import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
 
+import { isRugArchive } from "./RugEditorsPredicates";
+
+/**
+ * Convert an existing project to a seed project, adding an Rug generator.
+ * If the project is not already a Rug project, it is converted to one.
+ */
 @Editor("ConvertExistingProjectToGenerator",
     "converts an existing project to a Rug archive project with a basic Generator")
 @Tags("rug", "atomist")
@@ -80,11 +86,9 @@ export class ConvertExistingProjectToGenerator implements EditProject {
     public description: string;
 
     public edit(project: Project) {
-        if (project.fileExists(".atomist/manifest.yml")) {
-            return;
+        if (!isRugArchive(project)) {
+            project.editWith("ConvertExistingProjectToRugArchive", this);
         }
-        project.editWith("ConvertExistingProjectToRugArchive", this);
-        project.editWith("AddTypeScript", {});
         project.editWith("AddTypeScriptGenerator", this);
     }
 }

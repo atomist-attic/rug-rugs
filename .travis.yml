@@ -27,7 +27,7 @@ notifications:
 cache:
   directories:
   - $HOME/.atomist
-  - $HOME/.cache/yarn
+  - node_modules
 deploy:
   provider: releases
   api_key:

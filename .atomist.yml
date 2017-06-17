@@ -286,3 +286,20 @@ editor:
     branch: "master"
     sha: "d1145f3"
 
+---
+kind: "operation"
+client: "com.atomist:rug"
+version: "1.0.1-JESS"
+editor:
+  name: "DefineLibbit"
+  group: "satellite-of-love"
+  artifact: "libbit-rugs"
+  version: "0.2.0"
+  origin:
+    repo: "git@github.com:satellite-of-love/libbit-rugs.git"
+    branch: "master"
+    sha: "18fd18b"
+  parameters:
+    - "name": "IncrementVersion"
+    - "sourceFile": ".atomist/editors/libbits/IncrementVersion.ts"
+

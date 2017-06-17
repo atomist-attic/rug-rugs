@@ -17,7 +17,7 @@
 import "mocha";
 import assert = require("power-assert");
 
-import { incrementVersion } from "../editors/BumpVersion";
+import { incrementVersion } from "../editors/libbits/IncrementVersion";
 
 describe("incrementVersion", () => {
 

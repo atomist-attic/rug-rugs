@@ -26,8 +26,8 @@ notifications:
     on_error: always
 cache:
   directories:
-  - $HOME/.atomist
-  - node_modules
+  - "$HOME/.atomist"
+  - "$HOME/.npm"
 deploy:
   provider: releases
   api_key:

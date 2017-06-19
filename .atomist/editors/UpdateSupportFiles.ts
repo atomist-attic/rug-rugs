@@ -56,6 +56,8 @@ export function updateRugFiles(project: Project) {
         ".atomist/.gitignore",
         ".atomist/build/cli.yml",
         ".atomist/build/travis-build.bash",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
     ];
     for (const f of supportFiles) {
         project.deleteFile(f);

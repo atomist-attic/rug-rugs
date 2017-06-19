@@ -27,7 +27,8 @@ Feature: Create a customized new Rug project
     Then file at .atomist/package.json should contain "name": "@afghan-whigs/gentlemen"
     Then file at .atomist/package.json should contain "@atomist/rugs"
     Then file at CHANGELOG.md should not exist
-    Then file at CODE_OF_CONDUCT.md should not exist
+    Then file at CODE_OF_CONDUCT.md should exist
+    Then file at CONTRIBUTING.md should exist
     Then file at travis.yml should not exist
     Then file at README.md should exist
     Then file at README.md should contain # gentlemen

@@ -61,3 +61,5 @@ Feature: Create a new Rug project with sensible defaults
     Then file at .atomist/tests/project/MyFirstEditorSteps.ts should contain MyFirstEditor
     Then file at .atomist/handlers/command/MyFirstCommandHandler.ts should exist
     Then file at .atomist/handlers/event/MyFirstEventHandler.ts should exist
+    Then file at CODE_OF_CONDUCT.md should exist
+    Then file at CONTRIBUTING.md should exist

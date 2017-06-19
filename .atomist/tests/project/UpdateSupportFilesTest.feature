@@ -37,6 +37,8 @@ Feature: Keep TypeScript support and build files up to date
     Then there should not be deprecated CLI config files
     Then file at .atomist/build/travis-build.bash should contain export TEAM_ID=
     Then file at .gitattributes should contain .atomist.yml linguist-generated=true
+    Then file at CODE_OF_CONDUCT.md should exist
+    Then file at CONTRIBUTING.md should exist
 
 
   Scenario: UpdateSupportFile should abort if the target project is not a Rug archive

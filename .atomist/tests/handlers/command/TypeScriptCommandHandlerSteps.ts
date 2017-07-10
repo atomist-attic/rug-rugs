@@ -3,7 +3,7 @@ import {
     CommandHandlerScenarioWorld, Given, Then, When,
 } from "@atomist/rug/test/handler/Core";
 
-Given("nothing", (f) => { return; });
+Given("nothing", f => { return; });
 
 When("the TypeScriptCommandHandler is invoked", (w: CommandHandlerScenarioWorld) => {
     const handler = w.commandHandler("TypeScriptCommandHandler");

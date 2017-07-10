@@ -88,7 +88,7 @@ export class AddLicense implements EditProject {
         const eng: PathExpressionEngine = project.context.pathExpressionEngine;
         // TODO: We should be able to filter by file extension in path expression
         // But obvious *.ts or [@name='*.ts'] don't work"
-        eng.with<File>(project, `//File()`, (f) => {
+        eng.with<File>(project, `//File()`, f => {
             const paths = this.include.split(",").map((val, idx, arr) => {
                 return val.trim();
             });

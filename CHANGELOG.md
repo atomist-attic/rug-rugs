@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [Unreleased]: https://github.com/atomist/rug-rugs/compare/0.31.1...HEAD
 
+### Changed
+
+-   Update supporting files
+
 ## [0.31.1] - 2017-06-19
 
 [0.31.1]: https://github.com/atomist/rug-rugs/compare/0.31.0...0.31.1

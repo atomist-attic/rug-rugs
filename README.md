@@ -1,7 +1,6 @@
 # Atomist 'rug-rugs'
 
 [![Build Status](https://travis-ci.org/atomist/rug-rugs.svg?branch=master)](https://travis-ci.org/atomist/rug-rugs)
-[![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
 
 [rug]: http://docs.atomist.com/
 
@@ -607,15 +606,26 @@ the [Rug CLI][cli].
 [cli]: https://github.com/atomist/rug-cli
 
 ```
-$ rug test
+$ ( cd .atomist && npm test )
 $ rug install
 ```
 
-To clean up cached files and update TypeScript dependencies, run this
-command.
+To clean up cached files run:
 
 ```
-$ ( cd .atomist && find editors generators handlers tests -name '*.js' -print0 | xargs -0 rm; rm -rf node_modules; npm install && rug clean )
+$ ( cd .atomist && npm run clean )
+```
+
+To return this project to its distributed state run:
+
+```
+$ ( cd .atomist && npm run distclean )
+```
+
+You will need to install its dependencies again after this:
+
+```
+$ ( cd .atomist && npm install )
 ```
 
 To create a new release of the project, simply push a tag of the form

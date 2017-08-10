@@ -44,7 +44,6 @@ Feature: Create a new Rug project with sensible defaults
     Then file at README.md should not contain editors to create a Rug archive project
     Then file at README.md should not contain AddTypeScript
     Then file at README.md should contain https://travis-ci.org/atomist-contrib/breeders.svg?branch=master
-    Then file at README.md should contain [![Slack Status](https://join.atomist.com/badge.svg)](https://join.atomist.com)
     Then file at README.md should not contain ### NewRugProject
     Then file at README.md should not contain ruggery
     Then file at README.md should contain [rug]: http://docs.atomist.com/

@@ -17,15 +17,13 @@ fi
 
 # To publish to staging, we need to
 # - be on the tip of origin/master
-#    (we are assuming this version has not been published yet)
-#    (there are race conditions here if 2 of us are working at the same time.
-#     In this case, consider pairing instead.)
-# - publish to a team
 # - bump the version
 #    - npm version patch
 #    - npm install
 # - push the updated version to origin
 #    - both package.json and package-lock.json
+# - publish to a team
+# - print some ascii art
 
 
 cd $(git rev-parse --show-toplevel) # top of repo

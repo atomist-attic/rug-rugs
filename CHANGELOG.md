@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [0.33.0]: https://github.com/atomist/rug-rugs/compare/0.32.1...0.33.0
 
-The re-release
+Update release
 
 ### Changed
 

@@ -18,6 +18,8 @@ import { Project } from "@atomist/rug/model/Project";
 
 import deprecated from "deprecated-decorator";
 
+/* tslint:disable:no-shadowed-variable */
+
 export function isRugArchive(p: Project): boolean {
     if (p.fileExists(".atomist/manifest.yml")) {
         console.log("merging Rug archive manifest.yml into package.json");

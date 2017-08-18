@@ -43,10 +43,10 @@ Feature: Keep TypeScript support and build files up to date
     Then directory at .atomist/node_modules should not exist
     Then file at .atomist/tslint.json should exist
     Then file at .atomist/build/cli.yml should exist
-    Then file at .atomist/build/cli.yml should contain staging
     Then file at .atomist/build/cli.yml should contain release
     Then there should not be deprecated CLI config files
-    Then file at .atomist/build/travis-build.bash should contain local teams=
+    Then file at .atomist/build/publish-to-team should exist
+    Then file at .atomist/build/travis-build.bash should contain if ! $rug publish -a "$project_version" -i release; then
     Then file at .gitattributes should contain .atomist.yml linguist-generated=true
     Then file at CODE_OF_CONDUCT.md should exist
     Then file at CONTRIBUTING.md should exist

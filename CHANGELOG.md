@@ -7,11 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/atomist/rug-rugs/compare/0.32.1...HEAD
+[Unreleased]: https://github.com/atomist/rug-rugs/compare/0.33.0...HEAD
+
+## [0.33.0] - 2017-08-18
+
+[0.33.0]: https://github.com/atomist/rug-rugs/compare/0.32.1...0.33.0
+
+The re-release
+
+### Changed
+
+-   UpdateSupportFiles also updates portions of the package.json
+-   UpdateRug updates @atomist/rug and @atomist/cortex dependencies
+    too
+
+### Added
+
+-   publish-to-team script
 
 ## [0.32.1] - 2017-07-11
 
-[0.32.0]: https://github.com/atomist/rug-rugs/compare/0.32.0...0.32.1
+[0.32.1]: https://github.com/atomist/rug-rugs/compare/0.32.0...0.32.1
 
 The re-release
 

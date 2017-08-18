@@ -1,7 +1,7 @@
 {
   "name": "@atomist/rug-rugs",
   "description": "Atomist Rugs for working with Rugs",
-  "version": "0.32.2",
+  "version": "0.33.0",
   "author": "Atomist",
   "license": "Apache-2.0",
   "repository": {
@@ -18,15 +18,20 @@
   },
   "dependencies": {
     "@atomist/cortex": "^1.0.0-m.5",
-    "@atomist/rug": "^1.0.0-m.5",
+    "@atomist/rug": "^1.0.0-m.6",
     "@atomist/rugs": "^1.0.0-m.6",
+    "@atomist/yaml-updater": "^0.1.0",
     "deprecated-decorator": "0.1.6",
-    "js-yaml": "^3.8.4"
+    "js-yaml": "^3.8.4",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
+    "@types/chai": "^3.5.2",
     "@types/js-yaml": "^3.5.31",
+    "@types/lodash": "^4.14.73",
     "@types/mocha": "^2.2.41",
     "@types/power-assert": "^1.4.29",
+    "chai": "^3.5.0",
     "espower-typescript": "^8.0.0",
     "mocha": "^3.4.2",
     "power-assert": "^1.4.4",
@@ -45,11 +50,12 @@
     "compile": "tsc -p .",
     "distclean": "npm run clean ; rm -rf node_modules",
     "lint": "tslint '**/*.ts' --exclude 'node_modules/**' --exclude 'target/**' -t verbose",
+    "lint-fix": "npm run lint -- --fix",
     "mocha": "mocha --compilers ts:espower-typescript/guess 'mocha/**/*.ts'",
     "test": "npm run mocha && rug test"
   },
   "atomist": {
-    "requires": "[1.0.0-m.5,2.0.0)",
+    "requires": "[1.0.0-m.6,2.0.0)",
     "extensions": {
       "com.atomist.rug:rug-function-http": "[0.7.3,1.0.0)"
     },

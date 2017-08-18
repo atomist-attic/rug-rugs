@@ -17,20 +17,19 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
-import { packageJsonPath } from "../../editors/ConvertManifestToPackageJson";
+import { expect } from "chai";
 
 When("UpdateRug is run", (p: Project, w: ProjectScenarioWorld) => {
     const editor = w.editor("UpdateRug");
     w.editWith(editor, {});
 });
 
-Then("the package file requires the current version of rug", (p: Project, w: ProjectScenarioWorld) => {
-    const rugVersion = JSON.parse(p.backingArchiveProject().findFile(".atomist/package.json").content).atomist.requires;
-    return p.fileContains(packageJsonPath, `"${rugVersion}"`);
-});
-
-Then("the package file depends on the current version of rugs", (p: Project, w: ProjectScenarioWorld) => {
-    const rugsVersion = JSON.parse(p.backingArchiveProject().findFile(".atomist/package.json").content)
-        .dependencies["@atomist/rugs"];
-    return p.fileContains(packageJsonPath, `"@atomist/rugs": "${rugsVersion}"`);
+Then("the package file depends on the current versions of rug dependencies", (p: Project) => {
+    const pkgJsonPath = ".atomist/package.json";
+    const archivePkg = JSON.parse(p.backingArchiveProject().findFile(pkgJsonPath).content);
+    const pkg = JSON.parse(p.findFile(pkgJsonPath).content);
+    expect(archivePkg.atomist.requires).to.equal(pkg.atomist.requires);
+    expect(archivePkg.dependencies["@atomist/rug"]).to.equal(pkg.dependencies["@atomist/rug"]);
+    expect(archivePkg.dependencies["@atomist/rugs"]).to.equal(pkg.dependencies["@atomist/rugs"]);
+    expect(archivePkg.dependencies["@atomist/cortex"]).to.equal(pkg.dependencies["@atomist/cortex"]);
 });

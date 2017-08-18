@@ -47,8 +47,8 @@ export class UpdateRug implements EditProject {
         }
         const archivePkgJson = JSON.parse(archivePkgJsonFile.content);
 
-        const rugsName = "@atomist/rugs";
-        pkgJson.dependencies[rugsName] = archivePkgJson.dependencies[rugsName];
+        const deps = ["@atomist/rug", "@atomist/rugs", "@atomist/cortex"];
+        deps.forEach(d => pkgJson.dependencies[d] = archivePkgJson.dependencies[d]);
         pkgJson.atomist.requires = archivePkgJson.atomist.requires;
 
         pkgJsonFile.setContent(formatPackageJson(pkgJson));

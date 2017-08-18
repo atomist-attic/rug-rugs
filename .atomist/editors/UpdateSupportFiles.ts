@@ -18,7 +18,12 @@ import { Project } from "@atomist/rug/model/Project";
 import { Editor, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
+import { updateYamlDocument } from "@atomist/yaml-updater/Yaml";
 
+import * as yaml from "js-yaml";
+import * as _ from "lodash";
+
+import { formatPackageJson } from "./ConvertManifestToPackageJson";
 import { isRugArchive, NotRugArchiveError } from "./RugEditorsPredicates";
 
 /**
@@ -40,6 +45,11 @@ export class UpdateSupportFiles implements EditProject {
 
 export const updateSupportFiles = new UpdateSupportFiles();
 
+/**
+ * Update TypeScript and build files to latest standards.
+ *
+ * @param project project with files to update
+ */
 export function updateRugFiles(project: Project) {
     const oldFiles = [
         ".atomist/build/cli-build.yml",
@@ -76,4 +86,82 @@ export function updateRugFiles(project: Project) {
     } else {
         project.copyEditorBackingFileOrFail(gitAttributes);
     }
+
+    convergePackageJson(project);
+    convergeTravisYml(project);
+}
+
+/**
+ * Use archive package.json to update package.json
+ *
+ * @param project project with files to update
+ */
+function convergePackageJson(project: Project) {
+    const pkgJsonPath = ".atomist/package.json";
+    const archivePkgJsonFile = project.backingArchiveProject().findFile(pkgJsonPath);
+    if (!archivePkgJsonFile) {
+        throw new Error(`failed to load ${pkgJsonPath} from rug-rugs archive`);
+    }
+    const archivePkgJson = JSON.parse(archivePkgJsonFile.content);
+    const updatable = ["directories", "scripts"];
+    const updates = {};
+    updatable.forEach(u => updates[u] = archivePkgJson[u]);
+
+    const pkgJsonFile = project.findFile(pkgJsonPath);
+    if (!pkgJsonFile) {
+        throw new Error(`failed to load ${pkgJsonPath} from this project`);
+    }
+
+    pkgJsonFile.setContent(updatePackageJson(pkgJsonFile.content, updates));
+}
+
+/**
+ * Ensure relevant elements of the package.json are up to date.
+ *
+ * @param current contents of the Rug project package.json
+ * @param updates object containing elements to check and update
+ * @return new contents for the Rug project package.json
+ */
+export function updatePackageJson(current: string, updates: {}): string {
+    let updated = current;
+    try {
+        const pkg = JSON.parse(updated);
+        _.merge(pkg, updates);
+
+        const matches = /\s+$/.exec(updated);
+        const trailingSpace = (matches) ? matches[0] : "";
+        updated = formatPackageJson(pkg);
+    } catch (e) {
+        const err = e as Error;
+        const msg = `failed to parse current package.json:'${current}':${err.name}:${err.message}\n${err.stack}`;
+        console.log(msg);
+        throw new Error(msg);
+    }
+    return updated;
+}
+
+/**
+ * Use archive .travis.yml to update project .travis.yml
+ *
+ * @param project project with files to update
+ */
+function convergeTravisYml(project: Project) {
+    const travisPath = ".travis.yml";
+    const travisFile = project.findFile(travisPath);
+    if (!travisFile) {
+        console.log(`no Travis CI ${travisPath} file in this project`);
+        return;
+    }
+
+    const archiveTravisFile = project.backingArchiveProject().findFile(travisPath);
+    if (!archiveTravisFile) {
+        throw new Error(`failed to load ${travisPath} from rug-rugs archive`);
+    }
+    const archiveTravis = yaml.load(archiveTravisFile.content);
+
+    const updatable = ["install", "script", "cache"];
+    const updates = {};
+    updatable.forEach(u => updates[u] = archiveTravis[u]);
+
+    travisFile.setContent(updateYamlDocument(updates, travisFile.content));
 }

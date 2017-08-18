@@ -17,6 +17,9 @@
 import { Project } from "@atomist/rug/model/Project";
 import { Given, ProjectScenarioWorld, Then, When } from "@atomist/rug/test/project/Core";
 
+import { expect } from "chai";
+import * as yaml from "js-yaml";
+
 Given("a Travis CI config", (p: Project) => {
     p.addFile(".travis.yml", `dist: trusty
 language: java
@@ -53,4 +56,13 @@ Then("there should not be deprecated CLI config files", (p: Project) => {
     return !p.fileExists(".atomist/build/cli-build.yml") &&
         !p.fileExists(".atomist/build/cli-dev.yml") &&
         !p.fileExists(".atomist/build/cli-release.yml");
+});
+
+Then("the Travis CI config should be up to date", (p: Project) => {
+    const travisPath = ".travis.yml";
+    const travis = yaml.load(p.findFile(travisPath).content);
+    const archiveTravis = yaml.load(p.backingArchiveProject().findFile(travisPath).content);
+    expect(travis.install).to.equal(archiveTravis.install);
+    expect(travis.script).to.equal(archiveTravis.script);
+    expect(travis.cache).to.deep.equal(archiveTravis.cache);
 });

@@ -24,14 +24,13 @@ Feature: Bring a Rug project up to the latest versions and conventions
     Then parameters were valid
     Then changes were made
     Then file at .atomist/package.json should exist
-    Then the package file requires the current version of rug
-    Then the package file depends on the current version of rugs
+    Then the package file depends on the current versions of rug dependencies
     Then file at .atomist/package.json should contain "name": "@joe-henry/scar"
     Then file at .atomist/package.json should contain "version": "2001.5.15"
     Then file at .atomist/package.json should contain "mocha": "^3.2.0"
     Then file at .atomist/package.json should contain devDependencies
     Then file at .atomist/package.json should contain "autotest":
-    Then file at .atomist/package.json should contain "lint": "tslint '**/*.ts' --exclude 'node_modules/**' -t verbose",
+    Then file at .atomist/package.json should contain "lint": "tslint '**/*.ts' --exclude 'node_modules/**' --exclude 'target/**' -t verbose",
     Then file at .atomist/.gitignore should exist
     Then file at .atomist/tsconfig.json should exist
     Then file at .atomist/tslint.json should exist

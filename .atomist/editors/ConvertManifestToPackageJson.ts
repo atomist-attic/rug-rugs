@@ -152,5 +152,5 @@ export function customizePackageJson(
 }
 
 export function formatPackageJson(pkgJson: any): string {
-    return JSON.stringify(pkgJson, null, 2);
+    return JSON.stringify(pkgJson, null, 2) + "\n";
 }

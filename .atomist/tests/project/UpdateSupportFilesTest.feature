@@ -26,6 +26,15 @@ Feature: Keep TypeScript support and build files up to date
     Then changes were made
     Then file at .atomist/package.json should exist
     Then file at .atomist/package.json should contain "@atomist/rugs":
+    Then file at .atomist/package.json should contain "test": "mocha"
+    Then file at .atomist/package.json should contain "autotest": "supervisor -q -n exit -e ts -x npm -- run mocha"
+    Then file at .atomist/package.json should contain "lint": "tslint '**/*.ts' --exclude 'node_modules/**' --exclude 'target/**' -t verbose"
+    Then file at .atomist/package.json should contain "mocha": "mocha --compilers ts:espower-typescript/guess 'mocha/**/*.ts'"
+    Then file at .atomist/package.json should contain "test": "npm run mocha && rug test"
+    Then file at .atomist/package.json should contain "compile": "tsc -p ."
+    Then file at .atomist/package.json should contain "clean": "npm run clean-js ; rug clean"
+    Then file at .atomist/package.json should contain "lint-fix": "npm run lint -- --fix"
+    Then file at .atomist/package.json should contain "distclean": "npm run clean ; rm -rf node_modules"
     Then file at .atomist/tsconfig.json should exist
     Then file at .atomist/tsconfig.json should contain suppressImplicitAnyIndexErrors
     Then file at .atomist/tsconfig.json should contain outDir
@@ -41,6 +50,7 @@ Feature: Keep TypeScript support and build files up to date
     Then file at .gitattributes should contain .atomist.yml linguist-generated=true
     Then file at CODE_OF_CONDUCT.md should exist
     Then file at CONTRIBUTING.md should exist
+    Then the Travis CI config should be up to date
 
 
   Scenario: UpdateSupportFile should abort if the target project is not a Rug archive
@@ -59,3 +69,13 @@ Feature: Keep TypeScript support and build files up to date
     Then file at .gitattributes should contain .atomist.yml linguist-generated=true
     Then file at .gitattributes should contain *.class binary
     Then file at .gitattributes should contain *.dll binary
+
+
+  Scenario: UpdateSupportFiles should remove old CLI config files
+    Given a Rug archive package.json
+    Given a Travis CI config
+    Given old build CLI configs
+    When edit with UpdateSupportFiles
+    Then parameters were valid
+    Then changes were made
+    Then there should not be deprecated CLI config files

@@ -33,14 +33,14 @@ export class AddLocalEditor implements EditProject {
 
     @Parameter({
         ...RugParameters.Name,
-        name: "Editor Name",
+        displayName: "Editor Name",
         description: "name for the new Rug editor",
     })
     public editorName: string;
 
     @Parameter({
         ...RugParameters.Description,
-        name: "Description",
+        displayName: "Description",
         description: "description of the new Rug editor",
         required: false,
     })

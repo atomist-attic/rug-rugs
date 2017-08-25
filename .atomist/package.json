@@ -17,9 +17,9 @@
     "url": "https://github.com/atomist/rug-rugs/issues"
   },
   "dependencies": {
-    "@atomist/cortex": "^1.0.0-m.5",
-    "@atomist/rug": "^1.0.0-m.6",
-    "@atomist/rugs": "^1.0.0-m.6",
+    "@atomist/cortex": "^1.0.0-m.6",
+    "@atomist/rug": "^1.0.0-m.7",
+    "@atomist/rugs": "^1.0.0-m.7",
     "@atomist/yaml-updater": "^0.1.0",
     "deprecated-decorator": "0.1.6",
     "js-yaml": "^3.8.4",
